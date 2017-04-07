@@ -8,100 +8,6 @@ and open the template in the editor.
     Author     : shiva
 */
 
-/*@media print and (orientation: landscape), screen and (max-width: 767px){
-    .tech-support-container {
-        right: -30px !important;
-        overflow-y: auto;
-    }
-    
-    
-    .tech-support-container .navContainer input, .tech-support-container .navContainer textArea{
-        width: 91% !important;
-    }
-
-}*/
-
-
-@media print and (orientation: portrait), screen and (max-width: 767px){
-    .tech-support-container {
-        /*        right: -30px !important;*/
-        height: calc(100% - 85px);
-        overflow-y: auto;
-        z-index: 9998;
-    }
-    .tech-support-container .phoneContainer {
-        width: 100% !important;
-    }
-    .tech-support-container .phone-submit-btn.oj-button,
-    .tech-support-container .phone-submit-btn.oj-button.oj-hover{
-        padding: 0px 38px !important;
-        margin-right: 10px !important;
-    }
-
-    .tech-support-container .material-icons {
-        padding: 10px !important;
-        margin-right: 10px !important;
-    }
-    .square .material-icons
-    {
-        right: -8px !important;
-    }
-    .tech-support-container .phone-submit-btn.oj-button,
-    .tech-support-container .phone-submit-btn.oj-button.oj-hover{
-        margin-top: 10px !important;
-    }
-
-    .phoneContainer .form-background {
-        padding: 15px !important;
-    }
-
-}
-
-@media screen and (max-width: 320px){
-    .tech-support-container {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-        padding-top: 6px !important;
-    }
-    .tech-support-container .email-submit-btn.oj-button,
-    .tech-support-container .email-submit-btn.oj-button.oj-hover{
-        margin-top: 10px !important;
-    }
-    .tech-support-container .navContainer input, .tech-support-container .navContainer textArea{
-        margin-top: 10px !important; 
-        line-height: none !important;
-        /*        width: 85% !important;*/
-    }
-    .tech-support-container .material-icons {
-        padding: 10px !important;
-        margin-right: 10px !important;
-    }
-    .square .material-icons
-    {
-        right: -8px !important;
-        top: 9px !important;
-        width: 10px !important;
-    }
-
-    .tech-support-container .phone-submit-btn.oj-button,
-    .tech-support-container .phone-submit-btn.oj-button.oj-hover{
-        padding: 0px 23px !important;
-        margin-right: 15px !important;
-    }
-
-
-}
-
-@media screen and (min-width: 1280px){
-    .tech-support-container .navContainer{
-        margin-bottom: 10px !important;
-    }
-
-    .tech-support-container .email-submit-btn.oj-button,
-    .tech-support-container .email-submit-btn.oj-button.oj-hover{
-        margin-top: 20px !important;
-    }
-}
 
 .tech-support-container {
     position: fixed;
@@ -288,3 +194,84 @@ and open the template in the editor.
 .tab-selected {
     border-bottom: 2px solid #F80000;
 }
+@media print and (orientation: portrait), screen and (max-width: 767px){
+    .tech-support-container {
+        /*        right: -30px !important;*/
+        height: calc(100% - 85px);
+        overflow-y: auto;
+        z-index: 9998;
+    }
+    .tech-support-container .phoneContainer {
+        width: 100% !important;
+    }
+    .tech-support-container .phone-submit-btn.oj-button,
+    .tech-support-container .phone-submit-btn.oj-button.oj-hover{
+        padding: 0px 38px !important;
+        margin-right: 10px !important;
+    }
+
+    .tech-support-container .material-icons {
+        padding: 10px !important;
+        margin-right: 10px !important;
+    }
+    .square .material-icons
+    {
+        right: -8px !important;
+    }
+    .tech-support-container .phone-submit-btn.oj-button,
+    .tech-support-container .phone-submit-btn.oj-button.oj-hover{
+        margin-top: 10px !important;
+    }
+
+    .phoneContainer .form-background {
+        padding: 15px !important;
+    }
+
+}
+
+@media screen and (max-width: 320px){
+    .tech-support-container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 6px !important;
+    }
+    .tech-support-container .email-submit-btn.oj-button,
+    .tech-support-container .email-submit-btn.oj-button.oj-hover{
+        margin-top: 10px !important;
+    }
+    .tech-support-container .navContainer input, .tech-support-container .navContainer textArea{
+        margin-top: 10px !important; 
+        line-height: none !important;
+        /*        width: 85% !important;*/
+    }
+    .tech-support-container .material-icons {
+        padding: 10px !important;
+        margin-right: 10px !important;
+    }
+    .square .material-icons
+    {
+        right: -8px !important;
+        top: 9px !important;
+        width: 10px !important;
+    }
+
+    .tech-support-container .phone-submit-btn.oj-button,
+    .tech-support-container .phone-submit-btn.oj-button.oj-hover{
+        padding: 0px 23px !important;
+        margin-right: 15px !important;
+    }
+
+
+}
+
+@media screen and (min-width: 1280px){
+    .tech-support-container .navContainer{
+        margin-bottom: 10px !important;
+    }
+
+    .tech-support-container .email-submit-btn.oj-button,
+    .tech-support-container .email-submit-btn.oj-button.oj-hover{
+        margin-top: 20px !important;
+    }
+}
+

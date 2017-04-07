@@ -9,11 +9,13 @@ and open the template in the editor.
         <title>HexiCloud</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="icon" href="css/img/favicon.ico" type="image/x-icon" />
 
         <!-- This is the main css file for the default Alta theme -->
         <!--<link rel="stylesheet" href="css/libs/oj/v2.2.0/alta/oj-alta.css" type="text/css"/>-->
         <!-- modified @media Queries for HexiCloud project -->
-        <link rel="stylesheet" href="css/libs/oj/v2.2.0/alta/oj-alta-for-hc.css" type="text/css"/>
+        <!--link rel="stylesheet" href="css/libs/oj/v2.2.0/alta/oj-alta-for-hc.css" type="text/css"/-->
+		<link rel="stylesheet" href="css/alta/3.0.0/web/alta.min.css" type="text/css"/>
 
         <!-- This is where you would add any app specific styling -->
         
@@ -29,6 +31,7 @@ and open the template in the editor.
         <link href="css/hc-chooseRole.css" rel="stylesheet" type="text/css"/>
         <!--<link href="css/hc-csmadmin.css" rel="stylesheet" type="text/css"/>-->
         <link href="css/hc-home.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="js/components/techsupport/techsupport.css" rel="stylesheet" type="text/css"/>-->
         <!--<link href="css/hc-dnx.css" rel="stylesheet" type="text/css"/>-->
         <!--<link href="css/hc-faqs.css" rel="stylesheet" type="text/css"/>-->
         <!--<link href="css/hc-error.css" rel="stylesheet" type="text/css"/>-->
@@ -53,7 +56,7 @@ and open the template in the editor.
                 <header-content class="fixed-header" data-bind="css: isScreenSMorMD() ? 'oj-padding-horizontal' : 'oj-padding-lg-horizontal' "></header-content>
                 <!-- This is where your main page content will be loaded by module -->
                 <div id="module" class="oj-sm-12 oj-flex-item" data-bind="ojModule: moduleConfig"></div>
-                <tech-support references="{{references}}" is-panel-visible="{{false}}"></tech-support>
+
             </div>
         </div>
         <!-- Commenting as they do not have the footer in any of the pages -->

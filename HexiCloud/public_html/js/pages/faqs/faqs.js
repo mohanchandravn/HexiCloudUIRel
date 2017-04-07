@@ -7,7 +7,7 @@
 /**
  * faqs module
  */
-define(['knockout', 'config/serviceConfig'
+define(['knockout', 'config/serviceConfig','components/techsupport/loader'
 ], function (ko, service) {
     /**
      * The view model for the main content view template

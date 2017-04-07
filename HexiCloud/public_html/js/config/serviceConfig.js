@@ -6,34 +6,33 @@
 
 define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 ], function (ko, $, sessionInfo) {
-    
+
     /**
      * The view model for the managing service calls
      */
     function serviceConfig() {
-        
+
         var self = this;
-        
-        // New GSE JCS
-        if (location.protocol === 'http:') {
-            self.portalRestHost = ko.observable("http://129.152.128.105:8080/");
+        var ctx = '/hexiCloudRestSecured';
+        if (location.origin.indexOf('localhost') > 0) {
+            if (location.protocol === 'http:') {
+                self.portalRestHost = ko.observable("http://129.152.128.105:8080".concat(ctx));
+            } else {
+                self.portalRestHost = ko.observable("https://129.152.128.105".concat(ctx));
+            }
         } else {
-            self.portalRestHost = ko.observable("https://129.152.128.105/");
+            //For context root to be relative on PROD
+            self.portalRestHost = ko.observable(location.origin.concat(ctx));
         }
-
-        
-        //For context root to be relative on PROD
-//        self.portalRestHost = ko.observable("");
-
         self.serverURI = ko.observable("https://documents-gse00002841.documents.us2.oraclecloud.com/documents/link/");
 
         self.updateCurrentStep = function (payload) {
             // var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/createUserStep/";
+            var serverURL = self.portalRestHost() + "/services/rest/createUserStep/";
             $.ajax({
                 type: "POST",
                 url: serverURL,
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 contentType: "application/json",
@@ -55,11 +54,11 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getUserStep = function (userId) {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/findUsersCurrentStep/" + userId + "/";
+            var serverURL = self.portalRestHost() + "/services/rest/findUsersCurrentStep/" + userId + "/";
             $.ajax({
                 type: "GET",
                 url: serverURL,
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 success: function (data) {
@@ -78,14 +77,14 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getFileDetails = function (stepDetail) {
             var defer = $.Deferred();
             if (typeof stepDetail === 'number') {
-                var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/findStepDocsByStepId/" + stepDetail;
+                var serverURL = self.portalRestHost() + "/services/rest/findStepDocsByStepId/" + stepDetail;
             } else {
-                var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/findStepDocsByCode/" + stepDetail;
+                var serverURL = self.portalRestHost() + "/services/rest/findStepDocsByCode/" + stepDetail;
             }
             $.ajax({
                 type: "GET",
                 url: serverURL,
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 success: function (data, status) {
@@ -125,11 +124,11 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.submitSR = function (payload) {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/saveAndSendEmail/";
+            var serverURL = self.portalRestHost() + "/services/rest/saveAndSendEmail/";
             $.ajax({
                 type: "POST",
                 url: serverURL,
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 contentType: "application/json",
@@ -148,12 +147,12 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.authenticate = function (payload) {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "hexiCloudRestSecured/login";
+            var serverURL = self.portalRestHost() + "/login";
             $.ajax({
                 type: "POST",
                 url: serverURL,
                 dataType: "json",
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Portal-Type", "user");
                 },
                 transformRequest: function (obj) {
@@ -165,9 +164,6 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 contentType: "application/x-www-form-urlencoded",
                 data: payload,
                 success: function (data, textStatus, xhr) {
-                    console.log('Successfully posted data at: ' + serverURL);
-                    console.log('textStatus : ' + textStatus);
-                    console.log('Response status code : ' + xhr.status);
                     defer.resolve(data, {status: xhr.status});
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -180,11 +176,11 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getUserClmData = function (userId) {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/getClmData/" + userId + "/";
+            var serverURL = self.portalRestHost() + "/services/rest/getClmData/" + userId + "/";
             $.ajax({
                 type: "GET",
                 url: serverURL,
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 success: function (data) {
@@ -220,11 +216,11 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getServiceDetails = function (serverType) {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/serviceBenefits/" + serverType + "/";
+            var serverURL = self.portalRestHost() + "/services/rest/serviceBenefits/" + serverType + "/";
             $.ajax({
                 type: "GET",
                 url: serverURL,
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 dataType: "json",
@@ -241,11 +237,11 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getUseCaseItems = function () {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/usecases/";
+            var serverURL = self.portalRestHost() + "/services/rest/usecases/";
             $.ajax({
                 type: "GET",
                 url: serverURL,
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 dataType: "json",
@@ -262,11 +258,11 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getUseCaseDetails = function (usecaseCode) {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/usecases/" + usecaseCode + "/";
+            var serverURL = self.portalRestHost() + "/services/rest/usecases/" + usecaseCode + "/";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 dataType: "json",
@@ -283,7 +279,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.forgotPasswordService = function (userId) {
             var defer = $.Deferred();
-            var serviceUrl = self.portalRestHost() + "hexiCloudRestSecured/services/rest/forgotPasswordService/" + userId + "/";
+            var serviceUrl = self.portalRestHost() + "/services/rest/forgotPasswordService/" + userId + "/";
             $.ajax({
                 type: 'GET',
                 url: serviceUrl,
@@ -299,12 +295,12 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.requestCallBack = function (payload) {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "hexiCloudRestSecured/services/rest/requestCallback/";
+            var serverURL = self.portalRestHost() + "/services/rest/requestCallback/";
             $.ajax({
                 type: "POST",
                 url: serverURL,
                 dataType: "json",
-                beforeSend: function(request) {
+                beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 contentType: "application/json",
@@ -322,7 +318,8 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             });
             return $.when(defer);
         };
-    };
+    }
+    ;
 
     return new serviceConfig();
 });

@@ -81,7 +81,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojfilmstrip',
         
         self.changeFilmStripValue = function() {
             if(viewportSize() !== 'SM') {
-                var currentItem = $( "#filmStrip" ).ojFilmStrip( "option", "currentItem" );
+                var currentItem = $( "#filmStrip" ).ojFilmStrip( "option", "currentItem" ).index;
                 if (currentItem !== (self.filmStripItems.length - 1)) {
                     $("#filmStrip").ojFilmStrip("option", "currentItem", (currentItem + 1));
                 } else {
