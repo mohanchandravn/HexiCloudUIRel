@@ -15,15 +15,15 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         var self = this;
         
         // New GSE JCS
-//        if (location.protocol === 'http:') {
-//            self.portalRestHost = ko.observable("http://129.152.128.105:8080/");
-//        } else {
-//            self.portalRestHost = ko.observable("https://129.152.128.105/");
-//        }
-        // self.portalRestHost = ko.observable("https://129.152.128.105/");
+        if (location.protocol === 'http:') {
+            self.portalRestHost = ko.observable("http://129.152.128.105:8080/");
+        } else {
+            self.portalRestHost = ko.observable("https://129.152.128.105/");
+        }
+
         
         //For context root to be relative on PROD
-        self.portalRestHost = ko.observable("");
+//        self.portalRestHost = ko.observable("");
 
         self.serverURI = ko.observable("https://documents-gse00002841.documents.us2.oraclecloud.com/documents/link/");
 

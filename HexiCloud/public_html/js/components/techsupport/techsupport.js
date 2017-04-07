@@ -1,5 +1,5 @@
 
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'js/util/errorhandler', 'config/sessionInfo', 'js/util/commonhelper', 'ojs/ojinputtext', 'ojs/ojknockout-validation'], 
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'config/sessionInfo', 'util/commonhelper', 'ojs/ojinputtext', 'ojs/ojknockout-validation'], 
 
 function (oj, $, ko, service, errorHandler, sessionInfo, commonHelper) {
 
