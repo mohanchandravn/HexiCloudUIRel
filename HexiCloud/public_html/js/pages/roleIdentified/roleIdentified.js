@@ -15,10 +15,10 @@ define(['config/serviceConfig', 'knockout', 'ojs/ojcore', 'jquery', 'ojs/ojradio
     function rolerIdentifiedViewModel(params) {
         var self = this;
         var router = params.ojRouter.parentRouter;
-        var accntAdminImage = "img/Role_Identified_Admin.png";
+        var accntAdminImage = "css/img/Role_Identified_Admin.png";
         var accntAdminText = "Account Admin";
         var accntAdminDesc = "Administrator, Buyer, Manager";
-        var iTAdminImage = "img/IT_Administrator.png";
+        var iTAdminImage = "css/img/IT_Administrator.png";
         var iTAdminText = "IT Amdiminstrator";
         var iTAdminDesc = "IT, DBA, DEV";
 

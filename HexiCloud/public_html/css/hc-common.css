@@ -139,7 +139,7 @@ a {
     color: #ee4f50; 
 }
 /*.mainBackGroundImage {
-    background-image:url('../img/Main_background.jpg');
+    background-image:url('img/Main_background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -330,7 +330,7 @@ p.lg {
 .overlay {
     /*position: fixed;*/
     top: 0; right: 0; bottom: 0; left: 0;
-    background: url(../img/bg-overlay.png) no-repeat center center fixed; 
+    background: url(img/bg-overlay.png) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -339,7 +339,7 @@ p.lg {
 
 .mainBackGroundImage {
     margin:0 auto;
-    background-image:url('../img/desktop-background.jpg');
+    background-image:url('img/desktop-background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -348,7 +348,7 @@ p.lg {
 }
 @media only screen and (min-width: 1280px) {
     .mainBackGroundImage {
-        background-image:url('../img/desktop-background.jpg');
+        background-image:url('img/desktop-background.jpg');
         /*background-color: #335C62 !important;*/
     }
 }
@@ -466,7 +466,7 @@ login-page video::-webkit-media-controls-start-playback-button {
 }
 
 .error-msg-icon {
-    background-image: url(../img/alert.png);
+    background-image: url(img/alert.png);
     background-repeat: no-repeat;
     background-position: center;
     -webkit-background-size: 40px;

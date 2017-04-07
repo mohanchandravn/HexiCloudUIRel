@@ -47,19 +47,19 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
 
         self.getIcon = function (serverType) {
             if (serverType.toLowerCase().indexOf("compute") >= 0) {
-                return 'img/compute_w_72.png';
+                return 'css/img/compute_w_72.png';
             } else if (serverType.toLowerCase().indexOf("storage") >= 0) {
-                return 'img/storage_w_72.png';
+                return 'css/img/storage_w_72.png';
             } else if (serverType.toLowerCase().indexOf("network") >= 0) {
-                return 'img/network_w_72.png';
+                return 'css/img/network_w_72.png';
             } else if (serverType.toLowerCase().indexOf("container") >= 0) {
-                return 'img/Container_w_72.png';
+                return 'css/img/Container_w_72.png';
             } else if (serverType.toLowerCase().indexOf("ravello") >= 0) {
-                return 'img/Ravello_w_72.png';
+                return 'css/img/Ravello_w_72.png';
             } else if (serverType.toLowerCase().indexOf("cloud machine") >= 0) {
-                return 'img/CloudMachine_w_72.png';
+                return 'css/img/CloudMachine_w_72.png';
             } else {
-                return 'img/compute_w_72.png';
+                return 'css/img/compute_w_72.png';
             }
         };
 

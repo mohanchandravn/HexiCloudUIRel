@@ -24,15 +24,15 @@ navigationbarleft {
 }
 
 .csm-ico {
-    background: url('../img/rigthtNav_csmHead.png');
+    background: url('img/rigthtNav_csmHead.png');
 }
 
 .call-ico {
-    background: url('../img/rigthtNav_call.png');
+    background: url('img/rigthtNav_call.png');
 }
 
 .chat-ico {
-    background: url('../img/rigthtNav_chat.png');
+    background: url('img/rigthtNav_chat.png');
 }
 
 .csm-ico, .call-ico {
