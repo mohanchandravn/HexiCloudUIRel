@@ -8,6 +8,7 @@
         <grunt-tasks xmlns="http://www.netbeans.org/ns/build-tool-tasks/1">
             <workdir path="" showSimpleTasks="true">
                 <task index="0" name="build-release" options="" parameters="" tasks="build:release"/>
+                <task index="1" name="serve-release" options="" parameters="" tasks="serve:release"/>
             </workdir>
         </grunt-tasks>
     </configuration>
