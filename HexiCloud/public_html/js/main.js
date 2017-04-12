@@ -67,9 +67,9 @@ requirejs.config({
  * objects in the callback
  */
 
-require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorhandler', 'ojs/ojknockout',
+require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorhandler', 'config/serviceConfig', 'ojs/ojknockout',
     'ojs/ojtoolbar', 'ojs/ojbutton', 'ojs/ojrouter', 'ojs/ojmodule', 'ojs/ojmoduleanimations', 'ojs/ojanimation', 'ojs/ojoffcanvas'],
-        function (oj, ko, $, sessionInfo, errorHandler)
+        function (oj, ko, $, sessionInfo, errorHandler, service)
         {
             var self = this;
 
@@ -343,6 +343,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 self.capturedEvent = function (data, event) {
                     // Clear session attributes on user logout
+
                     if (event.currentTarget.id === 'logout') {
                         sessionInfo.removeAllFromSession();
                     }
@@ -354,15 +355,21 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 };
 
                 self.logout = function (data, event) {
-                    sessionInfo.removeAllFromSession();
-                    self.toggleLeft();
-                    $("#tech_support").hide();
-                    self.isDashboardSelected(true);
-                    self.isUseCaseSelected(false);
-                    self.isResourceSelected(false);
-                    self.isContactSelected(false);
-                    location.reload();
-                    router.go('home/');
+
+                    var logoutSuccessCallback = function () {
+                        sessionInfo.removeAllFromSession();
+                        self.toggleLeft();
+                        $("#tech_support").hide();
+                        self.isDashboardSelected(true);
+                        self.isUseCaseSelected(false);
+                        self.isResourceSelected(false);
+                        self.isContactSelected(false);
+                        location.reload();
+                        router.go('home/');
+
+                    };
+                    service.logout().then(logoutSuccessCallback);
+
                 };
 
                 $(window).resize(function () {

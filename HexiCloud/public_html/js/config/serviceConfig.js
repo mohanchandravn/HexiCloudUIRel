@@ -318,6 +318,27 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             });
             return $.when(defer);
         };
+
+        self.logout = function () {
+             var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/logout";
+            $.ajax({
+                type: "GET",
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                    request.setRequestHeader("Portal-Type", "user");
+                },
+                success: function () {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details at: " + serverURL);
+                }
+            });
+            return $.when(defer);
+        };
     }
     ;
 
