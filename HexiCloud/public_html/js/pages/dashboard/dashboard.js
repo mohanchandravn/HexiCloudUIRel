@@ -149,6 +149,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
             };
 
             service.getServiceDetails(serverType).then(successCbFn, FailCallBackFn);
+            service.updateAudit({"stepCode" : getStateId(), "action" : "View More : " + serviceClicked});
         };
 
         self.onClickFeedback = function () {

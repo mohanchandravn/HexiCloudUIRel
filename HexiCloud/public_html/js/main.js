@@ -304,11 +304,25 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 };
 
                 self.routeToDashboard = function (data, event) {
+                    service.updateCurrentStep({
+                        "userId": loggedInUser(),
+                        "userRole": loggedInUserRole(),
+                        "curStepCode": event.currentTarget.id,
+                        "preStepCode": getStateId(),
+                        "userAction": "Clicked Dashboard"
+                    }, true);
                     routeTo(data, event);
                     self.isDashboardSelected(true);
                 };
 
                 self.routeToUsecase = function (data, event) {
+                    service.updateCurrentStep({
+                        "userId": loggedInUser(),
+                        "userRole": loggedInUserRole(),
+                        "curStepCode": event.currentTarget.id,
+                        "preStepCode": getStateId(),
+                        "userAction": "Clicked Use Cases"
+                    }, true);
                     routeTo(data, event);
                     self.isUseCaseSelected(true);
                 };
@@ -322,6 +336,13 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 self.routeToFAQs = function (data, event) {
                     //routeTo(data,event);
+                    service.updateCurrentStep({
+                        "userId": loggedInUser(),
+                        "userRole": loggedInUserRole(),
+                        "curStepCode": event.currentTarget.id,
+                        "preStepCode": getStateId(),
+                        "userAction": "Clicked FAQ's"
+                    }, true);
                     self.clearSelectedList();
                     routeTo(data, event);
                 };
