@@ -26,7 +26,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         }
         self.serverURI = ko.observable("https://documents-gse00002841.documents.us2.oraclecloud.com/documents/link/");
 
-        self.updateCurrentStep = function (payload) {
+        self.updateCurrentStep = function (payload, doNotRoute) {
             // var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/createUserStep/";
             $.ajax({
@@ -39,8 +39,10 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 data: JSON.stringify(payload),
                 success: function (data) {
                     console.log('Successfully posted data at: ' + serverURL);
-                    console.log('Navigating to  : ' + payload.curStepCode);
-                    router.go(payload.curStepCode);
+                    if (doNotRoute === undefined) {
+                        console.log('Navigating to  : ' + payload.curStepCode);
+                        router.go(payload.curStepCode);
+                    }
                     // defer.resolve(payload.curStepCode, {status: 200});
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -336,6 +338,46 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 }
             });
             return $.when(defer);
+        };
+
+        self.logout = function () {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/logout";
+            $.ajax({
+                type: "GET",
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                    request.setRequestHeader("Portal-Type", "user");
+                },
+                success: function () {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details at: " + serverURL);
+                }
+            });
+            return $.when(defer);
+        };
+
+        self.updateAudit = function (payload) {
+            var serverURL = self.portalRestHost() + "/services/rest/updateAudit/";
+            $.ajax({
+                type: "POST",
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                contentType: "application/json",
+                data: JSON.stringify(payload),
+                success: function (data, textStatus, xhr) {
+                    console.log('Successfully posted data at: ' + serverURL);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error posting data to the service : " + serverURL);
+                }
+            });
         };
     }
     ;

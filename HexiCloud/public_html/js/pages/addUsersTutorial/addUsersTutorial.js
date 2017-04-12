@@ -29,9 +29,11 @@ define(['ojs/ojcore',
             if (event.currentTarget.id === "myAccount") {
                 self.getSelectedServiceHeader("How to add Identity Domain Administrator through MyAccount");
                 self.getSelectedServiceVideoLink("https://www.youtube.com/embed/VgeH6cKHXKo?rel=0");
+                service.updateAudit({"stepCode" : getStateId(), "action" : "Watching MyAccount Podcast"});
             } else if (event.currentTarget.id === "myServices") {
                 self.getSelectedServiceHeader("How to add Users through MyServices");
                 self.getSelectedServiceVideoLink("https://www.youtube.com/embed/8m7HF9xB0qc?rel=0");
+                 service.updateAudit({"stepCode" : getStateId(), "action" : "Watching MyServices Podcast"});
             }
         };
         

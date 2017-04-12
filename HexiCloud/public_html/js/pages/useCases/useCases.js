@@ -81,6 +81,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknock
             };
             
             service.getUseCaseDetails(useCaseCode).then(successCbFn, FailCallBackFn);
+            service.updateAudit({"stepCode" : getStateId(), "action" : "Selected Usecase : " + useCaseCode});
         };
 
         self.handleTransitionCompleted = function () {
