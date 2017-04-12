@@ -41,12 +41,12 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'config/sessionInfo', 'ojs
                 return self.isIDomainActive(iDomain.length > 0);
             });
             $("#username").focus();
-            $("#username").keypress(function (e) {
+            $("#username").on('keyup paste cut', function (e) {
                 if (e.keyCode === 13 && self.userName() !== undefined) {
                     $("#password").focus();
                 }
             });
-            $("#password").keypress(function (e) {
+            $("#password").on('keyup paste cut', function (e) {
                 if (e.keyCode === 13) {
                     self.login();
                 }
@@ -87,7 +87,7 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'config/sessionInfo', 'ojs
             if (self.iDomain() == "") {
                 var successCallBackFn = function (data, xhrStatus) {
                     console.log(data);
-                    console.log(status);
+                    console.log(xhrStatus);
                     if (xhrStatus.status == 200) {
                         sessionInfo.setToSession(sessionInfo.accessToken, data.access_token);
                         sessionInfo.setToSession(sessionInfo.expiresIn, data.expires_in);
@@ -109,12 +109,20 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'config/sessionInfo', 'ojs
                         // service.getUserStep(loggedInUser()).then(getUserStepSuccessCallBackFn);
                         // Hardcoding for the demo
                         
-                        checkIfOnboardingComplete();
-                        
-                        if (self.userName().toLowerCase() === 'fred' || self.userName().toLowerCase() === 'simon') {
-                            router.go('dashboard/');
-                        } else {
-                            router.go(self.savedStep() + '/');
+                        // if changePwd is set to true then user needs to change the password
+                        if (data.changePwd) {
+                            if(parentViewModel) {
+                                hidePreloader();
+                                parentViewModel.goToUpdatePassword();
+                            }
+                        } else {                        
+                            checkIfOnboardingComplete();
+
+                            if (self.userName().toLowerCase() === 'fred' || self.userName().toLowerCase() === 'simon') {
+                                router.go('dashboard/');
+                            } else {
+                                router.go(self.savedStep() + '/');
+                            }
                         }
                     
                         // setTimeout(function () {

@@ -7,5 +7,5 @@ define(['ojs/ojcore', 'text!./techsupport.html', './techsupport','text!./techsup
                 viewModel: {inline: viewModel},
                 metadata: {inline: JSON.parse(metadata)}
             });
-
+            
         });

@@ -293,6 +293,25 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
 
+        self.updatePasswordService = function (payload) {
+            var defer = $.Deferred();
+            var serviceUrl = self.portalRestHost() + "/services/rest/forgotPaswswordService/" + payload + "/";
+            $.ajax({
+                type: 'GET',
+                url: serviceUrl,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                success: function (data, status) {
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+
         self.requestCallBack = function (payload) {
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/requestCallback/";

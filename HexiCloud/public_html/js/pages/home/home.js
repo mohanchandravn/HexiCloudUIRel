@@ -44,6 +44,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojfilmstrip',
         });
         };
         
+        self.goToUpdatePassword = function ()
+        {
+            self.homeModule({
+            'name': 'pages/login/updatePassword',
+            "params": {
+                parent: self
+            }
+        });
+        };
+        
         console.log('home page');
         self.filmStripItems = [
             { title: 'Get onboard', description: 'There are 3 easy steps to complete the onboarding process and get started with your services' },

@@ -141,7 +141,7 @@ and open the template in the editor.
     font-family: 'Roboto-thin', sans-serif;
 }
 
-.forgotpasswordContainer .invalidUserText {
+.forgotpasswordContainer .invalidUserText, .updatepasswordContainer .invalidUserText {
     color: red;
 }
 
