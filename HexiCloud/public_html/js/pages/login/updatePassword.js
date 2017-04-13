@@ -16,7 +16,6 @@ define(['jquery',
         self.templateId = ko.observable('updatePwdForm');
         
         if(params) {
-            var router = params.parentRouter;
             self.parentVM = params.parent;
         }
         
