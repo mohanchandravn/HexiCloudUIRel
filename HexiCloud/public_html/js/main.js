@@ -206,6 +206,10 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     $("#routingContainer").css("pointer-events", "");
                     $("#routingContainer").css("opacity", "");
                 };
+                
+                self.goToPage = function(id) {
+                    router.go(id);
+                };
 
                 self.screenRange = oj.ResponsiveKnockoutUtils.createScreenRangeObservable();
                 self.viewportSize = ko.computed(function () {

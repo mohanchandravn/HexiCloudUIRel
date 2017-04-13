@@ -87,7 +87,7 @@ define(['jquery',
             var successCbFn = function (data, status) {
                 if (status === 'success') {
                     console.log('successfully updated password..');
-                    router.go('chooseRole');
+                    goToPage('chooseRole');
                 } else {
                     $('#invalidPassword').show();
                 }
