@@ -22,7 +22,11 @@ define(['jquery',
         self.minLength = {
             validate: function (value) {
                 if (value.length < 8) {
-                    throw new Error('Password length should not be less than 8.');
+                    if (value.length !== 0) {
+                       throw new Error('Password length should not be less than 8.');
+                    }
+                } else if (value === self.oldPassword()) {
+                    throw new Error('Old password and new password cannot be same.');
                 }
                 return true;
             }
@@ -31,10 +35,13 @@ define(['jquery',
         self.equalToPassword = {
             validate: function (value) {
                 var compareTo = self.newPassword.peek();
-                if (!value && !compareTo) {
-                    return true;
-                } else if (value !== compareTo) {
-                    throw new Error('The passwords must match.');
+                $("#mismatchedPassword").hide();
+                if (value.length !== 0) {
+                    if (!value && !compareTo) {
+                        return true;
+                    } else if (value !== compareTo) {
+                        throw new Error('The passwords must match.');
+                    }
                 }
                 return true;
             }
@@ -97,15 +104,26 @@ define(['jquery',
                 console.log(xhr);
                 if (xhr.status === 400) {
                     $('#invalidPassword').show();
+                    self.newPassword('');
+                    self.repeatPassword('');
                 } else {
+                    self.newPassword('');
+                    self.repeatPassword('');
                     errorHandler.showAppError("ERROR_GENERIC", xhr);
                 }
                 hidePreloader();
             };
-            
+            if ($("#newPassword").val() !== $("#repeatPassword").val()) {
+                $("#mismatchedPassword").show();
+                hidePreloader();
+                return;
+            } else {
+                $("#mismatchedPassword").hide();
+            }
             var payload = {
                 "oldPassword": self.oldPassword(),
-                "newPassword": $("#repeatPassword").val()
+                "newPassword": $("#newPassword").val(),
+                "repeatPassword": $("#repeatPassword").val()
             };
             console.log(payload);
             service.updatePasswordService(JSON.stringify(payload)).then(successCbFn, failCbFn);           
