@@ -1,3 +1,8 @@
 /HexiCloud/hexiCloudPortalV8.war
 /HexiCloud/hexiCloudPortalV9.war
 /HexiCloud/nbproject/private/
+/HexiCloud/dist/
+/HexiCloud/themes/
+/HexiCloud/web/
+/HexiCloud/node_modules/
+/.project
