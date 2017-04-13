@@ -1,22 +1,45 @@
 define(['jquery',
         'knockout',
         'config/serviceConfig',
+        'util/errorhandler',
         'config/sessionInfo',
         'ojs/ojcore',
         'ojs/ojinputtext',
-        'ojs/ojknockout'], function ($, ko, service, sessionInfo){
+        'ojs/ojknockout'], function ($, ko, service, errorHandler){
     
     function updatePasswordViewModel(params){
         var self = this;
-        self.currentPassword = ko.observable("");
+        self.oldPassword = ko.observable("");
         self.newPassword = ko.observable("");
         self.repeatPassword = ko.observable("");
         self.tracker = ko.observable();
         self.templateId = ko.observable('updatePwdForm');
         
         if(params) {
+            var router = params.parentRouter;
             self.parentVM = params.parent;
         }
+        
+        self.minLength = {
+            validate: function (value) {
+                if (value.length < 8) {
+                    throw new Error('Password length should not be less than 8.');
+                }
+                return true;
+            }
+        };
+        
+        self.equalToPassword = {
+            validate: function (value) {
+                var compareTo = self.newPassword.peek();
+                if (!value && !compareTo) {
+                    return true;
+                } else if (value !== compareTo) {
+                    throw new Error('The passwords must match.');
+                }
+                return true;
+            }
+        };
         
         self._showComponentValidationErrors = function (trackerObj) {
             trackerObj.showMessages();
@@ -32,20 +55,21 @@ define(['jquery',
 //        };
         
         self.handleBindingsApplied = function() {
-            $("#repeatPassword").on('keyup paste cut', function (e) {
-                var repeatPwd = $("#repeatPassword").val();
-                console.log(self.newPassword());
-                console.log(repeatPwd);
-                if ( repeatPwd !== '' ) {
-                    if (self.newPassword() !== repeatPwd) {
-                        $('#mismatchedPassword').show();
-                    } else {
-                        $('#mismatchedPassword').hide();
-                    }
-                } else {
-                    $('#mismatchedPassword').hide();
-                }
-            });
+            $("#oldPassword").focus();
+//            $("#repeatPassword").on('keyup paste cut', function (e) {
+//                var repeatPwd = $("#repeatPassword").val();
+//                console.log(self.newPassword());
+//                console.log(repeatPwd);
+//                if ( repeatPwd !== '' ) {
+//                    if (self.newPassword() !== repeatPwd) {
+//                        $('#mismatchedPassword').show();
+//                    } else {
+//                        $('#mismatchedPassword').hide();
+//                    }
+//                } else {
+//                    $('#mismatchedPassword').hide();
+//                }
+//            });
         };
         
         self.onClickUpdatePwdSubmit = function () {
@@ -61,8 +85,9 @@ define(['jquery',
             }
                         
             var successCbFn = function (data, status) {
-                if (status === 200) {
+                if (status === 'success') {
                     console.log('successfully updated password..');
+                    router.go('chooseRole');
                 } else {
                     $('#invalidPassword').show();
                 }
@@ -71,16 +96,20 @@ define(['jquery',
             
             var failCbFn = function(xhr) {
                 console.log(xhr);
-                $('#invalidPassword').show();
+                if (xhr.status === 400) {
+                    $('#invalidPassword').show();
+                } else {
+                    errorHandler.showAppError("ERROR_GENERIC", xhr);
+                }
                 hidePreloader();
             };
             
             var payload = {
-                "oldPassword": self.currentPassword(),
+                "oldPassword": self.oldPassword(),
                 "newPassword": $("#repeatPassword").val()
             };
             console.log(payload);
-            service.updatePasswordService(payload).then(successCbFn, failCbFn);           
+            service.updatePasswordService(JSON.stringify(payload)).then(successCbFn, failCbFn);           
         };
         
         var handleForgotPwdServiceSuccess = function (data, status)

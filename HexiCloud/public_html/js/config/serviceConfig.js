@@ -297,10 +297,12 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.updatePasswordService = function (payload) {
             var defer = $.Deferred();
-            var serviceUrl = self.portalRestHost() + "/services/rest/forgotPaswswordService/" + payload + "/";
+            var serviceUrl = self.portalRestHost() + "/services/rest/resetPassword/";
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: serviceUrl,
+                contentType: "application/json",
+                data: payload,
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
