@@ -12,13 +12,13 @@
 /**
  * service module
  */
-define(['knockout', 'config/serviceConfig', 'jquery', 'ojs/ojcore', 'ojs/ojprogressbar', 'ojs/ojmasonrylayout','components/trainnavigation/loader','components/techsupport/loader'
+define(['knockout', 'config/serviceConfig', 'jquery', 'ojs/ojcore', 'ojs/ojprogressbar', 'ojs/ojmasonrylayout', 'components/trainnavigation/loader', 'components/techsupport/loader'
 ], function (ko, service, $) {
     /**
      * The view model for the main content view template
      */
-    function serviceContentViewModel(params) {        
-               
+    function serviceContentViewModel(params) {
+
         var self = this;
         var router = params.ojRouter.parentRouter;
         self.servicesAsExpected = ko.observable(true);
@@ -32,13 +32,13 @@ define(['knockout', 'config/serviceConfig', 'jquery', 'ojs/ojcore', 'ojs/ojprogr
             showPreloader();
             isLoggedInUser(true);
 //            setTimeout(function () {
-                service.updateCurrentStep({
-                    "userId": loggedInUser(),
-                    "userRole": loggedInUserRole(),
-                    "curStepCode": 'dashboard',
-                    "preStepCode": getStateId(),
-                    "userAction": "Go To Dashboard"
-                });
+            service.updateCurrentStep({
+                "userId": loggedInUser(),
+                "userRole": loggedInUserRole(),
+                "curStepCode": 'dashboard',
+                "preStepCode": getStateId(),
+                "userAction": "Go To Dashboard"
+            });
 //            }, 500);
 //            slideOutAnimate(1500, 0);
         };
@@ -62,16 +62,16 @@ define(['knockout', 'config/serviceConfig', 'jquery', 'ojs/ojcore', 'ojs/ojprogr
             selectedTemplate('chat_content');
             $('#tech_support').slideToggle();
         };
-        
+
         self.currentStepValue = ko.observable('stp3');
-        self.stepsArray =ko.observableArray([
+        self.stepsArray = ko.observableArray([
             {label: 'Choose Role', id: 'stp1'},
             {label: 'Add Users', id: 'stp2'},
             {label: 'Services', id: 'stp3'}
         ]);
         self.actionDisabledCss = "disable-train-selection";
-        
-        self.getClass = function(serverType) {
+
+        self.getClass = function (serverType) {
 //            if (serverType === 'COMPUTE') {
 //                return 'blue';
 //            } else if (serverType === 'JCS') {
@@ -82,8 +82,8 @@ define(['knockout', 'config/serviceConfig', 'jquery', 'ojs/ojcore', 'ojs/ojprogr
 //            }
             return 'purple';
         };
-        
-        self.getIcon = function(serverType) {
+
+        self.getIcon = function (serverType) {
             if (serverType.toLowerCase().indexOf("compute") >= 0) {
                 return 'css/img/compute_w_72.png';
             } else if (serverType.toLowerCase().indexOf("storage") >= 0) {
@@ -93,21 +93,20 @@ define(['knockout', 'config/serviceConfig', 'jquery', 'ojs/ojcore', 'ojs/ojprogr
             } else if (serverType.toLowerCase().indexOf("container") >= 0) {
                 return 'css/img/Container_w_72.png';
             } else if (serverType.toLowerCase().indexOf("ravello") >= 0) {
-                 return 'css/img/Ravello_w_72.png';
+                return 'css/img/Ravello_w_72.png';
             } else if (serverType.toLowerCase().indexOf("cloud machine") >= 0) {
                 return 'css/img/CloudMachine_w_72.png';
-            } 
-            else {
-               return 'css/img/compute_w_72.png';
+            } else {
+                return 'css/img/compute_w_72.png';
             }
         };
-        
+
         function populateUI(data, status) {
             console.log(data);
             console.log(status);
             var length = 0;
             if (data) {
-                $.each(data, function(idx, serviceItem) {
+                $.each(data, function (idx, serviceItem) {
                     if (length < serviceItem.details.length) {
                         length = serviceItem.details.length;
                     }
@@ -116,10 +115,13 @@ define(['knockout', 'config/serviceConfig', 'jquery', 'ojs/ojcore', 'ojs/ojprogr
                 self.serviceItems(data);
             } else {
                 self.noServices(true);
+                self.servicesAsExpected(false);
+                self.showSupportPanel(true);
             }
             hidePreloader();
-        };
-        
+        }
+        ;
+
         self.handleAttached = function () {
             showPreloader();
             checkIfOnboardingComplete();
@@ -127,7 +129,7 @@ define(['knockout', 'config/serviceConfig', 'jquery', 'ojs/ojcore', 'ojs/ojprogr
             // service.getServiceItems().then(populateUI, FailCallBackFn);
             service.getUserClmData(loggedInUser()).then(populateUI, FailCallBackFn);
         };
-        
+
         self.handleTransitionCompleted = function () {
             // scroll the whole window to top if it's scroll position is not on top
             $(window).scrollTop(0);
