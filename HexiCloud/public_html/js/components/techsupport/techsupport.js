@@ -19,6 +19,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.detailsOfSR = ko.observable();
                 self.statusOfSR = ko.observable(false);
                 self.tracker = ko.observable();
+                self.emailMsgPlaceHolder = ko.observable('Please comment on the missing provisioned services...');
+                if (getStateId() !== 'servicesMini') {
+                    self.emailMsgPlaceHolder = ko.observable('Please brief us the problem or suggestion  ...');
+                }
                 self.phonePattern = commonHelper.phoneRegExpPattern;
 
                 self._showComponentValidationErrors = function (trackerObj) {

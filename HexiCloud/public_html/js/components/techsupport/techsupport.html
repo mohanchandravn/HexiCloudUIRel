@@ -23,7 +23,7 @@
     <!-- ko if: !statusOfSR() -->
     <div class="oj-flex-item">          
         <input type="text" id="emailSub" data-bind="ojComponent: {component: 'ojInputText', 
-                                                           placeholder: 'Subject', 
+                                                           placeholder: 'A Short Subject', 
                                                            value: emailSubject,
                                                            invalidComponentTracker: tracker,
                                                            required: true,
@@ -41,7 +41,7 @@
         <textarea rows="13" id="emailMsg"
                   style="resize: both;"
                   data-bind="ojComponent: {component: 'ojTextArea', 
-                                     value: emailMessage, placeholder: 'Please comment on your provisioned services issue...',
+                                     value: emailMessage, placeholder: emailMsgPlaceHolder,
                              invalidComponentTracker: tracker,
                                                            required: true,
                                                            rootAttributes: {style:'max-width:100%'} ,
@@ -181,12 +181,12 @@
                             <textarea rows="10" class="oj-sm-12 oj-flex-item"
                                     data-bind="ojComponent: {component: 'ojTextArea', 
                                                         value: phoneMessage,
-                                                        placeholder: 'Please add a message',
+                                                        placeholder: 'Let us know when to call you back',
                                                         invalidComponentTracker: tracker,
                                                         required: true,
                                                         rootAttributes: {style:'max-width:100%'},
                                                         translations: {'required': {
-                                                                      messageDetail: 'Please brief us the problem'}}
+                                                                      messageDetail: 'Please brief us the problem or convinient time to call you'}}
                                                         }">
                             </textarea>
                                 <span class="red-button oj-sm-12 oj-flex-item" data-bind="click: requestCallBack">Request a call</span>

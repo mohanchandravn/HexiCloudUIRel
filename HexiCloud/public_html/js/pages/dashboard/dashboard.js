@@ -74,13 +74,14 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
                     if (length < serviceItem.details.length) {
                         length = serviceItem.details.length;
                     }
-                    if (idx < 4) {
+                    if (idx <= 3) {
                         array.push(serviceItem);
                     }
-                    if (idx > 4) {
+                    if (idx > 3) {
                         self.showControlsButton(true);
                         self.showViewAllButton(true);
                     }
+                    console.log('idx: ' +idx);
                 });
                 self.detailsContentMaxHeight(length);
                 self.minimalServiceItems(array);
