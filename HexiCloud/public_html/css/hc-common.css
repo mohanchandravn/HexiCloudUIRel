@@ -502,3 +502,7 @@ login-page video::-webkit-media-controls-start-playback-button {
     margin-top: 5px;
     margin-bottom: 15px;
 }
+
+.c-pointer {
+    cursor: pointer;
+}

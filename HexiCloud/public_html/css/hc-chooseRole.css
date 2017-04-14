@@ -206,6 +206,7 @@ and open the template in the editor.
     border: #00758f 1px solid;
     border-radius: 20px;
     margin: 20px 10px 20px 0px;
+    cursor: pointer;
     box-sizing: border-box;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -232,6 +233,10 @@ and open the template in the editor.
     padding: 2px 9px !important;
     vertical-align: middle;
     /*    color: #fff !important;*/
+}
+.grey-button:active {
+    text-decoration: none;
+   border-radius: 20px; 
 }
 
 
