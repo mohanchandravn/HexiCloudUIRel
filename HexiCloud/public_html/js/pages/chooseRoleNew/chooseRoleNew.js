@@ -1,9 +1,10 @@
-define(['ojs/ojcore',
-    'jquery',
+define(['jquery',
     'knockout',
     'config/serviceConfig',
+    'config/sessionInfo',
+    'ojs/ojcore',
     'ojs/ojselectcombobox',
-    'components/trainnavigation/loader'], function (oj, $, ko, service) {
+    'components/trainnavigation/loader'], function ($, ko, service, sessionInfo) {
 
     function ChooseRoleViewModel(params)
     {
@@ -54,8 +55,10 @@ define(['ojs/ojcore',
                 "curStepCode": "addAdditionalUsers",
                 "preStepCode": getStateId(),
                 "userAction": "Selected Role as : " + loggedInUserRole(),
-                  "updateRole" : true
-            });
+                "updateRole" : true
+            });            
+            sessionInfo.setToSession(sessionInfo.loggedInUserRole, self.selectedRole()[0]);
+            
 //            setTimeout(function () {
             //$.fn.fullpage.moveSlideLeft();
 //            }, 500);

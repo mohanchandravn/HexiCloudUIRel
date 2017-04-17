@@ -75,10 +75,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
                 self.requestCallBack = function () {
                     var requestCallbackSuccessCbFn = function (data, status) {
-                        hidePreloader();
-                        self.isCallBackInitiated(true);
                         console.log(data);
                         console.log(status);
+                        hidePreloader();
+                        self.isCallBackInitiated(true);
+
+                        if (!self.confirmedPhoneNumber() || !self.phoneNumberAdded()) {
+                            sessionInfo.setToSession(sessionInfo.phoneNumber, self.countryCode() + '-' + self.addedPhoneNumber());
+                        }
                         service.updateAudit({"stepCode": getStateId(), "action": "Requested Callback"});
                     };
 

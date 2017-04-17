@@ -114,7 +114,7 @@ navigationbarleft {
     color: rgb(255,255,255);
 }
 
-.nav-list li:hover span{
+.nav-list li:not(.selectedList):hover span, .nav-list li:not(.selectedList):hover i{
     color: #F80000;
 }
 
@@ -163,10 +163,6 @@ navigationbarleft {
 
 .nav-list .sub-nav span {
     /* margin-left: 10px; */
-}
-
-.nav-list .sub-nav .sub-nav-content:hover {
-    color: #ee4f50;
 }
 
 .nav-list .sub-nav {
