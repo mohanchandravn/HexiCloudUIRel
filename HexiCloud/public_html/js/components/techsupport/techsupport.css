@@ -95,7 +95,8 @@ and open the template in the editor.
     height: 40px;
     border-radius: 27px;
     background-image: none !important;
-    background-color: #ee4f50;
+    background-color: #F80000;
+    opacity: 0.6;
     color: #fff;
 }
 
@@ -117,6 +118,8 @@ and open the template in the editor.
 .tech-support-container .email-submit-btn.oj-button.oj-hover, 
 .tech-support-container .email-submit-btn.oj-button.oj-focus,
 .tech-support-container .email-submit-btn.oj-button.oj-focus-highlight {
+    background-color: #C80000;
+    opacity: 1;
     border: 1px solid transparent !important;
 }
 

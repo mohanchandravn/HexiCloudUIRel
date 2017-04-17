@@ -298,7 +298,7 @@ p.lg {
 }
 
 .red-button {
-    background-color: #ee4f50 !important;
+    background-color: #F80000;
     /*    padding: 10px 30px;*/
     display: inline-block;
     text-align: center;
@@ -312,12 +312,15 @@ p.lg {
     line-height: 3.5rem;
     cursor: pointer;
     width:100%;
+    opacity: 0.6;
     /* padding: 0px 20px 0px 20px; */
     z-index: 999;
 }
 
 .red-button:hover {
+    background-color: #C80000;
     color: #fff;
+    opacity: 1;
     text-decoration: none; 
 }
 

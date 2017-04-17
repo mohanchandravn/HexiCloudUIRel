@@ -152,7 +152,7 @@ and open the template in the editor.
 }
 
 .chooseRoleContainer .red-button {
-    background-color: #ee4f50 !important;
+    background-color: #F80000;
     /*    padding: 10px 30px;*/
     display: inline-block;
     text-align: center;
@@ -167,6 +167,13 @@ and open the template in the editor.
     width:100%;
     padding: 0px 20px 0px 20px;
     z-index: 999;
+}
+
+.chooseRoleContainer .red-button:hover {
+    background-color: #C80000;
+    color: #fff;
+    opacity: 1;
+    text-decoration: none;
 }
 
 /*.chooseRole .oj-button .oj-button-text 
@@ -294,7 +301,7 @@ hr{
     /*height: 54px;*/
     border-radius: 27px;
     margin: 20px;
-    opacity: 0.65;
+    opacity: 0.6;
     min-width: 230px;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;

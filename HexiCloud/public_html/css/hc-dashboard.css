@@ -77,7 +77,7 @@ and open the template in the editor.
 }
 
 .view-more-button {
-    background-color: #ee4f50 !important;
+    background-color: #F80000;
     /* padding: 10px 30px; */
     display: inline-block;
     text-align: center;
@@ -89,11 +89,19 @@ and open the template in the editor.
     font-size: 18px;
     line-height: 2.5rem;
     cursor: pointer;
+    opacity: 0.6;
     width: 100%;
     /* padding: 0px 20px 0px 20px; */
     /* z-index: 999; */
 
 }
+.view-more-button:hover {
+    text-decoration: none;
+    background-color: #C80000;
+    color: #fff;
+    opacity: 1;
+}
+
 .view-more-button:hover, 
 .view-more-button:focus,
 .view-more-button:active{
