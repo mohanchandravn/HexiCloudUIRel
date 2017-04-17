@@ -160,7 +160,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 }
 
                 self.checkIfOnboardingComplete = function () {
-                    if (sessionInfo.getFromSession(sessionInfo.isOnboardingComplete)) {
+                    if (sessionInfo.getFromSession(sessionInfo.isOnboardingComplete)=== 'true') {
                         router.go('dashboard');
                     }
                 };
