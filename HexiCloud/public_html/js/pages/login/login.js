@@ -104,31 +104,35 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'config/sessionInfo', 'ojs
                         sessionInfo.setToSession(sessionInfo.userFirstLastName, data.firstName);
                         userClmRegistryId(data.registryId);
                         sessionInfo.setToSession(sessionInfo.userClmRegistryId, data.registryId);
+                        sessionInfo.setToSession(sessionInfo.isOnboardingComplete, data.onBoardingCompleted);
+                        
                         self.loginFailureText("");
                         
-                        // service.getUserStep(loggedInUser()).then(getUserStepSuccessCallBackFn);
-                        // Hardcoding for the demo
-                        
+                       
                         // if changePwd is set to true then user needs to change the password
                         if (data.changePwd) {
                             if(parentViewModel) {
                                 hidePreloader();
                                 parentViewModel.goToUpdatePassword();
                             }
-                        } else {                        
+                        } else {
                             checkIfOnboardingComplete();
-
-                            if (self.userName().toLowerCase() === 'fred' || self.userName().toLowerCase() === 'simon') {
-                                router.go('dashboard/');
-                            } else {
-                                router.go(self.savedStep() + '/');
+                            hidePreloader();
+                            if (!data.onBoardingCompleted) {
+                                if (data.curStepCode !== null && data.curStepCode !== 'null') {
+                                   router.go(data.curStepCode + '/'); 
+                                } else {
+                                    router.go(self.savedStep() + '/');
+                                }
+                                
                             }
+//                            if (self.userName().toLowerCase() === 'fred' || self.userName().toLowerCase() === 'simon') {
+//                                router.go('dashboard/');
+//                            } else {
+//                                router.go(self.savedStep() + '/');
+//                            }
                         }
-                    
-                        // setTimeout(function () {
-                        // }, 500);
-                        // slideOutAnimate(1500, 0);
-                        
+                       
                     } else {
                         self.loginFailureText("Invalid Username or Password");
                     }
@@ -140,16 +144,16 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'config/sessionInfo', 'ojs
                     hidePreloader();
                 };
                 
-                var getUserStepSuccessCallBackFn = function (data) {
-                    console.log(data);
-                    if (data) {
-                        loggedInUser(data.userId);
-                        loggedInUserRole(data.userRole);
-                        self.savedStep(data.curStepCode);
-                    }
-                    
-                    router.go(self.savedStep() + '/');
-                };
+//                var getUserStepSuccessCallBackFn = function (data) {
+//                    console.log(data);
+//                    if (data) {
+//                        loggedInUser(data.userId);
+//                        loggedInUserRole(data.userRole);
+//                        self.savedStep(data.curStepCode);
+//                    }
+//                    
+//                    router.go(self.savedStep() + '/');
+//                };
                 
                 var payload = {
                     "username": self.userName().toLowerCase(),
