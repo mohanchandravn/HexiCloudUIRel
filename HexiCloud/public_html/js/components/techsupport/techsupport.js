@@ -9,10 +9,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.selectedTemplate = ko.observable('phone_content');
                 self.isCallBackInitiated = ko.observable(false);
                 self.countryCode = ko.observable();
-                self.phoneNumber = ko.observable();
+//                self.phoneNumber = ko.observable();
                 self.addedPhoneNumber = ko.observable();
                 self.confirmedPhoneNumber = ko.observable();
-                self.changingNumber = ko.observable(false);
+//                self.changingNumber = ko.observable(false);
                 self.phoneMessage = ko.observable('');
                 self.emailSubject = ko.observable();
                 self.emailMessage = ko.observable();
@@ -52,11 +52,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
                 self.phoneNumberAdded = function () {
                     if (sessionInfo.getFromSession('phoneNumber') !== 'null') {
-                        self.phoneNumber(sessionInfo.getFromSession('phoneNumber'));
-                        self.changingNumber(false);
+                        phoneNumber(sessionInfo.getFromSession('phoneNumber'));
+                        changingNumber(false);
                         return true;
                     } else {
-                        self.changingNumber(true);
+                        changingNumber(true);
                         return false;
                     }
                 };
@@ -70,7 +70,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                         self.confirmedPhoneNumber(false);
                         self.countryCode('');
                     }
-                    self.changingNumber(true);
+                    changingNumber(true);
                 };
 
                 self.requestCallBack = function () {
@@ -116,7 +116,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.resetAndClosePhone = function () {
                     self.addedPhoneNumber("");
                     self.phoneMessage("");
-                    self.changingNumber(false);
+                    changingNumber(false);
                     self.isCallBackInitiated(false);
                 };
 
@@ -125,7 +125,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     self.emailMessage("");
                     self.detailsOfSR("");
                     self.statusOfSR(false);
-                    self.changingNumber(false);
+                    changingNumber(false);
                     self.resetAndClosePhone();
                     $('#tech_support').hide();
                 };

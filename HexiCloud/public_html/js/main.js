@@ -176,6 +176,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.loggedInUser = ko.observable(sessionInfo.getFromSession(sessionInfo.loggedInUser));
                 self.loggedInUserRole = ko.observable(sessionInfo.getFromSession(sessionInfo.loggedInUserRole));
                 self.phoneNumber = ko.observable(sessionInfo.getFromSession(sessionInfo.phoneNumber));
+                self.changingNumber = ko.observable(false);
                 self.userFirstLastName = ko.observable(sessionInfo.getFromSession(sessionInfo.userFirstLastName));
                 self.userClmRegistryId = ko.observable(sessionInfo.getFromSession(sessionInfo.userClmRegistryId));
                 self.isChatInitialized = ko.observable(false);
@@ -389,7 +390,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         self.isUseCaseSelected(false);
                         self.isResourceSelected(false);
                         self.isContactSelected(false);
-                        location.reload();
                         router.go('home/');
 
                     };

@@ -86,7 +86,7 @@
                 <div class="oj-flex">
                     <!-- ko if: !changingNumber() -->
                     <div class="oj-sm-12 oj-flex-item">
-                        <!-- ko if: phoneNumberAdded() -->
+                        <!-- ko if: !changingNumber() && phoneNumberAdded() -->
                         <div class="oj-sm-12 oj-flex-item">
                             <div class="oj-sm-justify-content-center oj-flex">
                                 <span class="label-text text-center oj-sm-12 oj-flex-item" data-bind="text: 'Your number: ' + phoneNumber()"></span>
@@ -96,7 +96,7 @@
                             </div>
                         </div>
                         <!-- /ko -->
-                        <!-- ko if: !phoneNumberAdded() -->
+                        <!-- ko if: !changingNumber() && !phoneNumberAdded() -->
                         <div class="oj-sm-12 oj-flex-item">
                             <div class="oj-flex">
                                 <div class="phone-container oj-sm-12 oj-flex-item">
@@ -145,11 +145,9 @@
                     <!-- ko if: changingNumber() -->
                     <div class="oj-sm-12 oj-flex-item">
                         <div class="oj-flex">
-                            <!-- ko if: !confirmedPhoneNumber() -->
+                            <!-- ko if: changingNumber() && !confirmedPhoneNumber() -->
                                 <div class="phone-container oj-flex-item">
                                     <label for="phone">Coutry Code - Phone</label>
-                                <!--</div>-->
-                                <!--<div class="oj-sm-12 oj-flex-item">-->
                                     <input id="phone" class="phone-input" maxlength="4" data-bind="ojComponent: { 
                                                                         component: 'ojInputText',
                                                                         value: countryCode,
@@ -175,7 +173,7 @@
                                                                           invalidComponentTracker: tracker }">
                                 </div>
                             <!-- /ko -->
-                            <!-- ko if: confirmedPhoneNumber() -->
+                            <!-- ko if: changingNumber() && confirmedPhoneNumber() -->
                             <span class="label-text" data-bind="text: 'Your number: ' + phoneNumber()"></span>
                             <!-- /ko -->
                             <textarea rows="10" class="oj-sm-12 oj-flex-item"
