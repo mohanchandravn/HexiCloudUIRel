@@ -6,59 +6,59 @@ requirejs.config({
     baseUrl: 'js',
     // Path mappings for the logical module names
     paths:
-            //injector:mainReleasePaths
-                    {
-                        'knockout': 'libs/knockout/knockout-3.4.0',
-                        'jquery': 'libs/jquery/jquery-3.1.1.min',
-                        'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0.min',
-                        'promise': 'libs/es6-promise/es6-promise.min',
-                        'hammerjs': 'libs/hammer/hammer-2.0.8.min',
-                        'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
-                        'ojs': 'libs/oj/v3.0.0/min',
-                        'ojL10n': 'libs/oj/v3.0.0/ojL10n',
-                        'ojtranslations': 'libs/oj/v3.0.0/resources',
-                        'text': 'libs/require/text',
-                        'signals': 'libs/js-signals/signals.min',
-                        'customElements': 'libs/webcomponents/CustomElements.min',
-                        'proj4': 'libs/proj4js/dist/proj4-src',
-                        'css': 'libs/require-css/css.min'
+    //injector:mainReleasePaths
+    {
+        'knockout': 'libs/knockout/knockout-3.4.0',
+        'jquery': 'libs/jquery/jquery-3.1.1.min',
+        'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0.min',
+        'promise': 'libs/es6-promise/es6-promise.min',
+        'hammerjs': 'libs/hammer/hammer-2.0.8.min',
+        'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
+        'ojs': 'libs/oj/v3.0.0/min',
+        'ojL10n': 'libs/oj/v3.0.0/ojL10n',
+        'ojtranslations': 'libs/oj/v3.0.0/resources',
+        'text': 'libs/require/text',
+        'signals': 'libs/js-signals/signals.min',
+        'customElements': 'libs/webcomponents/CustomElements.min',
+        'proj4': 'libs/proj4js/dist/proj4-src',
+        'css': 'libs/require-css/css.min'
 
 
 
-                                //    'knockout': 'libs/knockout/knockout-3.4.0',
-                                //    'jquery': 'libs/jquery/jquery-3.1.0.min',
-                                //    'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0.min',
-                                //    'ojs': 'libs/oj/v2.2.0/min',
-                                //    'ojL10n': 'libs/oj/v2.2.0/ojL10n',
-                                //    'ojtranslations': 'libs/oj/v2.2.0/resources',
-                                //    'signals': 'libs/js-signals/signals.min',
-                                //    'text': 'libs/require/text',
-                                //    'promise': 'libs/es6-promise/es6-promise.min',
-                                //    'hammerjs': 'libs/hammer/hammer-2.0.8.min',
-                                //    'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
-                                //    'css': 'libs/require-css/css.min'
+                //    'knockout': 'libs/knockout/knockout-3.4.0',
+                //    'jquery': 'libs/jquery/jquery-3.1.0.min',
+                //    'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0.min',
+                //    'ojs': 'libs/oj/v2.2.0/min',
+                //    'ojL10n': 'libs/oj/v2.2.0/ojL10n',
+                //    'ojtranslations': 'libs/oj/v2.2.0/resources',
+                //    'signals': 'libs/js-signals/signals.min',
+                //    'text': 'libs/require/text',
+                //    'promise': 'libs/es6-promise/es6-promise.min',
+                //    'hammerjs': 'libs/hammer/hammer-2.0.8.min',
+                //    'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
+                //    'css': 'libs/require-css/css.min'
 //                        'utilities': 'utils/utilities'
-                    }
-            //endinjector
-            ,
-            // Shim configurations for modules that do not expose AMD
-            shim: {
-                'jquery': {
-                    exports: ['jQuery', '$']
-                }
-            },
-            // This section configures the i18n plugin. It is merging the Oracle JET built-in translation
-            // resources with a custom translation file.
-            // Any resource file added, must be placed under a directory named "nls". You can use a path mapping or you can define
-            // a path that is relative to the location of this main.js file.
-            config: {
-                ojL10n: {
-                    merge: {
-                        //'ojtranslations/nls/ojtranslations': 'resources/nls/menu'
-                    }
-                }
+    }
+    //endinjector
+    ,
+    // Shim configurations for modules that do not expose AMD
+    shim: {
+        'jquery': {
+            exports: ['jQuery', '$']
+        }
+    },
+    // This section configures the i18n plugin. It is merging the Oracle JET built-in translation
+    // resources with a custom translation file.
+    // Any resource file added, must be placed under a directory named "nls". You can use a path mapping or you can define
+    // a path that is relative to the location of this main.js file.
+    config: {
+        ojL10n: {
+            merge: {
+                //'ojtranslations/nls/ojtranslations': 'resources/nls/menu'
             }
-        });
+        }
+    }
+});
 
 /**
  * A top-level require call executed by the Application.
@@ -89,7 +89,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
             oj.ModuleBinding.defaults.modelPath = './';
             oj.ModuleBinding.defaults.viewPath = 'text!./';
 
-
             // Retrieve the router static instance and configure the states
             var router = oj.Router.rootInstance;
             // Set the router base URL to the href of this page. This is needed when
@@ -106,8 +105,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     return "pages/learning/" + path;
                 else
                     return "pages/" + path + "/" + path;
-            }
-            ;
+            };
 
             router.configure({
                 'home': {label: 'Home', value: getPath('home'), isDefault: true},
@@ -132,6 +130,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 'createUsers': {label: 'Add Users', value: getPath('addUsersTutorial')},
                 'techSupport': {label: 'Techical Support', value: getPath('techSupport')},
                 'useCases': {label: 'Use Cases', value: getPath('useCases')},
+                'useCasesDemo': {label: 'Use Cases Demo', value: getPath('useCasesDemo')},
                 'faqs': {label: 'FAQ\'s', value: getPath('faqs')},
                 'error': {label: 'Error', value: getPath('error')}
             });
@@ -192,7 +191,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 self.showHeaderNav = ko.computed(function () {
                     var id = router.currentState().id;
-                    var pages = ["dashboard", "useCases", "faqs"];
+                    var pages = ["dashboard", "useCases", "useCasesDemo", "faqs"];
                     return (pages.indexOf(id) > -1) ? '' : 'visibility-hidden';
                 });
 
@@ -341,6 +340,10 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     }, true);
                     routeTo(data, event);
                     self.isUseCaseSelected(true);
+                };
+                
+                self.routeToUsecasesDemo = function (data, event) {
+                    router.go(event.currentTarget.id + '/');
                 };
 
                 self.routeToResources = function (data, event) {
