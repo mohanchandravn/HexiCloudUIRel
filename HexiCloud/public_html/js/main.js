@@ -208,6 +208,17 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     $("#routingContainer").css("opacity", "");
                 };
                 
+                self.isPhoneNumberAdded = function () {
+                    if (sessionInfo.getFromSession('phoneNumber') !== 'null') {
+                        phoneNumber(sessionInfo.getFromSession('phoneNumber'));
+                        changingNumber(false);
+                        return true;
+                    } else {
+                        changingNumber(true);
+                        return false;
+                    }
+                };
+                
                 self.goToPage = function(id) {
                     router.go(id);
                 };
@@ -391,7 +402,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         self.isResourceSelected(false);
                         self.isContactSelected(false);
                         router.go('home/');
-
+                        self.isPhoneNumberAdded();
                     };
                     service.logout().then(logoutSuccessCallback);
 

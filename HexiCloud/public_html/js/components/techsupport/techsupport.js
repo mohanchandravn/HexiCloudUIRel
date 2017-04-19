@@ -51,14 +51,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 };
 
                 self.phoneNumberAdded = function () {
-                    if (sessionInfo.getFromSession('phoneNumber') !== 'null') {
-                        phoneNumber(sessionInfo.getFromSession('phoneNumber'));
-                        changingNumber(false);
-                        return true;
-                    } else {
-                        changingNumber(true);
-                        return false;
-                    }
+                    return isPhoneNumberAdded();
                 };
 
                 self.changeNumber = function (data, event) {
