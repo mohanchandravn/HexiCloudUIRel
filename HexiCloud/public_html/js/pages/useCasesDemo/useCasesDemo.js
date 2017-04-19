@@ -7,8 +7,8 @@
 /**
  * useCases module
  */
-define(['jquery', 'knockout', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknockout', 'config/sessionInfo', 'ojs/ojprogressbar', 'ojs/ojfilmstrip', 'components/techsupport/loader'
-], function ($, ko, service) {
+define(['knockout', 'jquery', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojmasonrylayout'
+], function (ko) {
     /**
      * The view model for the main content view template
      */
@@ -19,6 +19,51 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknock
         console.log('useCasesDemo page');
         
         self.useCasesQuestionsCount = ko.observableArray([1, 2, 3, 4, 5, 6, 7]);
+        self.useCaseItems = [
+            { title: 'Apps Unlimited',
+              description: 'Lorem ipsum dolor sit amet',
+              imgPath: 'css/img/Asset 5.png',
+              sizeClass: 'oj-masonrylayout-tile-1x1' },
+            { title: 'Lift-and-Shift',
+              description: 'Lorem ipsum dolor sit amet',
+              imgPath: 'css/img/Asset 6.png',
+              sizeClass: 'oj-masonrylayout-tile-1x1' },
+            { title: 'Non-Oracle Workloads',
+              description: 'Lorem ipsum dolor sit amet',
+              imgPath: 'css/img/Asset 7.png',
+              sizeClass: 'oj-masonrylayout-tile-1x1' },
+            { title: 'Backup',
+              description: 'Lorem ipsum dolor sit amet',
+              imgPath: 'css/img/Asset 8.png',
+              sizeClass: 'oj-masonrylayout-tile-1x1' },
+            { title: 'Disaster Recovery',
+              description: 'Lorem ipsum dolor sit amet',
+              imgPath: 'css/img/Asset 9.png',
+              sizeClass: 'oj-masonrylayout-tile-1x1' }
+        ];
+        
+//        self.useCaseItems = [
+//            { title: 'Apps Unlimited',
+//              description: 'Lorem ipsum dolor sit amet',
+//              imgPath: 'css/img/Asset 5.png',
+//              sizeClass: 'oj-masonrylayout-tile-1x1' },
+//            { title: 'Lift-and-Shift',
+//              description: 'Lorem ipsum dolor sit amet',
+//              imgPath: 'css/img/Asset 5.png',
+//              sizeClass: 'oj-masonrylayout-tile-1x1' },
+//            { title: 'Non-Oracle Workloads',
+//              description: 'Lorem ipsum dolor sit amet',
+//              imgPath: 'css/img/Asset 5.png',
+//              sizeClass: 'oj-masonrylayout-tile-1x1' },
+//            { title: 'Backup',
+//              description: 'Lorem ipsum dolor sit amet',
+//              imgPath: 'css/img/Asset 5.png',
+//              sizeClass: 'oj-masonrylayout-tile-1x1' },
+//            { title: 'Disaster Recovery',
+//              description: 'Lorem ipsum dolor sit amet',
+//              imgPath: 'css/img/Asset 5.png',
+//              sizeClass: 'oj-masonrylayout-tile-1x1' }
+//        ];
   }
     
     return useCasesContentViewModel;

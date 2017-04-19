@@ -3,11 +3,55 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div class="oj-sm-justify-content-center oj-flex">
-    <div class="oj-lg-8 oj-flex-item" style="margin-top: 20px; border-left: 5px solid #F80000; background-color: #FFF; height: 250px;">
-        <div class="oj-sm-justify-content-center oj-flex" style="margin: 30px;">
+<div class="oj-sm-align-items-center oj-sm-flex-direction-column oj-flex">
+    <div class="oj-margin-lg-bottom oj-flex-item" style="max-width: 650px; padding: 0px 30px; margin-top: 20px; border-left: 5px solid #F80000; background-color: #FFF;">
+        <div class="oj-sm-justify-content-center oj-flex" style="margin-top: 30px;">
             <!-- ko foreach: useCasesQuestionsCount -->
             <span style="display: block; margin: 20px; border-radius: 50%; background-color: #F80000; width: 10px; height: 10px;"></span>
+            <!-- /ko -->
+        </div>
+        <div class="oj-flex">
+            <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000;">
+                Based on your Services these are the Use Cases available for you.
+            </span>
+            <div class="oj-flex-item">
+                <div class="oj-margin-bottom oj-flex">
+                    <span class="label-text" style="color: #DE8075;">Let us help you filtering them</span>
+                    <div class="oj-margin-lg-start oj-flex-bar" 
+                         style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
+                        <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
+                            Start
+                        </div>
+                        <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                            <span>
+                                <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="oj-lg-12 oj-flex-item" style="max-width: 650px;">
+        <div id="masonryUseCases" class="oj-sm-justify-content-center oj-flex" style="max-width: 650px;" 
+            data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+            <!-- ko foreach: useCaseItems -->
+            <div style="background-color: #FFFFFF;"
+                 data-bind="css: sizeClass">
+                <img data-bind="attr: { src : imgPath }" width="200" height="150" alt="Image" />
+                <div class="oj-margin-horizontal oj-flex-bar">
+                    <div class="oj-sm-align-self-center oj-flex-bar-start">
+                        <div class="oj-flex">
+                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
+                            <br/>
+                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: description"></span>
+                        </div>
+                    </div>
+                    <div class="oj-sm-align-self-center oj-flex-bar-end">
+                        <img src="css/img/Asset 14.png" width="20" height="20" alt="Image" />
+                    </div>
+                </div>
+            </div>
             <!-- /ko -->
         </div>
     </div>
