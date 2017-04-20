@@ -5,66 +5,169 @@
  */
 
 /**
- * useCases module
+ * useCasesDemo module
  */
-define(['knockout', 'jquery', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojmasonrylayout'
-], function (ko) {
+define(['knockout', 'jquery', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojmasonrylayout'
+], function (ko, $, service) {
     /**
      * The view model for the main content view template
      */
-    function useCasesContentViewModel(params) {
+    function useCasesDemoContentViewModel(params) {
         var self = this;
         var router = params.ojRouter.parentRouter;
         
         console.log('useCasesDemo page');
         
-        self.useCasesQuestionsCount = ko.observableArray([1, 2, 3, 4, 5, 6, 7]);
+        self.useCasesQuestions = ko.observableArray([]);
+        self.useCasesSubQuestions = ko.observableArray([]);
+        self.isSubQuestionSelected = ko.observable(false);
+        self.finalSubQuestionSelected = ko.observable(false);
+        self.finalSubQuestionTitle = ko.observable();
+        self.selectedSubQuestion = ko.observableArray([]);
+        
         self.useCaseItems = [
-            { title: 'Apps Unlimited',
+            { id: "88383",
+              title: 'Apps Unlimited',
               description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 5.png',
-              sizeClass: 'oj-masonrylayout-tile-1x1' },
-            { title: 'Lift-and-Shift',
+              imgPath: 'css/img/Asset 5.png' },
+            { id: "88384",
+              title: 'Lift-and-Shift',
               description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 6.png',
-              sizeClass: 'oj-masonrylayout-tile-1x1' },
-            { title: 'Non-Oracle Workloads',
+              imgPath: 'css/img/Asset 6.png' },
+            { id: "88385",
+              title: 'Non-Oracle Workloads',
               description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 7.png',
-              sizeClass: 'oj-masonrylayout-tile-1x1' },
-            { title: 'Backup',
+              imgPath: 'css/img/Asset 7.png' },
+            { id: "88386",
+              title: 'Backup',
               description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 8.png',
-              sizeClass: 'oj-masonrylayout-tile-1x1' },
-            { title: 'Disaster Recovery',
+              imgPath: 'css/img/Asset 8.png' },
+            { id: "88387",
+              title: 'Disaster Recovery',
               description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 9.png',
-              sizeClass: 'oj-masonrylayout-tile-1x1' }
+              imgPath: 'css/img/Asset 9.png' }
         ];
         
-//        self.useCaseItems = [
-//            { title: 'Apps Unlimited',
-//              description: 'Lorem ipsum dolor sit amet',
-//              imgPath: 'css/img/Asset 5.png',
-//              sizeClass: 'oj-masonrylayout-tile-1x1' },
-//            { title: 'Lift-and-Shift',
-//              description: 'Lorem ipsum dolor sit amet',
-//              imgPath: 'css/img/Asset 5.png',
-//              sizeClass: 'oj-masonrylayout-tile-1x1' },
-//            { title: 'Non-Oracle Workloads',
-//              description: 'Lorem ipsum dolor sit amet',
-//              imgPath: 'css/img/Asset 5.png',
-//              sizeClass: 'oj-masonrylayout-tile-1x1' },
-//            { title: 'Backup',
-//              description: 'Lorem ipsum dolor sit amet',
-//              imgPath: 'css/img/Asset 5.png',
-//              sizeClass: 'oj-masonrylayout-tile-1x1' },
-//            { title: 'Disaster Recovery',
-//              description: 'Lorem ipsum dolor sit amet',
-//              imgPath: 'css/img/Asset 5.png',
-//              sizeClass: 'oj-masonrylayout-tile-1x1' }
-//        ];
+        var questionsSuccessCbFn = function(data, status) {
+            console.log(status);
+            console.log(data);
+            self.useCasesQuestions(data.questions);
+        };
+        
+        var questionsFailCbFn = function(xhr) {
+            console.log(xhr);
+        };
+        
+        var subQuestionsSuccessCbFn = function(data, status) {
+            console.log(status);
+            console.log(data);
+            self.useCasesSubQuestions([]);
+            var subQuestions = data.subQuestions;
+            for (var idx = 0; idx < subQuestions.length; idx++) {
+                if (idx === 0) {
+                    self.useCasesSubQuestions.push({
+                        "id": subQuestions[idx].id,
+                        "title": subQuestions[idx].title,
+                        "useCaseIds": subQuestions[idx].useCaseIds,
+                        "status": "notStarted"
+                    });
+                } else {
+                    self.useCasesSubQuestions.push({
+                        "id": subQuestions[idx].id,
+                        "title": subQuestions[idx].title,
+                        "useCaseIds": subQuestions[idx].useCaseIds,
+                        "status": null
+                    });
+                }
+            }
+            self.isSubQuestionSelected(true);
+            self.selectedSubQuestion(self.useCasesSubQuestions()[0]);
+        };
+        
+        var subQuestionsFailCbFn = function(xhr) {
+            console.log(xhr);
+        };
+        
+        self.startTheUseCaseSelection = function(data, event) {
+            var questionId = "";
+            for (var idx = 0; idx < self.useCasesQuestions().length; idx++) {
+                if (self.useCasesQuestions()[idx].status === 'notStarted') {
+                    questionId = idx;
+                }
+            }
+            service.getUseCaseDemoSubQuestions(questionId).then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
+        };
+        
+        self.moveToNextSubQuestion = function(data, event) {            
+            var id = event.currentTarget.id;
+            
+            // for matching with yes/no button id's
+            var hasSelectedYes = id.startsWith("Y");
+            id = id.substring(1);
+            var foundAt;
+            var array = self.useCasesSubQuestions();
+            self.useCasesSubQuestions([]);
+            
+            // to get the id of selected sub question
+            for (var index = 0; index < array.length; index++) {
+                if (id === array[index].id) {
+                    foundAt = index;
+                }
+            }
+            
+            // for checking whether it's last sub question or not
+            if ((foundAt + 1) < array.length ) {
+                array[foundAt].status = "completed";
+                array[foundAt + 1].status = "notStarted";
+                self.useCasesSubQuestions(array);
+                self.selectedSubQuestion(self.useCasesSubQuestions()[id]);
+            } else {
+                array[foundAt].status = "completed";
+                self.useCasesSubQuestions(array);
+                self.selectedSubQuestion([]);
+                self.finalSubQuestionTitle('We have tailored these use cases that would fit perfectly with your provisioned services.');
+                self.finalSubQuestionSelected(true);
+            }
+            
+            if (hasSelectedYes) {
+                // to highlight the selected use cases for the matched sub questions
+                var useCases = array[foundAt].useCaseIds;
+                selectedUseCases([]);
+                $(".blur-selected-tile").removeClass("oj-sm-hide");
+                for (var a = 0; a < useCases.length; a++) {
+                    var tempObj;
+                    for (var idx = 0; idx < self.useCaseItems.length; idx++) {
+                        if (useCases[a].id === self.useCaseItems[idx].id) {
+                            tempObj = {
+                                id: self.useCaseItems[idx].id,
+                                title: self.useCaseItems[idx].title,
+                                description: self.useCaseItems[idx].description,
+                                imgPath: self.useCaseItems[idx].imgPath
+                            };
+                        }
+                    }
+                    tempObj.subQuestionId = array[foundAt].id;
+                    selectedUseCases.push(tempObj);
+                    $("#useCaseLayer" + useCases[a].id).addClass("oj-sm-hide");
+                }
+            }
+        };
+        
+        self.finishDemo = function() {
+            if (selectedUseCases().length > 0) {
+                useCasesSelected(true);
+            } else {
+                useCasesSelected(false);
+            }
+            console.log('Selected use cases are: ');
+            console.log(selectedUseCases());
+            router.go('dashboard/');
+        };
+        
+        self.handleAttached = function() {
+            service.getUseCaseDemoQuestions().then(questionsSuccessCbFn, questionsFailCbFn);
+        };
   }
     
-    return useCasesContentViewModel;
+    return useCasesDemoContentViewModel;
 });

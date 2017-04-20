@@ -7,7 +7,8 @@
 /**
  * dashboard module
  */
-define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs/ojcore', 'ojs/ojknockout',  'ojs/ojprogressbar', 'ojs/ojfilmstrip', 'components/techsupport/loader'
+define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs/ojcore', 'ojs/ojknockout',  'ojs/ojprogressbar',
+    'ojs/ojfilmstrip', 'components/techsupport/loader', 'ojs/ojmasonrylayout'
 ], function ($, ko, service, sessionInfo) {
     /**
      * The view model for the main content view template

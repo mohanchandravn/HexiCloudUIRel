@@ -8,7 +8,121 @@ and open the template in the editor.
     Author     : nyasarap
 */
 
-.oj-masonrylayout-tile-1x1 {
+.use-cases-head-content .status-completed {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 20px;
+    border-radius: 50%;
+    background-color: #F80000;
+}
+
+.use-cases-head-content .status-not-started-header {
+    width: 14px;
+    height: 14px;
+    margin: 16px;
+    border: 1px solid #F80000;
+    border-radius: 50%;
+}
+
+.use-cases-head-content .status-not-started {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+}
+
+.use-cases-head-content .status-unknown {
+    display: block;
+    margin: 20px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+    width: 10px;
+    height: 10px;
+    opacity: 0.4;
+}
+
+.use-cases-head-content .status-completed-small {
+    display: block;
+    width: 4px;
+    height: 4px;
+    margin: 21px 10px;
+    border-radius: 50%;
+    background-color: #F80000;
+    border: 1px solid #F80000;
+}
+
+.use-cases-head-content .status-not-started-small {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 19px 10px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+    border: 1px solid #F80000;
+    opacity: 0.4;
+}
+
+.use-cases-head-content .status-unknown-small {
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin: 21px 10px;
+    border-radius: 50%;
+    background-color:#CCCCCC;
+    opacity: 0.4;
+}
+
+.use-cases-head-content .status-of-final-step-not-selected-small {
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin: 21px 10px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+    opacity: 0.4;
+}
+
+.use-cases-head-content .status-of-final-step-selected-small {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 19px 10px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+    border: 1px solid #F80000;
+    opacity: 0.4;
+}
+
+.use-cases-head-content .inverted-btn {
+    width: 120px;
+    color: #F80000;
+    padding: 5px 30px;
+    border: 1px solid #F80000;
+    border-radius: 27px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.use-cases-head-content .inverted-btn:hover {
+    color: #FFFFFF;
+    padding: 5px 30px;
+    background-color: #F80000;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1, .dashboard-use-cases .oj-masonrylayout-tile-1x1 {
     width: 200px;
     height: 200px;
+}
+
+.use-cases-body-content .blur-selected-tile {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    background-color: #000000;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 1;
 }

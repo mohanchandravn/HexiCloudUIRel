@@ -1,0 +1,24 @@
+{
+    "subQuestions": [{
+            "id": "1",
+            "title": "Lorem ipsum dolor sit amet?",
+            "useCaseIds" : [{
+                    "id": "88384"
+                }, {
+                    "id": "88385"
+                }, {
+                    "id": "88387"
+                }
+            ]
+        }, {
+            "id": "2",
+            "title": "Lorem ipsum dolor sit amet?",
+            "useCaseIds" : [{
+                    "id": "88384"
+                }, {
+                    "id": "88385"
+                }
+            ]
+        }
+    ]
+}
