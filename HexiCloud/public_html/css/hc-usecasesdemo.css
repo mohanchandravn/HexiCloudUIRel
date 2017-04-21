@@ -122,8 +122,10 @@ and open the template in the editor.
 .use-cases-head-content .inverted-btn {
     width: 120px;
     color: #F80000;
+    font-size: 14px;
+    font-weight: bold;
     padding: 5px 30px;
-    border: 1px solid #F80000;
+    border: 2px solid #F80000;
     border-radius: 27px;
     background-color: #FFFFFF;
     cursor: pointer;
