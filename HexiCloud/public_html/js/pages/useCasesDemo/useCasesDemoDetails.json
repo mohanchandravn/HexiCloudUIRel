@@ -1,0 +1,13 @@
+{
+    "useCaseName": "Apps Unlimited",
+    "useCaseImage": "css/img/Asset 5.png",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero. Ut vel erat nec justo varius facilisis a nec diam. Aenean semper leo enim, ut pharetra justo imperdiet sed. Vivamus eu nibh magna. Nam erat velit, dapibus vel maximus et, dignissim nec ante. Aenean eu placerat dolor.",
+    "services": [
+        {
+          "name": "Network"
+        },
+        {
+          "name": "Compute"
+        }
+    ]
+}

@@ -119,7 +119,7 @@ and open the template in the editor.
     opacity: 0.4;
 }
 
-.use-cases-head-content .inverted-btn {
+.use-cases-demo-page .inverted-btn {
     width: 120px;
     color: #F80000;
     font-size: 14px;
@@ -131,7 +131,7 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.use-cases-head-content .inverted-btn:hover {
+.use-cases-demo-page .inverted-btn:hover {
     color: #FFFFFF;
     padding: 5px 30px;
     background-color: #F80000;
@@ -144,6 +144,7 @@ and open the template in the editor.
 
 .use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
     margin-top: -4px;
+    cursor: pointer;
 }
 
 .use-cases-body-content .oj-masonrylayout-tile-1x1, .dashboard-use-cases .oj-masonrylayout-tile-1x1 {
@@ -157,6 +158,21 @@ and open the template in the editor.
     position: absolute;
     background-color: #000000;
     opacity: 0.6;
-    pointer-events: none;
     z-index: 1;
+}
+
+.use-case-details-wrapper {
+    min-width: 320px;
+    width: 50%;
+    max-width: 500px;
+}
+
+.close-icon {
+    margin: 10px 20px;
+    cursor: pointer;
+}
+
+.selected-use-case-image {
+    width: 100%;
+    height: 200px;
 }

@@ -8,8 +8,8 @@ and open the template in the editor.
     Author     : nyasarap
 */
 
-.dashboard {
-    /*min-height: calc(100vh - 80px);*/
+.dashboard-page {
+    padding-bottom: 50px;
 }
 
 .bold {

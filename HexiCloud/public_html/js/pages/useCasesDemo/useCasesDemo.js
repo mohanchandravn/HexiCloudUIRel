@@ -7,14 +7,23 @@
 /**
  * useCasesDemo module
  */
-define(['knockout', 'jquery', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojmasonrylayout'
-], function (ko, $, service) {
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknockout', 'ojs/ojmasonrylayout'
+], function (oj, $, ko, service) {
     /**
      * The view model for the main content view template
      */
     function useCasesDemoContentViewModel(params) {
         var self = this;
         var router = params.ojRouter.parentRouter;
+        var useCaseDrawerRight;//, navigationDrawerRight;
+
+        useCaseDrawerRight = {
+            "selector": "#useCaseDrawerRight",
+            "edge": "end",
+            "displayMode": "overlay",
+            "autoDismiss": "none",
+            "modality": "modal"
+        };
         
         console.log('useCasesDemo page');
         
@@ -24,6 +33,8 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknock
         self.finalSubQuestionSelected = ko.observable(false);
         self.finalSubQuestionTitle = ko.observable();
         self.selectedSubQuestion = ko.observableArray([]);
+        self.isUseCaseSelected = ko.observable(true);
+        self.selectedUseCaseDetails = ko.observableArray([]);
         
         self.useCaseItems = [
             { id: "88383",
@@ -88,6 +99,16 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknock
             console.log(xhr);
         };
         
+        var getUseCaseDetailsSuccessCbFn = function(data, status) {
+            console.log(status);
+            console.log(data);
+            self.selectedUseCaseDetails(data);
+        };
+        
+        var getUseCaseDetailsFailCbFn = function(xhr) {
+            console.log(xhr);
+        };
+        
         self.startTheUseCaseSelection = function(data, event) {
             var questionId = "";
             for (var idx = 0; idx < self.useCasesQuestions().length; idx++) {
@@ -134,6 +155,7 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknock
                 var useCases = array[foundAt].useCaseIds;
                 selectedUseCases([]);
                 $(".blur-selected-tile").removeClass("oj-sm-hide");
+                $(".use-case-tile").addClass("pointer-events-none");
                 for (var a = 0; a < useCases.length; a++) {
                     var tempObj;
                     for (var idx = 0; idx < self.useCaseItems.length; idx++) {
@@ -149,8 +171,22 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknock
                     tempObj.subQuestionId = array[foundAt].id;
                     selectedUseCases.push(tempObj);
                     $("#useCaseLayer" + useCases[a].id).addClass("oj-sm-hide");
+                    $("#useCase" + useCases[a].id).removeClass("pointer-events-none");
                 }
             }
+        };
+        
+        self.getDetails = function(data, event) {
+            console.log(data);
+            console.log(event);
+            if (data.id === "88383") {
+                oj.OffcanvasUtils.open(useCaseDrawerRight);
+                service.getUseCaseDemoDetails(88383).then(getUseCaseDetailsSuccessCbFn, getUseCaseDetailsFailCbFn);
+            }
+        };
+        
+        self.closeIt = function() {
+            oj.OffcanvasUtils.close(useCaseDrawerRight);
         };
         
         self.finishDemo = function() {
@@ -165,6 +201,7 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknock
         };
         
         self.handleAttached = function() {
+            oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
             service.getUseCaseDemoQuestions().then(questionsSuccessCbFn, questionsFailCbFn);
         };
   }

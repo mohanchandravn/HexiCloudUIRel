@@ -23,7 +23,6 @@ header-content {
 
 #module {
     margin-top: 80px;
-    margin-bottom: 50px;
 }
 
 .branding-homepage {
@@ -123,6 +122,11 @@ navigationbarright {
 
 .opacity-half {
     opacity: 0.5;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+    cursor: not-allowed;
 }
 
 .service-status-ready {

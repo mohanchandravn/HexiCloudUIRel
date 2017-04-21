@@ -12,7 +12,7 @@ navigationbarleft {
 /*    background-color: rgba(216, 225, 229, 0.9);*/
     background-color: rgb(255,255,255);
 }
-    
+
 .chat-window {
     position: fixed;
     width: 250px;
