@@ -5,7 +5,7 @@ and open the template in the editor.
 -->
 <div class="use-cases-head-content oj-sm-justify-content-center oj-flex">
     <div class="oj-margin-lg-bottom oj-flex-item" style="max-width: 650px; padding: 0px 30px; margin-top: 20px; border-left: 5px solid #F80000; background-color: #FFF;">
-        <div class="oj-sm-justify-content-center oj-flex" style="margin-top: 30px;">
+        <div class="oj-sm-justify-content-center oj-flex">
             <!-- ko ifnot: isSubQuestionSelected() === true -->
                 <!-- ko foreach: useCasesQuestions -->
                     <!-- ko if: status === 'completed' -->
@@ -58,7 +58,7 @@ and open the template in the editor.
                     Based on your Services these are the Use Cases available for you.
                 </span>
                 <div class="oj-flex-item">
-                    <div class="oj-margin-bottom oj-flex">
+                    <div class="oj-margin-vertical oj-flex">
                         <span class="label-text" style="color: #DE8075;">Let us help you filtering them</span>
                         <div class="oj-margin-lg-start oj-flex-bar" data-bind="click: startTheUseCaseSelection" 
                              style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
@@ -101,31 +101,30 @@ and open the template in the editor.
             <!-- ko foreach: useCaseItems -->
             <div class="oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
                 <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
-                <img data-bind="attr: { src : imgPath }" width="200" height="150" alt="Image" />
-                <div class="oj-margin-horizontal oj-flex-bar" style="height: 50px;">
+                <img class="use-case-image" data-bind="attr: { src : imgPath }" alt="Image" />
+                <div class="oj-margin-horizontal oj-flex-bar" style="height: 44px;">
                     <div class="oj-sm-align-self-center oj-flex-bar-start">
-                        <div class="oj-flex">
+                        <div class="oj-flex" style="margin: 5px 0px 7px 0px;">
                             <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
-                            <br/>
                             <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: description"></span>
                         </div>
                     </div>
                     <div class="oj-sm-align-self-center oj-flex-bar-end">
-                        <img src="css/img/Asset 14.png" width="20" height="20" alt="Image" />
+                        <img class="bread-crumbs-icon" src="css/img/Asset 14.png" width="20" height="20" alt="Image" />
                     </div>
                 </div>
             </div>
             <!-- /ko -->
             <!-- ko if: finalSubQuestionSelected() === true  -->
             <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
-                <div class="text-center oj-margin-horizontal oj-flex" style="height: 200px;">
+                <div class="text-center oj-margin-horizontal oj-flex" style="height: inherit;">
                     <div style="margin-top: 50px;">
                         <div class="oj-flex">
-                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px; color: #CCCCCC" data-bind="text: 'You can find more informationabout the tailored Use Cases in the dashboard.'"></span>
+                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px; color: #CCCCCC" data-bind="text: 'You can find more information about the tailored Use Cases in the dashboard.'"></span>
                         </div>
                     </div>
                     <div class="oj-flex-bar" 
-                        style="height: 26px; margin-left: 40px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;"
+                        style="height: 26px; margin-left: 44px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;"
                         data-bind="click: finishDemo">
                         <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start" style="padding: 5px 0px 5px 12px;">
                             Finish

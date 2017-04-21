@@ -78,21 +78,19 @@ and open the template in the editor.
 
     <div class="dashboard oj-flex" id="serviceBenfits">
         <!-- Use Cases for demo -->
-        <div class="oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
+        <div class="use-case-items oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
             <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
             <!-- ko ifnot: useCasesSelected() === true -->
                 <span class="heading-type4">
                     Let's start your adoption journey!
                 </span>
-                <div id="useCasesDemo" class="oj-margin-lg-start oj-flex-bar" 
-                     style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;"
-                     data-bind="click: routeToUsecasesDemo">
-                    <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start" style="padding: 5px 0px 5px 12px;">
+                <div id="useCasesDemo" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUsecasesDemo">
+                    <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
                         Go to Use Case selection
                     </div>
-                    <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                    <div class="play-icon oj-flex-bar-end">
                         <span>
-                            <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                            <i class="material-icons">play_arrow</i>
                         </span>
                     </div>
                 </div>
@@ -101,27 +99,23 @@ and open the template in the editor.
                 <span class="heading-type4">
                     Please select a Use Case to implement!
                 </span>
-                <div id="useCasesDemo" class="oj-margin-lg-start oj-flex-bar" 
-                     style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;"
-                     data-bind="click: routeToUsecasesDemo">
-                    <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start" style="padding: 5px 0px 5px 12px;">
+                <div id="useCasesDemo" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUsecasesDemo">
+                    <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
                         I'm ready
                     </div>
-                    <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                    <div class="play-icon oj-flex-bar-end">
                         <span>
-                            <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                            <i class="material-icons">play_arrow</i>
                         </span>
                     </div>
                 </div>
-                <div id="useCasesDemo" class="oj-margin-lg-start oj-flex-bar" 
-                     style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;"
-                     data-bind="click: routeToUsecasesDemo">
-                    <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start" style="padding: 5px 0px 5px 12px;">
+                <div id="useCasesDemo" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUsecasesDemo">
+                    <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
                         I need to know more
                     </div>
-                    <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                    <div class="play-icon oj-flex-bar-end" style="padding-right: 12px;">
                         <span>
-                            <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                            <i class="material-icons">play_arrow</i>
                         </span>
                     </div>
                 </div>
@@ -134,7 +128,7 @@ and open the template in the editor.
         <div id="masonryUseCases" class="dashboard-use-cases oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
             <!-- ko foreach: selectedUseCases() -->
             <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
-                <img data-bind="attr: { src : imgPath }" width="200" height="150" alt="Image" />
+                <img class="use-case-image" data-bind="attr: { src : imgPath }" alt="Image" />
                 <div class="oj-margin-horizontal oj-flex-bar" style="height: 50px;">
                     <div class="oj-sm-align-self-center oj-flex-bar-start">
                         <div class="oj-flex">

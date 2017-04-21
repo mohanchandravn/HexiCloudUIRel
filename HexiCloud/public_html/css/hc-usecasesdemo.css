@@ -8,6 +8,29 @@ and open the template in the editor.
     Author     : nyasarap
 */
 
+.dashboard .use-cases-btn {
+    height: 30px;
+    font-size: 18px;
+    padding: 5px 0px 5px 15px;
+    background-color: #F80000;
+    color: #FFF;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+.dashboard .use-cases-btn .play-icon {
+    padding-right: 12px;
+}
+
+.dashboard .dashboard-use-case-btn {
+    margin-left: 40px;
+}
+
+.use-case-items i {
+    font-size: 18px;
+    margin-top: 1px;
+}
+
 .use-cases-head-content .status-completed {
     display: block;
     width: 10px;
@@ -112,14 +135,23 @@ and open the template in the editor.
     background-color: #F80000;
 }
 
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-image, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .use-case-image {
+    width: 200px;
+    height: 110px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
+    margin-top: -4px;
+}
+
 .use-cases-body-content .oj-masonrylayout-tile-1x1, .dashboard-use-cases .oj-masonrylayout-tile-1x1 {
     width: 200px;
-    height: 200px;
+    height: 160px;
 }
 
 .use-cases-body-content .blur-selected-tile {
     width: 200px;
-    height: 200px;
+    height: 160px;
     position: absolute;
     background-color: #000000;
     opacity: 0.6;
