@@ -12,10 +12,6 @@ and open the template in the editor.
     padding-bottom: 50px;
 }
 
-.bold {
-    font-weight: bold;
-}
-
 .provisioned-services.dashboard .content.stage h1,
 .provisioned-services.dashboard .content.stage p{
    text-align: left; 

@@ -6,21 +6,25 @@ and open the template in the editor.
 <div class="use-cases-demo-page oj-offcanvas-outer-wrapper">
 <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
     <div id="useCaseDrawerRight" class="use-case-details-wrapper">
-        <div style="background: white; height: 100%;">
+        <div style="background: white; min-height: 100%;">
             <div class="oj-sm-justify-content-flex-end oj-flex">
                 <span class="close-icon"><i class="material-icons" data-bind="click: closeIt">close</i></span>
             </div>
             <!-- ko if: isUseCaseSelected() -->
             <div class="oj-sm-justify-content-center oj-flex" style="padding: 0px 50px;">
                 <img class="selected-use-case-image" data-bind="attr: { src : selectedUseCaseDetails().useCaseImage }" alt="Image" />
-                <span class="text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().useCaseName"></span>
-                <span class="oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
-                <p class="oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().description"></p>
-                <span class="oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
-                <!-- ko foreach: selectedUseCaseDetails().services -->
-                    <span class="inverted-btn" data-bind="text: name"></span>
-                <!-- /ko -->
-                <span class="oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
+                <span class="heading-type4 bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().useCaseName"></span>
+                <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
+                <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().description"></p>
+                <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
+                <div class="oj-sm-12 oj-flex-item">
+                    <div class="oj-flex">
+                    <!-- ko foreach: selectedUseCaseDetails().services -->
+                        <span class="inverted-btn text-center" data-bind="text: name"></span>
+                    <!-- /ko -->
+                    </div>
+                </div>
+                <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
             </div>
             <!-- /ko -->
         </div>
@@ -103,8 +107,8 @@ and open the template in the editor.
                         <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000;" data-bind="text: selectedSubQuestion().title"></span>
                         <div class="oj-sm-12 oj-flex-item">
                             <div class="oj-margin-lg-vertical oj-flex">
-                                <span class="inverted-btn text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="attr: {id: 'Y' + selectedSubQuestion().id}, click: moveToNextSubQuestion">Yes</span>
-                                <span class="inverted-btn text-center oj-lg-2 oj-flex-item" data-bind="attr: {id: 'N' + selectedSubQuestion().id}, click: moveToNextSubQuestion">No</span>
+                                <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="attr: {id: 'Y' + selectedSubQuestion().id}, click: moveToNextSubQuestion">Yes</span>
+                                <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="attr: {id: 'N' + selectedSubQuestion().id}, click: moveToNextSubQuestion">No</span>
                             </div>
                         </div>
                     <!-- /ko -->

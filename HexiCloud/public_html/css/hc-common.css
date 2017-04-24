@@ -88,6 +88,14 @@ header-content {
     text-align: center;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
 .display-none {
     display: none !important;
 }
