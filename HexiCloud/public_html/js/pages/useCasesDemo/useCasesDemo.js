@@ -7,7 +7,7 @@
 /**
  * useCasesDemo module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknockout', 'ojs/ojmasonrylayout'
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch'
 ], function (oj, $, ko, service) {
     /**
      * The view model for the main content view template
@@ -27,14 +27,34 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         
         console.log('useCasesDemo page');
         
-        self.useCasesQuestions = ko.observableArray([]);
+        self.selectedUseCaseItems = ko.observableArray([]);
+        self.useCasesQuestions = ko.observableArray(
+            [{
+                "status": "notStarted"
+            }, {
+                "status": null
+            }, {
+                "status": null
+            }, {
+                "status": null
+            }, {
+                "status": null
+            }, {
+                "status": null
+            }, {
+                "status": null
+        }]);
         self.useCasesSubQuestions = ko.observableArray([]);
+        self.haveImplementedUseCases = ko.observable(false);
+        self.inQuestion = ko.observable(1);
         self.isSubQuestionSelected = ko.observable(false);
         self.finalSubQuestionSelected = ko.observable(false);
         self.finalSubQuestionTitle = ko.observable();
         self.selectedSubQuestion = ko.observableArray([]);
-        self.isUseCaseSelected = ko.observable(true);
+        self.areUseCaseDetailsFetched = ko.observable(true);
         self.selectedUseCaseDetails = ko.observableArray([]);
+        
+        self.agreement = ko.observable();
         
         self.useCaseItems = [
             { id: "88383",
@@ -58,6 +78,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
               description: 'Lorem ipsum dolor sit amet',
               imgPath: 'css/img/Asset 9.png' }
         ];
+        
+        self.useCaseItemsTemplate = ko.pureComputed(function() {
+            console.log(self.haveImplementedUseCases() === true ? 'useCaseItemsNonEditable' : 'useCaseItemsEditable');
+            return self.haveImplementedUseCases() === true ? 'useCaseItemsNonEditable' : 'useCaseItemsEditable';
+        });
         
         var questionsSuccessCbFn = function(data, status) {
             console.log(status);
@@ -108,15 +133,94 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         var getUseCaseDetailsFailCbFn = function(xhr) {
             console.log(xhr);
         };
+//        
+//        self.updateQuestionStep = function() {
+//            for ( var idx = self.inQuestion() - 1; idx < self.useCasesQuestions().length; idx++) {
+//                
+//            }
+//        };
         
-        self.startTheUseCaseSelection = function(data, event) {
-            var questionId = "";
-            for (var idx = 0; idx < self.useCasesQuestions().length; idx++) {
-                if (self.useCasesQuestions()[idx].status === 'notStarted') {
-                    questionId = idx;
+        self.toggleUseCaseSelections = function(data, event) {
+//            console.log(id);
+            console.log(event.currentTarget.id);
+//            console.log(operation);
+//            if (operation === 'add') {
+                if (self.selectedUseCaseItems().indexOf(event.currentTarget.id) > -1) {
+                    console.log('already added');
+                    self.selectedUseCaseItems.remove(event.currentTarget.id);
+                    return;
+                } else {
+                    self.selectedUseCaseItems().push(event.currentTarget.id);
+                }
+                console.log(self.selectedUseCaseItems());
+//            } else {
+//                self.selectedUseCaseItems().remove(id);
+//                console.log(self.selectedUseCaseItems());
+//            }
+        };
+        
+        self.updateSelections = function(event, ui) {
+            console.log(event.currentTarget.id);
+            console.log(ui);
+            if (ui.option === "value") {
+                if (ui.value.length > 0) {
+//                    self.toggleUseCaseSelections(event.currentTarget.id, 'add');
+                } else {
+//                    self.toggleUseCaseSelections(event.currentTarget.id, 'remove');
                 }
             }
-            service.getUseCaseDemoSubQuestions(questionId).then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
+        };
+        
+        self.moveToNextQuestion = function() {
+            console.log(self.useCasesQuestions());
+            
+            var array = self.useCasesQuestions();
+            self.useCasesQuestions([]);            
+            for (var index = 0; index < array.length; index++) {
+                if ( index <= (self.inQuestion() - 1) ) {
+                    console.log(index);
+                    array[index].status = "completed";
+                    array[index + 1].status = "notStarted";
+                }
+            }            
+            self.useCasesQuestions(array);
+            
+            if (self.inQuestion() === 3) {
+                console.log(self.haveImplementedUseCases());
+                console.log('making false to true of haveImplementedUseCases value');
+                self.haveImplementedUseCases(true);
+                console.log(self.haveImplementedUseCases());
+//                service.getUseCaseDemoSubQuestions(self.inQuestion()).then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
+            } else {
+                self.inQuestion(self.inQuestion() + 1);
+            }
+            console.log(self.useCasesQuestions());
+        };
+        
+        self.goToStartUseCasesStep = function() {
+            var array = self.useCasesQuestions();
+            self.useCasesQuestions([]);            
+            for (var index = 0; index < array.length; index++) {
+                if (index < 3) {
+                    array[index].status = "completed";
+                    array[index + 1].status = "notStarted";
+                }
+            }
+            self.inQuestion(4);
+            self.useCasesQuestions(array);
+            self.haveImplementedUseCases(true);
+        };
+        
+        self.startTheUseCaseSelection = function(data, event) {
+            for (var idx = 0; idx < self.useCasesQuestions().length; idx++) {
+                if (self.useCasesQuestions()[idx].status === 'notStarted') {
+                    self.inQuestion(idx + 1);
+                }
+            }
+            if (self.inQuestion() === 4) {
+                self.haveImplementedUseCases(true);
+                service.getUseCaseDemoSubQuestions(self.inQuestion()).then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
+            }
         };
         
         self.moveToNextSubQuestion = function(data, event) {            
@@ -202,7 +306,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         
         self.handleAttached = function() {
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
-            service.getUseCaseDemoQuestions().then(questionsSuccessCbFn, questionsFailCbFn);
+//            service.getUseCaseDemoQuestions().then(questionsSuccessCbFn, questionsFailCbFn);
         };
   }
     

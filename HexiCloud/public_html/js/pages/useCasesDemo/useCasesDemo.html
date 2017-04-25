@@ -4,93 +4,213 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div class="use-cases-demo-page oj-offcanvas-outer-wrapper">
-<div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
-    <div id="useCaseDrawerRight" class="use-case-details-wrapper">
-        <div style="background: white; min-height: 100%;">
-            <div class="oj-sm-justify-content-flex-end oj-flex">
-                <span class="close-icon"><i class="material-icons" data-bind="click: closeIt">close</i></span>
+    <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
+        <div id="useCaseDrawerRight" class="use-case-details-wrapper">
+            <div style="background: white; min-height: 100%;">
+                <div class="oj-sm-justify-content-flex-end oj-flex">
+                    <span class="close-icon"><i class="material-icons" data-bind="click: closeIt">close</i></span>
+                </div>
+                <!-- ko if: areUseCaseDetailsFetched() -->
+                <div class="oj-sm-justify-content-center oj-flex" style="padding: 0px 50px;">
+                    <img class="selected-use-case-image" data-bind="attr: { src : selectedUseCaseDetails().useCaseImage }" alt="Image" />
+                    <span class="heading-type4 bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().useCaseName"></span>
+                    <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
+                    <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().description"></p>
+                    <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
+                    <div class="oj-sm-12 oj-flex-item">
+                        <div class="oj-flex">
+                        <!-- ko foreach: selectedUseCaseDetails().services -->
+                            <span class="inverted-btn text-center" data-bind="text: name"></span>
+                        <!-- /ko -->
+                        </div>
+                    </div>
+                    <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
+                </div>
+                <!-- /ko -->
             </div>
-            <!-- ko if: isUseCaseSelected() -->
-            <div class="oj-sm-justify-content-center oj-flex" style="padding: 0px 50px;">
-                <img class="selected-use-case-image" data-bind="attr: { src : selectedUseCaseDetails().useCaseImage }" alt="Image" />
-                <span class="heading-type4 bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().useCaseName"></span>
-                <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
-                <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().description"></p>
-                <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
-                <div class="oj-sm-12 oj-flex-item">
-                    <div class="oj-flex">
-                    <!-- ko foreach: selectedUseCaseDetails().services -->
-                        <span class="inverted-btn text-center" data-bind="text: name"></span>
+        </div>
+
+        <div class="use-cases-head-content oj-sm-justify-content-center oj-flex">
+            <div class="oj-margin-lg-bottom oj-flex-item" style="max-width: 650px; padding: 0px 30px; margin-top: 20px; border-left: 5px solid #F80000; background-color: #FFF;">
+                <div class="oj-sm-justify-content-center oj-flex">
+                    <!-- ko ifnot: isSubQuestionSelected() === true -->
+                        <!-- ko foreach: useCasesQuestions -->
+                            <!-- ko if: status === 'completed' -->
+                            <span class="status-completed"></span>
+                            <!-- /ko -->
+                            <!-- ko if: status === 'notStarted' -->
+                            <span class="status-not-started-header">
+                                <span class="status-not-started"></span>
+                            </span>
+                            <!-- /ko -->
+                            <!-- ko if: status === null -->
+                            <span class="status-unknown"></span>
+                            <!-- /ko -->
+                        <!-- /ko -->
                     <!-- /ko -->
+
+                    <!-- ko if: isSubQuestionSelected() === true -->
+                        <!-- ko foreach: useCasesQuestions -->
+                            <!-- ko if: status === 'completed' -->
+                            <span class="status-completed"></span>
+                            <!-- /ko -->
+                            <!-- ko if: status === 'notStarted' -->
+                            <span class="status-not-started-header">
+                                <span class="status-not-started"></span>
+                            </span>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                       <!-- ko foreach: useCasesSubQuestions -->
+                            <!-- ko if: status === 'completed' -->
+                            <span class="status-completed-small"></span>
+                            <!-- /ko -->
+                            <!-- ko if: status === 'notStarted' -->
+                            <span class="status-not-started-small"></span>
+                            <!-- /ko -->
+                            <!-- ko if: status === null -->
+                            <span class="status-unknown-small"></span>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko ifnot: finalSubQuestionSelected() === true -->
+                            <span class="status-of-final-step-not-selected-small"></span>
+                        <!-- /ko -->
+                        <!-- ko if: finalSubQuestionSelected() === true -->
+                            <span class="status-of-final-step-selected-small"></span>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex">
+                    <!-- ko if: isSubQuestionSelected() === false && haveImplementedUseCases() === false -->
+                        <!-- ko if: inQuestion() === 1 -->
+                            <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000; margin-top: 30px;">
+                                Have you implemented an Use Case before?
+                            </span>
+                        <!-- /ko -->
+                        <!-- ko if: inQuestion() === 2 -->
+                            <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000; margin-top: 30px;">
+                                Please select the Use Cases you've implemented before
+                            </span>
+                        <!-- /ko -->
+                        <!-- ko if: inQuestion() === 3 -->
+                            <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000; margin-top: 30px;">
+                                Do you want to implement another Use Case?
+                            </span>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: isSubQuestionSelected() === false && haveImplementedUseCases() === true -->
+                        <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000;">
+                            Based on your Services these are the Use Cases available for you.
+                        </span>
+                        <div class="oj-flex-item">
+                            <div class="oj-margin-vertical oj-flex">
+                                <span class="label-text" style="color: #DE8075;">Let us help you filtering them</span>
+                                <div class="oj-margin-lg-start oj-flex-bar" data-bind="click: startTheUseCaseSelection" 
+                                     style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
+                                    <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
+                                        Start
+                                    </div>
+                                    <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                                        <span>
+                                            <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- /ko -->
+                    <!-- ko if: isSubQuestionSelected() === true && haveImplementedUseCases() === true -->
+                        <!-- ko if: finalSubQuestionSelected() === false -->
+                            <span class="normal-text oj-lg-8 oj-flex-item" style="color: #000000;" data-bind="text: 'Filtering Question ' + selectedSubQuestion().id + ':'"></span>                
+                            <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000;" data-bind="text: selectedSubQuestion().title"></span>
+                            <div class="oj-sm-12 oj-flex-item">
+                                <div class="oj-margin-lg-vertical oj-flex">
+                                    <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="attr: {id: 'Y' + selectedSubQuestion().id}, click: moveToNextSubQuestion">Yes</span>
+                                    <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="attr: {id: 'N' + selectedSubQuestion().id}, click: moveToNextSubQuestion">No</span>
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                        <!-- ko if: finalSubQuestionSelected() === true  -->
+                            <span class="label-text oj-lg-8 oj-flex-item" style="color: #F80000;" data-bind="text: 'Here are our results!'"></span>                
+                            <span class="heading-type4 oj-margin-top oj-lg-12 oj-flex-item" style="color: #000000;" data-bind="text: finalSubQuestionTitle"></span>
+                            <span class="oj-margin-bottom oj-sm-12 oj-flex-item"></span>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+        <!-- To load use case items either editable or non-editable -->
+        <div data-bind="template: useCaseItemsTemplate"></div>
+        
+        <script type="text/html" id="useCaseItemsEditable">
+        <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
+            <!-- ko if: inQuestion() !== 2 -->
+                <div class="oj-lg-12 oj-flex-item" style="max-width: 650px; padding-top: 50px; margin-left: auto; margin-right: auto;">
+                    <div class="oj-sm-justify-content-center oj-flex">
+                        <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="click: moveToNextQuestion">Yes</span>
+                        <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="click: inQuestion() === 1 ? goToStartUseCasesStep : moveToNextQuestion">No</span>
                     </div>
                 </div>
-                <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
-            </div>
             <!-- /ko -->
-        </div>
-    </div>
-    
-    <div class="use-cases-head-content oj-sm-justify-content-center oj-flex">
-        <div class="oj-margin-lg-bottom oj-flex-item" style="max-width: 650px; padding: 0px 30px; margin-top: 20px; border-left: 5px solid #F80000; background-color: #FFF;">
-            <div class="oj-sm-justify-content-center oj-flex">
-                <!-- ko ifnot: isSubQuestionSelected() === true -->
-                    <!-- ko foreach: useCasesQuestions -->
-                        <!-- ko if: status === 'completed' -->
-                        <span class="status-completed"></span>
-                        <!-- /ko -->
-                        <!-- ko if: status === 'notStarted' -->
-                        <span class="status-not-started-header">
-                            <span class="status-not-started"></span>
-                        </span>
-                        <!-- /ko -->
-                        <!-- ko if: status === null -->
-                        <span class="status-unknown"></span>
-                        <!-- /ko -->
-                    <!-- /ko -->
-                <!-- /ko -->
-
-                <!-- ko if: isSubQuestionSelected() === true -->
-                    <!-- ko foreach: useCasesQuestions -->
-                        <!-- ko if: status === 'completed' -->
-                        <span class="status-completed"></span>
-                        <!-- /ko -->
-                        <!-- ko if: status === 'notStarted' -->
-                        <span class="status-not-started-header">
-                            <span class="status-not-started"></span>
-                        </span>
-                        <!-- /ko -->
-                    <!-- /ko -->
-                   <!-- ko foreach: useCasesSubQuestions -->
-                        <!-- ko if: status === 'completed' -->
-                        <span class="status-completed-small"></span>
-                        <!-- /ko -->
-                        <!-- ko if: status === 'notStarted' -->
-                        <span class="status-not-started-small"></span>
-                        <!-- /ko -->
-                        <!-- ko if: status === null -->
-                        <span class="status-unknown-small"></span>
-                        <!-- /ko -->
-                    <!-- /ko -->
-                    <!-- ko ifnot: finalSubQuestionSelected() === true -->
-                        <span class="status-of-final-step-not-selected-small"></span>
-                    <!-- /ko -->
-                    <!-- ko if: finalSubQuestionSelected() === true -->
-                        <span class="status-of-final-step-selected-small"></span>
-                    <!-- /ko -->
-                <!-- /ko -->
-            </div>
-            <div class="oj-flex">
-                <!-- ko ifnot: isSubQuestionSelected() === true -->
-                    <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000;">
-                        Based on your Services these are the Use Cases available for you.
-                    </span>
-                    <div class="oj-flex-item">
-                        <div class="oj-margin-vertical oj-flex">
-                            <span class="label-text" style="color: #DE8075;">Let us help you filtering them</span>
-                            <div class="oj-margin-lg-start oj-flex-bar" data-bind="click: startTheUseCaseSelection" 
-                                 style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
+            <!-- ko if: inQuestion() === 2 -->
+                <div class="use-cases-body-content">
+                    <div class="oj-lg-12 oj-flex-item" style="max-width: 650px; margin-left: auto; margin-right: auto;">
+                        <div data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+                            <!-- ko foreach: useCaseItems -->
+                            <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
+                                <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
+                                <img class="use-case-image" data-bind="attr: { src : imgPath }" alt="Image" />
+                                <div class="oj-margin-horizontal oj-flex-bar" style="height: 44px;">
+                                    <div class="oj-sm-align-self-center oj-flex-bar-start">
+                                        <div class="oj-flex" style="margin: 5px 0px 7px 0px;">
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: description"></span>
+                                        </div>
+                                    </div>
+                                    <div class="oj-sm-align-self-center oj-flex-bar-end">
+                                        <div aria-labelledby="agreeId" 
+                                            data-bind="ojComponent: {
+                                                component: 'ojCheckboxset',
+                                                optionChange: $parent.updateSelections,
+                                                rootAttributes: { style:'width: 18px' } }" >
+                                            <span class="oj-choice-item">
+                                                <input id="agree" type="checkbox" data-bind="attr: {id: id, value: id}, click: $parent.toggleUseCaseSelections">
+                                                <label for="agree"></label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
+                                <div class="add-more-use-cases text-center" style="background-color: #CCC;">
+                                    <i class="plus-icon material-icons">add</i>
+                                </div>
+                                <div class="oj-margin-horizontal oj-flex-bar" style="height: 44px;">
+                                    <div class="oj-sm-align-self-center oj-flex-bar-start">
+                                        <div class="oj-flex" style="margin: 5px 0px 7px 0px;">
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: 'Other'"></span>
+                                        </div>
+                                    </div>
+                                    <div class="oj-sm-align-self-center oj-flex-bar-end">
+                                        <div id="checkboxSetAgreeId" aria-labelledby="agreeId" 
+                                            data-bind="ojComponent: {
+                                                component: 'ojCheckboxset', 
+                                                value: agreement,
+                                                rootAttributes: { style:'width: 18px' } }" >
+                                            <span class="oj-choice-item">
+                                                <input id="agree" type="checkbox" value="agree">
+                                                <label for="agree"></label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oj-sm-justify-content-flex-end oj-flex">
+                            <div class="oj-flex-bar" data-bind="click: moveToNextQuestion" 
+                                style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
                                 <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
-                                    Start
+                                    Next
                                 </div>
                                 <div class="oj-flex-bar-end" style="padding-right: 12px;">
                                     <span>
@@ -100,73 +220,57 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
-                <!-- /ko -->
-                <!-- ko if: isSubQuestionSelected() === true -->
-                    <!-- ko ifnot: finalSubQuestionSelected() === true -->
-                        <span class="normal-text oj-lg-8 oj-flex-item" style="color: #000000;" data-bind="text: 'Filtering Question ' + selectedSubQuestion().id + ':'"></span>                
-                        <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000;" data-bind="text: selectedSubQuestion().title"></span>
-                        <div class="oj-sm-12 oj-flex-item">
-                            <div class="oj-margin-lg-vertical oj-flex">
-                                <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="attr: {id: 'Y' + selectedSubQuestion().id}, click: moveToNextSubQuestion">Yes</span>
-                                <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="attr: {id: 'N' + selectedSubQuestion().id}, click: moveToNextSubQuestion">No</span>
+                </div>
+            <!-- /ko -->
+        </script>
+        <script type="text/html" id="useCaseItemsNonEditable">
+        // <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
+            <div class="use-cases-body-content">
+                <div class="oj-lg-12 oj-flex-item" style="max-width: 650px; margin-left: auto; margin-right: auto;">
+                    <div id="masonryUseCases" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+                        <!-- ko foreach: useCaseItems -->
+                        <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
+                            <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
+                            <img class="use-case-image" data-bind="attr: { src : imgPath }" alt="Image" />
+                            <div class="oj-margin-horizontal oj-flex-bar" style="height: 44px;">
+                                <div class="oj-sm-align-self-center oj-flex-bar-start">
+                                    <div class="oj-flex" style="margin: 5px 0px 7px 0px;">
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: description"></span>
+                                    </div>
+                                </div>
+                                <div class="oj-sm-align-self-center oj-flex-bar-end">
+                                    <img class="bread-crumbs-icon" data-bind="click: $parent.getDetails" src="css/img/Asset 14.png" width="20" height="20" alt="Image" />
+                                </div>
                             </div>
                         </div>
-                    <!-- /ko -->
-                    <!-- ko if: finalSubQuestionSelected() === true  -->
-                        <span class="label-text oj-lg-8 oj-flex-item" style="color: #F80000;" data-bind="text: 'Here are our results!'"></span>                
-                        <span class="heading-type4 oj-margin-top oj-lg-12 oj-flex-item" style="color: #000000;" data-bind="text: finalSubQuestionTitle"></span>
-                        <span class="oj-margin-bottom oj-sm-12 oj-flex-item"></span>
-                    <!-- /ko -->
-                <!-- /ko -->
-            </div>
-        </div>
-    </div>
-    <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
-    <div class="use-cases-body-content">
-        <div class="oj-lg-12 oj-flex-item" style="max-width: 650px; margin-left: auto; margin-right: auto; overflow: auto;">
-            <div id="masonryUseCases" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
-                <!-- ko foreach: useCaseItems -->
-                <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
-                    <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
-                    <img class="use-case-image" data-bind="attr: { src : imgPath }" alt="Image" />
-                    <div class="oj-margin-horizontal oj-flex-bar" style="height: 44px;">
-                        <div class="oj-sm-align-self-center oj-flex-bar-start">
-                            <div class="oj-flex" style="margin: 5px 0px 7px 0px;">
-                                <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
-                                <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: description"></span>
+                        <!-- /ko -->
+                        <!-- ko if: finalSubQuestionSelected() === true  -->
+                        <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
+                            <div class="text-center oj-margin-horizontal oj-flex" style="height: inherit;">
+                                <div style="margin-top: 50px;">
+                                    <div class="oj-flex">
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 10px; color: #CCCCCC" data-bind="text: 'You can find more information about the tailored Use Cases in the dashboard.'"></span>
+                                    </div>
+                                </div>
+                                <div class="oj-flex-bar" 
+                                    style="height: 26px; margin-left: 44px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;"
+                                    data-bind="click: finishDemo">
+                                    <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
+                                        Finish
+                                    </div>
+                                    <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                                        <span>
+                                            <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="oj-sm-align-self-center oj-flex-bar-end">
-                            <img class="bread-crumbs-icon" data-bind="click: $parent.getDetails" src="css/img/Asset 14.png" width="20" height="20" alt="Image" />
-                        </div>
+                        <!-- /ko -->
                     </div>
                 </div>
-                <!-- /ko -->
-                <!-- ko if: finalSubQuestionSelected() === true  -->
-                <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
-                    <div class="text-center oj-margin-horizontal oj-flex" style="height: inherit;">
-                        <div style="margin-top: 50px;">
-                            <div class="oj-flex">
-                                <span class="oj-sm-12 oj-flex-item" style="font-size: 10px; color: #CCCCCC" data-bind="text: 'You can find more information about the tailored Use Cases in the dashboard.'"></span>
-                            </div>
-                        </div>
-                        <div class="oj-flex-bar" 
-                            style="height: 26px; margin-left: 44px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;"
-                            data-bind="click: finishDemo">
-                            <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
-                                Finish
-                            </div>
-                            <div class="oj-flex-bar-end" style="padding-right: 12px;">
-                                <span>
-                                    <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /ko -->
             </div>
-        </div>
+        </script>
     </div>
-</div>
 </div>

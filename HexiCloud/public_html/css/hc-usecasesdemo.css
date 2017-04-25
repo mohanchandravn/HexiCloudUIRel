@@ -144,7 +144,13 @@ and open the template in the editor.
     background-color: #F80000;
 }
 
-.use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-image, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .use-case-image {
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases i.plus-icon {
+    font-size: 100px;
+    color: #F80000;
+    line-height: 110px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-image, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .use-case-image, .use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases {
     width: 200px;
     height: 110px;
 }
