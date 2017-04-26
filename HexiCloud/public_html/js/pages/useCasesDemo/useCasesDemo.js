@@ -184,11 +184,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                 }
             }            
             self.useCasesQuestions(array);
-            
             if (self.inQuestion() === 3) {
                 console.log(self.haveImplementedUseCases());
                 console.log('making false to true of haveImplementedUseCases value');
                 self.haveImplementedUseCases(true);
+                self.goToStartUseCasesStep();
                 console.log(self.haveImplementedUseCases());
 //                service.getUseCaseDemoSubQuestions(self.inQuestion()).then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
             } else {
@@ -218,7 +218,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                 }
             }
             if (self.inQuestion() === 4) {
-                self.haveImplementedUseCases(true);
+//                self.haveImplementedUseCases(true);
                 service.getUseCaseDemoSubQuestions(self.inQuestion()).then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
             }
         };
