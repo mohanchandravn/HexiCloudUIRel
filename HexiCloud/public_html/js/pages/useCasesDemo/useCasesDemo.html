@@ -157,34 +157,22 @@ and open the template in the editor.
                         <div data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                             <!-- ko foreach: useCaseItems -->
                             <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
-                                <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
-                                <img class="use-case-image" data-bind="attr: { src : imgPath }" alt="Image" />
-                                <div class="oj-margin-horizontal oj-flex-bar" style="height: 44px;">
+                                <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
+                                <div class="oj-margin-horizontal oj-flex-bar">
                                     <div class="oj-sm-align-self-center oj-flex-bar-start">
-                                        <div class="oj-flex" style="margin: 5px 0px 7px 0px;">
-                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
-                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: description"></span>
+                                        <div class="oj-flex" style="margin: 5px 0px 7px 0px; height: 61px;">
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 48px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                                         </div>
                                     </div>
                                     <div class="oj-sm-align-self-center oj-flex-bar-end">
-                                        <div aria-labelledby="agreeId" 
-                                            data-bind="ojComponent: {
-                                                component: 'ojCheckboxset',
-                                                optionChange: $parent.updateSelections,
-                                                rootAttributes: { style:'width: 18px' } }" >
-                                            <span class="oj-choice-item">
-                                                <input id="agree" type="checkbox" data-bind="attr: {id: id, value: id}, click: $parent.toggleUseCaseSelections">
-                                                <label for="agree"></label>
-                                            </span>
-                                        </div>
+                                        <span class="use-case-selection-cb" data-bind="attr: { id: id}, click: $parent.toggleUseCaseSelections"></span>
                                     </div>
                                 </div>
                             </div>
                             <!-- /ko -->
                             <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
-                                <div class="add-more-use-cases text-center" style="background-color: #CCC;">
-                                    <i class="plus-icon material-icons">add</i>
-                                </div>
+                                <img id="otherUseCaseImg" class="add-more-use-cases" src="" alt="" />
                                 <div class="oj-margin-horizontal oj-flex-bar" style="height: 44px;">
                                     <div class="oj-sm-align-self-center oj-flex-bar-start">
                                         <div class="oj-flex" style="margin: 5px 0px 7px 0px;">
@@ -192,21 +180,55 @@ and open the template in the editor.
                                         </div>
                                     </div>
                                     <div class="oj-sm-align-self-center oj-flex-bar-end">
-                                        <div id="checkboxSetAgreeId" aria-labelledby="agreeId" 
-                                            data-bind="ojComponent: {
-                                                component: 'ojCheckboxset', 
-                                                value: agreement,
-                                                rootAttributes: { style:'width: 18px' } }" >
-                                            <span class="oj-choice-item">
-                                                <input id="agree" type="checkbox" value="agree">
-                                                <label for="agree"></label>
-                                            </span>
-                                        </div>
+                                        <span id="otherUseCase" class="use-case-selection-cb" data-bind="click: toggleUseCaseSelections"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="oj-sm-justify-content-flex-end oj-flex">
+                        <!-- ko if: hasSelectedOtherUseCase() -->
+                            <div class="oj-sm-justify-content-center oj-flex" style="background: #FFFFFF; padding: 30px 0px;">
+                                <div class="oj-lg-6 oj-flex-item">
+                                    <div class="oj-flex">
+                                        <!-- ko foreach: otherUseCases -->
+                                            <span class="oj-margin-lg-top oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Use Case Summary</span>
+                                            <textarea rows="6" style="resize: none; padding: 10px; font-size: 12px; color: #CCC; border-radius: 15px; margin-bottom: 10px;" 
+                                                                                    data-bind="ojComponent: {
+                                                                                            component: 'ojTextArea', 
+                                                                                            value: useCaseSummary,
+                                                                                            rootAttributes: {style:'max-width:100%'}}">
+                                            </textarea>
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Services Used</span>
+                                            <div data-bind="ojComponent: {
+                                                                component: 'ojCheckboxset',
+                                                                invalidComponentTracker: $parent.tracker,
+                                                                required: true,
+                                                                value: useCaseServicesUsed}" 
+                                                class="oj-choice-direction-row">
+                                                <!-- ko foreach: $parent.otherUseCaseServiceItems -->
+                                                    <span class="oj-choice-item">
+                                                        <input type="checkbox" data-bind="attr: {id: label, value: label}">
+                                                        <label data-bind="attr: {for: label}, text: label"></label>
+                                                    </span>
+                                                <!-- /ko -->
+                                            </div>
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Benefits</span>
+                                            <select data-bind="ojComponent: {component: 'ojSelect',
+                                                            value: useCaseBenefits,
+                                                            rootAttributes: {style:'max-width:20em'}}">
+                                                <option value="benefits1">Benefits 1</option>
+                                                <option value="benefits2">Benefits 2</option>
+                                                <option value="benefits3">Benefits 3</option>
+                                                <option value="benefits4">Benefits 4</option>
+                                            </select>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oj-sm-justify-content-flex-end oj-flex" style="background: #FFFFFF; padding: 0px 30px 30px 0px;">
+                                <a data-bind="click: addOtherUseCase">add more</a>
+                            </div>
+                        <!-- /ko -->
+                        <div class="oj-margin-lg-top oj-sm-justify-content-flex-end oj-flex">
                             <div class="oj-flex-bar" data-bind="click: moveToNextQuestion" 
                                 style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
                                 <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
@@ -231,12 +253,12 @@ and open the template in the editor.
                         <!-- ko foreach: useCaseItems -->
                         <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
                             <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
-                            <img class="use-case-image" data-bind="attr: { src : imgPath }" alt="Image" />
-                            <div class="oj-margin-horizontal oj-flex-bar" style="height: 44px;">
+                            <img class="use-case-image" data-bind="attr: { src : 'css/usecases/img/' + image }" alt="Image" />
+                            <div class="oj-margin-horizontal oj-flex-bar">
                                 <div class="oj-sm-align-self-center oj-flex-bar-start">
-                                    <div class="oj-flex" style="margin: 5px 0px 7px 0px;">
-                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
-                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: description"></span>
+                                    <div class="oj-flex" style="margin: 5px 0px 7px 0px; height: 61px;">
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 48px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                                     </div>
                                 </div>
                                 <div class="oj-sm-align-self-center oj-flex-bar-end">

@@ -279,9 +279,9 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
 
-        self.getUseCaseDemoQuestions = function () {
+        self.getDemoUseCaseItems = function () {
             var defer = $.Deferred();
-            var serverURL = "js/pages/useCasesDemo/useCasesDemoQuestions.json";
+            var serverURL = "js/pages/useCasesDemo/use_cases.json";
 //            var serverURL = self.portalRestHost() + "/services/rest/usecases/";
             $.ajax({
                 type: 'GET',
@@ -326,6 +326,28 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getUseCaseDemoDetails = function (useCaseId) {
             var defer = $.Deferred();
             var serverURL = "js/pages/useCasesDemo/useCasesDemoDetails.json";
+//            var serverURL = self.portalRestHost() + "/services/rest/usecases/" + useCaseId + "/";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+//                beforeSend: function (request) {
+//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+//                },
+                dataType: "json",
+                success: function (data, status) {
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+
+        self.getotherUseCaseServiceItems = function () {
+            var defer = $.Deferred();
+            var serverURL = "js/pages/useCasesDemo/services.json";
 //            var serverURL = self.portalRestHost() + "/services/rest/usecases/" + useCaseId + "/";
             $.ajax({
                 type: 'GET',

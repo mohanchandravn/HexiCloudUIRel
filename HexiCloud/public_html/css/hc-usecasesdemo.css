@@ -144,15 +144,19 @@ and open the template in the editor.
     background-color: #F80000;
 }
 
-.use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases i.plus-icon {
-    font-size: 100px;
-    color: #F80000;
-    line-height: 110px;
-}
-
 .use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-image, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .use-case-image, .use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases {
     width: 200px;
     height: 110px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases {
+    background: url("img/usecases/other_unselected.png") no-repeat;
+    background-size: 200px 110px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases.selected {
+    background: url("img/usecases/other_selected.png") no-repeat;
+    background-size: 200px 110px;
 }
 
 .use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
@@ -162,7 +166,7 @@ and open the template in the editor.
 
 .use-cases-body-content .oj-masonrylayout-tile-1x1, .dashboard-use-cases .oj-masonrylayout-tile-1x1 {
     width: 200px;
-    height: 160px;
+    height: 190px;
 }
 
 .use-cases-body-content .blur-selected-tile {
@@ -173,6 +177,25 @@ and open the template in the editor.
     opacity: 0.6;
     z-index: 1;
 }
+
+.use-case-selection-cb {
+    width: 20px;
+    height: 20px;
+    background: url("img/usecases/checkbox_unselected.svg") no-repeat;
+}
+
+.use-case-selection-cb:active {
+    background: url("img/usecases/checkbox_unselected_active.svg") no-repeat;
+}
+
+.use-case-selection-cb.selected {
+    background: url("img/usecases/checkbox_selected.svg") no-repeat;
+}
+
+.use-case-selection-cb.selected:active {
+    background: url("img/usecases/checkbox_selected_active.svg") no-repeat;
+}
+
 
 .use-case-details-wrapper {
     min-width: 320px;

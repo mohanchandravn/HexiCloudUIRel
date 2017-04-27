@@ -1,0 +1,62 @@
+{
+  "useCases": [
+    {
+      "id": 1,
+      "title": "Migrate Oracle Applications Unlimited workloads",
+      "shortDesc": "Lorem ipsum dolor sit amet",
+      "longDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero. Ut vel erat nec justo varius facilisis a nec diam. Aenean semper leo enim, ut pharetra justo imperdiet sed. Vivamus eu nibh magna. Nam erat velit, dapibus vel maximus et, dignissim nec ante. Aenean eu placerat dolor.",
+      "image": "Migrate Oracle Applications.jpg",
+      "services": [
+        {
+          "id": 1,
+          "label": "Network"
+        },
+        {
+          "id": 2,
+          "label": "Compute"
+        },
+        {
+          "id": 2,
+          "label": "Storage"
+        }
+      ],
+      "benefits": ""
+    },
+    {
+      "id": 2,
+      "title": "Lift-and-Shift Oracle applications Mixed workloads",
+      "shortDesc": "Lorem ipsum dolor sit amet",
+      "longDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero. Ut vel erat nec justo varius facilisis a nec diam. Aenean semper leo enim, ut pharetra justo imperdiet sed. Vivamus eu nibh magna. Nam erat velit, dapibus vel maximus et, dignissim nec ante. Aenean eu placerat dolor.",
+      "image": "L&S_Oracle Applications Mixed Workloads.jpg",
+      "services": [
+        {
+          "id": 1,
+          "label": "Compute"
+        },
+        {
+          "id": 2,
+          "label": "Storage"
+        }
+      ],
+      "benefits": ""
+    },
+    {
+      "id": 3,
+      "title": "Lift & Shift  Non-Oracle Workloads ",
+      "shortDesc": "Lorem ipsum dolor sit amet",
+      "longDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero. Ut vel erat nec justo varius facilisis a nec diam. Aenean semper leo enim, ut pharetra justo imperdiet sed. Vivamus eu nibh magna. Nam erat velit, dapibus vel maximus et, dignissim nec ante. Aenean eu placerat dolor.",
+      "image": "L&S_Non-Oracle Workloads.jpg",
+      "services": [
+        {
+          "id": 1,
+          "label": "Network"
+        },
+        {
+          "id": 2,
+          "label": "Storage"
+        }
+      ],
+      "benefits": ""
+    }
+  ]
+}

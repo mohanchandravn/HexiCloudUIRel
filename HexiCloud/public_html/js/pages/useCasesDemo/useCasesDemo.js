@@ -7,7 +7,8 @@
 /**
  * useCasesDemo module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch'
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojinputtext',
+    'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox'
 ], function (oj, $, ko, service) {
     /**
      * The view model for the main content view template
@@ -27,7 +28,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         
         console.log('useCasesDemo page');
         
+        self.tracker = ko.observable();
         self.selectedUseCaseItems = ko.observableArray([]);
+        self.hasSelectedOtherUseCase = ko.observable(false);
+        self.otherUseCaseServiceItems = ko.observableArray([]);
+        self.otherUseCases = ko.observableArray([]);
         self.useCasesQuestions = ko.observableArray(
             [{
                 "status": "notStarted"
@@ -56,41 +61,35 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         
         self.agreement = ko.observable();
         
-        self.useCaseItems = [
-            { id: "88383",
-              title: 'Apps Unlimited',
-              description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 5.png' },
-            { id: "88384",
-              title: 'Lift-and-Shift',
-              description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 6.png' },
-            { id: "88385",
-              title: 'Non-Oracle Workloads',
-              description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 7.png' },
-            { id: "88386",
-              title: 'Backup',
-              description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 8.png' },
-            { id: "88387",
-              title: 'Disaster Recovery',
-              description: 'Lorem ipsum dolor sit amet',
-              imgPath: 'css/img/Asset 9.png' }
-        ];
+        self.useCaseItems = [];
         
         self.useCaseItemsTemplate = ko.pureComputed(function() {
             console.log(self.haveImplementedUseCases() === true ? 'useCaseItemsNonEditable' : 'useCaseItemsEditable');
             return self.haveImplementedUseCases() === true ? 'useCaseItemsNonEditable' : 'useCaseItemsEditable';
         });
         
-        var questionsSuccessCbFn = function(data, status) {
+        var useCaseItemsSuccessCbFn = function(data, status) {
             console.log(status);
             console.log(data);
-            self.useCasesQuestions(data.questions);
+            self.useCaseItems = data.useCases;
         };
         
-        var questionsFailCbFn = function(xhr) {
+        var useCaseItemsFailCbFn = function(xhr) {
+            console.log(xhr);
+        };
+        
+        var otherUseCaseServiceItemsSuccessCbFn = function(data, status) {
+            console.log(status);
+            console.log(data);
+            self.otherUseCaseServiceItems(data.services);
+            self.otherUseCases([{
+                useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
+                useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
+                useCaseBenefits: ''
+            }]);
+        };
+        
+        var otherUseCaseServiceItemsFailCbFn = function(xhr) {
             console.log(xhr);
         };
         
@@ -140,35 +139,61 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
 //            }
 //        };
         
-        self.toggleUseCaseSelections = function(data, event) {
-//            console.log(id);
-            console.log(event.currentTarget.id);
-//            console.log(operation);
-//            if (operation === 'add') {
-                if (self.selectedUseCaseItems().indexOf(event.currentTarget.id) > -1) {
-                    console.log('already added');
-                    self.selectedUseCaseItems.remove(event.currentTarget.id);
-                    return;
-                } else {
-                    self.selectedUseCaseItems().push(event.currentTarget.id);
-                }
-                console.log(self.selectedUseCaseItems());
-//            } else {
-//                self.selectedUseCaseItems().remove(id);
-//                console.log(self.selectedUseCaseItems());
-//            }
+        self._showComponentValidationErrors = function (trackerObj) {
+            trackerObj.showMessages();
+            if (trackerObj.focusOnFirstInvalid()) {
+                return false;
+            }
+            return true;
         };
         
-        self.updateSelections = function(event, ui) {
-            console.log(event.currentTarget.id);
-            console.log(ui);
-            if (ui.option === "value") {
-                if (ui.value.length > 0) {
-//                    self.toggleUseCaseSelections(event.currentTarget.id, 'add');
+        self.addOtherUseCase = function() {
+            console.log(self.otherUseCaseServiceItems());
+            console.log(self.otherUseCaseServiceItems()[0]);
+//            self.otherUseCaseSummary = ko.observable('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.');
+//        self.otherUseCaseServicesUsed = ko.observableArray([]);
+//        self.otherUseCaseBenefits = ko.observableArray(["   "]);
+            self.otherUseCases.push({
+                useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
+                useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
+                useCaseBenefits: ''
+            });
+        };
+        
+        self.toggleUseCaseSelections = function(data, event) {
+            var id = event.currentTarget.id;
+            if (id !== 'otherUseCase') {
+                if (self.selectedUseCaseItems().indexOf(id) > -1) {
+                    console.log('already added');
+                    $("#" + id).removeClass("selected");
+                    self.selectedUseCaseItems.remove(id);
                 } else {
-//                    self.toggleUseCaseSelections(event.currentTarget.id, 'remove');
+                    $("#" + id).addClass("selected");
+                    self.selectedUseCaseItems().push(id);
+                }
+            } else {
+                if (self.selectedUseCaseItems().indexOf(id) > -1) {
+                    self.otherUseCases([]);
+                    console.log('already added');
+                    $("#otherUseCaseImg").removeClass("selected");
+                    $("#" + id).removeClass("selected");
+                    self.hasSelectedOtherUseCase(false);
+                    self.selectedUseCaseItems.remove(id);                    
+                } else {
+                    console.log(self.otherUseCaseServiceItems());
+                    self.otherUseCases([]);
+                    self.otherUseCases([{
+                        useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
+                        useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
+                        useCaseBenefits: ''
+                    }]);
+                    $("#otherUseCaseImg").addClass("selected");
+                    $("#" + id).addClass("selected");
+                    self.hasSelectedOtherUseCase(true);
+                    self.selectedUseCaseItems().push(id);
                 }
             }
+            console.log(self.selectedUseCaseItems());
         };
         
         self.moveToNextQuestion = function() {
@@ -195,6 +220,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                 self.inQuestion(self.inQuestion() + 1);
             }
             console.log(self.useCasesQuestions());
+            if (self.hasSelectedOtherUseCase()) {
+                // Validations
+                var trackerObj = ko.utils.unwrapObservable(self.tracker);
+                if (!this._showComponentValidationErrors(trackerObj)) {
+                    return;
+                }
+                
+                console.log(self.otherUseCases());
+            }
         };
         
         self.goToStartUseCasesStep = function() {
@@ -306,7 +340,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         
         self.handleAttached = function() {
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
-//            service.getUseCaseDemoQuestions().then(questionsSuccessCbFn, questionsFailCbFn);
+            service.getDemoUseCaseItems().then(useCaseItemsSuccessCbFn, useCaseItemsFailCbFn);
+            service.getotherUseCaseServiceItems().then(otherUseCaseServiceItemsSuccessCbFn, otherUseCaseServiceItemsFailCbFn);
         };
   }
     
