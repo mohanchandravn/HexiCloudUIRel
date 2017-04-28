@@ -18,6 +18,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
         var router = params.ojRouter.parentRouter;
 
         console.log('dashboard page');
+        console.log(selectedUseCases());
 
         self.serviceItems = ko.observableArray([]);
         self.minimalServiceItems = ko.observableArray([]);

@@ -128,13 +128,13 @@ and open the template in the editor.
         <div id="masonryUseCases" class="dashboard-use-cases oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
             <!-- ko foreach: selectedUseCases() -->
             <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
-                <img class="use-case-image" data-bind="attr: { src : imgPath }" alt="Image" />
+                <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
                 <div class="oj-margin-horizontal oj-flex-bar" style="height: 50px;">
                     <div class="oj-sm-align-self-center oj-flex-bar-start">
                         <div class="oj-flex">
                             <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
                             <br/>
-                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: description"></span>
+                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                         </div>
                     </div>
                     <div class="oj-sm-align-self-center oj-flex-bar-end">

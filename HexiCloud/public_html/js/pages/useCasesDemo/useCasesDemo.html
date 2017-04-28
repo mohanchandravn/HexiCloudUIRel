@@ -8,19 +8,19 @@ and open the template in the editor.
         <div id="useCaseDrawerRight" class="use-case-details-wrapper">
             <div style="background: white; min-height: 100%;">
                 <div class="oj-sm-justify-content-flex-end oj-flex">
-                    <span class="close-icon"><i class="material-icons" data-bind="click: closeIt">close</i></span>
+                    <img class="close-icon" src="css/img/close.png" alt="Close it" data-bind="click: closeIt" />
                 </div>
                 <!-- ko if: areUseCaseDetailsFetched() -->
                 <div class="oj-sm-justify-content-center oj-flex" style="padding: 0px 50px;">
-                    <img class="selected-use-case-image" data-bind="attr: { src : selectedUseCaseDetails().useCaseImage }" alt="Image" />
-                    <span class="heading-type4 bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().useCaseName"></span>
+                    <img class="selected-use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCaseDetails().image }" alt="Image" />
+                    <span class="heading-type4 bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().title"></span>
                     <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
-                    <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().description"></p>
+                    <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().longDesc"></p>
                     <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
                     <div class="oj-sm-12 oj-flex-item">
                         <div class="oj-flex">
                         <!-- ko foreach: selectedUseCaseDetails().services -->
-                            <span class="inverted-btn text-center" data-bind="text: name"></span>
+                            <span class="inverted-btn text-center" data-bind="text: label"></span>
                         <!-- /ko -->
                         </div>
                     </div>
@@ -161,7 +161,7 @@ and open the template in the editor.
                                 <div class="oj-margin-horizontal oj-flex-bar">
                                     <div class="oj-sm-align-self-center oj-flex-bar-start">
                                         <div class="oj-flex" style="margin: 5px 0px 7px 0px; height: 61px;">
-                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 48px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 48px; font-weight: bold; margin-bottom: 2px" data-bind="text: title.length > 35 ? trimmedTitle : title"></span>
                                             <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                                         </div>
                                     </div>
@@ -253,16 +253,16 @@ and open the template in the editor.
                         <!-- ko foreach: useCaseItems -->
                         <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
                             <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
-                            <img class="use-case-image" data-bind="attr: { src : 'css/usecases/img/' + image }" alt="Image" />
+                            <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
                             <div class="oj-margin-horizontal oj-flex-bar">
                                 <div class="oj-sm-align-self-center oj-flex-bar-start">
                                     <div class="oj-flex" style="margin: 5px 0px 7px 0px; height: 61px;">
-                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 48px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 48px; font-weight: bold; margin-bottom: 2px" data-bind="text: title.length > 35 ? trimmedTitle : title"></span>
                                         <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                                     </div>
                                 </div>
                                 <div class="oj-sm-align-self-center oj-flex-bar-end">
-                                    <img class="bread-crumbs-icon" data-bind="click: $parent.getDetails" src="css/img/Asset 14.png" width="20" height="20" alt="Image" />
+                                    <img class="bread-crumbs-icon" data-bind="click: $parent.getDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
                                 </div>
                             </div>
                         </div>

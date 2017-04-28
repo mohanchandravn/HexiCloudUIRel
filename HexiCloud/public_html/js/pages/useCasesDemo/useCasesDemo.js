@@ -56,7 +56,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         self.finalSubQuestionSelected = ko.observable(false);
         self.finalSubQuestionTitle = ko.observable();
         self.selectedSubQuestion = ko.observableArray([]);
-        self.areUseCaseDetailsFetched = ko.observable(true);
+        self.areUseCaseDetailsFetched = ko.observable(false);
         self.selectedUseCaseDetails = ko.observableArray([]);
         
         self.agreement = ko.observable();
@@ -71,7 +71,19 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         var useCaseItemsSuccessCbFn = function(data, status) {
             console.log(status);
             console.log(data);
-            self.useCaseItems = data.useCases;
+            if (data.useCases) {
+                var useCases = data.useCases;
+                console.log(useCases);
+                for (var idx = 0; idx < useCases.length; idx++) {
+                    if (useCases[idx].title.length > 35) {
+                        var trimTitle = useCases[idx].title.slice(0, 35);
+                        useCases[idx].trimmedTitle = trimTitle + "...";
+                        console.log(useCases[idx].title.length);
+                    }
+                }
+                self.useCaseItems = useCases;
+                console.log(useCases);
+            }
         };
         
         var useCaseItemsFailCbFn = function(xhr) {
@@ -120,16 +132,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         };
         
         var subQuestionsFailCbFn = function(xhr) {
-            console.log(xhr);
-        };
-        
-        var getUseCaseDetailsSuccessCbFn = function(data, status) {
-            console.log(status);
-            console.log(data);
-            self.selectedUseCaseDetails(data);
-        };
-        
-        var getUseCaseDetailsFailCbFn = function(xhr) {
             console.log(xhr);
         };
 //        
@@ -291,6 +293,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
             if (hasSelectedYes) {
                 // to highlight the selected use cases for the matched sub questions
                 var useCases = array[foundAt].useCaseIds;
+                console.log(useCases);
                 selectedUseCases([]);
                 $(".blur-selected-tile").removeClass("oj-sm-hide");
                 $(".use-case-tile").addClass("pointer-events-none");
@@ -301,12 +304,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                             tempObj = {
                                 id: self.useCaseItems[idx].id,
                                 title: self.useCaseItems[idx].title,
-                                description: self.useCaseItems[idx].description,
-                                imgPath: self.useCaseItems[idx].imgPath
+                                trimmedTitle: self.useCaseItems[idx].trimmedTitle,
+                                shortDesc: self.useCaseItems[idx].shortDesc,
+                                image: self.useCaseItems[idx].image
                             };
                         }
                     }
-                    tempObj.subQuestionId = array[foundAt].id;
+                    console.log(tempObj);
+//                    tempObj.subQuestionId = array[foundAt].id;
                     selectedUseCases.push(tempObj);
                     $("#useCaseLayer" + useCases[a].id).addClass("oj-sm-hide");
                     $("#useCase" + useCases[a].id).removeClass("pointer-events-none");
@@ -317,9 +322,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         self.getDetails = function(data, event) {
             console.log(data);
             console.log(event);
-            if (data.id === "88383") {
+            if (data.id) {
+                self.selectedUseCaseDetails(data);
+                self.areUseCaseDetailsFetched(true);
                 oj.OffcanvasUtils.open(useCaseDrawerRight);
-                service.getUseCaseDemoDetails(88383).then(getUseCaseDetailsSuccessCbFn, getUseCaseDetailsFailCbFn);
             }
         };
         

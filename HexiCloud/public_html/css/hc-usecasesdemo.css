@@ -171,7 +171,7 @@ and open the template in the editor.
 
 .use-cases-body-content .blur-selected-tile {
     width: 200px;
-    height: 160px;
+    height: 190px;
     position: absolute;
     background-color: #000000;
     opacity: 0.6;
@@ -204,7 +204,7 @@ and open the template in the editor.
 }
 
 .close-icon {
-    margin: 10px 20px;
+    margin: 18px;
     cursor: pointer;
 }
 
