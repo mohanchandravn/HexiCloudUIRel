@@ -61,6 +61,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         
         self.agreement = ko.observable();
         
+        self.otherUserCaseCount = ko.observable(0);
+        
         self.useCaseItems = [];
         
         self.useCaseItemsTemplate = ko.pureComputed(function() {
@@ -79,13 +81,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         };
         
         var otherUseCaseServiceItemsSuccessCbFn = function(data, status) {
+            self.otherUserCaseCount(self.otherUserCaseCount() + 1);
             console.log(status);
             console.log(data);
             self.otherUseCaseServiceItems(data.services);
             self.otherUseCases([{
                 useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
                 useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
-                useCaseBenefits: ''
+                useCaseBenefits: '',
+                otherUserCaseCount: self.otherUserCaseCount()
             }]);
         };
         
@@ -148,6 +152,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         };
         
         self.addOtherUseCase = function() {
+            self.otherUserCaseCount(self.otherUserCaseCount() + 1);
             console.log(self.otherUseCaseServiceItems());
             console.log(self.otherUseCaseServiceItems()[0]);
 //            self.otherUseCaseSummary = ko.observable('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.');
@@ -156,7 +161,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
             self.otherUseCases.push({
                 useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
                 useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
-                useCaseBenefits: ''
+                useCaseBenefits: '',
+                otherUserCaseCount: self.otherUserCaseCount()
             });
         };
         

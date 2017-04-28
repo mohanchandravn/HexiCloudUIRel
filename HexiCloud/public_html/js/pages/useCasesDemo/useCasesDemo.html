@@ -206,8 +206,8 @@ and open the template in the editor.
                                                 class="oj-choice-direction-row">
                                                 <!-- ko foreach: $parent.otherUseCaseServiceItems -->
                                                     <span class="oj-choice-item">
-                                                        <input type="checkbox" data-bind="attr: {id: label, value: label}">
-                                                        <label data-bind="attr: {for: label}, text: label"></label>
+                                                        <input type="checkbox" data-bind="attr: {id: id + '_' + $parent.otherUserCaseCount, value: label}">
+                                                        <label data-bind="attr: {for: id + '_' + $parent.otherUserCaseCount}, text: label"></label>
                                                     </span>
                                                 <!-- /ko -->
                                             </div>
