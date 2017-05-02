@@ -376,7 +376,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
             showPreloader();
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
             service.getDemoUseCaseItems().then(useCaseItemsSuccessCbFn, useCaseItemsFailCbFn);
-            service.getotherUseCaseServiceItems().then(otherUseCaseServiceItemsSuccessCbFn, otherUseCaseServiceItemsFailCbFn);
+            service.getOtherUseCaseServiceItems().then(otherUseCaseServiceItemsSuccessCbFn, otherUseCaseServiceItemsFailCbFn);
         };
   }
     

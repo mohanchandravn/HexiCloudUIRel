@@ -191,8 +191,8 @@ and open the template in the editor.
                                                 class="oj-choice-direction-row">
                                                 <!-- ko foreach: $parent.otherUseCaseServiceItems -->
                                                     <span class="oj-choice-item">
-                                                        <input type="checkbox" data-bind="attr: {id: id + '_' + $parent.otherUserCaseCount, value: label}">
-                                                        <label data-bind="attr: {for: id + '_' + $parent.otherUserCaseCount}, text: label"></label>
+                                                        <input type="checkbox" data-bind="attr: {id: serviceId + '_' + $parent.otherUserCaseCount, value: label}">
+                                                        <label data-bind="attr: {for: serviceId + '_' + $parent.otherUserCaseCount}, text: label"></label>
                                                     </span>
                                                 <!-- /ko -->
                                             </div>
@@ -229,11 +229,12 @@ and open the template in the editor.
             <!-- /ko -->
         </script>
         <script type="text/html" id="useCaseItemsNonEditable">
-        // <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
+            <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
             <div class="use-cases-body-content">
                 <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; margin-left: auto; margin-right: auto;">
                     <div id="masonryUseCases" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                         <!-- ko foreach: useCaseItems -->
+                        <!-- ko if: id !== "10"  -->
                         <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
                             <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
                             <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
@@ -251,6 +252,7 @@ and open the template in the editor.
                                 <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                             </div>
                         </div>
+                        <!-- /ko -->
                         <!-- /ko -->
                         <!-- ko if: finalSubQuestionSelected() === true  -->
                         <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
