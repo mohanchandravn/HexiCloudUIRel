@@ -34,6 +34,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         self.selectedUseCaseItems = ko.observableArray([]);
         self.hasSelectedOtherUseCase = ko.observable(false);
         self.otherUseCaseServiceItems = ko.observableArray([]);
+//        self.otherUseCaseBenefitsList = ko.observableArray([]);
+        self.otherUseCaseBenefitsList = ko.observableArray([
+            {value: 'benefits1', label: 'Benefits 1'},
+            {value: 'benefits2', label: 'Benefits 2'},
+            {value: 'benefits3', label: 'Benefits 3'},
+            {value: 'benefits4', label: 'Benefits 4'},
+            {value: 'benefits5', label: 'Benefits 5'}
+        ]);
         self.otherUseCases = ko.observableArray([]);
         self.useCasesQuestions = ko.observableArray(
             [{
@@ -60,9 +68,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         self.selectedSubQuestion = ko.observableArray([]);
         self.areUseCaseDetailsFetched = ko.observable(false);
         self.selectedUseCaseDetails = ko.observableArray([]);
-        
-        self.agreement = ko.observable();
-        
+              
         self.otherUserCaseCount = ko.observable(0);
         
         self.useCaseItems = [];
@@ -183,7 +189,13 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                     self.selectedUseCaseItems.remove(id);
                 } else {
                     $("#" + id).addClass("selected");
-                    self.selectedUseCaseItems().push(id);
+                    
+                    for(var idx = 0; idx < self.useCaseItems.length; idx++) {
+                        if (id == self.useCaseItems[idx].id) {
+                            self.selectedUseCaseItems().push(self.useCaseItems[idx]);
+                        }
+                    }
+//                    self.selectedUseCaseItems().push(id);
                 }
             } else {
                 if (self.selectedUseCaseItems().indexOf(id) > -1) {
@@ -192,7 +204,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                     $("#img10").removeClass("selected");
                     $("#" + id).removeClass("selected");
                     self.hasSelectedOtherUseCase(false);
-                    self.selectedUseCaseItems.remove(id);                    
+                    self.selectedUseCaseItems.remove(id);
                 } else {
                     console.log(self.otherUseCaseServiceItems());
                     self.otherUseCases([]);
@@ -216,14 +228,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
             console.log(self.useCasesQuestions());
             
             var array = self.useCasesQuestions();
-            self.useCasesQuestions([]);            
+            self.useCasesQuestions([]);
             for (var index = 0; index < array.length; index++) {
                 if ( index <= (self.inQuestion() - 1) ) {
                     console.log(index);
                     array[index].status = "completed";
                     array[index + 1].status = "notStarted";
                 }
-            }            
+            }
             self.useCasesQuestions(array);
             if (self.inQuestion() === 3) {
                 console.log(self.haveImplementedUseCases());
@@ -242,9 +254,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                 if (!this._showComponentValidationErrors(trackerObj)) {
                     return;
                 }
-                
-                console.log(self.otherUseCases());
             }
+            
+            console.log(self.selectedUseCaseItems());
+            console.log(self.otherUseCases());
             hidePreloader();
         };
         

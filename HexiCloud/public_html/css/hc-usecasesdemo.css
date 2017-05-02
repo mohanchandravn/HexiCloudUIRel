@@ -164,15 +164,27 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.use-cases-body-content .oj-masonrylayout-tile-1x1, .dashboard-use-cases .oj-masonrylayout-tile-1x1 {
+.dashboard-use-cases .oj-masonrylayout-tile-1x1 {
     width: 200px;
-    height: 190px;
+    height: 180px;
 }
 
-.use-cases-body-content .blur-selected-tile {
+.use-cases-body-content .oj-masonrylayout-tile-1x1 {
     width: 200px;
-    height: 190px;
+    height: 180px;
+/*    margin: 25px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;*/
+}
+/*
+.use-cases-body-content .oj-masonrylayout-tile-1x1:hover {
+    transform: scale(1.2, 1.2);
+}*/
+
+.use-cases-body-content .blur-selected-tile {
     position: absolute;
+    width: 200px;
+    height: 180px;
     background-color: #000000;
     opacity: 0.6;
     z-index: 1;
@@ -195,7 +207,6 @@ and open the template in the editor.
 .use-case-selection-cb.selected:active {
     background: url("img/usecases/checkbox_selected_active.svg") no-repeat;
 }
-
 
 .use-case-details-wrapper {
     min-width: 320px;
