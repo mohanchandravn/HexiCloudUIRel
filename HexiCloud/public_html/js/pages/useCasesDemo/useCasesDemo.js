@@ -29,6 +29,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         console.log('useCasesDemo page');
         
         self.tracker = ko.observable();
+        
+        self.isUseCaseItemsLoaded = ko.observable(false);
         self.selectedUseCaseItems = ko.observableArray([]);
         self.hasSelectedOtherUseCase = ko.observable(false);
         self.otherUseCaseServiceItems = ko.observableArray([]);
@@ -86,10 +88,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                 self.useCaseItems = useCases;
                 console.log(useCases);
             }
+            self.isUseCaseItemsLoaded(true);
         };
         
         var useCaseItemsFailCbFn = function(xhr) {
             console.log(xhr);
+            hidePreloader();
         };
         
         var otherUseCaseServiceItemsSuccessCbFn = function(data, status) {
@@ -103,10 +107,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                 useCaseBenefits: '',
                 otherUserCaseCount: self.otherUserCaseCount()
             }]);
+            hidePreloader();
         };
         
         var otherUseCaseServiceItemsFailCbFn = function(xhr) {
             console.log(xhr);
+            hidePreloader();
         };
         
         var subQuestionsSuccessCbFn = function(data, status) {
@@ -170,7 +176,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         
         self.toggleUseCaseSelections = function(data, event) {
             var id = event.currentTarget.id;
-            if (id !== 'otherUseCase') {
+            if (id !== "10") { // Other use case
                 if (self.selectedUseCaseItems().indexOf(id) > -1) {
                     console.log('already added');
                     $("#" + id).removeClass("selected");
@@ -183,7 +189,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                 if (self.selectedUseCaseItems().indexOf(id) > -1) {
                     self.otherUseCases([]);
                     console.log('already added');
-                    $("#otherUseCaseImg").removeClass("selected");
+                    $("#img10").removeClass("selected");
                     $("#" + id).removeClass("selected");
                     self.hasSelectedOtherUseCase(false);
                     self.selectedUseCaseItems.remove(id);                    
@@ -195,7 +201,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                         useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
                         useCaseBenefits: ''
                     }]);
-                    $("#otherUseCaseImg").addClass("selected");
+                    $("#img10").addClass("selected");
                     $("#" + id).addClass("selected");
                     self.hasSelectedOtherUseCase(true);
                     self.selectedUseCaseItems().push(id);
@@ -205,6 +211,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         };
         
         self.moveToNextQuestion = function() {
+            showPreloader();
+            
             console.log(self.useCasesQuestions());
             
             var array = self.useCasesQuestions();
@@ -237,6 +245,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                 
                 console.log(self.otherUseCases());
             }
+            hidePreloader();
         };
         
         self.goToStartUseCasesStep = function() {
@@ -351,6 +360,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         };
         
         self.handleAttached = function() {
+            showPreloader();
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
             service.getDemoUseCaseItems().then(useCaseItemsSuccessCbFn, useCaseItemsFailCbFn);
             service.getotherUseCaseServiceItems().then(otherUseCaseServiceItemsSuccessCbFn, otherUseCaseServiceItemsFailCbFn);

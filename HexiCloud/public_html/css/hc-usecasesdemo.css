@@ -225,3 +225,7 @@ and open the template in the editor.
     color: #777;
     line-height: 20px;
 }
+
+.move-to-next-question-container {
+    margin-bottom: 15px;
+}

@@ -154,10 +154,11 @@ and open the template in the editor.
             <!-- ko if: inQuestion() === 2 -->
                 <div class="use-cases-body-content">
                     <div class="oj-lg-12 oj-flex-item" style="max-width: 650px; margin-left: auto; margin-right: auto;">
+                        <!-- ko if: isUseCaseItemsLoaded() -->
                         <div data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                             <!-- ko foreach: useCaseItems -->
                             <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
-                                <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
+                                <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
                                 <div class="oj-margin-horizontal oj-flex-bar">
                                     <div class="oj-sm-align-self-center oj-flex-bar-start">
                                         <div class="oj-flex" style="margin: 5px 0px 7px 0px; height: 61px;">
@@ -170,21 +171,9 @@ and open the template in the editor.
                                     </div>
                                 </div>
                             </div>
-                            <!-- /ko -->
-                            <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
-                                <img id="otherUseCaseImg" class="add-more-use-cases" src="" alt="" />
-                                <div class="oj-margin-horizontal oj-flex-bar" style="height: 44px;">
-                                    <div class="oj-sm-align-self-center oj-flex-bar-start">
-                                        <div class="oj-flex" style="margin: 5px 0px 7px 0px;">
-                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: 'Other'"></span>
-                                        </div>
-                                    </div>
-                                    <div class="oj-sm-align-self-center oj-flex-bar-end">
-                                        <span id="otherUseCase" class="use-case-selection-cb" data-bind="click: toggleUseCaseSelections"></span>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- /ko -->                           
                         </div>
+                        <!-- /ko -->
                         <!-- ko if: hasSelectedOtherUseCase() -->
                             <div class="oj-sm-justify-content-center oj-flex" style="background: #FFFFFF; padding: 30px 0px;">
                                 <div class="oj-lg-6 oj-flex-item">
@@ -225,10 +214,10 @@ and open the template in the editor.
                                 </div>
                             </div>
                             <div class="oj-sm-justify-content-flex-end oj-flex" style="background: #FFFFFF; padding: 0px 30px 30px 0px;">
-                                <a data-bind="click: addOtherUseCase">add more</a>
+                                <a class="c-pointer" data-bind="click: addOtherUseCase">add more</a>
                             </div>
                         <!-- /ko -->
-                        <div class="oj-margin-lg-top oj-sm-justify-content-flex-end oj-flex">
+                        <div class="move-to-next-question-container oj-margin-lg-top oj-sm-justify-content-flex-end oj-flex">
                             <div class="oj-flex-bar" data-bind="click: moveToNextQuestion" 
                                 style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
                                 <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
