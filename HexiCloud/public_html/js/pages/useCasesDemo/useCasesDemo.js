@@ -294,7 +294,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 console.log('otherUseCases - ' + JSON.stringify(self.otherUseCases()));
 
                 var saveUserUseCasesSuccessCbFn = function (data, status) {
-                    hidePreloader();
+                    service.getUseCasesForUser().then(getUseCasesForUserSuccessCbFn, getUseCasesForUserFailCbFn);
                 };
 
                 var saveUserUseCasesFailCbFn = function (xhr) {
@@ -349,10 +349,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 }
             }
             self.useCasesQuestions(array);
-            if (self.inQuestion() === 3) {
+            if (self.inQuestion() === 3) {         
                 showPreloader();
                 service.getUseCasesForUser().then(getUseCasesForUserSuccessCbFn, getUseCasesForUserFailCbFn);
-                
                 console.log(self.haveImplementedUseCases());
                 console.log('making false to true of haveImplementedUseCases value');
                 self.haveImplementedUseCases(true);
@@ -374,7 +373,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             hidePreloader();
         };
 
-        self.goToStartUseCasesStep = function () {
+        self.goToStartUseCasesStep = function () {           
             var array = self.useCasesQuestions();
             self.useCasesQuestions([]);
             for (var index = 0; index < array.length; index++) {
@@ -476,6 +475,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
         self.finishTailoring = function () {
             
+            showPreloader();
+
+            console.log('Tailored use cases : ');
+            console.log(self.tailoredUseCases());
+            
             var saveUserUseCasesSuccessCbFn = function (data, status) {
                 hidePreloader();
                 router.go('dashboard/');
@@ -487,16 +491,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 errorHandler.showAppError("ERROR_GENERIC", xhr);
             };
 
-
-            if (self.tailoredUseCases().length > 0) {
-                useCasesSelected(true);
-                selectedUseCases(self.tailoredUseCases());
-            } else {
-                useCasesSelected(false);
-            }
-            console.log('Tailored use cases : ');
-            console.log(self.tailoredUseCases());
-            
             var tailoredUseCases = [];
             for (var idx in self.tailoredUseCases()) {
                 var useCaseId = self.tailoredUseCases()[idx].id;
@@ -520,6 +514,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
             service.getAllUseCases().then(getAllUseCasesSuccessCbFn, getAllUseCasesFailCbFn);
             service.getAllServices().then(getAllServicesSuccessCbFn, getAllServicesFailCbFn);
+            service.getUseCasesForUser().then(getUseCasesForUserSuccessCbFn, getUseCasesForUserFailCbFn);
         };
     }
 

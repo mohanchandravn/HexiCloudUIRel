@@ -18,7 +18,6 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
         var router = params.ojRouter.parentRouter;
 
         console.log('dashboard page');
-        console.log(selectedUseCases());
 
         self.serviceItems = ko.observableArray([]);
         self.minimalServiceItems = ko.observableArray([]);
@@ -35,7 +34,10 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
         self.showControlsButton = ko.observable(false);
         self.showViewAllButton = ko.observable(false);
         self.showViewLessButton = ko.observable(false);
-
+        
+        self.selectedUseCases = ko.observableArray([]);
+        self.useCasesSelected = ko.observable(false);
+                
         self.getClass = function (serverType) {
 //            if (serverType === 'COMPUTE') {
 //                return 'blue';
