@@ -249,4 +249,5 @@ a.quit-quiz {
     color: #B7B9B9;
     font-size: 12px;
     text-decoration: none;
+    cursor: pointer;
 }

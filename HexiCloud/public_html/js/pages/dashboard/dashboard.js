@@ -106,6 +106,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
                     }
                 }
                 self.tailoredUseCases(useCases);
+                $("#masonryUseCases").ojMasonryLayout("refresh");
             }
             hidePreloader();
         };
