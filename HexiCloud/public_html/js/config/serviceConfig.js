@@ -13,7 +13,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
     function serviceConfig() {
 
         var self = this;
-        var ctx = '/hexiCloudRestSecured';
+        var ctx = '/hexiCloudRestSecuredDev';
         if (location.origin.indexOf('localhost') > 0) {
             if (location.protocol === 'http:') {
                 self.portalRestHost = ko.observable("http://129.152.128.105:8080".concat(ctx));
@@ -166,6 +166,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 contentType: "application/x-www-form-urlencoded",
                 data: payload,
                 success: function (data, textStatus, xhr) {
+                    console.log('Successfully posted data at: ' + serverURL);
                     defer.resolve(data, {status: xhr.status});
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -227,6 +228,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -248,6 +250,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -269,6 +272,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -282,7 +286,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getAllUseCases = function () {
             var defer = $.Deferred();
             // var serverURL = "js/pages/useCasesDemo/use_cases.json";
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getAllUseCases";
+            var serverURL = self.portalRestHost() + "/services/rest/getAllUseCases";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -291,6 +295,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -303,8 +308,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.getUseCasesForUser = function () {
             var defer = $.Deferred();
-            // var serverURL = "js/pages/useCasesDemo/use_cases.json";
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getUseCasesForUser";
+            var serverURL = self.portalRestHost() + "/services/rest/getUseCasesForUser";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -313,6 +317,29 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getTailoredUseCases = function () {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/getTailoredUseCases";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -326,7 +353,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getDecisionTree = function() {
             var defer = $.Deferred();
             // var serverURL = "js/pages/useCasesDemo/decisionTree.json";
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getDecisionTree";
+            var serverURL = self.portalRestHost() + "/services/rest/getDecisionTree";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -335,6 +362,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -357,6 +385,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 //                },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -370,7 +399,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getAllServices = function () {
             var defer = $.Deferred();
             //var serverURL = "js/pages/useCasesDemo/services.json";
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getAllServices";
+            var serverURL = self.portalRestHost() + "/services/rest/getAllServices";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -379,6 +408,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -391,7 +421,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.saveUserUseCases = function (payload) {
             var defer = $.Deferred();
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/saveUserUseCases/";
+            var serverURL = self.portalRestHost() + "/services/rest/saveUserUseCases/";
             $.ajax({
                 type: "POST",
                 url: serverURL,
@@ -419,6 +449,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 type: 'GET',
                 url: serviceUrl,
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -440,6 +471,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 success: function (data, status) {
+                    console.log('Successfully posted data at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {

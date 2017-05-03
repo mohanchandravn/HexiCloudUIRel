@@ -485,6 +485,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             
             var saveUserUseCasesSuccessCbFn = function (data, status) {
                 hidePreloader();
+                isUseCaseSelectionDone(true);
                 router.go('dashboard/');
             };
 

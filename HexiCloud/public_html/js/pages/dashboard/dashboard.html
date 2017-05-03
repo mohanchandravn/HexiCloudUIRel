@@ -80,7 +80,7 @@ and open the template in the editor.
         <!-- Use Cases for demo -->
         <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
             <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
-            <!-- ko ifnot: useCasesSelected() === true -->
+            <!-- ko ifnot: isUseCaseSelectionDone() === true -->
                 <span class="heading-type4">
                     Let's start your adoption journey!
                 </span>
@@ -95,7 +95,7 @@ and open the template in the editor.
                     </div>
                 </div>
             <!-- /ko -->
-            <!-- ko if: useCasesSelected() === true -->
+            <!-- ko if: isUseCaseSelectionDone() === true -->
                 <span class="heading-type4">
                     Please select a Use Case to implement!
                 </span>
@@ -122,11 +122,11 @@ and open the template in the editor.
             <!-- /ko -->
             </div>
         </div>
-        <!-- ko if: useCasesSelected() === true -->
+        <!-- ko if: isUseCaseSelectionDone() === true -->
         <span class="heading-type2 oj-sm-12 oj-flex-item">Tailored Use Cases</span>
         
         <div id="masonryUseCases" class="dashboard-use-cases oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
-            <!-- ko foreach: selectedUseCases() -->
+            <!-- ko foreach: tailoredUseCases() -->
             <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
                 <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
                 <div class="oj-margin-horizontal oj-flex-bar">
