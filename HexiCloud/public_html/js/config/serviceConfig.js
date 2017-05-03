@@ -345,16 +345,16 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
 
-        self.getotherUseCaseServiceItems = function () {
+        self.getOtherUseCaseServiceItems = function () {
             var defer = $.Deferred();
-            var serverURL = "js/pages/useCasesDemo/services.json";
-//            var serverURL = self.portalRestHost() + "/services/rest/usecases/" + useCaseId + "/";
+            //var serverURL = "js/pages/useCasesDemo/services.json";
+            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getAllServices";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
-//                beforeSend: function (request) {
-//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
-//                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
                 dataType: "json",
                 success: function (data, status) {
                     defer.resolve(data, status);

@@ -251,6 +251,37 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         
         self.moveToNextQuestion = function() {
             showPreloader();
+
+            console.log(self.selectedUseCaseItems());
+            console.log(self.otherUseCases());
+            
+            var allUseCasesSelected = [];
+            for (var idx in self.selectedUseCaseItems()) {
+                var useCaseId = self.selectedUseCaseItems()[idx].id;
+                if (useCaseId !== "") {
+                    var jsonData = {
+                        "useCaseId": useCaseId,
+                        "code": "I"
+                    };
+                    allUseCasesSelected.push(jsonData);
+                }
+            }
+            
+            for (var idx in self.otherUseCases()) {
+                var useCase = self.otherUseCases()[idx];
+                var services = useCase.useCaseServicesUsed === "" ? "" : useCase.useCaseServicesUsed.join();
+                var benefits = useCase.useCaseBenefits === "" ? "" : useCase.useCaseBenefits.join();
+                var jsonData = {
+                    "useCaseId": 10,
+                    "code": "I",
+                    "summary": useCase.useCaseSummary,
+                    "services": services,
+                    "benefits": benefits
+                };
+                allUseCasesSelected.push(jsonData);
+            }
+            
+            console.log('allUseCasesSelected - ' + JSON.stringify(allUseCasesSelected));
             
             console.log(self.useCasesQuestions());
             
@@ -282,9 +313,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
                     return;
                 }
             }
-            
-            console.log(self.selectedUseCaseItems());
-            console.log(self.otherUseCases());
+
             hidePreloader();
         };
         
@@ -404,7 +433,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
             showPreloader();
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
             service.getDemoUseCaseItems().then(useCaseItemsSuccessCbFn, useCaseItemsFailCbFn);
-            service.getotherUseCaseServiceItems().then(otherUseCaseServiceItemsSuccessCbFn, otherUseCaseServiceItemsFailCbFn);
+            service.getOtherUseCaseServiceItems().then(otherUseCaseServiceItemsSuccessCbFn, otherUseCaseServiceItemsFailCbFn);
         };
   }
     
