@@ -184,8 +184,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.isResourceSelected = ko.observable(false);
                 self.isContactSelected = ko.observable(false);
                 self.currentSelectedCss = "selectedList";
-                self.selectedUseCases = ko.observableArray([]);
-                self.useCasesSelected = ko.observable(false);
 
                 self.slideInEffect = ko.observable('slideIn');
                 self.slideOutEffect = ko.observable('slideOut');
