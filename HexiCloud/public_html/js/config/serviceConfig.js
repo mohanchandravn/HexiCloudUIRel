@@ -323,16 +323,16 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
 
-        self.getUseCaseDemoSubQuestions = function (questionId) {
+        self.getDecisionTree = function() {
             var defer = $.Deferred();
-            var serverURL = "js/pages/useCasesDemo/decisionTree.json";
-//            var serverURL = self.portalRestHost() + "/services/rest/usecases/" + questionId + "/";
+            // var serverURL = "js/pages/useCasesDemo/decisionTree.json";
+            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getDecisionTree";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
-//                beforeSend: function (request) {
-//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
-//                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
                 dataType: "json",
                 success: function (data, status) {
                     defer.resolve(data, status);

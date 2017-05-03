@@ -13,7 +13,11 @@ define([
 
         var self = this;
 
-        self.phoneRegExpPattern = '^[0-9]+$';        
+        self.phoneRegExpPattern = '^[0-9]+$';     
+        
+        self.isNullOrEmpty = function(val) {
+            return val === null || val === '';
+        };
     }
 
     return new CommonHelper();

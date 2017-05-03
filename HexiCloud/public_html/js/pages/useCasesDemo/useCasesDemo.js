@@ -7,9 +7,9 @@
 /**
  * useCasesDemo module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojinputtext',
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'util/commonhelper', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojinputtext',
     'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox'
-], function (oj, $, ko, service, errorHandler) {
+], function (oj, $, ko, service, errorHandler, commonHelper) {
     /**
      * The view model for the main content view template
      */
@@ -149,7 +149,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             errorHandler.showAppError("ERROR_GENERIC", xhr);
         };
 
-        var subQuestionsSuccessCbFn = function (data, status) {
+        var getDecisionTreeSuccessCbFn = function (data, status) {
             console.log(status);
             console.log(data);
             self.useCasesSubQuestions([]);
@@ -186,11 +186,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             self.selectedSubQuestion(self.useCasesSubQuestions()[0]);
         };
 
-        var subQuestionsFailCbFn = function (xhr) {
+        var getDecisionTreeFailCbFn = function (xhr) {
             hidePreloader();
             console.log(xhr);
             errorHandler.showAppError("ERROR_GENERIC", xhr);
         };
+        
 //        
 //        self.updateQuestionStep = function() {
 //            for ( var idx = self.inQuestion() - 1; idx < self.useCasesQuestions().length; idx++) {
@@ -394,7 +395,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 }
             }
             if (self.inQuestion() === 4) {
-                service.getUseCaseDemoSubQuestions().then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
+                service.getDecisionTree().then(getDecisionTreeSuccessCbFn, getDecisionTreeFailCbFn);
             }
         };
 
@@ -438,7 +439,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
 
             self.switchOffUseCases([]);
-            if (useCases !== "") {
+            if (!commonHelper.isNullOrEmpty(useCases)) {
                 useCases = useCases.split(",");
                 for (var idx = 0; idx < useCases.length; idx++) {
                     self.switchOffUseCases.push(Number(useCases[idx]));
