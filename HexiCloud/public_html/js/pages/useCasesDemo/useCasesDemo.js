@@ -511,6 +511,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             };
             service.saveUserUseCases(jsonData).then(saveUserUseCasesSuccessCbFn, saveUserUseCasesFailCbFn);
         };
+        
+        self.goToDashboard = function() {
+            router.go('dashboard/');
+        };
 
         self.handleAttached = function () {
             showPreloader();

@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : nyasarap
 */
 
+.use-cases-demo-page {
+    background-color: #F1F2F2;
+}
+
 .dashboard .use-cases-btn {
     height: 30px;
     font-size: 18px;
@@ -239,4 +243,10 @@ and open the template in the editor.
 
 .move-to-next-question-container {
     margin-bottom: 15px;
+}
+
+a.quit-quiz {
+    color: #B7B9B9;
+    font-size: 12px;
+    text-decoration: none;
 }

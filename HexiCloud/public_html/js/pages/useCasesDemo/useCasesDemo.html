@@ -291,8 +291,9 @@ and open the template in the editor.
                     </script>
                     
         <script type="text/html" id="quitQuiz">
-            <div class="oj-sm-justify-content-center oj-flex">
-                <a href="www.facebook.com">Quit quiz. I'll come back later.</a>
+            <div class="oj-flex" style="max-width: 750px; margin-left: auto; margin-right: auto;"
+                 data-bind="css: (inQuestion() === 1 || inQuestion() === 3) ? 'oj-sm-justify-content-center' : 'oj-sm-flex-items-initial'">
+                <a class="quit-quiz" data-bind="click: goToDashboard">Quit quiz. I'll come back later.</a>
             </div>
         </script>
     </div>

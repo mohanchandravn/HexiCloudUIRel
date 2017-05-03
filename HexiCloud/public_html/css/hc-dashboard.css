@@ -10,6 +10,7 @@ and open the template in the editor.
 
 .dashboard-page {
     padding-bottom: 50px;
+    background-color: #F1F2F2;
 }
 
 .provisioned-services.dashboard .content.stage h1,
