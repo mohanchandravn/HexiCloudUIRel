@@ -279,10 +279,32 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
 
-        self.getDemoUseCaseItems = function () {
+        self.getAllUseCases = function () {
             var defer = $.Deferred();
             // var serverURL = "js/pages/useCasesDemo/use_cases.json";
             var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getAllUseCases";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getUseCasesForUser = function () {
+            var defer = $.Deferred();
+            // var serverURL = "js/pages/useCasesDemo/use_cases.json";
+            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getUseCasesForUser";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -345,7 +367,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
 
-        self.getOtherUseCaseServiceItems = function () {
+        self.getAllServices = function () {
             var defer = $.Deferred();
             //var serverURL = "js/pages/useCasesDemo/services.json";
             var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getAllServices";
