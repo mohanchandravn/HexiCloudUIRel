@@ -13,7 +13,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
     function serviceConfig() {
 
         var self = this;
-        var ctx = '/hexiCloudRestSecured';
+        var ctx = '/hexiCloudRestSecuredDev';
         if (location.origin.indexOf('localhost') > 0) {
             if (location.protocol === 'http:') {
                 self.portalRestHost = ko.observable("http://129.152.128.105:8080".concat(ctx));
@@ -282,7 +282,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getAllUseCases = function () {
             var defer = $.Deferred();
             // var serverURL = "js/pages/useCasesDemo/use_cases.json";
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getAllUseCases";
+            var serverURL = self.portalRestHost() + "/services/rest/getAllUseCases";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -304,7 +304,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getUseCasesForUser = function () {
             var defer = $.Deferred();
             // var serverURL = "js/pages/useCasesDemo/use_cases.json";
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getUseCasesForUser";
+            var serverURL = self.portalRestHost() + "/services/rest/getUseCasesForUser";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -326,7 +326,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getDecisionTree = function() {
             var defer = $.Deferred();
             // var serverURL = "js/pages/useCasesDemo/decisionTree.json";
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getDecisionTree";
+            var serverURL = self.portalRestHost() + "/services/rest/getDecisionTree";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -370,7 +370,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getAllServices = function () {
             var defer = $.Deferred();
             //var serverURL = "js/pages/useCasesDemo/services.json";
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/getAllServices";
+            var serverURL = self.portalRestHost() + "/services/rest/getAllServices";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -391,7 +391,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.saveUserUseCases = function (payload) {
             var defer = $.Deferred();
-            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/saveUserUseCases/";
+            var serverURL = self.portalRestHost() + "/services/rest/saveUserUseCases/";
             $.ajax({
                 type: "POST",
                 url: serverURL,
