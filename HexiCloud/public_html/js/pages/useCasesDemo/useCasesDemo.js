@@ -40,7 +40,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             {value: 'benefits2', label: 'Benefits 2'},
             {value: 'benefits3', label: 'Benefits 3'},
             {value: 'benefits4', label: 'Benefits 4'},
-            {value: 'benefits5', label: 'Benefits 5'}
+            {value: 'benefits5', label: 'Benefits 5'},
+            {value: 'other', label: 'Other'}
         ]);
         self.otherUseCases = ko.observableArray([]);
         self.useCasesQuestions = ko.observableArray(
@@ -68,13 +69,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.selectedSubQuestion = ko.observableArray([]);
         self.areUseCaseDetailsFetched = ko.observable(false);
         self.selectedUseCaseDetails = ko.observableArray([]);
+        self.switchOffUseCases = ko.observableArray([]);
+        self.highlightedUseCases = ko.observableArray([]);
               
         self.otherUserCaseCount = ko.observable(0);
         
         self.useCaseItems = [];
         
         self.useCaseItemsTemplate = ko.pureComputed(function() {
-            console.log(self.haveImplementedUseCases() === true ? 'useCaseItemsNonEditable' : 'useCaseItemsEditable');
             return self.haveImplementedUseCases() === true ? 'useCaseItemsNonEditable' : 'useCaseItemsEditable';
         });
         
@@ -83,16 +85,13 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             console.log(data);
             if (data.useCases) {
                 var useCases = data.useCases;
-                console.log(useCases);
                 for (var idx = 0; idx < useCases.length; idx++) {
                     if (useCases[idx].title.length > 35) {
                         var trimTitle = useCases[idx].title.slice(0, 35);
                         useCases[idx].trimmedTitle = trimTitle + "...";
-                        console.log(useCases[idx].title.length);
                     }
                 }
                 self.useCaseItems = useCases;
-                console.log(useCases);
             }
             self.isUseCaseItemsLoaded(true);
         };
@@ -127,20 +126,31 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             console.log(status);
             console.log(data);
             self.useCasesSubQuestions([]);
-            var subQuestions = data.subQuestions;
+            var subQuestions = data.decisionTree;
+            console.log(subQuestions);
             for (var idx = 0; idx < subQuestions.length; idx++) {
                 if (idx === 0) {
                     self.useCasesSubQuestions.push({
+                        "index": (idx + 1),
                         "id": subQuestions[idx].id,
-                        "title": subQuestions[idx].title,
-                        "useCaseIds": subQuestions[idx].useCaseIds,
+                        "question": subQuestions[idx].question,
+                        "yesQId": subQuestions[idx].yesQId,
+                        "noQId": subQuestions[idx].noQId,
+                        "yesSwitchOffCases": subQuestions[idx].yesSwitchOffCases,
+                        "noSwitchOffCases": subQuestions[idx].noSwitchOffCases,
+                        "preQId": subQuestions[idx].preQId,
                         "status": "notStarted"
                     });
                 } else {
                     self.useCasesSubQuestions.push({
+                        "index": (idx + 1),
                         "id": subQuestions[idx].id,
-                        "title": subQuestions[idx].title,
-                        "useCaseIds": subQuestions[idx].useCaseIds,
+                        "question": subQuestions[idx].question,
+                        "yesQId": subQuestions[idx].yesQId,
+                        "noQId": subQuestions[idx].noQId,
+                        "yesSwitchOffCases": subQuestions[idx].yesSwitchOffCases,
+                        "noSwitchOffCases": subQuestions[idx].noSwitchOffCases,
+                        "preQId": subQuestions[idx].preQId,
                         "status": null
                     });
                 }
@@ -184,31 +194,48 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             });
         };
         
+        self.checkIfUseCaseAdded = function(id) {
+            for (var idx = 0; idx < self.selectedUseCaseItems().length; idx++) {
+                if (self.selectedUseCaseItems()[idx].id === id) {
+                    console.log('found at ' + idx);
+                    return true;
+                }
+            }
+            console.log('not found');
+            return false;
+        };
+        
         self.toggleUseCaseSelections = function(data, event) {
-            var id = event.currentTarget.id;
-            if (id !== "10") { // Other use case
-                if (self.selectedUseCaseItems().indexOf(id) > -1) {
+            var id = Number(event.currentTarget.id);
+            console.log(id);
+            console.log(self.selectedUseCaseItems());
+            if (id !== 10) { // Other use case
+//                var foundAt = self.checkIfUseCaseAdded(id);
+                if (self.checkIfUseCaseAdded(id)) {
                     console.log('already added');
                     $("#" + id).removeClass("selected");
-                    self.selectedUseCaseItems.remove(id);
+                    self.selectedUseCaseItems.remove( function (item) { return item.id === id; } );
+//                    self.selectedUseCaseItems.splice(foundAt, 1);
                 } else {
                     $("#" + id).addClass("selected");
                     
                     for(var idx = 0; idx < self.useCaseItems.length; idx++) {
-                        if (id == self.useCaseItems[idx].id) {
+                        if (id === self.useCaseItems[idx].id) {
                             self.selectedUseCaseItems().push(self.useCaseItems[idx]);
                         }
                     }
 //                    self.selectedUseCaseItems().push(id);
                 }
             } else {
-                if (self.selectedUseCaseItems().indexOf(id) > -1) {
+//                var foundAt = self.checkIfUseCaseAdded(id);
+                if (self.hasSelectedOtherUseCase()) {
                     self.otherUseCases([]);
                     console.log('already added');
                     $("#img10").removeClass("selected");
                     $("#" + id).removeClass("selected");
                     self.hasSelectedOtherUseCase(false);
-                    self.selectedUseCaseItems.remove(id);
+                    self.selectedUseCaseItems.remove( function (item) { return item.id === id; } );
+//                    self.selectedUseCaseItems.splice(foundAt, 1);
                 } else {
                     console.log(self.otherUseCaseServiceItems());
                     self.otherUseCases([]);
@@ -220,10 +247,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     $("#img10").addClass("selected");
                     $("#" + id).addClass("selected");
                     self.hasSelectedOtherUseCase(true);
-                    self.selectedUseCaseItems().push(id);
                 }
             }
             console.log(self.selectedUseCaseItems());
+            console.log(self.otherUseCases());
         };
         
         self.moveToNextQuestion = function() {
@@ -333,13 +360,13 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 }
             }
             if (self.inQuestion() === 4) {
-//                self.haveImplementedUseCases(true);
-                service.getUseCaseDemoSubQuestions(self.inQuestion()).then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
+                service.getUseCaseDemoSubQuestions().then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
             }
         };
         
         self.moveToNextSubQuestion = function(data, event) {            
-            var id = event.currentTarget.id;
+            var id = event.currentTarget.id;            
+            var useCases;
             
             // for matching with yes/no button id's
             var hasSelectedYes = id.startsWith("Y");
@@ -350,7 +377,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             
             // to get the id of selected sub question
             for (var index = 0; index < array.length; index++) {
-                if (id === array[index].id) {
+                if (Number(id) === Number(array[index].id)) {
                     foundAt = index;
                 }
             }
@@ -369,31 +396,31 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.finalSubQuestionSelected(true);
             }
             
+            // to highlight the selected use cases for the matched sub questions
             if (hasSelectedYes) {
-                // to highlight the selected use cases for the matched sub questions
-                var useCases = array[foundAt].useCaseIds;
-                console.log(useCases);
-                selectedUseCases([]);
-                $(".blur-selected-tile").removeClass("oj-sm-hide");
-                $(".use-case-tile").addClass("pointer-events-none");
-                for (var a = 0; a < useCases.length; a++) {
-                    var tempObj;
-                    for (var idx = 0; idx < self.useCaseItems.length; idx++) {
-                        if (useCases[a].id === self.useCaseItems[idx].id) {
-                            tempObj = {
-                                id: self.useCaseItems[idx].id,
-                                title: self.useCaseItems[idx].title,
-                                trimmedTitle: self.useCaseItems[idx].trimmedTitle,
-                                shortDesc: self.useCaseItems[idx].shortDesc,
-                                image: self.useCaseItems[idx].image
-                            };
-                        }
+                useCases = array[foundAt].yesSwitchOffCases;
+            } else {
+                useCases = array[foundAt].noSwitchOffCases;
+            }
+            
+            self.switchOffUseCases([]);
+            if (useCases !== "") {
+                useCases = useCases.split(",");
+                for (var idx = 0; idx < useCases.length; idx++) {
+                    self.switchOffUseCases.push(Number(useCases[idx]));
+                }
+                
+                console.log('Use Cases to be switched off: ' + self.switchOffUseCases());
+                for (var idx = 0; idx < self.useCaseItems.length; idx++) {
+                    var searchStatus = $.inArray(self.useCaseItems[idx].id, self.switchOffUseCases());
+                    if (searchStatus !== -1) {
+                        console.log(self.useCaseItems[idx].id);
+                        self.highlightedUseCases.push(self.useCaseItems[idx]);
+                        $("#useCaseLayer" + self.useCaseItems[idx].id).removeClass("oj-sm-hide");
+                        $("#useCase" + self.useCaseItems[idx].id).addClass("pointer-events-none");
+                    } else {
+                        console.log('not found');
                     }
-                    console.log(tempObj);
-//                    tempObj.subQuestionId = array[foundAt].id;
-                    selectedUseCases.push(tempObj);
-                    $("#useCaseLayer" + useCases[a].id).addClass("oj-sm-hide");
-                    $("#useCase" + useCases[a].id).removeClass("pointer-events-none");
                 }
             }
         };
@@ -413,13 +440,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.finishDemo = function() {
-            if (selectedUseCases().length > 0) {
+            if (self.highlightedUseCases().length > 0) {
                 useCasesSelected(true);
+                selectedUseCases(self.highlightedUseCases());
             } else {
                 useCasesSelected(false);
             }
             console.log('Selected use cases are: ');
-            console.log(selectedUseCases());
+            console.log(self.highlightedUseCases());
             router.go('dashboard/');
         };
         

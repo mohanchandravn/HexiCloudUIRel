@@ -1,0 +1,31 @@
+{
+  "decisionTree": [
+    {
+      "id": 1,
+      "question": "Would you like to migrate an existing application to the Cloud?",
+      "yesQId": 2,
+      "noQId": 0,
+      "yesSwitchOffCases": "5,7",
+      "noSwitchOffCases": "",
+      "preQId": 0
+    },
+    {
+      "id": 2,
+      "question": "Is this an Oracle Apps Unlimited application?",
+      "yesQId": 6,
+      "noQId": 3,
+      "yesSwitchOffCases": "",
+      "noSwitchOffCases": "1",
+      "preQId": "1"
+    },
+    {
+      "id": 3,
+      "question": "Do you have any plan to migrate older DB & Weblogic workloads?",
+      "yesQId": 0,
+      "noQId": 4,
+      "yesSwitchOffCases": "",
+      "noSwitchOffCases": "2",
+      "preQId": "2"
+    }
+  ]
+}

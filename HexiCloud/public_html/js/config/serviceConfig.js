@@ -303,7 +303,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getUseCaseDemoSubQuestions = function (questionId) {
             var defer = $.Deferred();
-            var serverURL = "js/pages/useCasesDemo/useCasesDemoSubQuestionsFor" + questionId + ".json";
+            var serverURL = "js/pages/useCasesDemo/decisionTree.json";
 //            var serverURL = self.portalRestHost() + "/services/rest/usecases/" + questionId + "/";
             $.ajax({
                 type: 'GET',

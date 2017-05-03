@@ -31,7 +31,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
         self.detailsContentMaxHeight = ko.observable(0);
         self.selectedItemBenefitsArray = ko.observableArray([]);
         self.noServices = ko.observable(false);
-        self.hsaServiceBenefits = ko.observable(false);
+        self.hasServiceBenefits = ko.observable(false);
         self.showControlsButton = ko.observable(false);
         self.showViewAllButton = ko.observable(false);
         self.showViewLessButton = ko.observable(false);
@@ -121,7 +121,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
                 console.log(data);
                 self.selectedServiceItem(serviceClicked);
                 if (status !== 'nocontent') {
-                    self.hsaServiceBenefits(true);
+                    self.hasServiceBenefits(true);
                     self.selectedItemTitle(data.Service.title);
                     self.selectedItemSubTitle(data.Service.subTitle);
                     self.benefitsTitle(data.Service.Benefits.title);
@@ -139,7 +139,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
                     self.selectedItemSubTitle('');
                     self.benefitsTitle('');
                     self.pdfSrc('');
-                    self.hsaServiceBenefits(false);
+                    self.hasServiceBenefits(false);
                     self.selectedItemBenefitsArray([]);
                 }
 
