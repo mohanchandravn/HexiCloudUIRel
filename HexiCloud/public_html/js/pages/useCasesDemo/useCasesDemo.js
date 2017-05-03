@@ -72,7 +72,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.areUseCaseDetailsFetched = ko.observable(false);
         self.selectedUseCaseDetails = ko.observableArray([]);
         self.switchOffUseCases = ko.observableArray([]);
-        self.highlightedUseCases = ko.observableArray([]);
+        self.tailoredUseCases = ko.observableArray([]);
 
         self.otherUserCaseCount = ko.observable(0);
 
@@ -450,7 +450,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     var searchStatus = $.inArray(self.allUseCases[idx].id, self.switchOffUseCases());
                     if (searchStatus !== -1) {
                         console.log(self.allUseCases[idx].id);
-                        self.highlightedUseCases.push(self.allUseCases[idx]);
+                        self.tailoredUseCases.push(self.allUseCases[idx]);
                         $("#useCaseLayer" + self.allUseCases[idx].id).removeClass("oj-sm-hide");
                         $("#useCase" + self.allUseCases[idx].id).addClass("pointer-events-none");
                     } else {
@@ -474,16 +474,45 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             oj.OffcanvasUtils.close(useCaseDrawerRight);
         };
 
-        self.finishDemo = function () {
-            if (self.highlightedUseCases().length > 0) {
+        self.finishTailoring = function () {
+            
+            var saveUserUseCasesSuccessCbFn = function (data, status) {
+                hidePreloader();
+                router.go('dashboard/');
+            };
+
+            var saveUserUseCasesFailCbFn = function (xhr) {
+                hidePreloader();
+                console.log(xhr);
+                errorHandler.showAppError("ERROR_GENERIC", xhr);
+            };
+
+
+            if (self.tailoredUseCases().length > 0) {
                 useCasesSelected(true);
-                selectedUseCases(self.highlightedUseCases());
+                selectedUseCases(self.tailoredUseCases());
             } else {
                 useCasesSelected(false);
             }
-            console.log('Selected use cases are: ');
-            console.log(self.highlightedUseCases());
-            router.go('dashboard/');
+            console.log('Tailored use cases : ');
+            console.log(self.tailoredUseCases());
+            
+            var tailoredUseCases = [];
+            for (var idx in self.tailoredUseCases()) {
+                var useCaseId = self.tailoredUseCases()[idx].id;
+                if (useCaseId) {
+                    var jsonData = {
+                        "useCaseId": useCaseId,
+                        "code": "T"
+                    };
+                    tailoredUseCases.push(jsonData);
+                }
+            }
+
+            var jsonData = {
+                "userUseCases": tailoredUseCases
+            };
+            service.saveUserUseCases(jsonData).then(saveUserUseCasesSuccessCbFn, saveUserUseCasesFailCbFn);
         };
 
         self.handleAttached = function () {
