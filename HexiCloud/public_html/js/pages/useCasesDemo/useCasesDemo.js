@@ -429,6 +429,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.selectedSubQuestion([]);
                 self.finalSubQuestionTitle('We have tailored these use cases that would fit perfectly with your provisioned services.');
                 self.finalSubQuestionSelected(true);
+                
+                // To refresh the items in the JET component
+                $("#masonryUseCases").ojMasonryLayout("refresh");
             }
 
             // to highlight the selected use cases for the matched sub questions

@@ -143,6 +143,8 @@ and open the template in the editor.
                     <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="click: moveToNextQuestion">Yes</span>
                     <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="click: inQuestion() === 1 ? goToStartUseCasesStep : moveToNextQuestion">No</span>
                 </div>
+                <!-- Loading a template to Quit the quiz -->
+                <div style="margin-top: 50px;" data-bind="template: 'quitQuiz'"></div>
             </div>
             <!-- /ko -->
             <!-- ko if: inQuestion() === 2 -->
@@ -167,7 +169,7 @@ and open the template in the editor.
                                 <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                             </div>
                         </div>
-                        <!-- /ko -->                           
+                        <!-- /ko -->
                     </div>
                     <!-- /ko -->
                     <!-- ko if: hasSelectedOtherUseCase() -->
@@ -226,7 +228,10 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
+            <!-- Loading a template to Quit the quiz -->
+            <div data-bind="template: 'quitQuiz'"></div>
             <!-- /ko -->
+
             </script>
             <script type="text/html" id="useCaseItemsNonEditable">
                 <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
@@ -253,33 +258,42 @@ and open the template in the editor.
                                 </div>
                             </div>
                             <!-- /ko -->
-                        </div>
-                        <!-- /ko -->
-
-                        <!-- ko if: finalSubQuestionSelected() === true  -->
-                        <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
-                            <div class="text-center oj-margin-horizontal oj-flex" style="height: inherit;">
-                                <div style="margin-top: 50px;">
-                                    <div class="oj-flex">
-                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 10px; color: #CCCCCC" data-bind="text: 'You can find more information about the tailored Use Cases in the dashboard.'"></span>
+                            <!-- ko if: finalSubQuestionSelected() === true  -->
+                            <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
+                                <div class="text-center oj-margin-horizontal oj-flex" style="height: inherit;">
+                                    <div style="margin-top: 50px;">
+                                        <div class="oj-flex">
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px; color: #CCCCCC" data-bind="text: 'You can find more information about the tailored Use Cases in the dashboard.'"></span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="oj-flex-bar" 
-                                     style="height: 26px; margin-left: 44px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;"
-                                     data-bind="click: finishDemo">
-                                    <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
-                                        Finish
-                                    </div>
-                                    <div class="oj-flex-bar-end" style="padding-right: 12px;">
-                                        <span>
-                                            <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
-                                        </span>
+                                    <div class="oj-flex-bar" 
+                                         style="height: 26px; margin-left: 44px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;"
+                                         data-bind="click: finishDemo">
+                                        <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
+                                            Finish
+                                        </div>
+                                        <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                                            <span>
+                                                <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- /ko -->
                         </div>
                         <!-- /ko -->
+
+                        
+                        <!-- Loading a template to Quit the quiz -->
+                        <div data-bind="template: 'quitQuiz'"></div>
                     </div>
                     </script>
-                </div>
+                    
+        <script type="text/html" id="quitQuiz">
+            <div class="oj-sm-justify-content-center oj-flex">
+                <a href="www.facebook.com">Quit quiz. I'll come back later.</a>
             </div>
+        </script>
+    </div>
+</div>
