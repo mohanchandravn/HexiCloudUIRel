@@ -1,0 +1,30 @@
+{
+  "userUseCases": [
+    {
+      "useCaseId": 10,
+      "code": "I",
+      "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "services": "COMPUTE,STORAGE",
+      "benefits": ""
+    },
+    {
+      "useCaseId": 10,
+      "code": "I",
+      "summary": "Duis sit amet eros a velit laoreet tristique accumsan sed libero.",
+      "services": "NETWORK",
+      "benefits": ""
+    },
+    {
+      "useCaseId": 1,
+      "code": "I"
+    },
+    {
+      "useCaseId": 2,
+      "code": "T"
+    },
+    {
+      "useCaseId": 3,
+      "code": "T"
+    }
+  ]
+}

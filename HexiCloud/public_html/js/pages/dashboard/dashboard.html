@@ -128,18 +128,19 @@ and open the template in the editor.
         <div id="masonryUseCases" class="dashboard-use-cases oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
             <!-- ko foreach: selectedUseCases() -->
             <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
-                <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
-                <div class="oj-margin-horizontal oj-flex-bar" style="height: 50px;">
+                <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
+                <div class="oj-margin-horizontal oj-flex-bar">
                     <div class="oj-sm-align-self-center oj-flex-bar-start">
-                        <div class="oj-flex">
-                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 2px" data-bind="text: title"></span>
-                            <br/>
-                            <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
+                        <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
+                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold;" data-bind="attr: {title: title}, text: title.length > 35 ? trimmedTitle : title"></span>
                         </div>
                     </div>
                     <div class="oj-sm-align-self-center oj-flex-bar-end">
-                        <img src="css/img/Asset 14.png" width="20" height="20" alt="Image" />
+                        <img class="bread-crumbs-icon" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
                     </div>
+                </div>
+                <div class="oj-margin-start oj-flex">
+                    <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                 </div>
             </div>
             <!-- /ko -->
@@ -152,7 +153,7 @@ and open the template in the editor.
         <div class="oj-sm-12 oj-lg-4 oj-flex-item">
             <div class="benefits oj-flex" data-bind="css: isScreenLGorXL() ? 'oj-margin-lg-end' : ''">
                 <span class="heading-type2 oj-sm-12 oj-flex-item" data-bind="text: 'Benefits for ' + selectedServiceItem() + ': '"></span>
-                <!--ko if:hsaServiceBenefits() -->
+                <!--ko if:hasServiceBenefits() -->
                 <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
                     <span class="heading-type4 color-red" data-bind="text: selectedItemTitle"></span>
                     <span class="normal-text" data-bind="text: ' - ' + selectedItemSubTitle()"></span>
@@ -166,7 +167,7 @@ and open the template in the editor.
                     <!-- /ko -->
                 </ul>
                 <!-- /ko -->
-                <!--ko ifnot:hsaServiceBenefits() -->
+                <!--ko ifnot:hasServiceBenefits() -->
                 <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
                     <span class="heading-type4 color-red" data-bind="text: selectedItemTitle"></span>
                 </span>
@@ -175,12 +176,12 @@ and open the template in the editor.
         </div>
         <div class="key-features oj-sm-12 oj-lg-8 oj-flex-item">
             <span class="heading-type2 oj-flex" data-bind="text: 'Key features for ' + selectedServiceItem() + ': '"></span>
-            <!--ko if:hsaServiceBenefits() -->
+            <!--ko if:hasServiceBenefits() -->
             <div class="oj-margin-lg-top oj-flex" style="height: 500px;">
                 <iframe id="pdf" style="width: 100%;" height="500" data-bind="attr : { src: 'https://docs.google.com/gview?url=' + pdfSrc() + '&embedded=true' }" frameborder="0"></iframe>
             </div>
             <!--/ko -->
-            <!--ko ifnot:hsaServiceBenefits() -->
+            <!--ko ifnot:hasServiceBenefits() -->
             <div class="oj-hybrid-padding"></div>
             <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
 

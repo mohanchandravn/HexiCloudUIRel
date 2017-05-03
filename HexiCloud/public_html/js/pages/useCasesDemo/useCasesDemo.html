@@ -16,7 +16,7 @@ and open the template in the editor.
                     <span class="heading-type4 bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().title"></span>
                     <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
                     <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().longDesc"></p>
-                    <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
+                    <span class="use-case-title oj-margin-lg-top oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
                     <div class="oj-sm-12 oj-flex-item">
                         <div class="oj-flex">
                         <!-- ko foreach: selectedUseCaseDetails().services -->
@@ -24,7 +24,7 @@ and open the template in the editor.
                         <!-- /ko -->
                         </div>
                     </div>
-                    <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
+                    <span class="use-case-title oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
                 </div>
                 <!-- /ko -->
             </div>
@@ -114,8 +114,8 @@ and open the template in the editor.
                     <!-- /ko -->
                     <!-- ko if: isSubQuestionSelected() === true && haveImplementedUseCases() === true -->
                         <!-- ko if: finalSubQuestionSelected() === false -->
-                            <span class="normal-text oj-lg-8 oj-flex-item" style="color: #000000;" data-bind="text: 'Filtering Question ' + selectedSubQuestion().id + ':'"></span>                
-                            <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000;" data-bind="text: selectedSubQuestion().title"></span>
+                            <span class="normal-text oj-lg-8 oj-flex-item" style="color: #000000;" data-bind="text: 'Filtering Question ' + selectedSubQuestion().index + ':'"></span>                
+                            <span class="heading-type4 oj-lg-8 oj-flex-item" style="color: #000000;" data-bind="text: selectedSubQuestion().question"></span>
                             <div class="oj-sm-12 oj-flex-item">
                                 <div class="oj-margin-lg-vertical oj-flex">
                                     <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="attr: {id: 'Y' + selectedSubQuestion().id}, click: moveToNextSubQuestion">Yes</span>
@@ -156,7 +156,7 @@ and open the template in the editor.
                                 <div class="oj-margin-horizontal oj-flex-bar">
                                     <div class="oj-sm-align-self-center oj-flex-bar-start">
                                         <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
-                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold;" data-bind="text: title.length > 35 ? trimmedTitle : title"></span>
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold;" data-bind="attr: {title: title}, text: title.length > 35 ? trimmedTitle : title"></span>
                                         </div>
                                     </div>
                                     <div class="oj-sm-align-self-center oj-flex-bar-end">
@@ -229,28 +229,30 @@ and open the template in the editor.
             <!-- /ko -->
         </script>
         <script type="text/html" id="useCaseItemsNonEditable">
-        // <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
+        <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
             <div class="use-cases-body-content">
                 <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; margin-left: auto; margin-right: auto;">
                     <div id="masonryUseCases" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                         <!-- ko foreach: useCaseItems -->
-                        <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
-                            <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
-                            <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
-                            <div class="oj-margin-horizontal oj-flex-bar">
-                                <div class="oj-sm-align-self-center oj-flex-bar-start">
-                                    <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
-                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold; margin-bottom: 2px" data-bind="text: title.length > 35 ? trimmedTitle : title"></span>
+                            <!-- ko if: id != 10 -->
+                            <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
+                                <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
+                                <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
+                                <div class="oj-margin-horizontal oj-flex-bar">
+                                    <div class="oj-sm-align-self-center oj-flex-bar-start">
+                                        <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold; margin-bottom: 2px" data-bind="attr: {title: title}, text: title.length > 35 ? trimmedTitle : title"></span>
+                                        </div>
+                                    </div>
+                                    <div class="oj-sm-align-self-center oj-flex-bar-end">
+                                        <img class="bread-crumbs-icon" data-bind="click: $parent.getDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
                                     </div>
                                 </div>
-                                <div class="oj-sm-align-self-center oj-flex-bar-end">
-                                    <img class="bread-crumbs-icon" data-bind="click: $parent.getDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
+                                <div class="oj-margin-start oj-flex">
+                                    <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                                 </div>
                             </div>
-                            <div class="oj-margin-start oj-flex">
-                                <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
-                            </div>
-                        </div>
+                            <!-- /ko -->
                         <!-- /ko -->
                         <!-- ko if: finalSubQuestionSelected() === true  -->
                         <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
