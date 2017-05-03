@@ -166,6 +166,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 contentType: "application/x-www-form-urlencoded",
                 data: payload,
                 success: function (data, textStatus, xhr) {
+                    console.log('Successfully posted data at: ' + serverURL);
                     defer.resolve(data, {status: xhr.status});
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -227,6 +228,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -248,6 +250,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -269,6 +272,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -291,6 +295,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -303,7 +308,6 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.getUseCasesForUser = function () {
             var defer = $.Deferred();
-            // var serverURL = "js/pages/useCasesDemo/use_cases.json";
             var serverURL = self.portalRestHost() + "/services/rest/getUseCasesForUser";
             $.ajax({
                 type: 'GET',
@@ -313,6 +317,29 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getTailoredUseCases = function () {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/getTailoredUseCases";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -335,6 +362,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -357,6 +385,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 //                },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -379,6 +408,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -419,6 +449,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 type: 'GET',
                 url: serviceUrl,
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -440,6 +471,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 success: function (data, status) {
+                    console.log('Successfully posted data at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {

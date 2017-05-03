@@ -7,9 +7,9 @@
 /**
  * dashboard module
  */
-define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs/ojcore', 'ojs/ojknockout',  'ojs/ojprogressbar',
+define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'util/errorhandler', 'ojs/ojcore', 'ojs/ojknockout',  'ojs/ojprogressbar',
     'ojs/ojfilmstrip', 'components/techsupport/loader', 'ojs/ojmasonrylayout'
-], function ($, ko, service, sessionInfo) {
+], function ($, ko, service, sessionInfo, errorHandler) {
     /**
      * The view model for the main content view template
      */
@@ -35,8 +35,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
         self.showViewAllButton = ko.observable(false);
         self.showViewLessButton = ko.observable(false);
         
-        self.selectedUseCases = ko.observableArray([]);
-        self.useCasesSelected = ko.observable(false);
+        self.tailoredUseCases = ko.observableArray([]);
                 
         self.getClass = function (serverType) {
 //            if (serverType === 'COMPUTE') {
@@ -95,6 +94,26 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
             }
             
             hidePreloader();
+        };
+        
+        var getTailoredUseCasesSuccessCbFn = function (data, status) {
+            if (data.useCases) {
+                var useCases = data.useCases;
+                for (var idx = 0; idx < useCases.length; idx++) {
+                    if (useCases[idx].title.length > 35) {
+                        var trimTitle = useCases[idx].title.slice(0, 35);
+                        useCases[idx].trimmedTitle = trimTitle + "...";
+                    }
+                }
+                self.tailoredUseCases(useCases);
+            }
+            hidePreloader();
+        };
+
+        var getTailoredUseCasesFailCbFn = function (xhr) {
+            hidePreloader();
+            console.log(xhr);
+            errorHandler.showAppError("ERROR_GENERIC", xhr);
         };
         
         self.openMinimalServices = function(data, event) {
@@ -172,6 +191,10 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'ojs
             
             // service.getServiceItems().then(populateUI, FailCallBackFn);
             service.getUserClmData(loggedInUser()).then(populateUI, FailCallBackFn);
+            
+            if (isUseCaseSelectionDone()) {
+                service.getTailoredUseCases().then(getTailoredUseCasesSuccessCbFn, getTailoredUseCasesFailCbFn);
+            }
         };
 
         self.handleTransitionCompleted = function () {
