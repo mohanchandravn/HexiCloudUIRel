@@ -7,9 +7,9 @@
 /**
  * useCasesDemo module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojinputtext',
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojinputtext',
     'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox'
-], function (oj, $, ko, service) {
+], function (oj, $, ko, service, errorHandler) {
     /**
      * The view model for the main content view template
      */
@@ -98,8 +98,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         };
         
         var useCaseItemsFailCbFn = function(xhr) {
-            console.log(xhr);
             hidePreloader();
+            console.log(xhr);
+            errorHandler.showAppError("ERROR_GENERIC", xhr);
         };
         
         var otherUseCaseServiceItemsSuccessCbFn = function(data, status) {
@@ -117,8 +118,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         };
         
         var otherUseCaseServiceItemsFailCbFn = function(xhr) {
-            console.log(xhr);
             hidePreloader();
+            console.log(xhr);
+            errorHandler.showAppError("ERROR_GENERIC", xhr);
         };
         
         var subQuestionsSuccessCbFn = function(data, status) {
@@ -148,7 +150,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         };
         
         var subQuestionsFailCbFn = function(xhr) {
+            hidePreloader();
             console.log(xhr);
+            errorHandler.showAppError("ERROR_GENERIC", xhr);
         };
 //        
 //        self.updateQuestionStep = function() {
@@ -225,36 +229,54 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'ojs/ojknock
         self.moveToNextQuestion = function() {
             showPreloader();
 
-            console.log(self.selectedUseCaseItems());
-            console.log(self.otherUseCases());
+            if (self.inQuestion() === 2) {
+                showPreloader();
+                console.log('selectedUseCaseItems - ' + JSON.stringify(self.selectedUseCaseItems()));
+                console.log('otherUseCases - ' + JSON.stringify(self.otherUseCases()));
+                
+                var saveUserUseCasesSuccessCbFn = function(data, status) {
+                    hidePreloader();
+                };
+
+                var saveUserUseCasesFailCbFn = function(xhr) {
+                    hidePreloader();
+                    console.log(xhr);
+                    errorHandler.showAppError("ERROR_GENERIC", xhr);
+                };
             
-            var allUseCasesSelected = [];
-            for (var idx in self.selectedUseCaseItems()) {
-                var useCaseId = self.selectedUseCaseItems()[idx].id;
-                if (useCaseId !== "") {
+                var allUseCasesSelected = [];
+                for (var idx in self.selectedUseCaseItems()) {
+                    var useCaseId = self.selectedUseCaseItems()[idx].id;
+                    if (useCaseId) {
+                        var jsonData = {
+                            "useCaseId": useCaseId,
+                            "code": "I"
+                        };
+                        allUseCasesSelected.push(jsonData);
+                    }
+                }
+
+                for (var idx in self.otherUseCases()) {
+                    var useCase = self.otherUseCases()[idx];
+                    var services = useCase.useCaseServicesUsed === "" ? "" : useCase.useCaseServicesUsed.join();
+                    var benefits = useCase.useCaseBenefits === "" ? "" : useCase.useCaseBenefits.join();
                     var jsonData = {
-                        "useCaseId": useCaseId,
-                        "code": "I"
+                        "useCaseId": 10,
+                        "code": "I",
+                        "summary": useCase.useCaseSummary,
+                        "services": services,
+                        "benefits": benefits
                     };
                     allUseCasesSelected.push(jsonData);
                 }
-            }
-            
-            for (var idx in self.otherUseCases()) {
-                var useCase = self.otherUseCases()[idx];
-                var services = useCase.useCaseServicesUsed === "" ? "" : useCase.useCaseServicesUsed.join();
-                var benefits = useCase.useCaseBenefits === "" ? "" : useCase.useCaseBenefits.join();
+                
                 var jsonData = {
-                    "useCaseId": 10,
-                    "code": "I",
-                    "summary": useCase.useCaseSummary,
-                    "services": services,
-                    "benefits": benefits
+                    "userUseCases": allUseCasesSelected
                 };
-                allUseCasesSelected.push(jsonData);
+                service.saveUserUseCases(jsonData).then(saveUserUseCasesSuccessCbFn, saveUserUseCasesFailCbFn);
+
+                console.log('allUseCasesSelected - ' + JSON.stringify(allUseCasesSelected));
             }
-            
-            console.log('allUseCasesSelected - ' + JSON.stringify(allUseCasesSelected));
             
             console.log(self.useCasesQuestions());
             

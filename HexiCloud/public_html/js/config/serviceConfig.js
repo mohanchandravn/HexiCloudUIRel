@@ -366,6 +366,29 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             });
             return $.when(defer);
         };
+        
+        self.saveUserUseCases = function (payload) {
+            var defer = $.Deferred();
+            var serverURL = "https://129.152.128.105/hexiCloudRestSecuredDev/services/rest/saveUserUseCases/";
+            $.ajax({
+                type: "POST",
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                contentType: "application/json",
+                data: JSON.stringify(payload),
+                success: function (data) {
+                    console.log('Successfully posted data at: ' + serverURL);
+                    defer.resolve(data, {status: 200});
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error posting data to the service" + serverURL);
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
 
         self.forgotPasswordService = function (userId) {
             var defer = $.Deferred();

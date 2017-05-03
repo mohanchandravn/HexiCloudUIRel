@@ -8,15 +8,15 @@
       "image": "Migrate Oracle Applications.jpg",
       "services": [
         {
-          "id": 1,
+          "serviceId": 1,
           "label": "Network"
         },
         {
-          "id": 2,
+          "serviceId": 2,
           "label": "Compute"
         },
         {
-          "id": 2,
+          "serviceId": 2,
           "label": "Storage"
         }
       ],
@@ -30,11 +30,11 @@
       "image": "L&S_Oracle Applications Mixed Workloads.jpg",
       "services": [
         {
-          "id": 1,
+          "serviceId": 1,
           "label": "Compute"
         },
         {
-          "id": 2,
+          "serviceId": 2,
           "label": "Storage"
         }
       ],
@@ -48,11 +48,11 @@
       "image": "L&S_Non-Oracle Workloads.jpg",
       "services": [
         {
-          "id": 1,
+          "serviceId": 1,
           "label": "Network"
         },
         {
-          "id": 2,
+          "serviceId": 2,
           "label": "Storage"
         }
       ],

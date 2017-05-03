@@ -1,15 +1,15 @@
 {
   "services": [
     {
-      "id": "NETWORK",
+      "serviceId": "NETWORK",
       "label": "Network"
     },
     {
-      "id": "COMPUTE",
+      "serviceId": "COMPUTE",
       "label": "Compute"
     },
     {
-      "id": "STORAGE",
+      "serviceId": "STORAGE",
       "label": "Storage"
     }
   ]
