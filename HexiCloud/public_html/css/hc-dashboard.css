@@ -8,11 +8,6 @@ and open the template in the editor.
     Author     : nyasarap
 */
 
-.dashboard-page {
-    padding-bottom: 50px;
-    /*background-color: #F1F2F2;*/
-}
-
 .provisioned-services.dashboard .content.stage h1,
 .provisioned-services.dashboard .content.stage p{
    text-align: left; 
@@ -50,27 +45,6 @@ and open the template in the editor.
     .dashboard {
         padding: 0px 120px 20px 120px;
     }
-}
-
-.feedback {
-    position: fixed;
-    bottom: 0;
-    right: 20px;
-    background-color: #FC0000;
-    color: #fff;
-}
-
-.feedback a {
-    height: auto;
-    width: 80px;
-    cursor: pointer;
-    margin-right: 5px;
-}
-
-.feedback .material-icons {
-    font-size: 30px !important;
-    padding: 15px;
-    color: #fff;
 }
 
 .view-more-button {

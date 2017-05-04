@@ -25,6 +25,10 @@ header-content {
     margin-top: 80px;
 }
 
+.dashboard-page, .faqs-page {
+    padding-bottom: 50px;
+}
+
 .branding-homepage {
     color: #f80000 !important;
 }
@@ -520,5 +524,12 @@ login-page video::-webkit-media-controls-start-playback-button {
 }
 
 .c-pointer {
+    cursor: pointer;
+}
+
+.need-help {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
     cursor: pointer;
 }
