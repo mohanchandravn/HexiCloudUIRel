@@ -180,6 +180,12 @@ and open the template in the editor.
     background-size: 200px 110px;
 }
 
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .info-icon {
+    font-size: 12px;
+    color: #FFFFFF;
+    background: #F80000;
+}
+
 .use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
@@ -279,4 +285,8 @@ and open the template in the editor.
 
 button.btn-add-another:hover {
     text-decoration: underline;
+}
+
+span.oj-collapsible-header::after {
+    content: "\e608";
 }

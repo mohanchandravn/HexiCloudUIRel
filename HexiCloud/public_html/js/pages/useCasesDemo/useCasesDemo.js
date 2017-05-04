@@ -8,8 +8,8 @@
  * useCasesDemo module
  */
 define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'util/commonhelper', 'ojs/ojknockout',
-    'ojs/ojmasonrylayout', 'ojs/ojinputtext', 'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox',
-    'components/techsupport/loader'
+    'ojs/ojmasonrylayout', 'ojs/ojinputtext', 'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox',, 'ojs/ojaccordion',
+    'ojs/ojcollapsible', 'components/techsupport/loader'
 ], function (oj, $, ko, service, errorHandler, commonHelper) {
     /**
      * The view model for the main content view template
@@ -43,11 +43,13 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.otherUseCaseServiceItems = ko.observableArray([]);
 //        self.otherUseCaseBenefitsList = ko.observableArray([]);
         self.otherUseCaseBenefitsList = ko.observableArray([
-            {value: 'benefits1', label: 'Benefits 1'},
-            {value: 'benefits2', label: 'Benefits 2'},
-            {value: 'benefits3', label: 'Benefits 3'},
-            {value: 'benefits4', label: 'Benefits 4'},
-            {value: 'benefits5', label: 'Benefits 5'},
+            {value: 'benefits1', label: 'Cost reduction'},
+            {value: 'benefits2', label: 'Time reduction / Faster Deployment'},
+            {value: 'benefits3', label: 'Zero Administration'},
+            {value: 'benefits4', label: 'Easy integration'},
+            {value: 'benefits5', label: 'ROI Increase'},
+            {value: 'benefits5', label: 'Flexibility'},
+            {value: 'benefits5', label: 'Scalability'},
             {value: 'other', label: 'Other'}
         ]);
         self.otherUseCases = ko.observableArray([]);
@@ -138,12 +140,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             console.log(status);
             console.log(data);
             self.otherUseCaseServiceItems(data.services);
-            self.otherUseCases([{
-                    useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
-                    useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
-                    useCaseBenefits: '',
-                    otherUserCaseCount: self.otherUserCaseCount()
-                }]);
             hidePreloader();
         };
 
@@ -162,7 +158,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             for (var idx = 0; idx < subQuestions.length; idx++) {
                 if (idx === 0) {
                     self.useCasesSubQuestions.push({
-                        "index": (idx + 1),
                         "id": subQuestions[idx].id,
                         "question": subQuestions[idx].question,
                         "yesQId": subQuestions[idx].yesQId,
@@ -174,7 +169,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     });
                 } else {
                     self.useCasesSubQuestions.push({
-                        "index": (idx + 1),
                         "id": subQuestions[idx].id,
                         "question": subQuestions[idx].question,
                         "yesQId": subQuestions[idx].yesQId,
@@ -217,6 +211,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             return hasInvalidComponents;
         };
 
+        self.openInfoPopUp = function(data, event) {
+            console.log(data);
+            console.log(event);
+        };
+
         self.addOtherUseCase = function () {
             self.otherUserCaseCount(self.otherUserCaseCount() + 1);
             console.log(self.otherUseCaseServiceItems());
@@ -230,6 +229,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 useCaseBenefits: '',
                 otherUserCaseCount: self.otherUserCaseCount()
             });
+            $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
+            $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
         };
 
         self.checkIfUseCaseAdded = function (id) {
@@ -279,6 +280,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     });
 //                    self.selectedUseCaseItems.splice(foundAt, 1);
                 } else {
+                    console.log(self.otherUserCaseCount());
                     self.otherUserCaseCount(self.otherUserCaseCount() + 1);
                     console.log(self.otherUseCaseServiceItems());
                     self.otherUseCases([]);
@@ -291,6 +293,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     $("#img10").addClass("selected");
                     $("#" + id).addClass("selected");
                     self.hasSelectedOtherUseCase(true);
+                    $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
                 }
             }
             console.log(self.selectedUseCaseItems());
