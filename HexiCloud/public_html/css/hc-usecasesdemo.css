@@ -251,3 +251,16 @@ a.quit-quiz {
     text-decoration: none;
     cursor: pointer;
 }
+
+.btn-add-another {
+    background: none !important;
+    border: none;
+    color: #f80000 !important;
+    cursor: pointer !important;
+    width: 104px;
+    height: 15px;
+}
+
+button.btn-add-another:hover {
+    text-decoration: underline;
+}
