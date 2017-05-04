@@ -419,6 +419,30 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
         
+
+        self.getUseCaseBenefits = function () {
+            var defer = $.Deferred();
+            var serverURL = "js/pages/useCasesDemo/benefits.json";
+//            var serverURL = self.portalRestHost() + "/services/rest/getUseCaseBenefits";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
         self.saveUserUseCases = function (payload) {
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/saveUserUseCases/";

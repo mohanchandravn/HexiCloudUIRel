@@ -41,17 +41,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.selectedUseCaseItems = ko.observableArray([]);
         self.hasSelectedOtherUseCase = ko.observable(false);
         self.otherUseCaseServiceItems = ko.observableArray([]);
-//        self.otherUseCaseBenefitsList = ko.observableArray([]);
-        self.otherUseCaseBenefitsList = ko.observableArray([
-            {value: 'benefits1', label: 'Cost reduction'},
-            {value: 'benefits2', label: 'Time reduction / Faster Deployment'},
-            {value: 'benefits3', label: 'Zero Administration'},
-            {value: 'benefits4', label: 'Easy integration'},
-            {value: 'benefits5', label: 'ROI Increase'},
-            {value: 'benefits5', label: 'Flexibility'},
-            {value: 'benefits5', label: 'Scalability'},
-            {value: 'other', label: 'Other'}
-        ]);
+        self.otherUseCaseBenefitsList = ko.observableArray([]);
         self.otherUseCases = ko.observableArray([]);
         self.useCasesQuestions = ko.observableArray(
                 [{
@@ -280,6 +270,26 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     });
 //                    self.selectedUseCaseItems.splice(foundAt, 1);
                 } else {
+                    var benefitsSuccessCbFn = function (data, status) {
+                        console.log(data);
+                        console.log(status);
+                        var benefits = data.benefits;
+                        self.otherUseCaseBenefitsList([]);
+                        for (var idx = 0; idx < benefits.length; idx++) {
+                            self.otherUseCaseBenefitsList.push({value: benefits[idx].id, label: benefits[idx].label});
+                        }
+                        hidePreloader();
+                    };
+                    
+                    var benefitsFailCbFn = function (xhr) {
+                        hidePreloader();
+                        console.log(xhr);
+                    };
+                    
+                    showPreloader();
+                    // service to get other Use Cases benefits list
+                    service.getUseCaseBenefits().then(benefitsSuccessCbFn, benefitsFailCbFn);
+                    
                     console.log(self.otherUserCaseCount());
                     self.otherUserCaseCount(self.otherUserCaseCount() + 1);
                     console.log(self.otherUseCaseServiceItems());
