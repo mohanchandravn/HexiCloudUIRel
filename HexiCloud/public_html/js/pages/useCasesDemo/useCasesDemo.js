@@ -34,6 +34,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.isAllUseCasesLoaded = ko.observable(false);
         self.isUseCasesForUserLoaded = ko.observable(false);
         
+        self.isUseCaseSelected = ko.observable(false);
+        self.isServiceSelected = ko.observable(false);
+        self.isBenefitSelected = ko.observable(false);
+
         self.selectedUseCaseItems = ko.observableArray([]);
         self.hasSelectedOtherUseCase = ko.observable(false);
         self.otherUseCaseServiceItems = ko.observableArray([]);
@@ -131,7 +135,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
 
         var getAllServicesSuccessCbFn = function (data, status) {
-            self.otherUserCaseCount(self.otherUserCaseCount() + 1);
             console.log(status);
             console.log(data);
             self.otherUseCaseServiceItems(data.services);
@@ -207,6 +210,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
             return true;
         };
+        
+        self.hasInvalidComponents = function () {
+            var trackerObj = ko.utils.unwrapObservable(self.tracker),
+                    hasInvalidComponents = trackerObj ? trackerObj["invalidShown"] : false;
+            return hasInvalidComponents;
+        };
 
         self.addOtherUseCase = function () {
             self.otherUserCaseCount(self.otherUserCaseCount() + 1);
@@ -233,7 +242,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             console.log('not found');
             return false;
         };
-
+        
         self.toggleUseCaseSelections = function (data, event) {
             var id = Number(event.currentTarget.id);
             console.log(id);
@@ -270,12 +279,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     });
 //                    self.selectedUseCaseItems.splice(foundAt, 1);
                 } else {
+                    self.otherUserCaseCount(self.otherUserCaseCount() + 1);
                     console.log(self.otherUseCaseServiceItems());
                     self.otherUseCases([]);
                     self.otherUseCases([{
                             useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
                             useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
-                            useCaseBenefits: ''
+                            useCaseBenefits: '',
+                            otherUserCaseCount: self.otherUserCaseCount()
                         }]);
                     $("#img10").addClass("selected");
                     $("#" + id).addClass("selected");
@@ -284,8 +295,20 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
             console.log(self.selectedUseCaseItems());
             console.log(self.otherUseCases());
+            
+            self.isUseCaseSelected(self.selectedUseCaseItems().length > 0 || 
+                (self.otherUseCases().length > 0 && self.otherUseCases()[0].otherUserCaseCount > 0)); 
         };
-
+           
+        self.disableNextButton = ko.pureComputed(function () {
+            return !self.isUseCaseSelected() || self.hasInvalidComponents() || 
+                (self.otherUseCases().length > 0 && self.otherUseCases()[0].otherUserCaseCount > 0 && self.disableAddAnotherButton());
+        });
+        
+        self.disableAddAnotherButton = ko.pureComputed(function () {
+            return !self.isServiceSelected() || !self.isBenefitSelected() || self.hasInvalidComponents();
+        });
+         
         self.moveToNextQuestion = function () {
             showPreloader();
 
@@ -518,6 +541,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             router.go('dashboard/');
         };
         
+        self.serviceOptionChange = function (event, data) {
+            self.isServiceSelected(data.value.length > 0);
+        };
+        
+        self.benefitOptionChange = function (event, data) {
+            self.isBenefitSelected(typeof data.value[0] === 'string' || (data.value.length === 0 && typeof data.previousValue === 'object'));
+        };
+
         self.onClickFeedback = function() {
             if (selectedTemplate() === "") {
                 selectedTemplate('email_content');

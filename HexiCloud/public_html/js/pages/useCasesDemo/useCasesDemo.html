@@ -189,6 +189,7 @@ and open the template in the editor.
                                                                 component: 'ojCheckboxset',
                                                                 invalidComponentTracker: $parent.tracker,
                                                                 required: true,
+                                                                optionChange: $parent.serviceOptionChange,
                                                                 value: useCaseServicesUsed}" 
                                      class="oj-choice-direction-row">
                                     <!-- ko foreach: $parent.otherUseCaseServiceItems -->
@@ -202,7 +203,11 @@ and open the template in the editor.
                                 <select data-bind="ojComponent: {component: 'ojSelect',
                                                             options: $parent.otherUseCaseBenefitsList,
                                                             value: useCaseBenefits,
+                                                            placeholder: 'Select benefit(s)',
                                                             multiple: true,
+                                                            required: true, 
+                                                            invalidComponentTracker: $parent.tracker,
+                                                            optionChange: $parent.benefitOptionChange,
                                                             rootAttributes: {style:'max-width:20em'}}">
                                 </select>
                                 <!-- /ko -->
@@ -210,7 +215,7 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="oj-sm-justify-content-flex-end oj-flex" style="background: #FFFFFF; padding: 0px 30px 30px 0px;">
-                        <a class="c-pointer" data-bind="click: addOtherUseCase">add more</a>
+                        <button class="btn-add-another" data-bind="ojComponent: {component: 'ojButton', label: 'Add another'}, click: addOtherUseCase, css: {'disable-actions' : disableAddAnotherButton()}"></button>
                     </div>
                     <!-- /ko -->
                     <div class="oj-flex">
@@ -218,7 +223,7 @@ and open the template in the editor.
                             <div class="move-to-next-question-container oj-margin-lg-top oj-sm-justify-content-space-between oj-flex">
                                 <!-- Loading a template to Quit the quiz -->
                                 <div class="oj-sm-align-self-flex-end oj-flex-item" data-bind="template: 'quitQuiz'"></div>
-                                <div class="oj-flex-bar" data-bind="click: moveToNextQuestion" 
+                                <div class="oj-flex-bar" data-bind="click: moveToNextQuestion, css: {'disable-actions' : disableNextButton}" 
                                      style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
                                     <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
                                         Next
