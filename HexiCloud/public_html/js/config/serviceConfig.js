@@ -27,6 +27,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.serverURI = ko.observable("https://documents-gse00002841.documents.us2.oraclecloud.com/documents/link/");
 
         self.updateCurrentStep = function (payload, doNotRoute) {
+            console.log('payload : '+ JSON.stringify(payload));
             // var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/createUserStep/";
             $.ajax({
@@ -125,6 +126,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.submitSR = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/saveAndSendEmail/";
             $.ajax({
@@ -148,6 +150,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.authenticate = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/login";
             $.ajax({
@@ -420,6 +423,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
         
         self.saveUserUseCases = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/saveUserUseCases/";
             $.ajax({
@@ -460,6 +464,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.updatePasswordService = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
             var serviceUrl = self.portalRestHost() + "/services/rest/resetPassword/";
             $.ajax({
@@ -482,6 +487,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.requestCallBack = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/requestCallback/";
             $.ajax({
@@ -529,6 +535,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.updateAudit = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var serverURL = self.portalRestHost() + "/services/rest/updateAudit/";
             $.ajax({
                 type: "POST",
