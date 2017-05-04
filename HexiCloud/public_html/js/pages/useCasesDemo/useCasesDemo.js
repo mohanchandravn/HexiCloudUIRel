@@ -27,8 +27,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             "modality": "modal"
         };
 
-        console.log('useCasesDemo page');
-
         self.tracker = ko.observable();
 
         self.isAllUseCasesLoaded = ko.observable(false);
@@ -68,7 +66,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.selectedSubQuestion = ko.observableArray([]);
         self.areUseCaseDetailsFetched = ko.observable(false);
         self.selectedUseCaseDetails = ko.observableArray([]);
-        self.switchOffUseCases = ko.observableArray([]);
         self.tailoredUseCases = ko.observableArray([]);
 
         self.otherUserCaseCount = ko.observable(0);
@@ -81,8 +78,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         });
 
         var getAllUseCasesSuccessCbFn = function (data, status) {
-            console.log(status);
-            console.log(data);
             if (data.useCases) {
                 var useCases = data.useCases;
                 for (var idx = 0; idx < useCases.length; idx++) {
@@ -104,8 +99,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         var getUseCasesForUserSuccessCbFn = function (data, status) {
-            console.log(status);
-            console.log(data);
             if (data.useCases) {
                 var useCases = data.useCases;
                 for (var idx = 0; idx < useCases.length; idx++) {
@@ -115,7 +108,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     }
                 }
                 self.useCasesForUser = useCases;
-            }
+                self.tailoredUseCases(useCases)
+             }
             self.isUseCasesForUserLoaded(true);
             hidePreloader();
         };
@@ -127,8 +121,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
 
         var getAllServicesSuccessCbFn = function (data, status) {
-            console.log(status);
-            console.log(data);
             self.otherUseCaseServiceItems(data.services);
             hidePreloader();
         };
@@ -140,11 +132,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
 
         var getDecisionTreeSuccessCbFn = function (data, status) {
-            console.log(status);
-            console.log(data);
             self.useCasesSubQuestions([]);
             var subQuestions = data.decisionTree;
-            console.log(subQuestions);
             for (var idx = 0; idx < subQuestions.length; idx++) {
                 if (idx === 0) {
                     self.useCasesSubQuestions.push({
@@ -208,8 +197,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
         self.addOtherUseCase = function () {
             self.otherUserCaseCount(self.otherUserCaseCount() + 1);
-            console.log(self.otherUseCaseServiceItems());
-            console.log(self.otherUseCaseServiceItems()[0]);
 //            self.otherUseCaseSummary = ko.observable('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.');
 //        self.otherUseCaseServicesUsed = ko.observableArray([]);
 //        self.otherUseCaseBenefits = ko.observableArray(["   "]);
@@ -226,22 +213,17 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.checkIfUseCaseAdded = function (id) {
             for (var idx = 0; idx < self.selectedUseCaseItems().length; idx++) {
                 if (self.selectedUseCaseItems()[idx].id === id) {
-                    console.log('found at ' + idx);
                     return true;
                 }
             }
-            console.log('not found');
             return false;
         };
         
         self.toggleUseCaseSelections = function (data, event) {
             var id = Number(event.currentTarget.id);
-            console.log(id);
-            console.log(self.selectedUseCaseItems());
             if (id !== 10) { // Other use case
 //                var foundAt = self.checkIfUseCaseAdded(id);
                 if (self.checkIfUseCaseAdded(id)) {
-                    console.log('already added');
                     $("#" + id).removeClass("selected");
                     self.selectedUseCaseItems.remove(function (item) {
                         return item.id === id;
@@ -261,7 +243,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 //                var foundAt = self.checkIfUseCaseAdded(id);
                 if (self.hasSelectedOtherUseCase()) {
                     self.otherUseCases([]);
-                    console.log('already added');
                     $("#img10").removeClass("selected");
                     $("#" + id).removeClass("selected");
                     self.hasSelectedOtherUseCase(false);
@@ -292,7 +273,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     
                     console.log(self.otherUserCaseCount());
                     self.otherUserCaseCount(self.otherUserCaseCount() + 1);
-                    console.log(self.otherUseCaseServiceItems());
                     self.otherUseCases([]);
                     self.otherUseCases([{
                             useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
@@ -306,8 +286,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
                 }
             }
-            console.log(self.selectedUseCaseItems());
-            console.log(self.otherUseCases());
             
             self.isUseCaseSelected(self.selectedUseCaseItems().length > 0 || 
                 (self.otherUseCases().length > 0 && self.otherUseCases()[0].otherUserCaseCount > 0)); 
@@ -327,8 +305,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
             if (self.inQuestion() === 2) {
                 showPreloader();
-                console.log('selectedUseCaseItems - ' + JSON.stringify(self.selectedUseCaseItems()));
-                console.log('otherUseCases - ' + JSON.stringify(self.otherUseCases()));
 
                 var saveUserUseCasesSuccessCbFn = function (data, status) {
                     service.getUseCasesForUser().then(getUseCasesForUserSuccessCbFn, getUseCasesForUserFailCbFn);
@@ -370,8 +346,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     "userUseCases": allUseCasesSelected
                 };
                 service.saveUserUseCases(jsonData).then(saveUserUseCasesSuccessCbFn, saveUserUseCasesFailCbFn);
-
-                console.log('allUseCasesSelected - ' + JSON.stringify(allUseCasesSelected));
             }
 
             console.log(self.useCasesQuestions());
@@ -380,7 +354,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             self.useCasesQuestions([]);
             for (var index = 0; index < array.length; index++) {
                 if (index <= (self.inQuestion() - 1)) {
-                    console.log(index);
                     array[index].status = "completed";
                     array[index + 1].status = "notStarted";
                 }
@@ -389,16 +362,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             if (self.inQuestion() === 3) {         
                 showPreloader();
                 service.getUseCasesForUser().then(getUseCasesForUserSuccessCbFn, getUseCasesForUserFailCbFn);
-                console.log(self.haveImplementedUseCases());
-                console.log('making false to true of haveImplementedUseCases value');
                 self.haveImplementedUseCases(true);
                 self.goToStartUseCasesStep();
-                console.log(self.haveImplementedUseCases());
 //                service.getUseCaseDemoSubQuestions(self.inQuestion()).then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
             } else {
                 self.inQuestion(self.inQuestion() + 1);
             }
-            console.log(self.useCasesQuestions());
             if (self.hasSelectedOtherUseCase()) {
                 // Validations
                 var trackerObj = ko.utils.unwrapObservable(self.tracker);
@@ -437,14 +406,13 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
         self.moveToNextSubQuestion = function (data, event) {
             var id = event.currentTarget.id;
-            var useCases;
 
             // for matching with yes/no button id's
             var hasSelectedYes = id.startsWith("Y");
             id = id.substring(1);
             var foundAt;
             var array = self.useCasesSubQuestions();
-            self.useCasesSubQuestions([]);
+            self.useCasesSubQuestions(array);
 
             // to get the id of selected sub question
             for (var index = 0; index < array.length; index++) {
@@ -454,11 +422,18 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
 
             // for checking whether it's last sub question or not
-            if ((foundAt + 1) < array.length) {
+            var currentQuestion = self.useCasesSubQuestions()[id - 1];
+            var yesQId = currentQuestion.yesQId;
+            var noQId = currentQuestion.noQId;
+            
+            if (!(commonHelper.isNullOrEmpty(yesQId) && commonHelper.isNullOrEmpty(noQId))) {
                 array[foundAt].status = "completed";
                 array[foundAt + 1].status = "notStarted";
-                self.useCasesSubQuestions(array);
-                self.selectedSubQuestion(self.useCasesSubQuestions()[id]);
+                if (hasSelectedYes) {
+                    self.selectedSubQuestion(self.useCasesSubQuestions()[self.getIndex(self.useCasesSubQuestions(), yesQId)]);
+                } else {
+                    self.selectedSubQuestion(self.useCasesSubQuestions()[self.getIndex(self.useCasesSubQuestions(), noQId)]);
+                }
             } else {
                 array[foundAt].status = "completed";
                 self.useCasesSubQuestions(array);
@@ -469,39 +444,50 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 // To refresh the items in the JET component
                 $("#masonryUseCases").ojMasonryLayout("refresh");
             }
-
-            // to highlight the selected use cases for the matched sub questions
+            
+            var switchOffUseCases = [];
+            
             if (hasSelectedYes) {
-                useCases = array[foundAt].yesSwitchOffCases;
+                if (!commonHelper.isNullOrEmpty(array[foundAt].yesSwitchOffCases)) {
+                    switchOffUseCases = array[foundAt].yesSwitchOffCases.split(',');
+                }               
             } else {
-                useCases = array[foundAt].noSwitchOffCases;
-            }
-
-            self.switchOffUseCases([]);
-            if (!commonHelper.isNullOrEmpty(useCases)) {
-                useCases = useCases.split(",");
-                for (var idx = 0; idx < useCases.length; idx++) {
-                    self.switchOffUseCases.push(Number(useCases[idx]));
+                if (!commonHelper.isNullOrEmpty(array[foundAt].noSwitchOffCases)) {
+                    switchOffUseCases = array[foundAt].noSwitchOffCases.split(',');
                 }
-
-                console.log('Use Cases to be switched off: ' + self.switchOffUseCases());
-                for (var idx = 0; idx < self.allUseCases.length; idx++) {
-                    var searchStatus = $.inArray(self.allUseCases[idx].id, self.switchOffUseCases());
-                    if (searchStatus !== -1) {
-                        console.log(self.allUseCases[idx].id);
-                        self.tailoredUseCases.push(self.allUseCases[idx]);
+            }                
+                
+            for (var idx = 0; idx < self.allUseCases.length; idx++) {
+                if ($.inArray(self.allUseCases[idx].id.toString(), switchOffUseCases) !== -1) {
+                    if (self.isUseCaseExists(self.allUseCases[idx], self.tailoredUseCases())) {
                         $("#useCaseLayer" + self.allUseCases[idx].id).removeClass("oj-sm-hide");
                         $("#useCase" + self.allUseCases[idx].id).addClass("pointer-events-none");
-                    } else {
-                        console.log('not found');
+                        self.tailoredUseCases().splice(self.getIndex(self.tailoredUseCases(), self.allUseCases[idx].id), 1);
                     }
-                }
+                }                   
             }
         };
-
+        
+        self.getIndex = function(arr, id) {
+            for (var idx in arr) {
+                var useCase = arr[idx];
+                if (useCase.id === id) {
+                    return idx;
+                }
+            }
+            return null;
+        };
+        
+        self.isUseCaseExists = function (useCase, useCaseArr) {
+            for (var idx in useCaseArr) {
+                if (useCaseArr[idx].id === useCase.id) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        
         self.getDetails = function (data, event) {
-            console.log(data);
-            console.log(event);
             if (data.id) {
                 self.selectedUseCaseDetails(data);
                 self.areUseCaseDetailsFetched(true);
@@ -513,12 +499,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             oj.OffcanvasUtils.close(useCaseDrawerRight);
         };
 
-        self.finishTailoring = function () {
-            
+        self.finishTailoring = function () {            
             showPreloader();
-
-            console.log('Tailored use cases : ');
-            console.log(self.tailoredUseCases());
             
             var saveUserUseCasesSuccessCbFn = function (data, status) {
                 hidePreloader();
@@ -544,10 +526,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 }
             }
 
-            var jsonData = {
-                "userUseCases": tailoredUseCases
-            };
-            service.saveUserUseCases(jsonData).then(saveUserUseCasesSuccessCbFn, saveUserUseCasesFailCbFn);
+            if (tailoredUseCases.length > 0) {
+                var jsonData = {
+                    "userUseCases": tailoredUseCases
+                };
+                service.saveUserUseCases(jsonData).then(saveUserUseCasesSuccessCbFn, saveUserUseCasesFailCbFn);
+            } else {
+                hidePreloader();
+                router.go('dashboard/');
+            }
         };
         
         self.goToDashboard = function() {
