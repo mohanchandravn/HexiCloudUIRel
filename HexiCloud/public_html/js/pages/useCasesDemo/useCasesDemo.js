@@ -7,8 +7,9 @@
 /**
  * useCasesDemo module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'util/commonhelper', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojinputtext',
-    'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox'
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'util/commonhelper', 'ojs/ojknockout',
+    'ojs/ojmasonrylayout', 'ojs/ojinputtext', 'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox',
+    'components/techsupport/loader'
 ], function (oj, $, ko, service, errorHandler, commonHelper) {
     /**
      * The view model for the main content view template
@@ -516,7 +517,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.goToDashboard = function() {
             router.go('dashboard/');
         };
-
+        
+        self.onClickFeedback = function() {
+            if (selectedTemplate() === "") {
+                selectedTemplate('email_content');
+            }
+            $("#tech_support").slideToggle();
+        };
+        
         self.handleAttached = function () {
             showPreloader();
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);

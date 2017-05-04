@@ -149,7 +149,23 @@ and open the template in the editor.
     background-color: #F80000;
 }
 
-.use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-image, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .use-case-image, .use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases {
+.dashboard-use-cases {
+    max-width: 840px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .finish-btn-container {
+    height: 70px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .finish-btn {
+    height: 26px;
+    background-color: #F80000;
+    color: #FFF;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-image, .use-cases-body-content .oj-masonrylayout-tile-1x1 .finish-selection, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .use-case-image, .use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases {
     width: 200px;
     height: 110px;
 }
@@ -164,9 +180,13 @@ and open the template in the editor.
     background-size: 200px 110px;
 }
 
-.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
-    margin-top: -4px;
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover {
+    transform: scale(1.3, 1.3);
 }
 
 .dashboard-use-cases .oj-masonrylayout-tile-1x1 {
