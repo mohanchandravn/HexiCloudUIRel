@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div class="use-cases-demo-page oj-offcanvas-outer-wrapper">
-    <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px); padding-bottom: 50px;">
+    <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
         <div id="useCaseDrawerRight" class="use-case-details-wrapper">
             <div style="background: white; min-height: 100%;">
                 <div class="oj-sm-justify-content-flex-end oj-flex">
@@ -138,7 +138,7 @@ and open the template in the editor.
         <script type="text/html" id="useCaseItemsEditable">
             <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
             <!-- ko if: inQuestion() !== 2 -->
-            <div class="oj-lg-12 oj-flex-item" style="max-width: 650px; padding-top: 50px; margin-left: auto; margin-right: auto;">
+            <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; padding-top: 50px; margin-left: auto; margin-right: auto;">
                 <div class="oj-sm-justify-content-center oj-flex">
                     <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="click: moveToNextQuestion">Yes</span>
                     <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="click: inQuestion() === 1 ? goToStartUseCasesStep : moveToNextQuestion">No</span>
@@ -149,7 +149,7 @@ and open the template in the editor.
             <!-- /ko -->
             <!-- ko if: inQuestion() === 2 -->
             <div class="use-cases-body-content">
-                <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; margin-left: auto; margin-right: auto;">
+                <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; padding-bottom: 50px; margin-left: auto; margin-right: auto;">
                     <!-- ko if: isAllUseCasesLoaded() -->
                     <div data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                         <!-- ko foreach: allUseCases -->
@@ -213,30 +213,34 @@ and open the template in the editor.
                         <a class="c-pointer" data-bind="click: addOtherUseCase">add more</a>
                     </div>
                     <!-- /ko -->
-                    <div class="move-to-next-question-container oj-margin-lg-top oj-sm-justify-content-flex-end oj-flex">
-                        <div class="oj-flex-bar" data-bind="click: moveToNextQuestion" 
-                             style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
-                            <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
-                                Next
-                            </div>
-                            <div class="oj-flex-bar-end" style="padding-right: 12px;">
-                                <span>
-                                    <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
-                                </span>
+                    <div class="oj-flex">
+                        <div class="oj-sm-12 oj-flex-item">
+                            <div class="move-to-next-question-container oj-margin-lg-top oj-sm-justify-content-space-between oj-flex">
+                                <!-- Loading a template to Quit the quiz -->
+                                <div class="oj-sm-align-self-flex-end oj-flex-item" data-bind="template: 'quitQuiz'"></div>
+                                <div class="oj-flex-bar" data-bind="click: moveToNextQuestion" 
+                                     style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
+                                    <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
+                                        Next
+                                    </div>
+                                    <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                                        <span>
+                                            <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Loading a template to Quit the quiz -->
-            <div data-bind="template: 'quitQuiz'"></div>
             <!-- /ko -->
 
             </script>
             <script type="text/html" id="useCaseItemsNonEditable">
                 <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
                 <div class="use-cases-body-content">
-                    <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; margin-left: auto; margin-right: auto;">
+                    <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; padding-bottom: 50px; margin-left: auto; margin-right: auto;">
                         <!-- ko if: isUseCasesForUserLoaded() -->
                         <div id="masonryUseCases" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                             <!-- ko foreach: useCasesForUser -->
@@ -283,7 +287,6 @@ and open the template in the editor.
                             <!-- /ko -->
                         </div>
                         <!-- /ko -->
-
                         
                         <!-- Loading a template to Quit the quiz -->
                         <div data-bind="template: 'quitQuiz'"></div>

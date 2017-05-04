@@ -241,11 +241,7 @@ and open the template in the editor.
     line-height: 20px;
 }
 
-.move-to-next-question-container {
-    margin-bottom: 15px;
-}
-
-a.quit-quiz {
+.use-cases-demo-page a.quit-quiz {
     color: #B7B9B9;
     font-size: 12px;
     text-decoration: none;
