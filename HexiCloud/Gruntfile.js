@@ -13,15 +13,15 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks("grunt-oraclejet");
-//    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 //    grunt.loadNpmTasks('grunt-contrib-imagemin');
-//    grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadNpmTasks('grunt-processhtml');
 
     grunt.registerTask("build", "Public task. Calls oraclejet-build to build the oraclejet application. Can be customized with additional build tasks.", function (buildType) {
         grunt.task.run([`oraclejet-build:${buildType}`]);
-//        grunt.task.run([`cssmin`]);
+        grunt.task.run([`cssmin`]);
 //        grunt.task.run([`imagemin`]);
-//        grunt.task.run([`processhtml`]);
+        grunt.task.run([`processhtml`]);
         grunt.task.run([`war`]);
     });
 
