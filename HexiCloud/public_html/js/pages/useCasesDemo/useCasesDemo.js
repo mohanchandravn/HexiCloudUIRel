@@ -7,7 +7,7 @@
 /**
  * useCasesDemo module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'util/commonhelper', 'ojs/ojknockout',
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'util/commonhelper', 'ojs/ojknockout', 'ojs/ojoffcanvas',
     'ojs/ojmasonrylayout', 'ojs/ojinputtext', 'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox',, 'ojs/ojaccordion',
     'ojs/ojcollapsible', 'components/techsupport/loader'
 ], function (oj, $, ko, service, errorHandler, commonHelper) {
@@ -17,7 +17,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
     function useCasesDemoContentViewModel(params) {
         var self = this;
         var router = params.ojRouter.parentRouter;
-        var useCaseDrawerRight;//, navigationDrawerRight;
+        var useCaseDrawerRight;
 
         useCaseDrawerRight = {
             "selector": "#useCaseDrawerRight",
@@ -213,15 +213,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.removeOtherUseCase = function (data, event) {
-            console.log(data);
-            console.log(event);
+//            console.log(data);
+//            console.log(event);
             var id = event.currentTarget.id;
             id = id.slice(6);
             console.log(id);
-            self.otherUseCases.splice(id, id);
-            $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
-            $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
-            console.log(self.otherUseCases());
+//            self.otherUseCases.splice(id, id);
+//            $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
+//            $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
+//            console.log(self.otherUseCases());
         };
 
         self.checkIfUseCaseAdded = function (id) {
@@ -538,6 +538,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.selectedUseCaseDetails(data);
                 self.areUseCaseDetailsFetched(true);
                 oj.OffcanvasUtils.open(useCaseDrawerRight);
+                window.scrollTo(0, 0);
             }
         };
 

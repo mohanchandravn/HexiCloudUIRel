@@ -215,10 +215,10 @@ and open the template in the editor.
                                         </select>
                                     </div>
                                 </div>                                    
-                                <a class="btn-remove oj-flex-item" data-bind="text: 'Remove',
+                                <a class="anchor-remove oj-flex-item" data-bind="text: 'Remove',
                                                                               attr: {id: 'remove' + $index()},
                                                                               click: $parent.removeOtherUseCase,
-                                                                              css: {'disable-actions' : $parent.otherUserCaseCount() < 2}">
+                                                                              css: {'disable-actions' : $parent.otherUseCases().length < 2}">
                                 </a>
                                 <!-- /ko -->
                             </div>

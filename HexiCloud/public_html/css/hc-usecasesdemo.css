@@ -136,7 +136,7 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.use-cases-demo-page .use-case-details-wrapper .inverted-btn {
+.use-cases-demo-page .use-case-details-wrapper .inverted-btn, .dashboard-page .use-case-details-wrapper .inverted-btn {
     min-width: 100px;
     font-size: 12px;
     margin-right: 15px;
@@ -186,23 +186,24 @@ and open the template in the editor.
     background: #F80000;
 }
 
-.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
 
-.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover {
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover {
     transform: scale(1.3, 1.3);
 }
 
 .dashboard-use-cases .oj-masonrylayout-tile-1x1 {
     width: 200px;
-    height: 180px;
+    height: 165px;
 }
 
+/* change props of .blur-selected-tile when you have any changes in dimensions */
 .use-cases-body-content .oj-masonrylayout-tile-1x1 {
     width: 200px;
-    height: 180px;
+    height: 165px;
     margin: 25px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.15);
     transition: all 0.3s ease-in-out;
@@ -215,7 +216,7 @@ and open the template in the editor.
 .use-cases-body-content .blur-selected-tile {
     position: absolute;
     width: 200px;
-    height: 180px;
+    height: 165px;
     background-color: #000000;
     opacity: 0.6;
     z-index: 1;
@@ -239,7 +240,7 @@ and open the template in the editor.
     background: url("img/usecases/checkbox_selected_active.svg") no-repeat;
 }
 
-.use-case-details-wrapper {
+.use-cases-demo-page .use-case-details-wrapper, .dashboard-page .use-case-details-wrapper {
     min-width: 320px;
     width: 100%;
     max-width: 500px;
@@ -255,13 +256,13 @@ and open the template in the editor.
     height: 200px;
 }
 
-.use-cases-demo-page .use-case-details-wrapper .use-case-title {
+.use-cases-demo-page .use-case-details-wrapper .use-case-title, .dashboard-page .use-case-details-wrapper .use-case-title {
     font-size: 14px;
     font-weight: bold;
     color: #000000;
 }
 
-.use-cases-demo-page .use-case-details-wrapper .use-case-description {
+.use-cases-demo-page .use-case-details-wrapper .use-case-description, .dashboard-page .use-case-details-wrapper .use-case-description {
     font-size: 12px;
     color: #777;
     line-height: 20px;
@@ -274,10 +275,9 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.btn-remove {
+.anchor-remove {
     color: #f80000 !important;
     padding: 10px;
-    /*cursor: pointer !important;*/
 }
 
 .btn-add-another {
