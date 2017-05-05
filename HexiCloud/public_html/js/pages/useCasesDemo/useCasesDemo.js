@@ -9,7 +9,7 @@
  */
 define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'util/commonhelper', 'ojs/ojknockout', 'ojs/ojoffcanvas',
     'ojs/ojmasonrylayout', 'ojs/ojinputtext', 'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox',, 'ojs/ojaccordion',
-    'ojs/ojcollapsible', 'components/techsupport/loader'
+    'ojs/ojcollapsible', 'ojs/ojpopup', 'components/techsupport/loader'
 ], function (oj, $, ko, service, errorHandler, commonHelper) {
     /**
      * The view model for the main content view template
@@ -193,8 +193,21 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
 
         self.openInfoPopUp = function(data, event) {
-            console.log(data);
-            console.log(event);
+            var id = event.currentTarget.id;
+            id = id.substring(5);
+            if (Number(id) !== 10) {
+                $("#popup" + id).ojPopup('open', '#title' + id);
+            }
+        };
+
+        self.closeInfoPopupUp = function(data, event) {
+            var id = event.currentTarget.id;
+            id = id.substring(5);
+            if (Number(id) !== 10) {
+                setTimeout(function() {
+                    $("#popup" + id).ojPopup('close');
+                }, 250);
+            }
         };
 
         self.addOtherUseCase = function () {
@@ -607,6 +620,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             if (isCapturePhaseCompleted()) {      
                 self.goToStartUseCasesStep();
             }
+
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
             service.getAllUseCases().then(getAllUseCasesSuccessCbFn, getAllUseCasesFailCbFn);
             service.getAllServices().then(getAllServicesSuccessCbFn, getAllServicesFailCbFn);
