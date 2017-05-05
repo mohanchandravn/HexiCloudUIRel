@@ -381,7 +381,23 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             hidePreloader();
         };
 
-        self.goToStartUseCasesStep = function () {           
+        self.goToStartUseCasesStep = function () {             
+            if (!isCapturePhaseCompleted()) {
+                showPreloader();
+                
+                var markUCCaptureCompletionSuccessCbFn = function (data, status) {
+                    hidePreloader();
+                };
+
+                var markUCCaptureCompletionFailCbFn = function (xhr) {
+                    hidePreloader();
+                    console.log(xhr);
+                    errorHandler.showAppError("ERROR_GENERIC", xhr);
+                };
+
+                service.markUCCaptureCompletion().then(markUCCaptureCompletionSuccessCbFn, markUCCaptureCompletionFailCbFn);
+            }
+            
             var array = self.useCasesQuestions();
             self.useCasesQuestions([]);
             for (var index = 0; index < array.length; index++) {
