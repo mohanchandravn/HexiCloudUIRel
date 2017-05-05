@@ -36,6 +36,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
         self.showViewLessButton = ko.observable(false);
         
         self.tailoredUseCases = ko.observableArray([]);
+        self.isSelectionPhaseCompleted = ko.observable(false);
                 
         self.getClass = function (serverType) {
 //            if (serverType === 'COMPUTE') {
@@ -97,16 +98,23 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
         };
         
         var getTailoredUseCasesSuccessCbFn = function (data, status) {
-            if (data.useCases) {
+            if (data.capturePhaseCompleted) {
+                isCapturePhaseCompleted(true);
+            }
+            
+            if (data.selectionPhaseCompleted) {
+                self.isSelectionPhaseCompleted(true);
                 var useCases = data.useCases;
-                for (var idx = 0; idx < useCases.length; idx++) {
-                    if (useCases[idx].title.length > 35) {
-                        var trimTitle = useCases[idx].title.slice(0, 35);
-                        useCases[idx].trimmedTitle = trimTitle + "...";
+                if (useCases) {
+                    for (var idx = 0; idx < useCases.length; idx++) {
+                        if (useCases[idx].title.length > 35) {
+                            var trimTitle = useCases[idx].title.slice(0, 35);
+                            useCases[idx].trimmedTitle = trimTitle + "...";
+                        }
                     }
+                    self.tailoredUseCases(useCases);
+                    $("#masonryUseCases").ojMasonryLayout("refresh");
                 }
-                self.tailoredUseCases(useCases);
-                $("#masonryUseCases").ojMasonryLayout("refresh");
             }
             hidePreloader();
         };
@@ -193,9 +201,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
             // service.getServiceItems().then(populateUI, FailCallBackFn);
             service.getUserClmData(loggedInUser()).then(populateUI, FailCallBackFn);
             
-            if (isUseCaseSelectionDone()) {
-                service.getTailoredUseCases().then(getTailoredUseCasesSuccessCbFn, getTailoredUseCasesFailCbFn);
-            }
+            service.getTailoredUseCases().then(getTailoredUseCasesSuccessCbFn, getTailoredUseCasesFailCbFn);
         };
 
         self.handleTransitionCompleted = function () {
