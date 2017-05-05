@@ -213,15 +213,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.removeOtherUseCase = function (data, event) {
-//            console.log(data);
-//            console.log(event);
             var id = event.currentTarget.id;
-            id = id.slice(6);
-            console.log(id);
-//            self.otherUseCases.splice(id, id);
-//            $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
-//            $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
-//            console.log(self.otherUseCases());
+            id = id.replace('remove', '');      
+            self.otherUseCases().splice(id, 1);
+            $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
+            $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
         };
 
         self.checkIfUseCaseAdded = function (id) {

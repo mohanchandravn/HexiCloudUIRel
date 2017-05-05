@@ -278,6 +278,7 @@ and open the template in the editor.
 .anchor-remove {
     color: #f80000 !important;
     padding: 10px;
+    cursor: pointer;
 }
 
 .btn-add-another {
