@@ -58,6 +58,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                         "status": null
                     }]);
         self.useCasesSubQuestions = ko.observableArray([]);
+        self.useCasesSubQuestionsToDisplay = ko.observableArray([]);
+
         self.haveImplementedUseCases = ko.observable(false);
         self.inQuestion = ko.observable(1);
         self.isSubQuestionSelected = ko.observable(false);
@@ -262,8 +264,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 //                    self.selectedUseCaseItems.splice(foundAt, 1);
                 } else {
                     var benefitsSuccessCbFn = function (data, status) {
-                        console.log(data);
-                        console.log(status);
                         var benefits = data.benefits;
                         self.otherUseCaseBenefitsList([]);
                         for (var idx = 0; idx < benefits.length; idx++) {
@@ -282,7 +282,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     // service to get other Use Cases benefits list
                     service.getUseCaseBenefits().then(benefitsSuccessCbFn, benefitsFailCbFn);
                     
-                    console.log(self.otherUserCaseCount());
                     self.otherUserCaseCount(self.otherUserCaseCount() + 1);
                     self.otherUseCases([]);
                     self.otherUseCases([{
@@ -358,8 +357,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 };
                 service.saveUserUseCases(jsonData).then(saveUserUseCasesSuccessCbFn, saveUserUseCasesFailCbFn);
             }
-
-            console.log(self.useCasesQuestions());
 
             var array = self.useCasesQuestions();
             self.useCasesQuestions([]);
@@ -441,7 +438,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             id = id.substring(1);
             var foundAt;
             var array = self.useCasesSubQuestions();
-            self.useCasesSubQuestions(array);
+            self.useCasesSubQuestions([]);
 
             // to get the id of selected sub question
             for (var index = 0; index < array.length; index++) {
@@ -450,14 +447,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 }
             }
 
-            // for checking whether it's last sub question or not
-            var currentQuestion = self.useCasesSubQuestions()[id - 1];
+            var currentQuestion = array[id - 1];
             var yesQId = currentQuestion.yesQId;
             var noQId = currentQuestion.noQId;
             
             var goToCompletionScreen = function() {
                 array[foundAt].status = "completed";
-                self.useCasesSubQuestions(array);
                 self.selectedSubQuestion([]);
                 self.finalSubQuestionTitle('We have tailored these use cases that would fit perfectly with your provisioned services.');
                 self.finalSubQuestionSelected(true);
@@ -469,23 +464,23 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             if (array[foundAt]) {
                 array[foundAt].status = "completed";
             }
-            if (array[foundAt + 1]) {
-                array[foundAt].status = "notStarted";
-            }
 
             if (hasSelectedYes) {
                 if (commonHelper.isNullOrEmpty(yesQId)) {
                     goToCompletionScreen();
                 } else {
-                    self.selectedSubQuestion(self.useCasesSubQuestions()[self.getIndex(self.useCasesSubQuestions(), yesQId)]);
+                    self.selectedSubQuestion(array[self.getIndex(array, yesQId)]);
+                    array[self.getIndex(array, yesQId)].status = "notStarted";
                 }
             } else {
                 if (commonHelper.isNullOrEmpty(noQId)) {
                     goToCompletionScreen();
                 } else {
-                    self.selectedSubQuestion(self.useCasesSubQuestions()[self.getIndex(self.useCasesSubQuestions(), noQId)]);
+                    self.selectedSubQuestion(array[self.getIndex(array, noQId)]);
+                    array[self.getIndex(array, noQId)].status = "notStarted";
                 }
             }
+            self.useCasesSubQuestions(array);
             
             var switchOffUseCases = [];
             
