@@ -95,6 +95,7 @@ and open the template in the editor.
     background-color: #F80000;
     opacity: 0.6;
     color: #fff;
+    cursor: pointer;
 }
 
 .tech-support-container .phone-submit-btn.oj-button,

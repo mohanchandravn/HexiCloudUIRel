@@ -9,7 +9,8 @@ and open the template in the editor.
 */
 
 navigationbarleft {
-    background-color: #31353D;
+    background-color: #FFFFFF;
+    border-right: 2px solid #b0c6d1;
 }
 
 .chat-window {

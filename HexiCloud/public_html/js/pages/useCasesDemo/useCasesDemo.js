@@ -267,6 +267,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     var benefitsFailCbFn = function (xhr) {
                         hidePreloader();
                         console.log(xhr);
+                        errorHandler.showAppError("ERROR_GENERIC", xhr);
                     };
                     
                     showPreloader();
@@ -446,15 +447,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             var yesQId = currentQuestion.yesQId;
             var noQId = currentQuestion.noQId;
             
-            if (!(commonHelper.isNullOrEmpty(yesQId) && commonHelper.isNullOrEmpty(noQId))) {
-                array[foundAt].status = "completed";
-                array[foundAt + 1].status = "notStarted";
-                if (hasSelectedYes) {
-                    self.selectedSubQuestion(self.useCasesSubQuestions()[self.getIndex(self.useCasesSubQuestions(), yesQId)]);
-                } else {
-                    self.selectedSubQuestion(self.useCasesSubQuestions()[self.getIndex(self.useCasesSubQuestions(), noQId)]);
-                }
-            } else {
+            var goToCompletionScreen = function() {
                 array[foundAt].status = "completed";
                 self.useCasesSubQuestions(array);
                 self.selectedSubQuestion([]);
@@ -463,6 +456,27 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 
                 // To refresh the items in the JET component
                 $("#masonryUseCases").ojMasonryLayout("refresh");
+            }
+            
+            if (array[foundAt]) {
+                array[foundAt].status = "completed";
+            }
+            if (array[foundAt + 1]) {
+                array[foundAt].status = "notStarted";
+            }
+
+            if (hasSelectedYes) {
+                if (commonHelper.isNullOrEmpty(yesQId)) {
+                    goToCompletionScreen();
+                } else {
+                    self.selectedSubQuestion(self.useCasesSubQuestions()[self.getIndex(self.useCasesSubQuestions(), yesQId)]);
+                }
+            } else {
+                if (commonHelper.isNullOrEmpty(noQId)) {
+                    goToCompletionScreen();
+                } else {
+                    self.selectedSubQuestion(self.useCasesSubQuestions()[self.getIndex(self.useCasesSubQuestions(), noQId)]);
+                }
             }
             
             var switchOffUseCases = [];
