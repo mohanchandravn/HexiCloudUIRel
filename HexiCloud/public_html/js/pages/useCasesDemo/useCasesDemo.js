@@ -58,7 +58,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                         "status": null
                     }]);
         self.useCasesSubQuestions = ko.observableArray([]);
-        self.useCasesSubQuestionsToDisplay = ko.observableArray([]);
 
         self.haveImplementedUseCases = ko.observable(false);
         self.inQuestion = ko.observable(1);
