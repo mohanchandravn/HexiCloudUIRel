@@ -14,10 +14,9 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
      * The view model for the main content view template
      */
     function dashboardContentViewModel(params) {
+        
         var self = this;
         var router = params.ojRouter.parentRouter;
-
-        console.log('dashboard page');
 
         self.serviceItems = ko.observableArray([]);
         self.minimalServiceItems = ko.observableArray([]);
@@ -36,6 +35,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
         self.showViewLessButton = ko.observable(false);
         
         self.tailoredUseCases = ko.observableArray([]);
+        self.isSelectionPhaseCompleted = ko.observable(false);
                 
         self.getClass = function (serverType) {
 //            if (serverType === 'COMPUTE') {
@@ -67,8 +67,6 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
         };
 
         function populateUI(data, status) {
-            console.log(data);
-            console.log(status);
             var array = [];
             var length = 0;
             self.allServiceItems(data);
@@ -84,7 +82,6 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
                         self.showControlsButton(true);
                         self.showViewAllButton(true);
                     }
-                    console.log('idx: ' +idx);
                 });
                 self.detailsContentMaxHeight(length);
                 self.minimalServiceItems(array);
@@ -97,16 +94,23 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
         };
         
         var getTailoredUseCasesSuccessCbFn = function (data, status) {
-            if (data.useCases) {
+            if (data.capturePhaseCompleted) {
+                isCapturePhaseCompleted(true);
+            }
+                
+            if (data.selectionPhaseCompleted) {
+                self.isSelectionPhaseCompleted(true);
                 var useCases = data.useCases;
-                for (var idx = 0; idx < useCases.length; idx++) {
-                    if (useCases[idx].title.length > 35) {
-                        var trimTitle = useCases[idx].title.slice(0, 35);
-                        useCases[idx].trimmedTitle = trimTitle + "...";
+                if (useCases) {
+                    for (var idx = 0; idx < useCases.length; idx++) {
+                        if (useCases[idx].title.length > 35) {
+                            var trimTitle = useCases[idx].title.slice(0, 35);
+                            useCases[idx].trimmedTitle = trimTitle + "...";
+                        }
                     }
+                    self.tailoredUseCases(useCases);
+                    $("#masonryUseCases").ojMasonryLayout("refresh");
                 }
-                self.tailoredUseCases(useCases);
-                $("#masonryUseCases").ojMasonryLayout("refresh");
             }
             hidePreloader();
         };
@@ -118,14 +122,12 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
         };
         
         self.openMinimalServices = function(data, event) {
-            console.log('opening all service items..');
             self.serviceItems(self.minimalServiceItems());
             self.showViewLessButton(false);
             self.showViewAllButton(true);
         };
         
         self.openAllServices = function(data, event) {
-            console.log('opening all service items..');
             self.serviceItems(self.allServiceItems());
             self.showViewAllButton(false);
             self.showViewLessButton(true);
@@ -133,14 +135,10 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
 
         self.openServiceDetail = function (data, event) {
             showPreloader();
-            console.log(data);
-            console.log(event);
             var serviceClicked = data.service;
             var serverType = data.service.toLowerCase();
-            console.log(serverType);
 
             var successCbFn = function (data, status) {
-                console.log(data);
                 self.selectedServiceItem(serviceClicked);
                 if (status !== 'nocontent') {
                     self.hasServiceBenefits(true);
@@ -149,12 +147,6 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
                     self.benefitsTitle(data.Service.Benefits.title);
                     self.pdfSrc(data.Service.FeaturesLink);
                     self.selectedItemBenefitsArray(data.Service.Benefits.benefitsList);
-                    console.log(self.selectedItemTitle());
-                    console.log(self.selectedItemSubTitle());
-                    console.log(self.benefitsTitle());
-                    console.log(self.pdfSrc());
-                    console.log(self.selectedItemBenefitsArray());
-                    
                     
                 } else {
                     self.selectedItemTitle('Coming Soon');
@@ -193,9 +185,7 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
             // service.getServiceItems().then(populateUI, FailCallBackFn);
             service.getUserClmData(loggedInUser()).then(populateUI, FailCallBackFn);
             
-            if (isUseCaseSelectionDone()) {
-                service.getTailoredUseCases().then(getTailoredUseCasesSuccessCbFn, getTailoredUseCasesFailCbFn);
-            }
+            service.getTailoredUseCases().then(getTailoredUseCasesSuccessCbFn, getTailoredUseCasesFailCbFn);
         };
 
         self.handleTransitionCompleted = function () {

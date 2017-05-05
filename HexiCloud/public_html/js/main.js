@@ -185,10 +185,10 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.isContactSelected = ko.observable(false);
                 self.currentSelectedCss = "selectedList";
 
-                self.isUseCaseSelectionDone = ko.observable(false);
-
                 self.slideInEffect = ko.observable('slideIn');
                 self.slideOutEffect = ko.observable('slideOut');
+                
+                self.isCapturePhaseCompleted = ko.observable(false);
 
                 self.showHeaderNav = ko.computed(function () {
                     var id = router.currentState().id;

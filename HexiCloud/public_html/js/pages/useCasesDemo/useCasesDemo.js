@@ -111,6 +111,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.tailoredUseCases(useCases)
              }
             self.isUseCasesForUserLoaded(true);
+            
             hidePreloader();
         };
 
@@ -161,6 +162,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
             self.isSubQuestionSelected(true);
             self.selectedSubQuestion(self.useCasesSubQuestions()[0]);
+            hidePreloader();
         };
 
         var getDecisionTreeFailCbFn = function (xhr) {
@@ -391,7 +393,23 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             hidePreloader();
         };
 
-        self.goToStartUseCasesStep = function () {           
+        self.goToStartUseCasesStep = function () {             
+            if (!isCapturePhaseCompleted()) {
+                showPreloader();
+                
+                var markUCCaptureCompletionSuccessCbFn = function (data, status) {
+                    hidePreloader();
+                };
+
+                var markUCCaptureCompletionFailCbFn = function (xhr) {
+                    hidePreloader();
+                    console.log(xhr);
+                    errorHandler.showAppError("ERROR_GENERIC", xhr);
+                };
+
+                service.markUCCaptureCompletion().then(markUCCaptureCompletionSuccessCbFn, markUCCaptureCompletionFailCbFn);
+            }
+            
             var array = self.useCasesQuestions();
             self.useCasesQuestions([]);
             for (var index = 0; index < array.length; index++) {
@@ -405,13 +423,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             self.haveImplementedUseCases(true);
         };
 
-        self.startTheUseCaseSelection = function (data, event) {
+        self.startTheUseCaseSelection = function (data, event) {            
             for (var idx = 0; idx < self.useCasesQuestions().length; idx++) {
                 if (self.useCasesQuestions()[idx].status === 'notStarted') {
                     self.inQuestion(idx + 1);
                 }
             }
+
             if (self.inQuestion() === 4) {
+                showPreloader();
                 service.getDecisionTree().then(getDecisionTreeSuccessCbFn, getDecisionTreeFailCbFn);
             }
         };
@@ -516,7 +536,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             
             var saveUserUseCasesSuccessCbFn = function (data, status) {
                 hidePreloader();
-                isUseCaseSelectionDone(true);
                 router.go('dashboard/');
             };
 
@@ -570,7 +589,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.handleAttached = function () {
-            showPreloader();
+            showPreloader();       
+            if (isCapturePhaseCompleted()) {      
+                self.goToStartUseCasesStep();
+            }
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
             service.getAllUseCases().then(getAllUseCasesSuccessCbFn, getAllUseCasesFailCbFn);
             service.getAllServices().then(getAllServicesSuccessCbFn, getAllServicesFailCbFn);
