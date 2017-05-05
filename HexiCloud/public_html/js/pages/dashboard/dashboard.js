@@ -192,7 +192,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
                 self.selectedUseCaseDetails(data);
                 self.areUseCaseDetailsFetched(true);
                 oj.OffcanvasUtils.open(useCaseDrawerRight);
-//                window.scrollTo(0, 0);
+                $(window).scrollTop(0);
             }
         };
 

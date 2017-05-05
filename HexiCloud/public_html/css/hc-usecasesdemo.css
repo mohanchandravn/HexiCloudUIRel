@@ -123,7 +123,7 @@ and open the template in the editor.
     opacity: 0.4;
 }
 
-.use-cases-demo-page .inverted-btn {
+.use-cases-demo-page .inverted-btn, .dashboard-page .inverted-btn {
     min-width: 120px;
     color: #F80000;
     font-size: 14px;
@@ -151,6 +151,7 @@ and open the template in the editor.
 
 .dashboard-use-cases {
     max-width: 840px;
+    padding-bottom: 50px;
 }
 
 .use-cases-body-content .oj-masonrylayout-tile-1x1 .finish-btn-container {
