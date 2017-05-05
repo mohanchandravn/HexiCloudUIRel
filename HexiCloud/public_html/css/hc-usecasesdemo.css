@@ -274,13 +274,19 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.btn-add-another {
-    background: none !important;
-    border: none;
+.btn-remove {
     color: #f80000 !important;
-    cursor: pointer !important;
+    padding: 10px;
+    /*cursor: pointer !important;*/
+}
+
+.btn-add-another {
     width: 104px;
     height: 15px;
+    color: #f80000 !important;
+    border: none;
+    background: none !important;
+    cursor: pointer !important;
 }
 
 button.btn-add-another:hover {
