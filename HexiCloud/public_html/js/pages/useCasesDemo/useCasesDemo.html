@@ -225,7 +225,7 @@ and open the template in the editor.
                                 <a class="anchor-remove oj-flex-item" data-bind="text: 'Remove',
                                                                               attr: {id: 'remove' + $index()},
                                                                               click: $parent.removeOtherUseCase,
-                                                                              css: {'disable-actions' : $parent.otherUseCases().length < 2}">
+                                                                              css: {'oj-sm-hide' : $parent.otherUseCases().length < 2}">
                                 </a>
                                 <!-- /ko -->
                             </div>

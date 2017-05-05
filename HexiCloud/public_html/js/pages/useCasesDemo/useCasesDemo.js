@@ -228,8 +228,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         
         self.removeOtherUseCase = function (data, event) {
             var id = event.currentTarget.id;
-            id = id.replace('remove', '');      
-            self.otherUseCases().splice(id, 1);
+            id = id.replace('remove', '');  
+            var otherUseCases = self.otherUseCases();
+            otherUseCases.splice(id, 1);
+            self.otherUseCases(otherUseCases);
             $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
             $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
         };
