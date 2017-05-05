@@ -292,7 +292,3 @@ and open the template in the editor.
 button.btn-add-another:hover {
     text-decoration: underline;
 }
-
-span.oj-collapsible-header::after {
-    content: "\e608";
-}

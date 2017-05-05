@@ -591,8 +591,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.benefitOptionChange = function (event, data) {
-//            self.isBenefitSelected(typeof data.value[0] === 'string' || (data.value.length === 0 && typeof data.previousValue === 'object'));
-            self.isBenefitSelected(data.option === 'value');
+            self.isBenefitSelected(typeof data.value[0] === 'number' || (data.value.length === 0 && typeof data.previousValue === 'object'));
         };
 
         self.onClickFeedback = function() {
