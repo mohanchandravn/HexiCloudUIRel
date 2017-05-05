@@ -117,7 +117,7 @@ and open the template in the editor.
 /*All the styles for provisioned Services goes here*/
 
 .provisioned-services {
-    margin-top: 10px;
+    padding-top: 10px;
 }
 
 .provisioned-services .content.stage {
