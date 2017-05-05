@@ -106,7 +106,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
         
         var getTailoredUseCasesSuccessCbFn = function (data, status) {
             if (data.capturePhaseCompleted) {
-//                isCapturePhaseCompleted(true);
+                isCapturePhaseCompleted(true);
             }
                 
             if (data.selectionPhaseCompleted) {
