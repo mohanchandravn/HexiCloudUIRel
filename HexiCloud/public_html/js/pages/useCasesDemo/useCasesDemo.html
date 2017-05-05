@@ -170,57 +170,57 @@ and open the template in the editor.
                     <!-- /ko -->
                     <!-- ko if: hasSelectedOtherUseCase() -->
                     <div class="oj-sm-justify-content-center oj-flex" style="background: #FFFFFF; padding: 30px 0px;">
-                        <div class="oj-lg-6 oj-flex-item">
-                            <div class="oj-flex">
-                                <div id="otherUseCasesAccordion" style="width: 100%;" data-bind="ojComponent: {
-                                                                        component: 'ojAccordion'}">
-                                    <!-- ko foreach: otherUseCases -->
-                                    <div data-bind="attr: { id: 'collapsible' + ($index() + 1) }">
-                                        <span data-bind="text: 'Other Use Case ' + ($index() + 1)"></span>
-                                        <div>
-                                            <span class="oj-margin-lg-top oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Use Case Summary</span>
-                                            <textarea rows="6" style="resize: none; padding: 10px; font-size: 12px; color: #CCC; border-radius: 15px; margin-bottom: 10px;" 
-                                                      data-bind="ojComponent: {
-                                                                                                        component: 'ojTextArea', 
-                                                                                                        value: useCaseSummary,
-                                                                                                        rootAttributes: {style:'max-width:100%'},
-                                                                                                        translations: {'required': {
-                                                                                                                messageDetail: 'Please select the role'}}}">
-                                            </textarea>
-                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Services Used</span>
-                                            <div data-bind="ojComponent: {
-                                                                            component: 'ojCheckboxset',
-                                                                            invalidComponentTracker: $parent.tracker,
-                                                                            required: true,
-                                                                            optionChange: $parent.serviceOptionChange,
-                                                                            value: useCaseServicesUsed,
-                                                                            translations: {'required': {
-                                                                                    messageDetail: 'Please select atleast one service'}}}" 
-                                                 class="oj-choice-direction-row">
-                                                <!-- ko foreach: $parent.otherUseCaseServiceItems -->
-                                                <span class="oj-choice-item">
-                                                    <input type="checkbox" data-bind="attr: {id: serviceId + '_' + $parent.otherUserCaseCount, value: serviceId}">
-                                                    <label data-bind="attr: {for: serviceId + '_' + $parent.otherUserCaseCount}, text: label"></label>
-                                                </span>
-                                                <!-- /ko -->
-                                            </div>
-                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Benefits</span>
-                                            <select data-bind="ojComponent: {component: 'ojSelect',
-                                                                        options: $parent.otherUseCaseBenefitsList,
-                                                                        value: useCaseBenefits,
-                                                                        placeholder: 'Select benefit(s)',
-                                                                        multiple: true,
-                                                                        required: true, 
+                        <div class="oj-lg-10 oj-flex-item">
+                            <div id="otherUseCasesAccordion" class="oj-flex" data-bind="ojComponent: {component: 'ojAccordion'}">
+                                <!-- ko foreach: otherUseCases -->
+                                <div class="oj-lg-9 oj-flex-item" data-bind="attr: { id: 'collapsible' + ($index() + 1) }">
+                                    <span data-bind="text: 'Other Use Case ' + ($index() + 1)"></span>
+                                    <div>
+                                        <span class="oj-margin-lg-top oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Use Case Summary</span>
+                                        <textarea rows="6" style="resize: none; padding: 10px; font-size: 12px; color: #CCC; border-radius: 15px; margin-bottom: 10px;" 
+                                                  data-bind="ojComponent: {
+                                                                                                    component: 'ojTextArea', 
+                                                                                                    value: useCaseSummary,
+                                                                                                    rootAttributes: {style:'max-width:100%'}}">
+                                        </textarea>
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Services Used</span>
+                                        <div data-bind="ojComponent: {
+                                                                        component: 'ojCheckboxset',
                                                                         invalidComponentTracker: $parent.tracker,
-                                                                        optionChange: $parent.benefitOptionChange,
-                                                                        rootAttributes: {style:'max-width:20em'},
+                                                                        required: true,
+                                                                        optionChange: $parent.serviceOptionChange,
+                                                                        value: useCaseServicesUsed,
                                                                         translations: {'required': {
-                                                                                    messageDetail: 'Please select atleast one benefit'}}}">
-                                            </select>
+                                                                                messageDetail: 'Please select atleast one service'}}}" 
+                                             class="oj-choice-direction-row">
+                                            <!-- ko foreach: $parent.otherUseCaseServiceItems -->
+                                            <span class="oj-choice-item">
+                                                <input type="checkbox" data-bind="attr: {id: serviceId + '_' + $parent.otherUserCaseCount, value: serviceId}">
+                                                <label data-bind="attr: {for: serviceId + '_' + $parent.otherUserCaseCount}, text: label"></label>
+                                            </span>
+                                            <!-- /ko -->
                                         </div>
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Benefits</span>
+                                        <select data-bind="ojComponent: {component: 'ojSelect',
+                                                                    options: $parent.otherUseCaseBenefitsList,
+                                                                    value: useCaseBenefits,
+                                                                    placeholder: 'Select benefit(s)',
+                                                                    multiple: true,
+                                                                    required: true, 
+                                                                    invalidComponentTracker: $parent.tracker,
+                                                                    optionChange: $parent.benefitOptionChange,
+                                                                    rootAttributes: {style:'max-width:20em'},
+                                                                    translations: {'required': {
+                                                                                messageDetail: 'Please select atleast one benefit'}}}">
+                                        </select>
                                     </div>
-                                    <!-- /ko -->
-                                </div>
+                                </div>                                    
+                                <a class="btn-remove oj-flex-item" data-bind="text: 'Remove',
+                                                                              attr: {id: 'remove' + $index()},
+                                                                              click: $parent.removeOtherUseCase,
+                                                                              css: {'disable-actions' : $parent.otherUserCaseCount() < 2}">
+                                </a>
+                                <!-- /ko -->
                             </div>
                         </div>
                     </div>
@@ -271,9 +271,6 @@ and open the template in the editor.
                                     <div class="oj-sm-align-self-center oj-flex-bar-end">
                                         <img class="bread-crumbs-icon" data-bind="click: $parent.getDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
                                     </div>
-                                </div>
-                                <div class="oj-margin-start oj-flex">
-                                    <span class="oj-sm-12 oj-flex-item" style="font-size: 10px;" data-bind="text: shortDesc"></span>
                                 </div>
                             </div>
                             <!-- /ko -->

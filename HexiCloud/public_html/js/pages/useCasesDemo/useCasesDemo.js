@@ -204,12 +204,24 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 //        self.otherUseCaseBenefits = ko.observableArray(["   "]);
             self.otherUseCases.push({
                 useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
-                useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
+                useCaseServicesUsed: [],
                 useCaseBenefits: '',
                 otherUserCaseCount: self.otherUserCaseCount()
             });
             $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
             $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
+        };
+        
+        self.removeOtherUseCase = function (data, event) {
+            console.log(data);
+            console.log(event);
+            var id = event.currentTarget.id;
+            id = id.slice(6);
+            console.log(id);
+            self.otherUseCases.splice(id, id);
+            $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
+            $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
+            console.log(self.otherUseCases());
         };
 
         self.checkIfUseCaseAdded = function (id) {
@@ -279,7 +291,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     self.otherUseCases([]);
                     self.otherUseCases([{
                             useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
-                            useCaseServicesUsed: [self.otherUseCaseServiceItems()[0].label],
+                            useCaseServicesUsed: [],
                             useCaseBenefits: '',
                             otherUserCaseCount: self.otherUserCaseCount()
                         }]);
@@ -579,7 +591,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.benefitOptionChange = function (event, data) {
-            self.isBenefitSelected(typeof data.value[0] === 'string' || (data.value.length === 0 && typeof data.previousValue === 'object'));
+//            self.isBenefitSelected(typeof data.value[0] === 'string' || (data.value.length === 0 && typeof data.previousValue === 'object'));
+            self.isBenefitSelected(data.option === 'value');
         };
 
         self.onClickFeedback = function() {
