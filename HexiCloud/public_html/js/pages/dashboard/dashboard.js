@@ -7,9 +7,9 @@
 /**
  * dashboard module
  */
-define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'util/errorhandler', 'ojs/ojcore', 'ojs/ojknockout',  'ojs/ojprogressbar',
-    'ojs/ojfilmstrip', 'components/techsupport/loader', 'ojs/ojmasonrylayout'
-], function ($, ko, service, sessionInfo, errorHandler) {
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'util/errorhandler', 'ojs/ojknockout',  'ojs/ojprogressbar',
+    'ojs/ojfilmstrip', 'components/techsupport/loader', 'ojs/ojmasonrylayout', 'ojs/ojoffcanvas'
+], function (oj, $, ko, service, sessionInfo, errorHandler) {
     /**
      * The view model for the main content view template
      */
@@ -17,7 +17,16 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
         
         var self = this;
         var router = params.ojRouter.parentRouter;
+        var useCaseDrawerRight;
 
+        useCaseDrawerRight = {
+            "selector": "#useCaseDrawerRight",
+            "edge": "end",
+            "displayMode": "overlay",
+            "autoDismiss": "none",
+            "modality": "modal"
+        };
+        
         self.serviceItems = ko.observableArray([]);
         self.minimalServiceItems = ko.observableArray([]);
         self.allServiceItems = ko.observableArray([]);
@@ -34,6 +43,8 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
         self.showViewAllButton = ko.observable(false);
         self.showViewLessButton = ko.observable(false);
         
+        self.areUseCaseDetailsFetched = ko.observable(false);
+        self.selectedUseCaseDetails = ko.observableArray([]);
         self.tailoredUseCases = ko.observableArray([]);
         self.isSelectionPhaseCompleted = ko.observable(false);
                 
@@ -175,11 +186,24 @@ define(['jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'uti
             }
             $("#tech_support").slideToggle();
         };
+        
+        self.getDetails = function (data, event) {
+            if (data.id) {
+                self.selectedUseCaseDetails(data);
+                self.areUseCaseDetailsFetched(true);
+                oj.OffcanvasUtils.open(useCaseDrawerRight);
+//                window.scrollTo(0, 0);
+            }
+        };
 
+        self.closeIt = function () {
+            oj.OffcanvasUtils.close(useCaseDrawerRight);
+        };
 
         self.handleAttached = function () {
             showPreloader();
             
+            oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
             sessionInfo.setToSession(sessionInfo.isOnboardingComplete, true);
             
             // service.getServiceItems().then(populateUI, FailCallBackFn);
