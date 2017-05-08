@@ -234,6 +234,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             self.otherUseCases(otherUseCases);
             $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
             $( "#otherUseCasesAccordion" ).ojAccordion( "option", "expanded", ["collapsible" + self.otherUseCases().length] );
+
+            // To add missing collapsible icon on remove action
+            $("#otherUseCasesAccordion span.oj-collapsible-header").each(function(index, elem){
+                var collapsibleIcon = '<a href="#" class="oj-component-icon oj-clickable-icon-nocontext oj-collapsible-header-icon oj-collapsible-open-icon" aria-labelledby="oj-collapsible-collapsible1-header" role="button" aria-controls="oj-collapsible-collapsible1-content" aria-expanded="true"></a>';
+                $(this).html(collapsibleIcon + $(this).text());                
+            });
         };
 
         self.checkIfUseCaseAdded = function (id) {

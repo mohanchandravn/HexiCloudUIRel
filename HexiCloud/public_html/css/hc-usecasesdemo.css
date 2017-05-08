@@ -283,6 +283,7 @@ and open the template in the editor.
     color: #f80000 !important;
     padding: 10px;
     cursor: pointer;
+    height: 15px;
 }
 
 .btn-add-another {
