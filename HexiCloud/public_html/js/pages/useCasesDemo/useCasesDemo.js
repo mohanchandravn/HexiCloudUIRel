@@ -229,6 +229,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.removeOtherUseCase = function (data, event) {
             var id = event.currentTarget.id;
             id = id.replace('remove', '');  
+            
+            // Enable add another button if use case removed has no services or benifits selected
+            if (data.useCaseServicesUsed.length == 0) {
+                self.isServiceSelected(true);
+            }
+            if (commonHelper.isNullOrEmpty(data.useCaseBenefits)) {
+                self.isBenefitSelected(true);
+            }
+            
             var otherUseCases = self.otherUseCases();
             otherUseCases.splice(id, 1);
             self.otherUseCases(otherUseCases);
