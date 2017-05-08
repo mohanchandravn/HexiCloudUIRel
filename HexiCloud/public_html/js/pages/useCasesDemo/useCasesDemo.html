@@ -152,8 +152,8 @@ and open the template in the editor.
             <!-- ko if: inQuestion() !== 2 -->
             <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; padding-top: 50px; margin-left: auto; margin-right: auto;">
                 <div class="oj-sm-justify-content-center oj-flex">
-                    <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="click: moveToNextQuestion">Yes</span>
-                    <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="click: inQuestion() === 1 ? goToStartUseCasesStep : moveToNextQuestion">No</span>
+                    <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="attr: {id: 'Y'}, click: moveToNextQuestion">Yes</span>
+                    <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="attr: {id: 'N'},click: inQuestion() === 1 ? goToStartUseCasesStep : moveToNextQuestion">No</span>
                 </div>
                 <!-- Loading a template to Quit the quiz -->
                 <div style="margin-top: 50px;" data-bind="template: 'quitQuiz'"></div>

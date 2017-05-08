@@ -607,6 +607,23 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 }
             });
         };
+        
+        self.notifyUCSelectionIgnored = function () {
+            var serverURL = self.portalRestHost() + "/services/rest/notifyUCSelectionIgnored";
+            $.ajax({
+                type: "GET",
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                success: function (data, textStatus, xhr) {
+                    console.log('Successfully posted data at: ' + serverURL);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error posting data to the service : " + serverURL);
+                }
+            });
+        };
     }
     ;
 
