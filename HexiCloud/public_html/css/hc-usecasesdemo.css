@@ -298,3 +298,7 @@ and open the template in the editor.
 button.btn-add-another:hover {
     text-decoration: underline;
 }
+
+.other-benefit-label {
+    margin-top: 7px;
+}
