@@ -35,12 +35,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.isUseCaseSelected = ko.observable(false);
         self.isServiceSelected = ko.observable(false);
         self.isBenefitSelected = ko.observable(false);
+        self.isOtherBenefitSelected = ko.observable(false);
+        self.otherBenefit = ko.observable('');
 
         self.selectedUseCaseItems = ko.observableArray([]);
         self.hasSelectedOtherUseCase = ko.observable(false);
         self.otherUseCaseServiceItems = ko.observableArray([]);
         self.otherUseCaseBenefitsList = ko.observableArray([]);
-        self.otherUseCases = ko.observableArray([]);
+        self.otherUseCases = ko.observableArray([]);        
+        self.otherUserCaseCount = ko.observable(0);
         self.useCasesQuestions = ko.observableArray(
                 [{
                         "status": "notStarted"
@@ -68,8 +71,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.areUseCaseDetailsFetched = ko.observable(false);
         self.selectedUseCaseDetails = ko.observableArray([]);
         self.tailoredUseCases = ko.observableArray([]);
-
-        self.otherUserCaseCount = ko.observable(0);
 
         self.allUseCases = [];
         self.useCasesForUser = [];
@@ -621,8 +622,22 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             self.isServiceSelected(data.value.length > 0);
         };
         
-        self.benefitOptionChange = function (event, data) {
+        self.benefitsOptionChange = function (event, data) {
             self.isBenefitSelected(typeof data.value[0] === 'number' || (data.value.length === 0 && typeof data.previousValue === 'object'));
+            
+            // Other benefit
+            for (var idx in data.value) {
+                if (data.value[idx] === 8) {
+                    self.isOtherBenefitSelected(true);
+                    break;
+                } else {
+                    self.isOtherBenefitSelected(false);
+                }
+            }
+            
+            if (!self.isOtherBenefitSelected()) {
+                self.otherBenefit('');
+            }
         };
 
         self.onClickFeedback = function() {

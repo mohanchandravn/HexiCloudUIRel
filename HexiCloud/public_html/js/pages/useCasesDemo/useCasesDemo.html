@@ -221,18 +221,29 @@ and open the template in the editor.
                                             <!-- /ko -->
                                         </div>
                                         <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Benefits</span>
-                                        <select data-bind="ojComponent: {component: 'ojSelect',
-                                                                    options: $parent.otherUseCaseBenefitsList,
-                                                                    value: useCaseBenefits,
-                                                                    placeholder: 'Select benefit(s)',
-                                                                    multiple: true,
-                                                                    required: true, 
-                                                                    invalidComponentTracker: $parent.tracker,
-                                                                    optionChange: $parent.benefitOptionChange,
-                                                                    rootAttributes: {style:'max-width:20em'},
-                                                                    translations: {'required': {
-                                                                                messageDetail: 'Please select atleast one benefit'}}}">
-                                        </select>
+                                        <div class="oj-sm-12 oj-flex-item">
+                                            <select data-bind="ojComponent: {component: 'ojSelect',
+                                                                        options: $parent.otherUseCaseBenefitsList,
+                                                                        value: useCaseBenefits,
+                                                                        placeholder: 'Select benefit(s)',
+                                                                        multiple: true,
+                                                                        required: true, 
+                                                                        invalidComponentTracker: $parent.tracker,
+                                                                        optionChange: $parent.benefitsOptionChange,
+                                                                        rootAttributes: {style:'max-width:20em; margin-top:5px;'},
+                                                                        translations: {'required': {
+                                                                                    messageDetail: 'Please select atleast one benefit'}}}">
+                                            </select>
+                                            <!-- ko if: $parent.isOtherBenefitSelected() -->
+                                            <label id="otherBenefitLabel" for="otherBenefit" class="other-benefit-label">Others: </label>
+                                            <input id="otherBenefit" type="text" maxlength="50" data-bind="ojComponent: {component: 'ojInputText', 
+                                                                                                                    placeholder: 'Enter other benefit', 
+                                                                                                                    value: $parent.otherBenefit,
+                                                                                                                    invalidComponentTracker: $parent.tracker,
+                                                                                                                    required: true,
+                                                                                                                    rootAttributes: {style:'max-width: 63%; margin-top: 5px;'}} "/>
+                                            <!-- /ko -->
+                                        </div>
                                     </div>
                                 </div>                                    
                                 <a class="anchor-remove" data-bind="text: 'Remove',
