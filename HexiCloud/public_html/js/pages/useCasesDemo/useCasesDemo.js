@@ -332,7 +332,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
          
         self.moveToNextQuestion = function () {
             showPreloader();
+            var id = event.currentTarget.id;
 
+            // for matching with yes/no button id's
+            var hasSelectedYes = id.startsWith("Y");
+            
             if (self.inQuestion() === 2) {
                 showPreloader();
 
@@ -387,11 +391,17 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 }
             }
             self.useCasesQuestions(array);
-            if (self.inQuestion() === 3) {         
-                showPreloader();
-                service.getUseCasesForUser().then(getUseCasesForUserSuccessCbFn, getUseCasesForUserFailCbFn);
-                self.haveImplementedUseCases(true);
-                self.goToStartUseCasesStep();
+            if (self.inQuestion() === 3) {
+                if (hasSelectedYes) {
+                    showPreloader();
+                    service.getUseCasesForUser().then(getUseCasesForUserSuccessCbFn, getUseCasesForUserFailCbFn);
+                    self.haveImplementedUseCases(true);
+                    self.goToStartUseCasesStep();
+                } else {
+                    service.notifyUCSelectionIgnored();
+                    self.goToDashboard();
+                }
+
 //                service.getUseCaseDemoSubQuestions(self.inQuestion()).then(subQuestionsSuccessCbFn, subQuestionsFailCbFn);
             } else {
                 self.inQuestion(self.inQuestion() + 1);
