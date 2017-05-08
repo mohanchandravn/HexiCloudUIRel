@@ -7,8 +7,8 @@
 /**
  * dashboard module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'util/errorhandler', 'ojs/ojknockout',  'ojs/ojprogressbar',
-    'ojs/ojfilmstrip', 'components/techsupport/loader', 'ojs/ojmasonrylayout', 'ojs/ojoffcanvas'
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'util/errorhandler', 'ojs/ojknockout',
+    'components/techsupport/loader', 'ojs/ojmasonrylayout', 'ojs/ojoffcanvas'
 ], function (oj, $, ko, service, sessionInfo, errorHandler) {
     /**
      * The view model for the main content view template
@@ -172,7 +172,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
                 
                 // scroll the benefits conteiner to top including header
                 $('html, body').animate({
-                    scrollTop: $('#serviceBenfits').offset().top - 80
+                    scrollTop: $('#serviceBenefits').offset().top - 80
                 }, 500);
             };
 
@@ -180,13 +180,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
             service.updateAudit({"stepCode" : getStateId(), "action" : "View More : " + serviceClicked});
         };
 
-        self.onClickFeedback = function () {
-            if (selectedTemplate() === "") {
-                selectedTemplate('email_content');
-            }
-            $("#tech_support").slideToggle();
-        };
-        
         self.getDetails = function (data, event) {
             if (data.id) {
                 self.selectedUseCaseDetails(data);
@@ -199,6 +192,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
         self.closeIt = function () {
             oj.OffcanvasUtils.close(useCaseDrawerRight);
         };
+        
+        self.onClickFeedback = function () {
+            if (selectedTemplate() === "") {
+                selectedTemplate('email_content');
+            }
+            $("#tech_support").slideToggle();
+        };
+        
 
         self.handleAttached = function () {
             showPreloader();

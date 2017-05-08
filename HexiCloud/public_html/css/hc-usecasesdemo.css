@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : nyasarap
 */
 
-.use-cases-demo-page {
+.use-cases-demo-page, useCases-page {
     background-color: #F1F2F2;
 }
 
@@ -128,7 +128,7 @@ and open the template in the editor.
     opacity: 0.4;
 }
 
-.use-cases-demo-page .inverted-btn, .dashboard-page .inverted-btn {
+.use-cases-demo-page .inverted-btn, .dashboard-page .inverted-btn, .useCases-page .inverted-btn {
     min-width: 120px;
     color: #F80000;
     font-size: 14px;
@@ -141,7 +141,7 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.use-cases-demo-page .use-case-details-wrapper .inverted-btn, .dashboard-page .use-case-details-wrapper .inverted-btn {
+.use-cases-demo-page .use-case-details-wrapper .inverted-btn,.dashboard-page .use-case-details-wrapper .inverted-btn, .useCases-page .use-case-details-wrapper .inverted-btn {
     min-width: 100px;
     font-size: 12px;
     margin-right: 15px;
@@ -149,7 +149,7 @@ and open the template in the editor.
     cursor: default;
 }
 
-.use-cases-demo-page .inverted-btn-hover:hover {
+.use-cases-demo-page .inverted-btn-hover:hover, .useCases-page .inverted-btn-hover:hover {
     color: #FFFFFF;
     background-color: #F80000;
 }
@@ -171,8 +171,13 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-image, .use-cases-body-content .oj-masonrylayout-tile-1x1 .finish-selection, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .use-case-image, .use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases {
+.dashboard-use-cases .oj-masonrylayout-tile-1x1 .use-case-image {
     width: 200px;
+    height: 110px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-image, .use-cases-body-content .oj-masonrylayout-tile-1x1 .finish-selection, .use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases {
+    width: 220px;
     height: 110px;
 }
 
@@ -206,9 +211,9 @@ and open the template in the editor.
 
 /* change props of .blur-selected-tile when you have any changes in dimensions */
 .use-cases-body-content .oj-masonrylayout-tile-1x1 {
-    width: 200px;
+    width: 220px;
     height: 165px;
-    margin: 25px;
+    margin: 15px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.15);
     transition: all 0.3s ease-in-out;
 }
@@ -219,7 +224,7 @@ and open the template in the editor.
 
 .use-cases-body-content .blur-selected-tile {
     position: absolute;
-    width: 200px;
+    width: 220px;
     height: 165px;
     background-color: #000000;
     opacity: 0.6;
@@ -244,10 +249,14 @@ and open the template in the editor.
     background: url("img/usecases/checkbox_selected_active.svg") no-repeat;
 }
 
-.use-cases-demo-page .use-case-details-wrapper, .dashboard-page .use-case-details-wrapper {
+.use-cases-demo-page .use-case-details-wrapper, .dashboard-page .use-case-details-wrapper, .useCases-page .use-case-details-wrapper {
     min-width: 320px;
     width: 100%;
     max-width: 500px;
+}
+
+.use-cases-demo-page .use-case-details-wrapper-content, .dashboard-page .use-case-details-wrapper-content, .useCases-page .use-case-details-wrapper-content {
+    padding: 0px 10px;
 }
 
 .close-icon {
@@ -255,21 +264,48 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.selected-use-case-image {
+.use-cases-demo-page .use-case-details-wrapper .use-case-image, .dashboard-page .use-case-details-wrapper .use-case-image, .useCases-page .use-case-details-wrapper .use-case-image {
     width: 100%;
     height: 200px;
 }
 
-.use-cases-demo-page .use-case-details-wrapper .use-case-title, .dashboard-page .use-case-details-wrapper .use-case-title {
+.use-cases-demo-page .use-case-details-wrapper .use-case-title, .dashboard-page .use-case-details-wrapper .use-case-title, .useCases-page .use-case-details-wrapper .use-case-title {
+    font-size: 22px;
+    line-height: 28px;
+    color: #000000;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .use-case-heading, .dashboard-page .use-case-details-wrapper .use-case-heading, .useCases-page .use-case-details-wrapper .use-case-heading {
     font-size: 14px;
     font-weight: bold;
     color: #000000;
 }
 
-.use-cases-demo-page .use-case-details-wrapper .use-case-description, .dashboard-page .use-case-details-wrapper .use-case-description {
+.use-cases-demo-page .use-case-details-wrapper .use-case-description, .dashboard-page .use-case-details-wrapper .use-case-description, .useCases-page .use-case-details-wrapper .use-case-description {
     font-size: 12px;
     color: #777;
     line-height: 20px;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .benefits-content, .dashboard-page .use-case-details-wrapper .benefits-content, .useCases-page .use-case-details-wrapper .benefits-content {
+    font-size: 12px;
+    color: #A8A8A8;
+    padding: 20px;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .benefits-image-container, .dashboard-page .use-case-details-wrapper .benefits-image-container, .useCases-page .use-case-details-wrapper .benefits-image-container {
+    border: 1px solid #F80000;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .benefits-image, .dashboard-page .use-case-details-wrapper .benefits-image, .useCases-page .use-case-details-wrapper .benefits-image {
+    width: 100%;
+    height: 100%;
 }
 
 .use-cases-demo-page a.quit-quiz {
@@ -286,6 +322,13 @@ and open the template in the editor.
     height: 15px;
 }
 
+.anchor-read-more {
+    color: #f80000 !important;
+    font-size: 10px;
+    line-height: 15px;
+    cursor: pointer;
+}
+
 .btn-add-another {
     width: 104px;
     height: 15px;
@@ -297,4 +340,10 @@ and open the template in the editor.
 
 button.btn-add-another:hover {
     text-decoration: underline;
+}
+
+@media screen and (min-width: 480px) {
+    .use-cases-demo-page .use-case-details-wrapper-content, .dashboard-page .use-case-details-wrapper-content, .useCases-page .use-case-details-wrapper-content {
+        padding: 0px 50px;
+    }
 }

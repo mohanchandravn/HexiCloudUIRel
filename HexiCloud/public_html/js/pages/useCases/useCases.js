@@ -7,99 +7,83 @@
 /**
  * useCases module
  */
-define(['jquery', 'knockout', 'config/serviceConfig', 'ojs/ojcore', 'ojs/ojknockout', 'config/sessionInfo', 'ojs/ojprogressbar', 'ojs/ojfilmstrip',
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojoffcanvas',
     'components/techsupport/loader'
-], function ($, ko, service) {
+], function (oj, $, ko, service, errorHandler) {
     /**
      * The view model for the main content view template
      */
     function useCasesContentViewModel(params) {
         var self = this;
         var router = params.ojRouter.parentRouter;
+        var useCaseDrawerRight;
+
+        useCaseDrawerRight = {
+            "selector": "#useCaseDrawerRight",
+            "edge": "end",
+            "displayMode": "overlay",
+            "autoDismiss": "none",
+            "modality": "modal"
+        };
         
         console.log('useCases page');
+
+        self.areAllUseCasesLoaded = ko.observable(false);
+        self.areUseCaseDetailsFetched = ko.observable(false);
+        self.selectedUseCaseDetails = ko.observableArray([]);
+        self.allUseCases = [];
         
-//        self.useCaseItems = [
-//            { usecaseCode: 'Use Case 1', usecaseDesc: 'Migrate Non Oracle Workloads to the Public Cloud' },
-//            { usecaseCode: 'Use Case 2', usecaseDesc: 'Extended Use Case for added value – Oracle Ravello Cloud Service' },
-//            { usecaseCode: 'Use Case 3', usecaseDesc: 'Migrate Non Oracle Workloads to the Public Cloud' }
-//        ];
-        
-        self.useCaseItems = ko.observableArray([]);
-        self.areUseCasesLoaded = ko.observable(false);
-        self.selectedFilmStripItem = ko.observable(0);
-        self.selectedUseCaseItem = ko.observable();
-        self.selectedUseCaseName = ko.observable();
-        self.selectedUseCaseTitle = ko.observable();
-        self.selectedUseCaseSubTitle = ko.observable();
-//        self.benefitsTitle = ko.observable();
-        self.selectedUseCaseBenefitsArray = ko.observableArray([]);
-        self.pdfSrc = ko.observable();
-        
-        getItemInitialDisplay = function(index) {
-            return index < 3 ? '' : 'none';
-        };
-        
-        self.updateUseCaseItems = function(data, status) {
-            console.log(data);
-            self.useCaseItems([]);
-            for (var idx = 0; idx < data.length; idx++) {
-                self.useCaseItems.push({fileId: data[idx].fileId,
-                                        id: data[idx].id,
-                                        publicLinkId: data[idx].publicLinkId,
-                                        usecaseCode: data[idx].usecaseCode,
-                                        usecaseDesc: data[idx].usecaseDesc,
-                                        usecaseName: data[idx].usecaseName
-                });
+        var getAllUseCasesSuccessCbFn = function (data, status) {
+            if (data.useCases) {
+                var useCases = data.useCases;
+                for (var idx = 0; idx < useCases.length; idx++) {
+                    if (useCases[idx].title.length > 35) {
+                        var trimTitle = useCases[idx].title.slice(0, 35);
+                        useCases[idx].trimmedTitle = trimTitle + "...";
+                    }
+                }
+                self.allUseCases = useCases;
             }
-            self.areUseCasesLoaded(true);
-            self.openUseCaseContainer();
-        };
-        
-        self.openUseCaseContainer = function(data, event) {    
-            showPreloader();
-            var id, useCaseCode;
-            if (event === undefined) {
-                id = self.useCaseItems()[0].id;
-                useCaseCode = self.useCaseItems()[0].usecaseCode;
-            } else {
-                id = event.currentTarget.id;
-                useCaseCode = data.usecaseCode;
-            }
-            $(".head").removeClass("active");
-            $("#useCaseHead" + id).addClass("active");
-            
-            var successCbFn = function(data, status) {
-                console.log(data);
-                self.selectedUseCaseName(data.UseCase.Name);
-                self.selectedUseCaseTitle(data.UseCase.title);
-                self.selectedUseCaseSubTitle(data.UseCase.subTitle);
-//                self.benefitsTitle(data.useCase.benefits.title);
-                self.selectedUseCaseBenefitsArray(data.UseCase.Benefits.benefitsList);
-                self.pdfSrc(data.UseCase.FeaturesLink);
-                self.selectedUseCaseItem(id);
-                hidePreloader();
-            };
-            
-            service.getUseCaseDetails(useCaseCode).then(successCbFn, FailCallBackFn);
-            service.updateAudit({"stepCode" : getStateId(), "action" : "Selected Usecase : " + useCaseCode});
+            self.areAllUseCasesLoaded(true);
+            hidePreloader();
         };
 
-        self.handleTransitionCompleted = function () {
-            // scroll the whole window to top if it's scroll position is not on top
-            $(window).scrollTop(0);
+        var getAllUseCasesFailCbFn = function (xhr) {
+            hidePreloader();
+            console.log(xhr);
+            errorHandler.showAppError("ERROR_GENERIC", xhr);
         };
         
-        self.handleBindingsApplied = function() {
-            showPreloader();
-            service.getUseCaseItems().then(self.updateUseCaseItems, FailCallBackFn);
+        self.getDetails = function (data, event) {
+            if (data.id) {
+                self.selectedUseCaseDetails(data);
+                self.areUseCaseDetailsFetched(true);
+                oj.OffcanvasUtils.open(useCaseDrawerRight);
+                $(window).scrollTop(0);
+            }
         };
-        
+
         self.onClickFeedback = function() {
             if (selectedTemplate() === "") {
                 selectedTemplate('email_content');
             }
             $("#tech_support").slideToggle();
+        };
+
+        self.closeIt = function () {
+            oj.OffcanvasUtils.close(useCaseDrawerRight);
+        };
+        
+        self.handleTransitionCompleted = function () {
+            // scroll the whole window to top if it's scroll position is not on top
+            $(window).scrollTop(0);
+        };
+        
+        self.handleAttached = function () {
+            showPreloader();
+
+            oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
+            service.getAllUseCases().then(getAllUseCasesSuccessCbFn, getAllUseCasesFailCbFn);
         };
   }
     

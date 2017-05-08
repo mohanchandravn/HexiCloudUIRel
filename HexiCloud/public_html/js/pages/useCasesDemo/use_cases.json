@@ -1,4 +1,6 @@
 {
+  "capturePhaseCompleted": true,
+  "selectionPhaseCompleted": true,
   "useCases": [
     {
       "id": 1,
@@ -8,19 +10,25 @@
       "image": "Migrate Oracle Applications.jpg",
       "services": [
         {
-          "serviceId": 1,
+          "serviceId": "NETWORK",
           "label": "Network"
         },
         {
-          "serviceId": 2,
+          "serviceId": "COMPUTE",
           "label": "Compute"
         },
         {
-          "serviceId": 2,
+          "serviceId": "STORAGE",
           "label": "Storage"
         }
       ],
-      "benefits": ""
+      "benefits": [
+        {
+          "title": "TECHNICAL",
+          "image": "Modern User Experience.svg",
+          "description": "Modern User Experience"
+        }
+      ]
     },
     {
       "id": 2,
@@ -30,15 +38,25 @@
       "image": "L&S_Oracle Applications Mixed Workloads.jpg",
       "services": [
         {
-          "serviceId": 1,
+          "serviceId": "COMPUTE",
           "label": "Compute"
         },
         {
-          "serviceId": 2,
+          "serviceId": "STORAGE",
           "label": "Storage"
         }
       ],
-      "benefits": ""
+      "benefits": [
+        {
+          "title": "TECHNICAL",
+          "image": "Modern User Experience.svg",
+          "description": "Modern User Experience"
+        }, {
+          "title": "FINANCIAL",
+          "image": "Lower TCO.svg",
+          "description": "Lower TCO"
+        }
+      ]
     },
     {
       "id": 3,
@@ -48,15 +66,61 @@
       "image": "L&S_Non-Oracle Workloads.jpg",
       "services": [
         {
-          "serviceId": 1,
+          "serviceId": "NETWORK",
           "label": "Network"
         },
         {
-          "serviceId": 2,
+          "serviceId": "COMPUTE",
           "label": "Storage"
         }
       ],
-      "benefits": ""
+      "benefits": [
+        {
+          "title": "TECHNICAL",
+          "image": "Modern User Experience.svg",
+          "description": "Modern User Experience"
+        }, {
+          "title": "FINANCIAL",
+          "image": "Lower TCO.svg",
+          "description": "Lower TCO"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }
+      ]
     }
   ]
 }

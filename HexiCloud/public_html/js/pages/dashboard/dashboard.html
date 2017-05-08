@@ -3,7 +3,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div class="dashboard-page container oj-offcanvas-outer-wrapper">
+<div class="dashboard-page oj-offcanvas-outer-wrapper">
     <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
         <div id="useCaseDrawerRight" class="use-case-details-wrapper">
             <div style="background: white; min-height: 100%;">
@@ -11,12 +11,12 @@ and open the template in the editor.
                     <img class="close-icon" src="css/img/close.png" alt="Close it" data-bind="click: closeIt" />
                 </div>
                 <!-- ko if: areUseCaseDetailsFetched() -->
-                <div class="oj-sm-justify-content-center oj-flex" style="padding: 0px 50px;">
-                    <img class="selected-use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCaseDetails().image }" alt="Image" />
-                    <span class="heading-type4 bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().title"></span>
-                    <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
+                <div class="use-case-details-wrapper-content oj-sm-justify-content-center oj-flex">
+                    <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCaseDetails().image }" alt="Image" />
+                    <span class="use-case-title bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().title"></span>
+                    <span class="use-case-heading oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
                     <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().longDesc"></p>
-                    <span class="use-case-title oj-margin-lg-top oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
+                    <span class="use-case-heading oj-margin-lg-top oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
                     <div class="oj-sm-12 oj-flex-item">
                         <div class="oj-flex">
                             <!-- ko foreach: selectedUseCaseDetails().services -->
@@ -24,7 +24,21 @@ and open the template in the editor.
                             <!-- /ko -->
                         </div>
                     </div>
-                    <span class="use-case-title oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
+                    <span class="use-case-heading oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
+                    <div class="oj-sm-12 oj-flex-item">
+                        <div class="oj-flex">
+                            <!-- ko foreach: selectedUseCaseDetails().benefits -->
+                            <div class="benefits-content oj-sm-6 oj-lg-4 oj-flex-item">
+                                <span class="text-center oj-sm-justify-content-center oj-flex" data-bind="text: title"></span>
+                                <span class="benefits-image-container oj-margin-vertical oj-sm-justify-content-center oj-flex">
+                                    <img class="benefits-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
+                                </span>
+                                <span class="text-center oj-sm-justify-content-center oj-flex" data-bind="text: description"></span>
+                                <a class="anchor-read-more oj-sm-justify-content-center oj-flex" data-bind="text: 'Read more'"></a>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
                 </div>
                 <!-- /ko -->
             </div>
@@ -102,7 +116,7 @@ and open the template in the editor.
             <!-- /ko -->
         </div>
 
-        <div class="dashboard oj-flex" id="serviceBenfits">
+        <div class="dashboard oj-flex">
             <!-- Use Cases for demo -->
             <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
                 <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
@@ -173,7 +187,7 @@ and open the template in the editor.
             <!-- Use cases for demo -->
 
             <!-- ko if: selectedServiceItem() !== undefined -->
-            <div class="oj-sm-12 oj-lg-4 oj-flex-item">
+            <div id="serviceBenefits" class="oj-sm-12 oj-lg-4 oj-flex-item">
                 <div class="benefits oj-flex" data-bind="css: isScreenLGorXL() ? 'oj-margin-lg-end' : ''">
                     <span class="heading-type2 oj-sm-12 oj-flex-item" data-bind="text: 'Benefits for ' + selectedServiceItem() + ': '"></span>
                     <!--ko if:hasServiceBenefits() -->

@@ -8,82 +8,12 @@ and open the template in the editor.
     Author     : nyasarap
 */
 
-.useCases-page {
+.use-cases-content {
     padding: 10px;
-}
-
-.use-case hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 0;
-    box-sizing: content-box;
-    height: 0;
-    border-top: 1px solid #b1c7d2;
-}
-
-.use-case-container {
-    max-width: 330px;
-}
-
-.use-case-container .head {
-    height: 20px;
-    background-color: #324b5c;
-}
-
-.use-case-container .head.active {
-    background-color: #F80000;
-}
-
-.use-case-item {
-    min-height: 216px;
-    padding: 20px;
-    border-bottom: 1px solid #F80000;
-    background-color: white;
-    box-sizing: border-box;
-}
-
-.use-case-container i {
-    font-size: 60px !important;
-    color: #324b5c;
-}
-
-.use-case-title, .use-case-content {
-    color: #00758f;
-    font-size: 20px;
-    font-family: 'Roboto-thin', sans-serif;
-}
-
-.use-case-content {
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.use-case-detail-item {
-    background-color: #fff;
-    padding: 10px;
-    margin-bottom: 30px;
-}
-
-.use-case ul {
-    padding-left: 20px;
-}
-
-.use-case ul li {
-    list-style-type: disc;
-    color: #00758f;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.use-case li {
-    color: #4e5052;
 }
 
 @media screen and (min-width: 1024px) {
-    .useCases-page {
-        padding: 30px 50px;
-    }
-    .use-case-detail-item {
+    .use-cases-content {
         padding: 20px;
     }
 }

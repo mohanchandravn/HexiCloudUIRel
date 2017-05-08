@@ -11,12 +11,12 @@ and open the template in the editor.
                     <img class="close-icon" src="css/img/close.png" alt="Close it" data-bind="click: closeIt" />
                 </div>
                 <!-- ko if: areUseCaseDetailsFetched() -->
-                <div class="oj-sm-justify-content-center oj-flex" style="padding: 0px 50px;">
-                    <img class="selected-use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCaseDetails().image }" alt="Image" />
-                    <span class="heading-type4 bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().title"></span>
-                    <span class="use-case-title oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
+                <div class="use-case-details-wrapper-content oj-sm-justify-content-center oj-flex">
+                    <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCaseDetails().image }" alt="Image" />
+                    <span class="use-case-title bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().title"></span>
+                    <span class="use-case-heading oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
                     <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().longDesc"></p>
-                    <span class="use-case-title oj-margin-lg-top oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
+                    <span class="use-case-heading oj-margin-lg-top oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
                     <div class="oj-sm-12 oj-flex-item">
                         <div class="oj-flex">
                             <!-- ko foreach: selectedUseCaseDetails().services -->
@@ -24,7 +24,20 @@ and open the template in the editor.
                             <!-- /ko -->
                         </div>
                     </div>
-                    <span class="use-case-title oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
+                    <span class="use-case-heading oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
+                    <div class="oj-sm-12 oj-flex-item">
+                        <div class="oj-flex">
+                            <!-- ko foreach: selectedUseCaseDetails().benefits -->
+                            <div class="benefits-content oj-sm-6 oj-lg-4 oj-flex-item">
+                                <span class="text-center oj-sm-justify-content-center oj-flex" data-bind="text: title"></span>
+                                <span class="benefits-image-container oj-margin-vertical oj-sm-justify-content-center oj-flex">
+                                    <img class="benefits-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
+                                </span>
+                                <span class="text-center oj-sm-justify-content-center oj-flex" data-bind="text: description"></span>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
                 </div>
                 <!-- /ko -->
             </div>
