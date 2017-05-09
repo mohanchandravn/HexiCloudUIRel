@@ -454,7 +454,8 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.getUseCaseBenefits = function () {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "/services/rest/getUseCaseBenefits";
+            var serverURL = "js/pages/useCasesDemo/otherUseCaseBenefits.json";
+//            var serverURL = self.portalRestHost() + "/services/rest/getUseCaseBenefits";
             $.ajax({
                 type: 'GET',
                 url: serverURL,

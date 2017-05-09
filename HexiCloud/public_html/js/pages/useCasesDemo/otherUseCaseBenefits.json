@@ -1,0 +1,44 @@
+{
+  "benefits": [
+    {
+      "id": 1,
+      "label": "Cost reduction",
+      "usecaseId": 10
+    },
+    {
+      "id": 2,
+      "label": "Time reduction / Faster Deployment",
+      "usecaseId": 10
+    },
+    {
+      "id": 3,
+      "label": "Zero Administration",
+      "usecaseId": 10
+    },
+    {
+      "id": 4,
+      "label": "Easy integration",
+      "usecaseId": 10
+    },
+    {
+      "id": 5,
+      "label": "ROI Increase",
+      "usecaseId": 10
+    },
+    {
+      "id": 6,
+      "label": "Flexibility",
+      "usecaseId": 10
+    },
+    {
+      "id": 7,
+      "label": "Scalability",
+      "usecaseId": 10
+    },
+    {
+      "id": 8,
+      "label": "Others",
+      "usecaseId": 10
+    }
+  ]
+}
