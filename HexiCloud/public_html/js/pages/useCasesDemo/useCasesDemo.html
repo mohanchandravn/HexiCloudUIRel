@@ -222,7 +222,7 @@ and open the template in the editor.
                                         </div>
                                         <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Benefits</span>
                                         <div class="oj-sm-12 oj-flex-item">
-                                            <select data-bind="ojComponent: {component: 'ojSelect',
+                                            <select id="otherUseCaseBenefits" data-bind="ojComponent: {component: 'ojSelect',
                                                                         options: $parent.otherUseCaseBenefitsList,
                                                                         value: useCaseBenefits,
                                                                         placeholder: 'Select benefit(s)',
@@ -235,7 +235,7 @@ and open the template in the editor.
                                                                                     messageDetail: 'Please select atleast one benefit'}}}">
                                             </select>
                                             <!-- ko if: $parent.isOtherBenefitSelected() -->
-                                            <label id="otherBenefitLabel" for="otherBenefit" class="other-benefit-label">Others: </label>
+                                            <label id="otherBenefitLabel" for="otherBenefit" class="other-benefit-label" data-bind="text: $parent.otherBenefitLabel"></label>
                                             <input id="otherBenefit" type="text" maxlength="50" data-bind="ojComponent: {component: 'ojInputText', 
                                                                                                                     placeholder: 'Enter other benefit', 
                                                                                                                     value: $parent.otherBenefit,
