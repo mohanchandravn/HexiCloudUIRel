@@ -78,7 +78,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.useCaseItemsTemplate = ko.pureComputed(function () {
             return self.haveImplementedUseCases() === true ? 'useCaseItemsNonEditable' : 'useCaseItemsEditable';
         });
-
+        
+        self.selectedUseCase = ko.computed(function() {
+            return self.selectedUseCaseDetails();
+        }, self);
+        
         var getAllUseCasesSuccessCbFn = function (data, status) {
             if (data.useCases) {
                 var useCases = data.useCases;
@@ -564,7 +568,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             return false;
         };
         
-        self.getDetails = function (data, event) {
+        self.getUseCaseDetails = function (data, event) {
             if (data.id) {
                 self.selectedUseCaseDetails(data);
                 self.areUseCaseDetailsFetched(true);
@@ -573,7 +577,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
         };
 
-        self.closeIt = function () {
+        closeUseCaseDetailOffCanvas = function () {
+            self.areUseCaseDetailsFetched(false);
             oj.OffcanvasUtils.close(useCaseDrawerRight);
         };
 

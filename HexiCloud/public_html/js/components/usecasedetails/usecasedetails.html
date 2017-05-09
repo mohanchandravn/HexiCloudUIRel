@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!-- ko if: $parent.areUseCaseDetailsFetched() -->
+<div class="use-case-details-wrapper">
+    <div class="oj-sm-justify-content-flex-end oj-flex">
+        <img class="close-icon" src="css/img/close.png" alt="Close it" data-bind="click: closeUseCaseDetailOffCanvas" />
+    </div>
+    <div class="use-case-details-wrapper-content oj-sm-justify-content-center oj-flex">
+        <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + $parent.selectedUseCase().image }" alt="Image" />
+        <span class="use-case-title bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: $parent.selectedUseCase().title"></span>
+        <span class="use-case-heading oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
+        <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: $parent.selectedUseCase().longDesc"></p>
+        <span class="use-case-heading oj-margin-lg-top oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
+        <div class="oj-sm-12 oj-flex-item">
+            <div class="oj-flex">
+                <!-- ko foreach: $parent.selectedUseCase().services -->
+                <span class="inverted-btn text-center" data-bind="text: label"></span>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div id="offCanvasPreloader" class="off-canvas-preloader-container oj-sm-12 oj-flex-item">
+            <div class="preloader oj-sm-align-self-center"></div>
+        </div>
+        <!-- ko if: fetchedUseCaseBenefits().length > 0 -->
+        <span class="use-case-heading oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
+        <div class="oj-sm-12 oj-flex-item">
+            <div class="oj-flex">
+                <!-- ko foreach: fetchedUseCaseBenefits -->
+                <div class="benefits-content oj-sm-6 oj-lg-4 oj-flex-item">
+                    <span class="text-center oj-sm-justify-content-center oj-flex" data-bind="text: title"></span>
+                    <span class="benefits-image-container oj-margin-vertical oj-sm-justify-content-center oj-flex">
+                        <img class="benefits-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
+                    </span>
+                    <span class="text-center oj-sm-justify-content-center oj-flex" data-bind="text: description"></span>
+                    <a class="anchor-read-more oj-sm-justify-content-center oj-flex" data-bind="text: 'Read more'"></a>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

@@ -1,36 +1,17 @@
 {
-  "benefits": [
-    {
-      "id": 1,
-      "label": "Cost reduction"
-    },
-    {
-      "id": 2,
-      "label": "Time reduction / Faster Deployment"
-    },
-    {
-      "id": 3,
-      "label": "Zero Administration"
-    },
-    {
-      "id": 4,
-      "label": "Easy integration"
-    },
-    {
-      "id": 5,
-      "label": "ROI Increase"
-    },
-    {
-      "id": 6,
-      "label": "Flexibility"
-    },
-    {
-      "id": 7,
-      "label": "Scalability"
-    },
-    {
-      "id": 8,
-      "label": "Others"
-    }
-  ]
+    "benefits": [
+        {
+          "title": "TECHNICAL",
+          "image": "Modern User Experience.svg",
+          "description": "Modern User Experience"
+        }, {
+          "title": "FINANCIAL",
+          "image": "Lower TCO.svg",
+          "description": "Lower TCO"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }
+    ]
 }

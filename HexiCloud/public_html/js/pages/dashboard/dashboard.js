@@ -58,7 +58,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
 //            }
             return 'purple';
         };
-
+        
+        self.selectedUseCase = ko.computed(function() {
+            return self.selectedUseCaseDetails();
+        }, self);
+        
         self.getIcon = function (serverType) {
             if (serverType.toLowerCase().indexOf("compute") >= 0) {
                 return 'css/img/compute_w_72.png';
@@ -180,7 +184,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
             service.updateAudit({"stepCode" : getStateId(), "action" : "View More : " + serviceClicked});
         };
 
-        self.getDetails = function (data, event) {
+        self.getUseCaseDetails = function (data, event) {
             if (data.id) {
                 self.selectedUseCaseDetails(data);
                 self.areUseCaseDetailsFetched(true);
@@ -189,7 +193,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
             }
         };
 
-        self.closeIt = function () {
+        closeUseCaseDetailOffCanvas = function () {
+            self.areUseCaseDetailsFetched(false);
             oj.OffcanvasUtils.close(useCaseDrawerRight);
         };
         

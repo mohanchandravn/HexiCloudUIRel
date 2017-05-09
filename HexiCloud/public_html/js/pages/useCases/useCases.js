@@ -33,6 +33,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.selectedUseCaseDetails = ko.observableArray([]);
         self.allUseCases = [];
         
+        self.selectedUseCase = ko.computed(function() {
+            return self.selectedUseCaseDetails();
+        }, self);
+        
         var getAllUseCasesSuccessCbFn = function (data, status) {
             if (data.useCases) {
                 var useCases = data.useCases;
@@ -54,7 +58,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             errorHandler.showAppError("ERROR_GENERIC", xhr);
         };
         
-        self.getDetails = function (data, event) {
+        self.getUseCaseDetails = function (data, event) {
             if (data.id) {
                 self.selectedUseCaseDetails(data);
                 self.areUseCaseDetailsFetched(true);
@@ -63,15 +67,16 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
         };
 
+        closeUseCaseDetailOffCanvas = function () {
+            self.areUseCaseDetailsFetched(false);
+            oj.OffcanvasUtils.close(useCaseDrawerRight);
+        };
+
         self.onClickFeedback = function() {
             if (selectedTemplate() === "") {
                 selectedTemplate('email_content');
             }
             $("#tech_support").slideToggle();
-        };
-
-        self.closeIt = function () {
-            oj.OffcanvasUtils.close(useCaseDrawerRight);
         };
         
         self.handleTransitionCompleted = function () {

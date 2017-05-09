@@ -127,6 +127,10 @@ navigationbarright {
     background-color: #4C5B5E;
 }
 
+usecasedetails {
+    background-color: #FFFFFF;
+}
+
 .disable-actions {
     pointer-events: none;
     opacity: 0.5;
@@ -450,6 +454,12 @@ login-page video::-webkit-media-controls-start-playback-button {
     left: calc(50% - 36px);
     height: 100%;
     width: 100%;
+}
+
+.off-canvas-preloader-container {
+    height: 200px;
+    padding-top: 100px;
+    padding-left: calc(50% - 36px);
 }
 
 .preloader {

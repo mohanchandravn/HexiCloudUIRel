@@ -5,44 +5,7 @@ and open the template in the editor.
 -->
 <div class="useCases-page oj-offcanvas-outer-wrapper">
     <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
-        <div id="useCaseDrawerRight" class="use-case-details-wrapper">
-            <div style="background: white; min-height: 100%;">
-                <div class="oj-sm-justify-content-flex-end oj-flex">
-                    <img class="close-icon" src="css/img/close.png" alt="Close it" data-bind="click: closeIt" />
-                </div>
-                <!-- ko if: areUseCaseDetailsFetched() -->
-                <div class="use-case-details-wrapper-content oj-sm-justify-content-center oj-flex">
-                    <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCaseDetails().image }" alt="Image" />
-                    <span class="use-case-title bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().title"></span>
-                    <span class="use-case-heading oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
-                    <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCaseDetails().longDesc"></p>
-                    <span class="use-case-heading oj-margin-lg-top oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
-                    <div class="oj-sm-12 oj-flex-item">
-                        <div class="oj-flex">
-                            <!-- ko foreach: selectedUseCaseDetails().services -->
-                            <span class="inverted-btn text-center" data-bind="text: label"></span>
-                            <!-- /ko -->
-                        </div>
-                    </div>
-                    <span class="use-case-heading oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: 'BENEFITS'"></span>
-                    <div class="oj-sm-12 oj-flex-item">
-                        <div class="oj-flex">
-                            <!-- ko foreach: selectedUseCaseDetails().benefits -->
-                            <div class="benefits-content oj-sm-6 oj-lg-4 oj-flex-item">
-                                <span class="text-center oj-sm-justify-content-center oj-flex" data-bind="text: title"></span>
-                                <span class="benefits-image-container oj-margin-vertical oj-sm-justify-content-center oj-flex">
-                                    <img class="benefits-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
-                                </span>
-                                <span class="text-center oj-sm-justify-content-center oj-flex" data-bind="text: description"></span>
-                                <a class="anchor-read-more oj-sm-justify-content-center oj-flex" data-bind="text: 'Read more'"></a>
-                            </div>
-                            <!-- /ko -->
-                        </div>
-                    </div>
-                </div>
-                <!-- /ko -->
-            </div>
-        </div>
+        <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
         <div class="use-cases-content oj-flex">
             <div class="use-case oj-sm-12 oj-flex-item">
                 <span class="heading-type2">Get more out of Oracle Cloud</span>
@@ -62,7 +25,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="oj-sm-align-self-center oj-flex-bar-end">
-                                    <img class="bread-crumbs-icon" data-bind="click: $parent.getDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
+                                    <img class="bread-crumbs-icon" data-bind="click: $parent.getUseCaseDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
                                 </div>
                             </div>
                         </div>
