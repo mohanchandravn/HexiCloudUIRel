@@ -37,6 +37,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.isBenefitSelected = ko.observable(false);
         self.isOtherBenefitSelected = ko.observable(false);
         self.otherBenefit = ko.observable('');
+        
+        self.otherBenefitLabel = ko.observable('Others: ');
 
         self.selectedUseCaseItems = ko.observableArray([]);
         self.hasSelectedOtherUseCase = ko.observable(false);
@@ -341,7 +343,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         });
         
         self.disableAddAnotherButton = ko.pureComputed(function () {
-            return !self.isServiceSelected() || !self.isBenefitSelected() || self.hasInvalidComponents();
+            return !self.isServiceSelected() || !self.isBenefitSelected() 
+                || (self.isOtherBenefitSelected() && commonHelper.isNullOrEmpty(self.otherBenefit())) || self.hasInvalidComponents();
         });
          
         self.moveToNextQuestion = function () {
@@ -379,7 +382,18 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 for (var idx in self.otherUseCases()) {
                     var useCase = self.otherUseCases()[idx];
                     var services = useCase.useCaseServicesUsed === "" ? "" : useCase.useCaseServicesUsed.join();
-                    var benefits = useCase.useCaseBenefits === "" ? "" : useCase.useCaseBenefits.join();
+                    
+                    var benefitsArr = [];
+                    for (var idx in useCase.useCaseBenefits) {
+                        var eachBenefit = useCase.useCaseBenefits[idx];
+                        if (eachBenefit === 8) { // Other benefit
+                            // Appending user entered text
+                            eachBenefit = eachBenefit + '#' + self.otherBenefit(); 
+                        }
+                        benefitsArr.push(eachBenefit);
+                    }
+                    var benefits = useCase.useCaseBenefits === "" ? "" : benefitsArr.join('|');
+                    
                     var jsonData = {
                         "useCaseId": 10,
                         "code": "I",
@@ -624,18 +638,22 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.serviceOptionChange = function (event, data) {
-            self.isServiceSelected(data.value.length > 0);
+            self.isServiceSelected(data.value.length > 0 && typeof data.value[0] === 'string');
         };
         
         self.benefitsOptionChange = function (event, data) {
-            self.isBenefitSelected(typeof data.value[0] === 'number' || (data.value.length === 0 && typeof data.previousValue === 'object'));
+            var value = data.value;
+            var prevValue = data.previousValue;
+            self.isBenefitSelected(typeof value[0] === 'number' || (value.length === 0 && typeof prevValue === 'object'));
             
             // Other benefit
-            for (var idx in data.value) {
-                if (data.value[idx] === 8) {
+            for (var idx in value) {
+                if (value[idx] === 8) {
+                    self.otherBenefitLabel('Others: ');
                     self.isOtherBenefitSelected(true);
                     break;
                 } else {
+                    self.otherBenefitLabel('');
                     self.isOtherBenefitSelected(false);
                 }
             }
