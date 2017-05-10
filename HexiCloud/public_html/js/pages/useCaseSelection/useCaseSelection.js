@@ -5,7 +5,7 @@
  */
 
 /**
- * useCasesDemo module
+ * useCaseSelection module
  */
 define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'util/commonhelper', 'ojs/ojknockout', 'ojs/ojoffcanvas',
     'ojs/ojmasonrylayout', 'ojs/ojinputtext', 'ojs/ojcheckboxset', 'ojs/ojradioset', 'ojs/ojswitch', 'ojs/ojselectcombobox',, 'ojs/ojaccordion',
@@ -14,7 +14,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
     /**
      * The view model for the main content view template
      */
-    function useCasesDemoContentViewModel(params) {
+    function useCaseSelectionContentViewModel(params) {
         var self = this;
         var router = params.ojRouter.parentRouter;
         var useCaseDrawerRight;
@@ -683,5 +683,5 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
     }
 
-    return useCasesDemoContentViewModel;
+    return useCaseSelectionContentViewModel;
 });

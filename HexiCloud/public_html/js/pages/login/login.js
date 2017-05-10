@@ -72,7 +72,7 @@ define(['knockout', 'jquery', 'config/serviceConfig', 'config/sessionInfo', 'ojs
 
         self.login = function () {
             showPreloader();
-            // router.go('chooseRoleNew/');
+            // router.go('chooseRole/');
             console.log('login clicked');
             console.log(loggedInUser());
             console.log(self.restEndPoint());
