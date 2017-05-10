@@ -22,57 +22,32 @@ and open the template in the editor.
     height: 50px;
 }
 
+.header-wrapper span i {
+    font-size: 36px !important;
+}
+
 .header-start-item .logo {
     height: 36px;
 }
 
-.header-start-item {
-/*.header-start-item, .header-branding, .header-end-item {*/
-    height: 50px;
-    box-sizing: border-box;
-}
-
-.header-start-item {
-/*.header-start-item, .header-end-item {*/
+.header-start-item, .header-end-item {
     /*color: #324b5c;*/
+    height: 50px;
     color: #F80000;
+    padding: 8px;
+    box-sizing: border-box;
     cursor: pointer;
 }
 
-/*.header-branding {
-    color: #000;
-}*/
-
-.header-wrapper .ico-container i {
-    font-size: 36px !important;
-}
-
-/*.brand-logo {
-    color: #f80000;
-}
-
-.logoSpan{
-    font-weight: lighter;
-}*/
-
-.header-start-item {
-/*.header-start-item, .header-branding, .header-end-item {*/
-    padding: 8px;
-}
-
-/*.header-branding {
-    font-size: 30px;
-}*/
-
-span.ico-container {
-    display: block;
-    width: 36px;
-    height: 36px;
-    font-size: 36px !important;
-}
-
-@media only screen and (max-width: 480px) {
-/*    .header-branding {
-        font-size: 20px;
-    }*/
+.header-end-item .notification-count-container {
+    position: absolute;
+    background: #F80000;
+    margin: 3px 0px 0px -15px;
+    color: #FFFFFF;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    font-size: 8px;
+    text-align: center;
+    line-height: 12px;
 }
