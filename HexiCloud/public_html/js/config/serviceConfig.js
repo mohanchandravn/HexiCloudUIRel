@@ -294,7 +294,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getAllUseCases = function () {
             var defer = $.Deferred();
-//             var serverURL = "js/pages/useCasesDemo/use_cases.json";
+//             var serverURL = "js/pages/useCaseSelection/use_cases.json";
             var serverURL = self.portalRestHost() + "/services/rest/getAllUseCases";
             $.ajax({
                 type: 'GET',
@@ -317,7 +317,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.getUseCasesForUser = function () {
             var defer = $.Deferred();
-//            var serverURL = "js/pages/useCasesDemo/use_cases.json";
+//            var serverURL = "js/pages/useCaseSelection/use_cases.json";
             var serverURL = self.portalRestHost() + "/services/rest/getUseCasesForUser";
             $.ajax({
                 type: 'GET',
@@ -341,7 +341,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.getTailoredUseCases = function () {
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/getTailoredUseCases";
-//            var serverURL = "js/pages/useCasesDemo/use_cases.json";
+//            var serverURL = "js/pages/useCaseSelection/use_cases.json";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -363,7 +363,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getDecisionTree = function() {
             var defer = $.Deferred();
-            // var serverURL = "js/pages/useCasesDemo/decisionTree.json";
+            // var serverURL = "js/pages/useCaseSelection/decisionTree.json";
             var serverURL = self.portalRestHost() + "/services/rest/getDecisionTree";
             $.ajax({
                 type: 'GET',
@@ -386,7 +386,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getUseCaseDemoDetails = function (useCaseId) {
             var defer = $.Deferred();
-            var serverURL = "js/pages/useCasesDemo/useCasesDemoDetails.json";
+            var serverURL = "js/pages/useCaseSelection/useCaseSelectionDetails.json";
 //            var serverURL = self.portalRestHost() + "/services/rest/usecases/" + useCaseId + "/";
             $.ajax({
                 type: 'GET',
@@ -409,7 +409,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getAllServices = function () {
             var defer = $.Deferred();
-            //var serverURL = "js/pages/useCasesDemo/services.json";
+            //var serverURL = "js/pages/useCaseSelection/services.json";
             var serverURL = self.portalRestHost() + "/services/rest/getAllServices";
             $.ajax({
                 type: 'GET',
@@ -432,7 +432,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.getSelectedUseCaseBenefits = function () {
             var defer = $.Deferred();
-            var serverURL = "js/pages/useCasesDemo/benefits.json";
+            var serverURL = "js/pages/useCaseSelection/benefits.json";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
@@ -454,7 +454,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.getUseCaseBenefits = function () {
             var defer = $.Deferred();
-            var serverURL = "js/pages/useCasesDemo/otherUseCaseBenefits.json";
+            var serverURL = "js/pages/useCaseSelection/otherUseCaseBenefits.json";
 //            var serverURL = self.portalRestHost() + "/services/rest/getUseCaseBenefits";
             $.ajax({
                 type: 'GET',

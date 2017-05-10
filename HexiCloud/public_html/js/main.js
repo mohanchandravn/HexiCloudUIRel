@@ -113,8 +113,8 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 'login': {label: 'Login', value: getPath('login')},
 //                'hello': {label: 'Hello', value: getPath('hello')},
                 'roleIdentified': {label: 'Role Identified', value: getPath('roleIdentified')},
-//                'chooseRole': {label: 'Choose Role', value: getPath('chooseRole')},
-                'chooseRole': {label: 'Choose Role', value: getPath('chooseRoleNew')},
+//                'chooseRoleOld': {label: 'Choose Role Old', value: getPath('chooseRoleOld')},
+                'chooseRole': {label: 'Choose Role', value: getPath('chooseRole')},
 //                'createUsers': {label: 'Create Users', value: getPath('createUsers')},
 //                'addAdditionalUsers': {label: 'Add Additional Users', value: getPath('addAdditionalUsers')},
                 'learning': {label: 'Learning', value: getPath('learning')},
@@ -131,7 +131,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 'createUsers': {label: 'Add Users', value: getPath('addUsersTutorial')},
                 'techSupport': {label: 'Techical Support', value: getPath('techSupport')},
                 'useCases': {label: 'Use Cases', value: getPath('useCases')},
-                'useCasesDemo': {label: 'Use Cases Demo', value: getPath('useCasesDemo')},
+                'useCaseSelection': {label: 'Use Case Selection', value: getPath('useCaseSelection')},
                 'faqs': {label: 'FAQ\'s', value: getPath('faqs')},
                 'error': {label: 'Error', value: getPath('error')}
             });
@@ -193,7 +193,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 self.showHeaderNav = ko.computed(function () {
                     var id = router.currentState().id;
-                    var pages = ["dashboard", "useCases", "useCasesDemo", "faqs"];
+                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs"];
                     return (pages.indexOf(id) > -1) ? '' : 'visibility-hidden';
                 });
 
@@ -344,7 +344,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     self.isUseCaseSelected(true);
                 };
                 
-                self.routeToUsecasesDemo = function (data, event) {
+                self.routeToUseCaseSelection = function (data, event) {
                     router.go(event.currentTarget.id + '/');
                 };
 

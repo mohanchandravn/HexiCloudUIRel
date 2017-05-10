@@ -79,14 +79,14 @@ and open the template in the editor.
         </div>
 
         <div class="dashboard oj-flex">
-            <!-- Use Cases for demo -->
+            <!-- Use case selection -->
             <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
                 <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
                 <!-- ko ifnot: isSelectionPhaseCompleted() === true -->
                     <span class="heading-type4">
                         Let's start your adoption journey!
                     </span>
-                    <div id="useCasesDemo" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUsecasesDemo">
+                    <div id="useCasesSelection" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUseCaseSelection">
                         <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
                             Go to Use Case selection
                         </div>
@@ -101,7 +101,7 @@ and open the template in the editor.
                     <span class="heading-type4">
                         Please select a Use Case to implement!
                     </span>
-                    <div id="useCasesDemo" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUsecasesDemo">
+                    <div id="useCaseSelection" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUseCaseSelection">
                         <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
                             I'm ready
                         </div>
@@ -111,7 +111,7 @@ and open the template in the editor.
                             </span>
                         </div>
                     </div>
-                    <div id="useCasesDemo" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUsecasesDemo">
+                    <div id="useCaseSelection" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUseCaseSelection">
                         <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
                             I need to know more
                         </div>
@@ -146,7 +146,7 @@ and open the template in the editor.
             </div>
 
             <!-- /ko -->
-            <!-- Use cases for demo -->
+            <!-- Use case selection -->
 
             <!-- ko if: selectedServiceItem() !== undefined -->
             <div id="serviceBenefits" class="oj-sm-12 oj-lg-4 oj-flex-item">
