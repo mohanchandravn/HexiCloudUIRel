@@ -523,10 +523,10 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.forgotPasswordService = function (userId) {
             var defer = $.Deferred();
-            var serviceUrl = self.portalRestHost() + "/services/rest/forgotPasswordService/" + userId + "/";
+            var serverURL = self.portalRestHost() + "/services/rest/forgotPasswordService/" + userId + "/";
             $.ajax({
                 type: 'GET',
-                url: serviceUrl,
+                url: serverURL,
                 success: function (data, status) {
                     console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
@@ -541,10 +541,10 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.updatePasswordService = function (payload) {
             console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
-            var serviceUrl = self.portalRestHost() + "/services/rest/resetPassword/";
+            var serverURL = self.portalRestHost() + "/services/rest/resetPassword/";
             $.ajax({
                 type: 'POST',
-                url: serviceUrl,
+                url: serverURL,
                 contentType: "application/json",
                 data: payload,
                 beforeSend: function (request) {
