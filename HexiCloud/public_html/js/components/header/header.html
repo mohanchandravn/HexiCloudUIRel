@@ -7,12 +7,18 @@ and open the template in the editor.
 <div class="oj-flex">
     <div class="header-wrapper oj-sm-12 oj-flex-item">
         <div class="oj-flex-bar">
-            <div id="navigationIconLeft" class="header-start-item oj-flex-bar-start" data-bind="click: toggleLeft, css: showHeaderNav()">
-                <span class="ico-container">
-                    <i id="menu" class="material-icons">menu</i>
-                </span>
+            <div class="header-start-item oj-flex-bar-start">
+                <div id="navigationIconLeft" data-bind="click: toggleLeft, css: showHeaderNav()">
+                    <span class="ico-container">
+                        <i id="menu" class="material-icons">menu</i>
+                    </span>
+                </div>
+                <img class="logo" src="css/img/hexicloud_email_logo.png" alt="Hexi Cloud" />
             </div>
-            <div class="header-branding oj-margin-lg-start oj-margin-lg-end oj-flex-bar-middle" data-bind="css: viewportSize() !== 'SM' ? 'oj-sm-align-items-center' : ''">
+            <div class="oj-flex-bar-end">
+                
+            </div>
+<!--            <div class="header-branding oj-margin-lg-start oj-margin-lg-end oj-flex-bar-middle" data-bind="css: viewportSize() !== 'SM' ? 'oj-sm-align-items-center' : ''">
                 <div class="oj-flex-item">
                     <div class="oj-flex-bar oj-sm-only-flex-direction-column oj-sm-align-items-center">
                         <div data-bind="css: viewportSize() !== 'SM' ? 'oj-flex-bar-start' : 'oj-sm-align-items-center'">
@@ -24,12 +30,12 @@ and open the template in the editor.
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="disable-actions header-end-item oj-flex-bar-end" data-bind="css: showHeaderNav()">
+            </div>-->
+<!--            <div class="disable-actions header-end-item oj-flex-bar-end" data-bind="css: showHeaderNav()">
                 <span class="ico-container">
                     <i class="material-icons" style="display: none">notifications</i>
                 </span>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
