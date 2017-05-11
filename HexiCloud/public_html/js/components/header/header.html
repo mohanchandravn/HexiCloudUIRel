@@ -15,7 +15,7 @@ and open the template in the editor.
             </div>
             <div class="header-end-item oj-sm-align-items-center oj-flex-bar-end" data-bind="css: showHeaderNav()">
                 <div class="oj-sm-only-hide oj-margin-horizontal">
-                    <img src="css/img/notification-icon.png" alt="Notification" />
+                    <img class="notification-icon" title="Notifications" src="css/img/notification-icon.png" alt="Notification" />
                 </div>
                 <div class="oj-sm-only-hide">
                     <span class="notification-count-container">
@@ -23,7 +23,7 @@ and open the template in the editor.
                     </span>
                 </div>
                 <div class="oj-sm-only-hide oj-margin-horizontal">
-                    <img src="css/img/email-icon.png" alt="Email" />
+                    <img class="email-icon" title="Emails" src="css/img/email-icon.png" alt="Email" />
                 </div>
                 <div class="oj-sm-only-hide">
                     <span class="notification-count-container">
@@ -37,29 +37,21 @@ and open the template in the editor.
                     <div>
                         <img src="css/img/profile-icon.png" alt="Profile" />
                     </div>
-                    <span class="profile-dropdown-arrow">
+                    <div class="profile-dropdown-arrow">
                         <i class="material-icons">keyboard_arrow_down</i>
-                    </span>
+                        <div class="dropdown">
+                            <div class="dropdown-content">
+                                <div class="oj-sm-justify-content-center oj-flex">
+                                    <span class="header-username" data-bind="css: { 'display-none' :  viewportSize() !== 'SM' }, text: 'Username: ' + 'Nagaraju'"></span>
+                                </div>
+                                <a data-bind="css: { 'display-none' :  viewportSize() !== 'SM' }, text: 'Notifications - 3'"></a>
+                                <a data-bind="css: { 'display-none' :  viewportSize() !== 'SM' }, text: 'Mails - 1'"></a>
+                                <a data-bind="click: logout, text: 'Logout'"></a>
+                            </div>
+                        </div>
+                    </div>             
                 </div>
             </div>
-<!--            <div class="header-branding oj-margin-lg-start oj-margin-lg-end oj-flex-bar-middle" data-bind="css: viewportSize() !== 'SM' ? 'oj-sm-align-items-center' : ''">
-                <div class="oj-flex-item">
-                    <div class="oj-flex-bar oj-sm-only-flex-direction-column oj-sm-align-items-center">
-                        <div data-bind="css: viewportSize() !== 'SM' ? 'oj-flex-bar-start' : 'oj-sm-align-items-center'">
-                            <span class="logoSpan brand-logo">Hexi</span>
-                            <span class="logoSpan">Cloud</span>
-                        </div>
-                        <div data-bind="css: viewportSize() !== 'SM' ? 'oj-flex-bar-end' : 'oj-sm-align-items-center'">
-                            <img src="css/img/logo.png" alt=""/>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-<!--            <div class="disable-actions header-end-item oj-flex-bar-end" data-bind="css: showHeaderNav()">
-                <span class="ico-container">
-                    <i class="material-icons" style="display: none">notifications</i>
-                </span>
-            </div>-->
         </div>
     </div>
 </div>

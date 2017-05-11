@@ -24,6 +24,7 @@ and open the template in the editor.
 
 .header-wrapper span i {
     font-size: 36px !important;
+    cursor: pointer;
 }
 
 .header-start-item .logo {
@@ -36,6 +37,10 @@ and open the template in the editor.
     color: #F80000;
     padding: 8px;
     box-sizing: border-box;
+}
+
+.header-end-item .notification-icon, .email-icon {
+    cursor: pointer;
 }
 
 .header-end-item .notification-count-container {
@@ -56,7 +61,45 @@ and open the template in the editor.
     color: #AEAEAE;
 }
 
+.header-end-item .profile-dropdown-arrow {
+    height: 50px;
+    cursor: pointer;
+}
+
 .header-end-item .profile-dropdown-arrow i {
     font-size: 20px !important;
     color: #AEAEAE;
+    margin-top: 15px;
+}
+
+.header-end-item .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0px;
+    margin-top: 12px;
+    min-width: 160px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.header-end-item .dropdown-content .header-username {
+    padding: 5px 0px;
+    border-bottom: 1px solid #AEAEAE;
+}
+
+.header-end-item .dropdown-content a {
+    display: block;
+    color: #000000;
+    padding: 12px 16px;
+    text-decoration: none;
+}
+
+.header-end-item .dropdown-content a:hover {
+    color: #FFFFFF;
+    background-color: #F80000
+}
+
+.header-end-item .profile-dropdown-arrow:hover .dropdown-content {
+    display: block;
 }
