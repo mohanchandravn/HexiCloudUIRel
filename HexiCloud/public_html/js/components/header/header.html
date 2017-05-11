@@ -13,22 +13,30 @@ and open the template in the editor.
                 </span>
                 <img class="logo" src="css/img/hexicloud_email_logo.png" alt="Hexi Cloud" />
             </div>
-            <div class="header-end-item oj-sm-align-items-center oj-flex-bar-end">
-                <div class="oj-margin-horizontal">
+            <div class="header-end-item oj-sm-align-items-center oj-flex-bar-end" data-bind="css: showHeaderNav()">
+                <div class="oj-sm-only-hide oj-margin-horizontal">
                     <img src="css/img/notification-icon.png" alt="Notification" />
                 </div>
-                <div>
+                <div class="oj-sm-only-hide">
                     <span class="notification-count-container">
                         <span data-bind="text: 3"></span>
                     </span>
                 </div>
-                <div class="oj-margin-horizontal">
+                <div class="oj-sm-only-hide oj-margin-horizontal">
                     <img src="css/img/email-icon.png" alt="Email" />
                 </div>
-                <div>
+                <div class="oj-sm-only-hide">
                     <span class="notification-count-container">
                         <span data-bind="text: 1"></span>
                     </span>
+                </div>
+                <div class="oj-margin-lg-start oj-sm-align-items-center oj-flex">
+                    <div class="oj-sm-only-hide">
+                        <span class="header-username oj-margin-end" data-bind="text: userFirstLastName()"></span>
+                    </div>
+                    <div>
+                        <img src="css/img/profile-icon.png" alt="Profile" />
+                    </div>
                 </div>
             </div>
 <!--            <div class="header-branding oj-margin-lg-start oj-margin-lg-end oj-flex-bar-middle" data-bind="css: viewportSize() !== 'SM' ? 'oj-sm-align-items-center' : ''">
