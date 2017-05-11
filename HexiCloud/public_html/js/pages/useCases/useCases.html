@@ -16,7 +16,7 @@ and open the template in the editor.
                     <div id="masonryUseCases" class="oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                         <!-- ko foreach: allUseCases -->
                         <!-- ko if: id !== 10 -->
-                        <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;" data-bind="click: $parent.onClickOnUseCase()">
+                        <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;" data-bind="click: $parent.onClickOnUseCase">
                             <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
                             <div class="oj-margin-horizontal oj-flex-bar">
                                 <div class="oj-sm-align-self-center oj-flex-bar-start">

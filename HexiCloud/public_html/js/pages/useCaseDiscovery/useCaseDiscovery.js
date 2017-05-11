@@ -13,17 +13,25 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
     /**
      * The view model for the main content view template
      */
-    function useCaseDiscovery() {
+    function useCaseDiscoveryViewModel(params) {
         
         var self = this;
         
+        self.selectedUseCase = params.rootData.selectedUseCase;
+
         self.onClickFeedback = function() {
             if (selectedTemplate() === "") {
                 selectedTemplate('email_content');
             }
             $("#tech_support").slideToggle();
         };
+        
+        /*
+        self.onClickTabTCACalculator = function() {
+            window.open('https://oracle.valuestoryapp.com/iaas/', '_blank');
+        };
+        */
     }
     
-    return useCaseDiscovery;
+    return useCaseDiscoveryViewModel;
 });

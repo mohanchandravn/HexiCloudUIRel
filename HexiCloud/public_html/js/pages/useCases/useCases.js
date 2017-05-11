@@ -79,8 +79,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             $("#tech_support").slideToggle();
         };
         
-        self.onClickOnUseCase = function(event, data) {
-            // router.go('useCaseDiscovery');
+        self.onClickOnUseCase = function(data, event) {
+            if (data.id) {
+                self.selectedUseCaseDetails(data);
+            }
+            params.rootData.selectedUseCase = self.selectedUseCase();
+            router.go('useCaseDiscovery');
         };
         
         self.handleTransitionCompleted = function () {
