@@ -5,7 +5,7 @@
  */
 
 /**
- * useCases module
+ * useCaseDetail module
  */
 define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojoffcanvas',
     'components/techsupport/loader'
@@ -13,7 +13,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
     /**
      * The view model for the main content view template
      */
-    function useCasesContentViewModel(params) {
+    function useCaseDetail(params) {
         var self = this;
         var router = params.ojRouter.parentRouter;
         var useCaseDrawerRight;
@@ -79,10 +79,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             $("#tech_support").slideToggle();
         };
         
-        self.onClickOnUseCase = function(event, data) {
-            // router.go('useCaseDetail');
-        };
-        
         self.handleTransitionCompleted = function () {
             // scroll the whole window to top if it's scroll position is not on top
             $(window).scrollTop(0);
@@ -96,5 +92,5 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
   }
     
-    return useCasesContentViewModel;
+    return useCaseDetail;
 });
