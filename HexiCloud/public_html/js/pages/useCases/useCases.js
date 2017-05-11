@@ -80,7 +80,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.onClickOnUseCase = function(event, data) {
-            // router.go('useCaseDetail');
+            // router.go('useCaseDiscovery');
         };
         
         self.handleTransitionCompleted = function () {

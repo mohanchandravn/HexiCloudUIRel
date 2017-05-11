@@ -1,0 +1,34 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div id="useCaseDiscoveryPage">
+    <div id="tabs-container">
+        <div id="tabs" data-bind="ojComponent:{component: 'ojTabs'}">
+            <!-- tab bar -->
+            <ul>
+                <li><span>Core Technical Knowledge</span></li>
+                <li><span>Complementary Knowledge</span></li>
+                <li><span>TCA Calculator</span></li>
+                <li><span>Success Stories</span></li>
+            </ul>
+
+            <!-- tab contents -->
+            <div id="tabs-1">
+                <p>Tab 1 Content</p>
+            </div>
+            <div id="tabs-2">
+                <p>Tab 2 Content</p>
+            </div>
+            <div id="tabs-3">
+                <p>Tab 3 Content</p>
+            </div>
+            <div id="tabs-4">
+                <p>Tab 4 Content</p>
+            </div>
+        </div>
+    </div>
+</div>
+<img class="need-help" src="css/img/need-help.png" data-bind="click: onClickFeedback" alt="" />
+<tech-support references="{{references}}" is-panel-visible="{{false}}"></tech-support>

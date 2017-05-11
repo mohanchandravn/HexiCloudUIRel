@@ -131,8 +131,8 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 'createUsers': {label: 'Add Users', value: getPath('addUsersTutorial')},
                 'techSupport': {label: 'Techical Support', value: getPath('techSupport')},
                 'useCases': {label: 'Use Cases', value: getPath('useCases')},
-                'useCaseDetail': {label: 'Use Case Detail', value: getPath('useCaseDetail')},
                 'useCaseSelection': {label: 'Use Case Selection', value: getPath('useCaseSelection')},
+                'useCaseDiscovery': {label: 'Use Case Discovery', value: getPath('useCaseDiscovery')},
                 'faqs': {label: 'FAQ\'s', value: getPath('faqs')},
                 'error': {label: 'Error', value: getPath('error')}
             });
@@ -194,7 +194,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 self.showHeaderNav = ko.computed(function () {
                     var id = router.currentState().id;
-                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs"];
+                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery"];
                     return (pages.indexOf(id) > -1) ? '' : 'visibility-hidden';
                 });
 
