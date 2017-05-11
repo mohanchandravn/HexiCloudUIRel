@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 11, 2017, 11:46:39 AM
+    Author     : nithin narayanan
+*/
+
+#useCaseDiscoveryPage .oj-selected .oj-tabs-title {
+    color: #F80000;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#useCaseDiscoveryPage .oj-tabs-tab.oj-selected {
+    border-color: #F80000;
+}
+
+#useCaseDiscoveryPage .oj-tabs-title {
+    text-decoration: none;
+}
+
+#useCaseDiscoveryPage .oj-tabs-title:hover {
+    text-decoration: none;
+}
