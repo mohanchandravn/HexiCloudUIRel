@@ -24,6 +24,7 @@ and open the template in the editor.
 
 .header-wrapper span i {
     font-size: 36px !important;
+    cursor: pointer;
 }
 
 .header-start-item .logo {

@@ -152,7 +152,8 @@ navigationbarleft {
 }
 
 .nav-list li:first-child span {
-    /* margin-left: 10px; */
+    margin-left: 10px;
+    margin-top: 4px;
 }
 
 .nav-list li:not(:last-child) {
