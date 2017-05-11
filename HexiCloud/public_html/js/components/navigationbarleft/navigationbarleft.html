@@ -6,19 +6,20 @@ and open the template in the editor.
 
 <div class="navigation-left oj-flex">
     <div class="oj-sm-12 oj-flex-item">
-        <!--<a id="navClose" data-bind="click: toggleLeft"><i class="material-icons">close</i></a>-->
-        <ul class="nav-list">
-            <li id="dashboard" data-bind="click: routeToDashboard, css: isDashboardSelected() === true? currentSelectedCss: ''">
-                <div class="list-header oj-flex-bar">
-                    <div class="oj-flex-bar-start"><i class="material-icons">home</i><span>Dashboard</span></div>
-                </div>
+        <ul class="pages-nav-list nav-list">
+            <li id="dashboard" class="oj-sm-align-items-center oj-flex" data-bind="click: routeToDashboard, css: getStateId() ===  'dashboard' ? 'selected' : ''">
+                <img class="nav-icons" src="css/img/dashboard-icon.png" alt="Dashboard" />
+                <span>Dashboard</span>
             </li>
-            <li id="useCases" data-bind="click: routeToUsecase,css: isUseCaseSelected() === true ? currentSelectedCss: ''">
-                <div class="list-header oj-flex-bar">
-                    <div class="oj-flex-bar-start"><span>Use Cases</span></div>
-                </div>
+            <li class="oj-sm-align-items-center oj-flex">
+                <img class="nav-icons" src="css/img/my-services-icon.png" alt="My Services" />
+                <span>My Services</span>
             </li>
-            <li id="resources" data-bind="click: routeToResources,css: isResourceSelected() === true ? currentSelectedCss: ''">
+            <li id="useCases" class="oj-sm-align-items-center oj-flex" data-bind="click: routeToUsecase, css: getStateId() ===  'useCases' ? 'selected' : ''">
+                <img class="nav-icons" src="css/img/use-cases-icon.png" alt="Dashboard" />
+                <span>Use Cases</span>
+            </li>
+            <li id="resources" data-bind="click: routeToResources">
                 <div class="list-header oj-flex-bar">
                     <div class="oj-flex-bar-start"><span>Resources</span></div>
                     <div class="oj-flex-bar-end"><i id="resourcesToggle" class="material-icons">keyboard_arrow_down</i></div>
@@ -33,7 +34,7 @@ and open the template in the editor.
                     </ul>
                 </div>
             </li>
-            <li data-bind="css: isContactSelected() === true ? currentSelectedCss : ''">
+            <li>
                 <div class="list-header oj-flex-bar" data-bind="click: toggleContactType">
                     <div class="oj-flex-bar-start"><span>Contact</span></div>
                     <div class="oj-flex-bar-end"><i id="contactToggle" class="material-icons">keyboard_arrow_down</i></div>
@@ -61,10 +62,9 @@ and open the template in the editor.
                     </ul>
                 </div>
             </li>
-            <li id="logout">
-                <div class="oj-flex-bar">
-                    <div class="list-header oj-flex-bar-start"><span><a data-bind="click: logout">Logout</a></span></div>
-                </div>
+            <li id="logout" class="oj-sm-align-items-center oj-flex" data-bind="click: logout">
+                <img class="nav-icons" src="css/img/logout-icon.png" alt="Logout" />
+                <span>Logout</span>
             </li>
         </ul>
     </div>

@@ -180,12 +180,12 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.changingNumber = ko.observable(false);
                 self.userFirstLastName = ko.observable(sessionInfo.getFromSession(sessionInfo.userFirstLastName));
                 self.userClmRegistryId = ko.observable(sessionInfo.getFromSession(sessionInfo.userClmRegistryId));
-                self.isChatInitialized = ko.observable(false);
-                self.isDashboardSelected = ko.observable(true);
-                self.isUseCaseSelected = ko.observable(false);
-                self.isResourceSelected = ko.observable(false);
-                self.isContactSelected = ko.observable(false);
-                self.currentSelectedCss = "selectedList";
+//                self.isChatInitialized = ko.observable(false);
+//                self.isDashboardSelected = ko.observable(true);
+//                self.isUseCaseSelected = ko.observable(false);
+//                self.isResourceSelected = ko.observable(false);
+//                self.isContactSelected = ko.observable(false);
+//                self.currentSelectedCss = "selectedList";
 
                 self.slideInEffect = ko.observable('slideIn');
                 self.slideOutEffect = ko.observable('slideOut');
@@ -276,9 +276,9 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     }
                 };
 
-                self.getStateId = function () {
+                self.getStateId = ko.computed( function () {
                     return router.currentState().id;
-                };
+                });
 
                 self.FailCallBackFn = function (xhr) {
                     hidePreloader();
@@ -289,7 +289,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.dashboardServices = ko.observableArray([]);
 
                 self.toggleContactType = function () {
-                    self.clearSelectedList();
+//                    self.clearSelectedList();
                     self.isContactSelected(true);
                     if ($("#contactType").hasClass("oj-sm-hide")) {
                         $("#contactType").removeClass("oj-sm-hide");
@@ -330,7 +330,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         "userAction": "Clicked Dashboard"
                     }, true);
                     routeTo(data, event);
-                    self.isDashboardSelected(true);
+//                    self.isDashboardSelected(true);
                 };
 
                 self.routeToUsecase = function (data, event) {
@@ -342,7 +342,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         "userAction": "Clicked Use Cases"
                     }, true);
                     routeTo(data, event);
-                    self.isUseCaseSelected(true);
+//                    self.isUseCaseSelected(true);
                 };
                 
                 self.routeToUseCaseSelection = function (data, event) {
@@ -351,8 +351,8 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 self.routeToResources = function (data, event) {
                     //routeTo(data,event);
-                    self.clearSelectedList();
-                    self.isResourceSelected(true);
+//                    self.clearSelectedList();
+//                    self.isResourceSelected(true);
                     self.toggleResourcesType();
                 };
 
@@ -365,23 +365,23 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         "preStepCode": getStateId(),
                         "userAction": "Clicked FAQ's"
                     }, true);
-                    self.clearSelectedList();
+//                    self.clearSelectedList();
                     routeTo(data, event);
                 };
 
                 var routeTo = function (data, event) {
                     console.log(event.currentTarget.id);
-                    self.clearSelectedList();
+//                    self.clearSelectedList();
                     router.go(event.currentTarget.id + '/');
                     self.toggleLeft();
                 };
 
-                self.clearSelectedList = function () {
-                    self.isDashboardSelected(false);
-                    self.isUseCaseSelected(false);
-                    self.isResourceSelected(false);
-                    self.isContactSelected(false);
-                };
+//                self.clearSelectedList = function () {
+//                    self.isDashboardSelected(false);
+//                    self.isUseCaseSelected(false);
+//                    self.isResourceSelected(false);
+//                    self.isContactSelected(false);
+//                };
 
 
                 self.capturedEvent = function (data, event) {
@@ -401,12 +401,14 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                     var logoutSuccessCallback = function () {
                         sessionInfo.removeAllFromSession();
-                        self.toggleLeft();
+                        if (event.currentTarget.id !== 'logoutFromDropdown') {
+                            self.toggleLeft();
+                        }
                         $("#tech_support").hide();
-                        self.isDashboardSelected(true);
-                        self.isUseCaseSelected(false);
-                        self.isResourceSelected(false);
-                        self.isContactSelected(false);
+//                        self.isDashboardSelected(true);
+//                        self.isUseCaseSelected(false);
+//                        self.isResourceSelected(false);
+//                        self.isContactSelected(false);
                         router.go('home/');
                         self.isPhoneNumberAdded();
                     };
@@ -414,12 +416,12 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 };
 
-                $(window).resize(function () {
-                    if (oj.ResponsiveUtils.compare(self.screenRange(), oj.ResponsiveUtils.SCREEN_RANGE.LG) < 0) {
-                        self.isChatInitialized(false);
-                    }
-//                    self.autoAlignContent();
-                });
+//                $(window).resize(function () {
+//                    if (oj.ResponsiveUtils.compare(self.screenRange(), oj.ResponsiveUtils.SCREEN_RANGE.LG) < 0) {
+//                        self.isChatInitialized(false);
+//                    }
+////                    self.autoAlignContent();
+//                });
 
                 self.selectedTemplate = ko.observable('');
 
