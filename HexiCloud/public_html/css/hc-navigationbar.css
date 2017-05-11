@@ -9,7 +9,8 @@ and open the template in the editor.
 */
 
 navigationbarleft {
-    background-color: #FFFFFF;
+    background-color: #31353D;
+    /*background-color: #FFFFFF;*/
     border-right: 2px solid #b0c6d1;
 }
 
@@ -74,7 +75,8 @@ navigationbarleft {
 
 .nav-list li {
     font-size: 20px;
-    color: #324b5c;
+    color: #FFFFFF;
+/*    color: #324b5c;*/
     /* padding: 16px 30px; */
     min-height: 54px;
     box-sizing: border-box;

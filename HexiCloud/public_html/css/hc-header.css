@@ -55,3 +55,8 @@ and open the template in the editor.
     font-size: 14px;
     color: #AEAEAE;
 }
+
+.header-end-item .profile-dropdown-arrow i {
+    font-size: 20px !important;
+    color: #AEAEAE;
+}
