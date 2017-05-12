@@ -6,59 +6,59 @@ requirejs.config({
     baseUrl: 'js',
     // Path mappings for the logical module names
     paths:
-            //injector:mainReleasePaths
-                    {
-                        'knockout': 'libs/knockout/knockout-3.4.0',
-                        'jquery': 'libs/jquery/jquery-3.1.1.min',
-                        'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0.min',
-                        'promise': 'libs/es6-promise/es6-promise.min',
-                        'hammerjs': 'libs/hammer/hammer-2.0.8.min',
-                        'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
-                        'ojs': 'libs/oj/v3.0.0/min',
-                        'ojL10n': 'libs/oj/v3.0.0/ojL10n',
-                        'ojtranslations': 'libs/oj/v3.0.0/resources',
-                        'text': 'libs/require/text',
-                        'signals': 'libs/js-signals/signals.min',
-                        'customElements': 'libs/webcomponents/CustomElements.min',
-                        'proj4': 'libs/proj4js/dist/proj4-src',
-                        'css': 'libs/require-css/css.min'
+    //injector:mainReleasePaths
+    {
+        'knockout': 'libs/knockout/knockout-3.4.0',
+        'jquery': 'libs/jquery/jquery-3.1.1.min',
+        'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0.min',
+        'promise': 'libs/es6-promise/es6-promise.min',
+        'hammerjs': 'libs/hammer/hammer-2.0.8.min',
+        'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
+        'ojs': 'libs/oj/v3.0.0/min',
+        'ojL10n': 'libs/oj/v3.0.0/ojL10n',
+        'ojtranslations': 'libs/oj/v3.0.0/resources',
+        'text': 'libs/require/text',
+        'signals': 'libs/js-signals/signals.min',
+        'customElements': 'libs/webcomponents/CustomElements.min',
+        'proj4': 'libs/proj4js/dist/proj4-src',
+        'css': 'libs/require-css/css.min'
 
 
 
-                                //    'knockout': 'libs/knockout/knockout-3.4.0',
-                                //    'jquery': 'libs/jquery/jquery-3.1.0.min',
-                                //    'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0.min',
-                                //    'ojs': 'libs/oj/v2.2.0/min',
-                                //    'ojL10n': 'libs/oj/v2.2.0/ojL10n',
-                                //    'ojtranslations': 'libs/oj/v2.2.0/resources',
-                                //    'signals': 'libs/js-signals/signals.min',
-                                //    'text': 'libs/require/text',
-                                //    'promise': 'libs/es6-promise/es6-promise.min',
-                                //    'hammerjs': 'libs/hammer/hammer-2.0.8.min',
-                                //    'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
-                                //    'css': 'libs/require-css/css.min'
+                //    'knockout': 'libs/knockout/knockout-3.4.0',
+                //    'jquery': 'libs/jquery/jquery-3.1.0.min',
+                //    'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0.min',
+                //    'ojs': 'libs/oj/v2.2.0/min',
+                //    'ojL10n': 'libs/oj/v2.2.0/ojL10n',
+                //    'ojtranslations': 'libs/oj/v2.2.0/resources',
+                //    'signals': 'libs/js-signals/signals.min',
+                //    'text': 'libs/require/text',
+                //    'promise': 'libs/es6-promise/es6-promise.min',
+                //    'hammerjs': 'libs/hammer/hammer-2.0.8.min',
+                //    'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
+                //    'css': 'libs/require-css/css.min'
 //                        'utilities': 'utils/utilities'
-                    }
-            //endinjector
-            ,
-            // Shim configurations for modules that do not expose AMD
-            shim: {
-                'jquery': {
-                    exports: ['jQuery', '$']
-                }
-            },
-            // This section configures the i18n plugin. It is merging the Oracle JET built-in translation
-            // resources with a custom translation file.
-            // Any resource file added, must be placed under a directory named "nls". You can use a path mapping or you can define
-            // a path that is relative to the location of this main.js file.
-            config: {
-                ojL10n: {
-                    merge: {
-                        //'ojtranslations/nls/ojtranslations': 'resources/nls/menu'
-                    }
-                }
+    }
+    //endinjector
+    ,
+    // Shim configurations for modules that do not expose AMD
+    shim: {
+        'jquery': {
+            exports: ['jQuery', '$']
+        }
+    },
+    // This section configures the i18n plugin. It is merging the Oracle JET built-in translation
+    // resources with a custom translation file.
+    // Any resource file added, must be placed under a directory named "nls". You can use a path mapping or you can define
+    // a path that is relative to the location of this main.js file.
+    config: {
+        ojL10n: {
+            merge: {
+                //'ojtranslations/nls/ojtranslations': 'resources/nls/menu'
             }
-        });
+        }
+    }
+});
 
 /**
  * A top-level require call executed by the Application.
@@ -89,7 +89,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
             oj.ModuleBinding.defaults.modelPath = './';
             oj.ModuleBinding.defaults.viewPath = 'text!./';
 
-
             // Retrieve the router static instance and configure the states
             var router = oj.Router.rootInstance;
             // Set the router base URL to the href of this page. This is needed when
@@ -100,22 +99,22 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
             ko.components.register('header-content', {require: 'components/header/header'});
             ko.components.register('navigationbarleft', {require: 'components/navigationbarleft/navigationbarleft'});
             ko.components.register('navigationbarright', {require: 'components/navigationbarright/navigationbarright'});
+            ko.components.register('usecasedetails', {require: 'components/usecasedetails/usecasedetails'});
 
             function getPath(path) {
                 if (path === 'learningFlow')
                     return "pages/learning/" + path;
                 else
                     return "pages/" + path + "/" + path;
-            }
-            ;
+            };
 
             router.configure({
                 'home': {label: 'Home', value: getPath('home'), isDefault: true},
                 'login': {label: 'Login', value: getPath('login')},
 //                'hello': {label: 'Hello', value: getPath('hello')},
                 'roleIdentified': {label: 'Role Identified', value: getPath('roleIdentified')},
-//                'chooseRole': {label: 'Choose Role', value: getPath('chooseRole')},
-                'chooseRole': {label: 'Choose Role', value: getPath('chooseRoleNew')},
+//                'chooseRoleOld': {label: 'Choose Role Old', value: getPath('chooseRoleOld')},
+                'chooseRole': {label: 'Choose Role', value: getPath('chooseRole')},
 //                'createUsers': {label: 'Create Users', value: getPath('createUsers')},
 //                'addAdditionalUsers': {label: 'Add Additional Users', value: getPath('addAdditionalUsers')},
                 'learning': {label: 'Learning', value: getPath('learning')},
@@ -132,6 +131,8 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 'createUsers': {label: 'Add Users', value: getPath('addUsersTutorial')},
                 'techSupport': {label: 'Techical Support', value: getPath('techSupport')},
                 'useCases': {label: 'Use Cases', value: getPath('useCases')},
+                'useCaseSelection': {label: 'Use Case Selection', value: getPath('useCaseSelection')},
+                'useCaseDiscovery': {label: 'Use Case Discovery', value: getPath('useCaseDiscovery')},
                 'faqs': {label: 'FAQ\'s', value: getPath('faqs')},
                 'error': {label: 'Error', value: getPath('error')}
             });
@@ -179,20 +180,21 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.changingNumber = ko.observable(false);
                 self.userFirstLastName = ko.observable(sessionInfo.getFromSession(sessionInfo.userFirstLastName));
                 self.userClmRegistryId = ko.observable(sessionInfo.getFromSession(sessionInfo.userClmRegistryId));
-                self.isChatInitialized = ko.observable(false);
-                self.isDashboardSelected = ko.observable(true);
-                self.isUseCaseSelected = ko.observable(false);
-                self.isResourceSelected = ko.observable(false);
-                self.isContactSelected = ko.observable(false);
-                self.currentSelectedCss = "selectedList";
+//                self.isChatInitialized = ko.observable(false);
+//                self.isDashboardSelected = ko.observable(true);
+//                self.isUseCaseSelected = ko.observable(false);
+//                self.isResourceSelected = ko.observable(false);
+//                self.isContactSelected = ko.observable(false);
+//                self.currentSelectedCss = "selectedList";
 
                 self.slideInEffect = ko.observable('slideIn');
                 self.slideOutEffect = ko.observable('slideOut');
-
+                
+                self.isCapturePhaseCompleted = ko.observable(false);
 
                 self.showHeaderNav = ko.computed(function () {
                     var id = router.currentState().id;
-                    var pages = ["dashboard", "useCases", "faqs"];
+                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery"];
                     return (pages.indexOf(id) > -1) ? '' : 'visibility-hidden';
                 });
 
@@ -274,9 +276,9 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     }
                 };
 
-                self.getStateId = function () {
+                self.getStateId = ko.computed( function () {
                     return router.currentState().id;
-                };
+                });
 
                 self.FailCallBackFn = function (xhr) {
                     hidePreloader();
@@ -287,7 +289,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.dashboardServices = ko.observableArray([]);
 
                 self.toggleContactType = function () {
-                    self.clearSelectedList();
+//                    self.clearSelectedList();
                     self.isContactSelected(true);
                     if ($("#contactType").hasClass("oj-sm-hide")) {
                         $("#contactType").removeClass("oj-sm-hide");
@@ -328,7 +330,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         "userAction": "Clicked Dashboard"
                     }, true);
                     routeTo(data, event);
-                    self.isDashboardSelected(true);
+//                    self.isDashboardSelected(true);
                 };
 
                 self.routeToUsecase = function (data, event) {
@@ -340,13 +342,17 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         "userAction": "Clicked Use Cases"
                     }, true);
                     routeTo(data, event);
-                    self.isUseCaseSelected(true);
+//                    self.isUseCaseSelected(true);
+                };
+                
+                self.routeToUseCaseSelection = function (data, event) {
+                    router.go(event.currentTarget.id + '/');
                 };
 
                 self.routeToResources = function (data, event) {
                     //routeTo(data,event);
-                    self.clearSelectedList();
-                    self.isResourceSelected(true);
+//                    self.clearSelectedList();
+//                    self.isResourceSelected(true);
                     self.toggleResourcesType();
                 };
 
@@ -359,23 +365,23 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         "preStepCode": getStateId(),
                         "userAction": "Clicked FAQ's"
                     }, true);
-                    self.clearSelectedList();
+//                    self.clearSelectedList();
                     routeTo(data, event);
                 };
 
                 var routeTo = function (data, event) {
                     console.log(event.currentTarget.id);
-                    self.clearSelectedList();
+//                    self.clearSelectedList();
                     router.go(event.currentTarget.id + '/');
                     self.toggleLeft();
                 };
 
-                self.clearSelectedList = function () {
-                    self.isDashboardSelected(false);
-                    self.isUseCaseSelected(false);
-                    self.isResourceSelected(false);
-                    self.isContactSelected(false);
-                };
+//                self.clearSelectedList = function () {
+//                    self.isDashboardSelected(false);
+//                    self.isUseCaseSelected(false);
+//                    self.isResourceSelected(false);
+//                    self.isContactSelected(false);
+//                };
 
 
                 self.capturedEvent = function (data, event) {
@@ -395,12 +401,14 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                     var logoutSuccessCallback = function () {
                         sessionInfo.removeAllFromSession();
-                        self.toggleLeft();
+                        if (event.currentTarget.id !== 'logoutFromDropdown') {
+                            self.toggleLeft();
+                        }
                         $("#tech_support").hide();
-                        self.isDashboardSelected(true);
-                        self.isUseCaseSelected(false);
-                        self.isResourceSelected(false);
-                        self.isContactSelected(false);
+//                        self.isDashboardSelected(true);
+//                        self.isUseCaseSelected(false);
+//                        self.isResourceSelected(false);
+//                        self.isContactSelected(false);
                         router.go('home/');
                         self.isPhoneNumberAdded();
                     };
@@ -408,12 +416,12 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 };
 
-                $(window).resize(function () {
-                    if (oj.ResponsiveUtils.compare(self.screenRange(), oj.ResponsiveUtils.SCREEN_RANGE.LG) < 0) {
-                        self.isChatInitialized(false);
-                    }
-//                    self.autoAlignContent();
-                });
+//                $(window).resize(function () {
+//                    if (oj.ResponsiveUtils.compare(self.screenRange(), oj.ResponsiveUtils.SCREEN_RANGE.LG) < 0) {
+//                        self.isChatInitialized(false);
+//                    }
+////                    self.autoAlignContent();
+//                });
 
                 self.selectedTemplate = ko.observable('');
 

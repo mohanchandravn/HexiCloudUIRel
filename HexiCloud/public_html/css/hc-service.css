@@ -7,6 +7,11 @@ and open the template in the editor.
     Created on : Jan 16, 2017, 1:33:29 PM
     Author     : nyasarap
 */
+
+.servicesMini-page {
+    margin-top: 50px;
+}
+
 .services-content {
     padding-top: 20px;       
     padding-bottom: 20px;
@@ -93,11 +98,6 @@ and open the template in the editor.
 
 }
 
-.oj-masonrylayout-tile-1x1 {
-    width: 200px;
-    height: 200px;
-}
-
 .services-mini-item {
     /*width: 165px;*/
     /*min-height: 120px;*/
@@ -122,7 +122,7 @@ and open the template in the editor.
 /*All the styles for provisioned Services goes here*/
 
 .provisioned-services {
-    margin-top: 65px;
+    padding-top: 10px;
 }
 
 .provisioned-services .content.stage {

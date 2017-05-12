@@ -30,6 +30,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         self.serverURI = ko.observable("https://documents-gse00002841.documents.us2.oraclecloud.com/documents/link/");
 
         self.updateCurrentStep = function (payload, doNotRoute) {
+            console.log('payload : '+ JSON.stringify(payload));
             // var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/createUserStep/";
             $.ajax({
@@ -128,6 +129,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.submitSR = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/saveAndSendEmail/";
             $.ajax({
@@ -151,6 +153,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.authenticate = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/login";
             $.ajax({
@@ -169,6 +172,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 contentType: "application/x-www-form-urlencoded",
                 data: payload,
                 success: function (data, textStatus, xhr) {
+                    console.log('Successfully posted data at: ' + serverURL);
                     defer.resolve(data, {status: xhr.status});
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -230,6 +234,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -251,6 +256,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -272,7 +278,8 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 dataType: "json",
                 success: function (data, status) {
-                    defer.resolve(data, status)
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log("Error retrieving service details for: " + usecaseCode);
@@ -282,13 +289,243 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
 
-        self.forgotPasswordService = function (userId) {
+        self.getAllUseCases = function () {
             var defer = $.Deferred();
-            var serviceUrl = self.portalRestHost() + "/services/rest/forgotPasswordService/" + userId + "/";
+//             var serverURL = "js/pages/useCaseSelection/use_cases.json";
+            var serverURL = self.portalRestHost() + "/services/rest/getAllUseCases";
             $.ajax({
                 type: 'GET',
-                url: serviceUrl,
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
                 success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getUseCasesForUser = function () {
+            var defer = $.Deferred();
+//            var serverURL = "js/pages/useCaseSelection/use_cases.json";
+            var serverURL = self.portalRestHost() + "/services/rest/getUseCasesForUser";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getTailoredUseCases = function () {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/getTailoredUseCases";
+//            var serverURL = "js/pages/useCaseSelection/use_cases.json";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+
+        self.getDecisionTree = function() {
+            var defer = $.Deferred();
+            // var serverURL = "js/pages/useCaseSelection/decisionTree.json";
+            var serverURL = self.portalRestHost() + "/services/rest/getDecisionTree";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+
+        self.getUseCaseDemoDetails = function (useCaseId) {
+            var defer = $.Deferred();
+            var serverURL = "js/pages/useCaseSelection/useCaseSelectionDetails.json";
+//            var serverURL = self.portalRestHost() + "/services/rest/usecases/" + useCaseId + "/";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+//                beforeSend: function (request) {
+//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+//                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+
+        self.getAllServices = function () {
+            var defer = $.Deferred();
+            //var serverURL = "js/pages/useCaseSelection/services.json";
+            var serverURL = self.portalRestHost() + "/services/rest/getAllServices";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getSelectedUseCaseBenefits = function () {
+            var defer = $.Deferred();
+            var serverURL = "js/pages/useCaseSelection/benefits.json";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+//                beforeSend: function (request) {
+//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+//                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getUseCaseBenefits = function () {
+            var defer = $.Deferred();
+            var serverURL = "js/pages/useCaseSelection/otherUseCaseBenefits.json";
+//            var serverURL = self.portalRestHost() + "/services/rest/getUseCaseBenefits";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.saveUserUseCases = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/saveUserUseCases/";
+            $.ajax({
+                type: "POST",
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                contentType: "application/json",
+                data: JSON.stringify(payload),
+                success: function (data) {
+                    console.log('Successfully posted data at: ' + serverURL);
+                    defer.resolve(data, {status: 200});
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error posting data to the service" + serverURL);
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.markUCCaptureCompletion = function () {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/markUCCaptureCompletion/";
+            $.ajax({
+                type: "POST",
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                contentType: "application/json",
+                success: function (data) {
+                    console.log('Successfully posted data at: ' + serverURL);
+                    defer.resolve(data, {status: 200});
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error posting data to the service" + serverURL);
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };       
+
+        self.forgotPasswordService = function (userId) {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/forgotPasswordService/" + userId + "/";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -299,17 +536,19 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.updatePasswordService = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
-            var serviceUrl = self.portalRestHost() + "/services/rest/resetPassword/";
+            var serverURL = self.portalRestHost() + "/services/rest/resetPassword/";
             $.ajax({
                 type: 'POST',
-                url: serviceUrl,
+                url: serverURL,
                 contentType: "application/json",
                 data: payload,
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
                 success: function (data, status) {
+                    console.log('Successfully posted data at: ' + serverURL);
                     defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -320,6 +559,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.requestCallBack = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/requestCallback/";
             $.ajax({
@@ -367,6 +607,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
 
         self.updateAudit = function (payload) {
+            console.log('payload : '+ JSON.stringify(payload));
             var serverURL = self.portalRestHost() + "/services/rest/updateAudit/";
             $.ajax({
                 type: "POST",
@@ -376,6 +617,23 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 },
                 contentType: "application/json",
                 data: JSON.stringify(payload),
+                success: function (data, textStatus, xhr) {
+                    console.log('Successfully posted data at: ' + serverURL);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error posting data to the service : " + serverURL);
+                }
+            });
+        };
+        
+        self.notifyUCSelectionIgnored = function () {
+            var serverURL = self.portalRestHost() + "/services/rest/notifyUCSelectionIgnored";
+            $.ajax({
+                type: "GET",
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
                 success: function (data, textStatus, xhr) {
                     console.log('Successfully posted data at: ' + serverURL);
                 },

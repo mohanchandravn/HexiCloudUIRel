@@ -9,10 +9,11 @@ and open the template in the editor.
 */
 
 navigationbarleft {
-/*    background-color: rgba(216, 225, 229, 0.9);*/
-    background-color: rgb(255,255,255);
+    background-color: #31353D;
+    /*background-color: #FFFFFF;*/
+    border-right: 2px solid #b0c6d1;
 }
-    
+/*
 .chat-window {
     position: fixed;
     width: 250px;
@@ -40,7 +41,7 @@ navigationbarleft {
     padding-top: 40px;
     background-size: 40px 40px;
     background-repeat: no-repeat;
-    /* 4px is the 10th part of backgrond-size (40px) */
+     4px is the 10th part of backgrond-size (40px) 
     background-position: 36px 0px;
 }
 
@@ -49,13 +50,13 @@ navigationbarleft {
     padding-top: 60px;
     background-size: 60px 60px;
     background-repeat: no-repeat;
-    /* 6px is the 10th part of backgrond-size (60px) */
+     6px is the 10th part of backgrond-size (60px) 
     background-position: 80px 0px;
 }
 
 .chat-container {
     min-height: 400px;
-    /*border: 1px solid #F5EBDC;*/
+    border: 1px solid #F5EBDC;
 }
 
 .chat-send {
@@ -64,25 +65,43 @@ navigationbarleft {
     padding-top: 6px;
     background-color: #F6ECDD;
     cursor: pointer;
+}*/
+
+.pages-nav-list {
+    margin: 50px 0px;
 }
 
 .nav-list {
-    margin: 0px;
+    margin: 50px 0px;
     padding-left: 0;
     list-style: none;
 }
 
+.nav-list .nav-icons {
+    width: 22px;
+    height: 22px;
+    margin-right: 20px;
+}
+
 .nav-list li {
-    font-size: 20px;
-    color: #324b5c;
-    /* padding: 16px 30px; */
-    min-height: 54px;
+    font-size: 18px;
+    color: #FFFFFF;
+    height: 45px;
+    padding: 0px 40px;
     box-sizing: border-box;
     cursor: pointer;
 }
 
-.nav-list li .list-header {
-    padding: 16px 30px;
+.nav-list li:hover {
+    color: #000000;
+    border-left: 6px solid #F80000;
+    background: #FFFFFF;
+}
+
+.nav-list li.selected {
+    color: #000000;
+    border-left: 6px solid #F80000;
+    background: #FFFFFF;
 }
 
 .nav-list li .list-detail {
@@ -150,12 +169,13 @@ navigationbarleft {
 }
 
 .nav-list li:first-child span {
-    /* margin-left: 10px; */
+    margin-left: 10px;
+    margin-top: 4px;
 }
 
-.nav-list li:not(:last-child) {
+/*.nav-list li:not(:last-child) {
     border-bottom: 2px solid #b0c6d1;
-}
+}*/
 
 .nav-list li.sub-nav:not(:last-child) {
     border-bottom: none;

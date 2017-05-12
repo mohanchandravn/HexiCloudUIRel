@@ -3,131 +3,194 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div class="dashboard-page container">
-    <div class="provisioned-services dashboard oj-flex">
-        <span class="heading-type2 oj-sm-12 oj-flex-item">Welcome to the Dashboard</span>
-        <span class="heading-type4 oj-sm-12 oj-flex-item">The dashboard page provides you with a snapshot of your provisioned services, relevant use cases and your progress within the How-to guides. Further information click within each section to directed to the relevant page.</span>
-        <!-- ko if: noServices() -->
-        <div class="oj-sm-12 oj-flex-item">
-            <div class="oj-flex">
-                <div class="oj-sm-12 oj-flex-item">
-                    <div class="content stage oj-flex">
-                        <span class="heading-type4 oj-sm-12 oj-flex-item">We cannot find any services associated with your account, please contact CSC to resolve the issue.</span>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /ko -->
-        <!-- ko ifnot: noServices() -->
-
-        <div class="oj-sm-12 oj-flex-item">
-            <div class="oj-flex">
-                <div class="oj-sm-12 oj-flex-item">
-                    <div class="content stage oj-flex">
-                        <span class="heading-type2 oj-sm-12 oj-flex-item">Your services</span>
-                        <span class="heading-type4 oj-sm-12 oj-flex-item">Please see below an overview of your provisioned services. To display all your provisioned services click ‘View all’</span>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="oj-sm-12 oj-flex-item">
-            <div class="oj-flex oj-flex-items-pad">
-                <!-- ko foreach: serviceItems -->
-                <div class="oj-flex-item oj-md-10 oj-lg-3">
-                    <div class="service" data-bind="css: $parent.getClass(service)">
-                        <div class="head">
-                            <div class="laas"><img src="css/img/laas-icon.png"><span style="color: white; font-weight:lighter" data-bind="text: platform"></span></div>
-                            <img data-bind="attr:{src:$parent.getIcon(service)}" class="img-dimen" alt="Image">
-                            <p class="metered" data-bind="text: serviceType === '' ? '&nbsp;' : serviceType"></p>
-                            <h4 class="serviceName" data-bind="text: service"></h4>
+<div class="dashboard-page oj-offcanvas-outer-wrapper">
+    <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
+        <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
+        <div class="provisioned-services dashboard oj-flex">
+            <span class="heading-type2 oj-sm-12 oj-flex-item">Welcome to the Dashboard</span>
+            <span class="heading-type4 oj-sm-12 oj-flex-item">The dashboard page provides you with a snapshot of your provisioned services, relevant use cases and your progress within the How-to guides. Further information click within each section to directed to the relevant page.</span>
+            <!-- ko if: noServices() -->
+            <div class="oj-sm-12 oj-flex-item">
+                <div class="oj-flex">
+                    <div class="oj-sm-12 oj-flex-item">
+                        <div class="content stage oj-flex">
+                            <span class="heading-type4 oj-sm-12 oj-flex-item">We cannot find any services associated with your account, please contact CSC to resolve the issue.</span>
+                            <hr>
                         </div>
-                        <div class="body oj-flex" data-bind="css: 'row-count-' + $parent.detailsContentMaxHeight()">
-                            <div class="oj-sm-12 oj-flex-item">
-                                <!-- ko foreach: details -->
-                                <p class="serviceDetails oj-sm-justify-content-center oj-sm-align-items-flex-end oj-flex">
-                                    <span class="uom-quantity" data-bind="text: quantity"></span>&nbsp;<span class="uom-measurement" data-bind="text: uom"></span>
-                                    <!-- ko if: tier9ShortDesc !== null && tier9ShortDesc !== "" -->
-                                    &nbsp;<span class="short-desc" data-bind="text: '(' + tier9ShortDesc + ')', attr: { title: tier9LongDesc }"></span>
-                                    <!-- /ko -->
-                                </p>
-                                <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: noServices() -->
+
+            <div class="oj-sm-12 oj-flex-item">
+                <div class="oj-flex">
+                    <div class="oj-sm-12 oj-flex-item">
+                        <div class="content stage oj-flex">
+                            <span class="heading-type2 oj-sm-12 oj-flex-item">Your services</span>
+                            <span class="heading-type4 oj-sm-12 oj-flex-item">Please see below an overview of your provisioned services. To display all your provisioned services click ‘View all’</span>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="oj-sm-12 oj-flex-item">
+                <div class="oj-flex oj-flex-items-pad">
+                    <!-- ko foreach: serviceItems -->
+                    <div class="oj-flex-item oj-md-10 oj-lg-3">
+                        <div class="service" data-bind="css: $parent.getClass(service)">
+                            <div class="head">
+                                <div class="laas"><img src="css/img/laas-icon.png"><span style="color: white; font-weight:lighter" data-bind="text: platform"></span></div>
+                                <img data-bind="attr:{src:$parent.getIcon(service)}" class="img-dimen" alt="Image">
+                                <p class="metered" data-bind="text: serviceType === '' ? '&nbsp;' : serviceType"></p>
+                                <h4 class="serviceName" data-bind="text: service"></h4>
                             </div>
-                            <div class="oj-sm-align-self-flex-end oj-sm-12 oj-flex-item">
-                                <div class="oj-sm-justify-content-center oj-flex">
-                                    <a class="view-more-button oj-sm-6 oj-flex-item" data-bind="click: $parent.openServiceDetail">View More</a>
+                            <div class="body oj-flex" data-bind="css: 'row-count-' + $parent.detailsContentMaxHeight()">
+                                <div class="oj-sm-12 oj-flex-item">
+                                    <!-- ko foreach: details -->
+                                    <p class="serviceDetails oj-sm-justify-content-center oj-sm-align-items-flex-end oj-flex">
+                                        <span class="uom-quantity" data-bind="text: quantity"></span>&nbsp;<span class="uom-measurement" data-bind="text: uom"></span>
+                                        <!-- ko if: tier9ShortDesc !== null && tier9ShortDesc !== "" -->
+                                        &nbsp;<span class="short-desc" data-bind="text: '(' + tier9ShortDesc + ')', attr: { title: tier9LongDesc }"></span>
+                                        <!-- /ko -->
+                                    </p>
+                                    <!-- /ko -->
+                                </div>
+                                <div class="oj-sm-align-self-flex-end oj-sm-12 oj-flex-item">
+                                    <div class="oj-sm-justify-content-center oj-flex">
+                                        <a class="view-more-button oj-sm-6 oj-flex-item" data-bind="click: $parent.openServiceDetail">View More</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /ko -->
+                </div>    
+            </div>
+            <div class="oj-flex-item" data-bind="visible: showControlsButton">
+                <div class="oj-flex oj-sm-justify-content-flex-end" data-bind="visible: showViewAllButton">
+                    <a class="deep-red-button open-all-services-btn" data-bind="click: openAllServices">View All »</a>    
+                </div>
+                <div class="oj-flex oj-sm-justify-content-flex-end" data-bind="visible: showViewLessButton">
+                    <a class="deep-red-button open-all-services-btn" data-bind="click: openMinimalServices">Show less »</a>    
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+
+        <div class="dashboard oj-flex">
+            <!-- Use case selection -->
+            <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
+                <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
+                <!-- ko ifnot: isSelectionPhaseCompleted() === true -->
+                    <span class="heading-type4">
+                        Let's start your adoption journey!
+                    </span>
+                    <div id="useCaseSelection" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUseCaseSelection">
+                        <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
+                            Go to Use Case selection
+                        </div>
+                        <div class="play-icon oj-flex-bar-end">
+                            <span>
+                                <i class="material-icons">play_arrow</i>
+                            </span>
+                        </div>
+                    </div>
+                <!-- /ko -->
+                <!-- ko if: isSelectionPhaseCompleted() === true -->
+                    <span class="heading-type4">
+                        Please select a Use Case to implement!
+                    </span>
+                    <div id="useCaseSelection" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUseCaseSelection">
+                        <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
+                            I'm ready
+                        </div>
+                        <div class="play-icon oj-flex-bar-end">
+                            <span>
+                                <i class="material-icons">play_arrow</i>
+                            </span>
+                        </div>
+                    </div>
+                    <div id="useCaseSelection" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUseCaseSelection">
+                        <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
+                            I need to know more
+                        </div>
+                        <div class="play-icon oj-flex-bar-end" style="padding-right: 12px;">
+                            <span>
+                                <i class="material-icons">play_arrow</i>
+                            </span>
+                        </div>
+                    </div>
+                <!-- /ko -->
+                </div>
+            </div>
+            <!-- ko if: isSelectionPhaseCompleted() === true -->
+            <span class="heading-type2 oj-sm-12 oj-flex-item">Tailored Use Cases</span>
+
+            <div id="masonryUseCases" class="dashboard-use-cases oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+                <!-- ko foreach: tailoredUseCases() -->
+                <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
+                    <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
+                    <div class="oj-margin-horizontal oj-flex-bar">
+                        <div class="oj-sm-align-self-center oj-flex-bar-start">
+                            <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
+                                <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold;" data-bind="attr: {title: title}, text: title.length > 35 ? trimmedTitle : title"></span>
+                            </div>
+                        </div>
+                        <div class="oj-sm-align-self-center oj-flex-bar-end">
+                            <img class="bread-crumbs-icon" data-bind="click: $parent.getUseCaseDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
+                        </div>
+                    </div>
                 </div>
                 <!-- /ko -->
-            </div>    
-        </div>
-        <div class="oj-flex-item" data-bind="visible: showControlsButton">
-            <div class="oj-flex oj-sm-justify-content-flex-end" data-bind="visible: showViewAllButton">
-                <a class="deep-red-button open-all-services-btn" data-bind="click: openAllServices">View All »</a>    
             </div>
-            <div class="oj-flex oj-sm-justify-content-flex-end" data-bind="visible: showViewLessButton">
-                <a class="deep-red-button open-all-services-btn" data-bind="click: openMinimalServices">Show less »</a>    
-            </div>
-        </div>
-        <!-- /ko -->
-    </div>
 
-    <div class="dashboard oj-flex" id="serviceBenfits">
-        <!-- ko if: selectedServiceItem() !== undefined -->
-        <div class="oj-sm-12 oj-lg-4 oj-flex-item">
-            <div class="benefits oj-flex" data-bind="css: isScreenLGorXL() ? 'oj-margin-lg-end' : ''">
-                <span class="heading-type2 oj-sm-12 oj-flex-item" data-bind="text: 'Benefits for ' + selectedServiceItem() + ': '"></span>
-                <!--ko if:hsaServiceBenefits() -->
-                <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
-                    <span class="heading-type4 color-red" data-bind="text: selectedItemTitle"></span>
-                    <span class="normal-text" data-bind="text: ' - ' + selectedItemSubTitle()"></span>
-                </span>
-                <span class="heading-type4 oj-sm-12 oj-flex-item" data-bind="text: benefitsTitle() + ':'"></span>
-                <ul class="oj-sm-12 oj-flex-item">
-                    <!-- ko foreach: selectedItemBenefitsArray -->
-                    <li>
-                        <div data-bind="text: text"></div>
-                    </li>
+            <!-- /ko -->
+            <!-- Use case selection -->
+
+            <!-- ko if: selectedServiceItem() !== undefined -->
+            <div id="serviceBenefits" class="oj-sm-12 oj-lg-4 oj-flex-item">
+                <div class="benefits oj-flex" data-bind="css: isScreenLGorXL() ? 'oj-margin-lg-end' : ''">
+                    <span class="heading-type2 oj-sm-12 oj-flex-item" data-bind="text: 'Benefits for ' + selectedServiceItem() + ': '"></span>
+                    <!--ko if:hasServiceBenefits() -->
+                    <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
+                        <span class="heading-type4 color-red" data-bind="text: selectedItemTitle"></span>
+                        <span class="normal-text" data-bind="text: ' - ' + selectedItemSubTitle()"></span>
+                    </span>
+                    <span class="heading-type4 oj-sm-12 oj-flex-item" data-bind="text: benefitsTitle() + ':'"></span>
+                    <ul class="oj-sm-12 oj-flex-item">
+                        <!-- ko foreach: selectedItemBenefitsArray -->
+                        <li>
+                            <div data-bind="text: text"></div>
+                        </li>
+                        <!-- /ko -->
+                    </ul>
                     <!-- /ko -->
-                </ul>
-                <!-- /ko -->
-                <!--ko ifnot:hsaServiceBenefits() -->
+                    <!--ko ifnot:hasServiceBenefits() -->
+                    <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
+                        <span class="heading-type4 color-red" data-bind="text: selectedItemTitle"></span>
+                    </span>
+                    <!--/ko -->
+                </div>
+            </div>
+            <div class="key-features oj-sm-12 oj-lg-8 oj-flex-item">
+                <span class="heading-type2 oj-flex" data-bind="text: 'Key features for ' + selectedServiceItem() + ': '"></span>
+                <!--ko if:hasServiceBenefits() -->
+                <div class="oj-margin-lg-top oj-flex" style="height: 500px;">
+                    <iframe id="pdf" style="width: 100%;" height="500" data-bind="attr : { src: 'https://docs.google.com/gview?url=' + pdfSrc() + '&embedded=true' }" frameborder="0"></iframe>
+                </div>
+                <!--/ko -->
+                <!--ko ifnot:hasServiceBenefits() -->
+                <div class="oj-hybrid-padding"></div>
                 <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
+
                     <span class="heading-type4 color-red" data-bind="text: selectedItemTitle"></span>
                 </span>
                 <!--/ko -->
             </div>
+            <!-- /ko -->
         </div>
-        <div class="key-features oj-sm-12 oj-lg-8 oj-flex-item">
-            <span class="heading-type2 oj-flex" data-bind="text: 'Key features for ' + selectedServiceItem() + ': '"></span>
-            <!--ko if:hsaServiceBenefits() -->
-            <div class="oj-margin-lg-top oj-flex" style="height: 500px;">
-                <iframe id="pdf" style="width: 100%;" height="500" data-bind="attr : { src: 'https://docs.google.com/gview?url=' + pdfSrc() + '&embedded=true' }" frameborder="0"></iframe>
-            </div>
-            <!--/ko -->
-            <!--ko ifnot:hsaServiceBenefits() -->
-            <div class="oj-hybrid-padding"></div>
-            <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
-
-                <span class="heading-type4 color-red" data-bind="text: selectedItemTitle"></span>
-            </span>
-            <!--/ko -->
-        </div>
-        <!-- /ko -->
     </div>
 </div>
-<div class="feedback">
-    <a id="feedback_button" data-bind="click: onClickFeedback"><i class="material-icons" style="opacity: 1;">help_outline</i></a>
-</div>
+<img class="need-help" src="css/img/need-help.png" data-bind="click: onClickFeedback" alt="" />
 <tech-support references="{{references}}" is-panel-visible="{{false}}"></tech-support>
-
-
-
-
-
-
-

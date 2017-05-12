@@ -19,56 +19,87 @@ and open the template in the editor.
 }
 
 .header-wrapper {
-    height: 80px;
+    height: 50px;
 }
 
-.header-start-item, .header-branding, .header-end-item {
-    height: 80px;
-    box-sizing: border-box;
-}
-
-.header-start-item, .header-end-item {
-    color: #324b5c;
+.header-wrapper span i {
+    font-size: 36px !important;
     cursor: pointer;
 }
 
-.header-branding {
-    color: #000;
-}
-
-.header-wrapper .ico-container i {
-    font-size: 36px !important;
-}
-
-.brand-logo {
-    color: #f80000;
-}
-
-.logoSpan{
-    font-weight: lighter;
+.header-start-item .logo {
+    height: 36px;
 }
 
 .header-start-item, .header-end-item {
-    padding: 20px 20px 0px 20px;
+    /*color: #324b5c;*/
+    height: 50px;
+    color: #F80000;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
-.header-branding {
-    padding: 10px 20px 0px 20px;
-    font-size: 30px;
-    line-height: 45px;
+.header-end-item .notification-icon, .email-icon {
+    cursor: pointer;
 }
 
-span.ico-container {
+.header-end-item .notification-count-container {
+    position: absolute;
+    background: #F80000;
+    margin: 3px 0px 0px -15px;
+    color: #FFFFFF;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    font-size: 8px;
+    text-align: center;
+    line-height: 12px;
+}
+
+.header-end-item .header-username {
+    font-size: 14px;
+    color: #AEAEAE;
+}
+
+.header-end-item .profile-dropdown-arrow {
+    height: 50px;
+    cursor: pointer;
+}
+
+.header-end-item .profile-dropdown-arrow i {
+    font-size: 20px !important;
+    color: #AEAEAE;
+    margin-top: 15px;
+}
+
+.header-end-item .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0px;
+    margin-top: 12px;
+    min-width: 160px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.header-end-item .dropdown-content .header-username {
+    padding: 5px 0px;
+    border-bottom: 1px solid #AEAEAE;
+}
+
+.header-end-item .dropdown-content a {
     display: block;
-    width: 36px;
-    height: 36px;
-    font-size: 36px !important;
+    color: #000000;
+    padding: 12px 16px;
+    text-decoration: none;
 }
 
-@media only screen and (max-width: 480px) {
-    .header-branding {
-        padding: 0px;
-        font-size: 20px;
-        line-height: 35px;
-    }
+.header-end-item .dropdown-content a:hover {
+    color: #FFFFFF;
+    background-color: #F80000
+}
+
+.header-end-item .profile-dropdown-arrow:hover .dropdown-content {
+    display: block;
 }

@@ -20,12 +20,12 @@ and open the template in the editor.
     }
 
 }*/
-
+/*
 
 @media print and (orientation: portrait), screen and (max-width: 767px){
     .tech-support-container {
 /*        right: -30px !important;*/
-        height: calc(100% - 85px);
+/*        height: calc(100% - 85px);
         overflow-y: auto;
     }
     .tech-support-container .phoneContainer {
@@ -70,7 +70,7 @@ and open the template in the editor.
         margin-top: 10px !important; 
         line-height: none !important;
 /*        width: 85% !important;*/
-    }
+/*    }
     .tech-support-container .material-icons {
             padding: 10px !important;
             margin-right: 10px !important;
@@ -150,7 +150,7 @@ and open the template in the editor.
     padding: 15px;
     background-color: #eaeef0;
 /*    width: 90%;*/
-width: calc(100% - 30px);
+/*width: calc(100% - 30px);
     margin-top: 20px;
     height: 20px;
     font-size: 14px;
@@ -164,7 +164,7 @@ width: calc(100% - 30px);
 .tech-support-container .email-submit-btn.oj-button,
 .tech-support-container .email-submit-btn.oj-button.oj-hover{
 /*    margin-right: 27px;*/
-    margin-top: 45px;
+/*    margin-top: 45px;
     font-size: 18px;
     padding: 0px 45px;
     height: 40px;
@@ -249,8 +249,4 @@ width: calc(100% - 30px);
 .tech-support-container .navContainer a{
     color: transparent !important;
 }
-
-
-
-
-
+*/

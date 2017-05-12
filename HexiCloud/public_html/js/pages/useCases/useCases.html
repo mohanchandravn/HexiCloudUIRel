@@ -3,77 +3,34 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div class="useCases-page">
-    <div class="oj-flex">
-        <div class="use-case oj-sm-12 oj-flex-item">
-            <span class="heading-type2">Get more out of Oracle Cloud</span>
-            <hr>
-            <span class="heading-type4 oj-flex">Explore a tailored selection from our library of use cases and guided learning paths to find out how to make the most of your services</span>
-            <div class="oj-margin-lg-top oj-flex">
-                <!-- ko if: areUseCasesLoaded() -->
-                <div class="oj-sm-12 oj-flex-item">
-                    <div id="usecaseFilmStrip" class="oj-margin-lg-vertical oj-sm-justify-content-center oj-flex" aria-label="Set of use cases"
-                        data-bind="ojComponent: {
-                          component: 'ojFilmStrip',
-                          arrowPlacement: 'adjacent',
-                          currentItem: selectedFilmStripItem,
-                          maxItemsPerPage: 2,
-                          arrowVisibility: 'visible'}">
-                        
-                        <!-- ko foreach: useCaseItems -->
-                        <div class="use-case-container oj-flex-item"
-                            data-bind="style: { display: getItemInitialDisplay($index()) }">
-                            <div class="oj-flex" data-bind="attr:{ id: id }, click: $parent.openUseCaseContainer">
-                                <div class="oj-sm-12 oj-flex-item">
-                                    <div class="head oj-flex" data-bind="attr:{ id: 'useCaseHead' + id }"></div>
-                                    <div class="use-case-item oj-flex">
-                                        <div class="oj-sm-3 oj-flex-item">
-                                            <i class="material-icons">lightbulb_outline</i>
-                                        </div>
-                                        <div class="oj-sm-9 oj-flex-item">
-                                            <span class="use-case-title oj-flex" data-bind="text: usecaseCode"></span>
-                                            <span class="use-case-content oj-padding-lg-vertical oj-flex" data-bind="text: usecaseDesc"></span>
-                                        </div>
+<div class="useCases-page oj-offcanvas-outer-wrapper">
+    <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
+        <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
+        <div class="use-cases-content oj-flex">
+            <div class="use-case oj-sm-12 oj-flex-item">
+                <span class="heading-type2">Get more out of Oracle Cloud</span>
+                <hr>
+                <span class="heading-type4 oj-flex">Explore a tailored selection from our library of use cases and guided learning paths to find out how to make the most of your services</span>
+                <div class="use-cases-body-content oj-margin-lg-top oj-flex">
+                    <!-- ko if: areAllUseCasesLoaded() -->
+                    <div id="masonryUseCases" class="oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+                        <!-- ko foreach: allUseCases -->
+                        <!-- ko if: id !== 10 -->
+                        <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;" data-bind="click: $parent.onClickOnUseCase">
+                            <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
+                            <div class="oj-margin-horizontal oj-flex-bar">
+                                <div class="oj-sm-align-self-center oj-flex-bar-start">
+                                    <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold;" data-bind="attr: {title: title}, text: title.length > 35 ? trimmedTitle : title"></span>
                                     </div>
+                                </div>
+                                <div class="oj-sm-align-self-center oj-flex-bar-end">
+                                    <img class="bread-crumbs-icon" data-bind="click: $parent.getUseCaseDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
                                 </div>
                             </div>
                         </div>
                         <!-- /ko -->
-                    </div>
-                </div>
-                <!-- /ko -->
-                <div class="oj-sm-12 oj-lg-12 oj-xl-12 oj-flex-item" data-bind="css: isScreenLGorXL() ? 'oj-margin-lg-bottom' : 'oj-margin-lg-top'">
-                    <!-- ko if: selectedUseCaseItem() !== undefined -->
-                    <div class="oj-flex">
-                        <div class="oj-sm-12 oj-lg-4 oj-flex-item">
-                            <div class="use-case-detail-item oj-flex" data-bind="css: viewportSize() !== 'SM' ? 'oj-margin-lg-end' : ''">
-                                <div class="oj-sm-12 oj-flex-item">
-<!--                                    <div class="usecase-img-container oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
-                                        <img class="usecase-detail-image" src="css/img/discover.jpg" alt="Image" />
-                                    </div>-->
-                                    <span class="heading-type3 oj-flex" data-bind="text: selectedUseCaseName"></span>
-                                    <hr class="oj-flex">
-                                    <!--<span class="usecase-detail-heading oj-flex" data-bind="text: selectedUsecaseTitle"></span>-->
-                                    <span class="heading-type4 color-red" data-bind="text: selectedUseCaseTitle"></span>
-                                    <span class="normal-text" data-bind="text: ' ' + selectedUseCaseSubTitle()"></span>
-                                    <ul class="oj-sm-12 oj-flex-item">
-                                        <!-- ko foreach: selectedUseCaseBenefitsArray -->
-                                        <li>
-                                            <div data-bind="text: text"></div>
-                                        </li>
-                                        <!-- /ko -->
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="oj-sm-12 oj-lg-8 oj-flex-item">
-                            <div class="use-case-detail-item oj-flex">
-                                <span class="heading-type3 oj-sm-12 oj-flex-item" data-bind="text: 'More on ' + selectedUseCaseName() + ':'"></span>
-                                <div class="oj-margin-lg-top oj-sm-12 oj-flex-item" style="height: 500px;">
-                                    <iframe id="pdf" style="width: 100%;" height="500" data-bind="attr : { src: 'https://docs.google.com/gview?url=' + pdfSrc() + '&embedded=true' }" frameborder="0"></iframe>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- /ko -->
                     </div>
                     <!-- /ko -->
                 </div>
@@ -81,7 +38,5 @@ and open the template in the editor.
         </div>
     </div>
 </div>
-<div class="feedback">
-    <a id="feedback_button" data-bind="click: onClickFeedback"><i class="material-icons" style="opacity: 1;">help_outline</i></a>
-	</div>
+<img class="need-help" src="css/img/need-help.png" data-bind="click: onClickFeedback" alt="" />
 <tech-support references="{{references}}" is-panel-visible="{{false}}"></tech-support>

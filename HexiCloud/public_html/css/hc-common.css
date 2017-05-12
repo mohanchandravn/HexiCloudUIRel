@@ -18,11 +18,15 @@ body {
 }
 
 header-content {
-    height: 80px;
+    height: 50px;
 }
 
 #module {
-    margin-top: 80px;
+    margin-top: 50px;
+}
+
+.faqs-page {
+    padding-bottom: 50px;
 }
 
 .branding-homepage {
@@ -88,6 +92,14 @@ header-content {
     text-align: center;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
 .display-none {
     display: none !important;
 }
@@ -101,8 +113,8 @@ header-content {
 }
 
 navigationbarleft {
-    width: 340px;
-    max-width: 340px;
+    width: 320px;
+    max-width: 320px;
     top: 0;
 }
 
@@ -115,6 +127,10 @@ navigationbarright {
     background-color: #4C5B5E;
 }
 
+usecasedetails {
+    background-color: #FFFFFF;
+}
+
 .disable-actions {
     pointer-events: none;
     opacity: 0.5;
@@ -122,6 +138,11 @@ navigationbarright {
 
 .opacity-half {
     opacity: 0.5;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+    cursor: not-allowed;
 }
 
 .service-status-ready {
@@ -435,6 +456,12 @@ login-page video::-webkit-media-controls-start-playback-button {
     width: 100%;
 }
 
+.off-canvas-preloader-container {
+    height: 200px;
+    padding-top: 100px;
+    padding-left: calc(50% - 36px);
+}
+
 .preloader {
     border: 6px solid #f3f3f3;
     -webkit-animation: spin 1s linear infinite;
@@ -507,5 +534,12 @@ login-page video::-webkit-media-controls-start-playback-button {
 }
 
 .c-pointer {
+    cursor: pointer;
+}
+
+.need-help {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
     cursor: pointer;
 }

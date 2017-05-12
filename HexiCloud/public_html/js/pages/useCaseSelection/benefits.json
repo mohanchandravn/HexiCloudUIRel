@@ -1,0 +1,17 @@
+{
+    "benefits": [
+        {
+          "title": "TECHNICAL",
+          "image": "Modern User Experience.svg",
+          "description": "Modern User Experience"
+        }, {
+          "title": "FINANCIAL",
+          "image": "Lower TCO.svg",
+          "description": "Lower TCO"
+        }, {
+          "title": "BUSINESS",
+          "image": "Industry and Functional Enhancements.svg",
+          "description": "Industry and Functional Enhancements"
+        }
+    ]
+}

@@ -1,0 +1,308 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="use-cases-demo-page oj-offcanvas-outer-wrapper">
+    <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
+        <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
+        <div class="use-cases-head-content oj-sm-justify-content-center oj-flex">
+            <div class="oj-margin-lg-bottom oj-lg-9 oj-flex-item" style="max-width: 750px; padding: 0px 30px; margin-top: 20px; border-left: 5px solid #F80000; background-color: #FFF;">
+                <div class="oj-sm-justify-content-center oj-flex">
+                    <!-- ko if: isSubQuestionSelected() !== true && inQuestion() > 3 -->
+                        <!-- ko foreach: useCasesQuestions -->
+                            <!-- ko if: status === 'notStarted' -->
+                            <span class="status-not-started-header">
+                                <span class="status-not-started"></span>
+                            </span>
+                            <!-- /ko -->
+                            <!-- ko if: status === null -->
+                            <span class="status-unknown"></span>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+
+                    <!-- ko if: isSubQuestionSelected() === true -->
+                        <!-- ko foreach: useCasesQuestions -->
+                            <!-- ko if: status === 'notStarted' -->
+                            <span class="status-not-started-header">
+                                <span class="status-not-started"></span>
+                            </span>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko foreach: useCasesSubQuestions -->
+                            <!-- ko if: status === 'completed' -->
+                            <span class="status-completed-small"></span>
+                            <!-- /ko -->
+                            <!-- ko if: status === 'notStarted' -->
+                            <span class="status-not-started-small"></span>
+                            <!-- /ko -->
+                            <!-- ko if: status === null -->
+                            <!-- <span class="status-unknown-small"></span> -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: finalSubQuestionSelected() !== true -->
+                        <span class="status-of-final-step-not-selected-small"></span>
+                        <span class="status-of-final-step-not-selected-small"></span>
+                        <!-- /ko -->
+                        <!-- ko if: finalSubQuestionSelected() === true -->
+                        <span class="status-of-final-step-selected-small"></span>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+                <div class="oj-flex" data-bind="style: { margin: !haveImplementedUseCases() ? '30px 0px 10px 0px' : '0px' }">
+                    <!-- ko if: isSubQuestionSelected() === false && haveImplementedUseCases() === false -->
+                    <!-- ko if: inQuestion() === 1 -->
+                    <span class="heading-type4 oj-lg-9 oj-flex-item" style="color: #000000; margin-top: 30px;">
+                        Have you implemented an Use Case before?
+                    </span>
+                    <!-- /ko -->
+                    <!-- ko if: inQuestion() === 2 -->
+                    <span class="heading-type4 oj-lg-9 oj-flex-item" style="color: #000000; margin-top: 30px;">
+                        Please select the Use Cases you've implemented before
+                    </span>
+                    <!-- /ko -->
+                    <!-- ko if: inQuestion() === 3 -->
+                    <span class="heading-type4 oj-lg-9 oj-flex-item" style="color: #000000; margin-top: 30px;">
+                        Do you want to implement another Use Case?
+                    </span>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: isSubQuestionSelected() === false && haveImplementedUseCases() === true -->
+                    <span class="heading-type4 oj-lg-9 oj-flex-item" style="color: #000000;">
+                        Based on your Services these are the Use Cases available for you.
+                    </span>
+                    <div class="oj-sm-12 oj-flex-item">
+                        <div class="oj-margin-vertical oj-flex">
+                            <span class="label-text" style="color: #DE8075;">Let us help you filtering them</span>
+                            <div class="oj-margin-lg-start oj-flex-bar" data-bind="click: startTheUseCaseSelection" 
+                                 style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
+                                <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
+                                    Start
+                                </div>
+                                <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                                    <span>
+                                        <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: isSubQuestionSelected() === true && haveImplementedUseCases() === true -->
+                    <!-- ko if: finalSubQuestionSelected() === false -->
+                    <span class="heading-type4 oj-lg-9 oj-flex-item" style="color: #000000;" data-bind="text: selectedSubQuestion().question"></span>
+                    <div class="oj-sm-12 oj-flex-item">
+                        <div class="oj-margin-lg-vertical oj-flex">
+                            <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="attr: {id: 'Y' + selectedSubQuestion().id}, click: moveToNextSubQuestion">Yes</span>
+                            <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="attr: {id: 'N' + selectedSubQuestion().id}, click: moveToNextSubQuestion">No</span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: finalSubQuestionSelected() === true  -->
+                    <span class="heading-type4 oj-margin-top oj-lg-12 oj-flex-item" style="color: #000000;" data-bind="text: finalSubQuestionTitle"></span>
+                    <span class="oj-margin-bottom oj-sm-12 oj-flex-item"></span>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+        <!-- To load use case items either editable or non-editable -->
+        <div data-bind="template: useCaseItemsTemplate"></div>
+
+        <script type="text/html" id="useCaseItemsEditable">
+            <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
+            <!-- ko if: inQuestion() !== 2 -->
+            <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; padding-top: 50px; margin-left: auto; margin-right: auto;">
+                <div class="oj-sm-justify-content-center oj-flex">
+                    <span class="inverted-btn inverted-btn-hover text-center oj-margin-lg-end oj-lg-2 oj-flex-item" data-bind="attr: {id: 'Y'}, click: moveToNextQuestion">Yes</span>
+                    <span class="inverted-btn inverted-btn-hover text-center oj-lg-2 oj-flex-item" data-bind="attr: {id: 'N'},click: inQuestion() === 1 ? goToStartUseCasesStep : moveToNextQuestion">No</span>
+                </div>
+                <!-- Loading a template to Quit the quiz -->
+                <div style="margin-top: 50px;" data-bind="template: 'quitQuiz'"></div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: inQuestion() === 2 -->
+            <div class="use-cases-body-content">
+                <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; padding-bottom: 50px; margin-left: auto; margin-right: auto;">
+                    <!-- ko if: isAllUseCasesLoaded() -->
+                    <div data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+                        <!-- ko foreach: allUseCases -->
+                        <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
+                            <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
+                            <div class="oj-margin-horizontal oj-flex-bar">
+                                <div class="oj-sm-align-self-center oj-flex-bar-start">
+                                    <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
+                                        <span class="title-popup oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold;" 
+                                              data-bind="attr: {id: 'title' + id},
+                                                            event: { mouseenter: $parent.openInfoPopUp, mouseleave: $parent.closeInfoPopupUp },
+                                                            text: title.length > 35 ? trimmedTitle : title"></span>
+                                        <div class="info-popup oj-sm-hide" data-bind="attr: {id: 'popup' + id}, ojComponent:{component: 'ojPopup'}">
+                                            <span class="bold oj-margin-bottom oj-flex" data-bind="text: title"></span>
+                                            <span class="oj-flex" data-bind="text: shortDesc"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oj-sm-align-self-center oj-flex-bar-end">
+                                    <span class="use-case-selection-cb" data-bind="attr: { id: id}, click: $parent.toggleUseCaseSelections"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: hasSelectedOtherUseCase() -->
+                    <div class="oj-sm-justify-content-center oj-flex" style="background: #FFFFFF; padding: 30px 0px;">
+                        <div class="oj-lg-10 oj-flex-item">
+                            <div id="otherUseCasesAccordion" class="oj-flex" data-bind="ojComponent: {component: 'ojAccordion'}">
+                                <!-- ko foreach: otherUseCases -->
+                                <div class="oj-lg-9 oj-flex-item" data-bind="attr: { id: 'collapsible' + ($index() + 1) }">
+                                    <span data-bind="text: 'Other Use Case ' + ($index() + 1)"></span>
+                                    <div>
+                                        <span class="oj-margin-lg-top oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Use Case Summary</span>
+                                        <textarea rows="6" style="resize: none; padding: 10px; font-size: 12px; color: #CCC; border-radius: 15px; margin-bottom: 10px;" 
+                                                  data-bind="ojComponent: {
+                                                                                                    component: 'ojTextArea', 
+                                                                                                    value: useCaseSummary,
+                                                                                                    rootAttributes: {style:'max-width:100%'}}">
+                                        </textarea>
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Services Used</span>
+                                        <div data-bind="ojComponent: {
+                                                                        component: 'ojCheckboxset',
+                                                                        invalidComponentTracker: $parent.tracker,
+                                                                        required: true,
+                                                                        optionChange: $parent.serviceOptionChange,
+                                                                        value: useCaseServicesUsed,
+                                                                        translations: {'required': {
+                                                                                messageDetail: 'Please select atleast one service'}}}" 
+                                             class="oj-choice-direction-row">
+                                            <!-- ko foreach: $parent.otherUseCaseServiceItems -->
+                                            <span class="oj-choice-item">
+                                                <input type="checkbox" data-bind="attr: {id: serviceId + '_' + $parent.otherUserCaseCount, value: serviceId}">
+                                                <label data-bind="attr: {for: serviceId + '_' + $parent.otherUserCaseCount}, text: label"></label>
+                                            </span>
+                                            <!-- /ko -->
+                                        </div>
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Benefits</span>
+                                        <div class="oj-sm-12 oj-flex-item">
+                                            <select id="otherUseCaseBenefits" data-bind="ojComponent: {component: 'ojSelect',
+                                                                        options: $parent.otherUseCaseBenefitsList,
+                                                                        value: useCaseBenefits,
+                                                                        placeholder: 'Select benefit(s)',
+                                                                        multiple: true,
+                                                                        required: true, 
+                                                                        invalidComponentTracker: $parent.tracker,
+                                                                        optionChange: $parent.benefitsOptionChange,
+                                                                        rootAttributes: {style:'max-width:20em; margin-top:5px;'},
+                                                                        translations: {'required': {
+                                                                                    messageDetail: 'Please select atleast one benefit'}}}">
+                                            </select>
+                                            <!-- ko if: $parent.isOtherBenefitSelected() -->
+                                            <label id="otherBenefitLabel" for="otherBenefit" class="other-benefit-label" data-bind="text: $parent.otherBenefitLabel"></label>
+                                            <input id="otherBenefit" type="text" maxlength="50" data-bind="ojComponent: {component: 'ojInputText', 
+                                                                                                                    placeholder: 'Enter other benefit', 
+                                                                                                                    value: $parent.otherBenefit,
+                                                                                                                    invalidComponentTracker: $parent.tracker,
+                                                                                                                    required: true,
+                                                                                                                    rootAttributes: {style:'max-width: 63%; margin-top: 5px;'}} "/>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                </div>                                    
+                                <a class="anchor-remove" data-bind="text: 'Remove',
+                                                                              attr: {id: 'remove' + $index()},
+                                                                              click: $parent.removeOtherUseCase,
+                                                                              css: {'oj-sm-hide' : $parent.otherUseCases().length < 2}">
+                                </a>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-sm-justify-content-flex-end oj-flex" style="background: #FFFFFF; padding: 0px 30px 30px 0px;">
+                        <button class="btn-add-another" data-bind="ojComponent: {component: 'ojButton', label: 'Add another'}, click: addOtherUseCase, css: {'disable-actions' : disableAddAnotherButton()}"></button>
+                    </div>
+                    <!-- /ko -->
+                    <div class="oj-flex">
+                        <div class="oj-sm-12 oj-flex-item">
+                            <div class="move-to-next-question-container oj-margin-lg-top oj-sm-justify-content-space-between oj-flex">
+                                <!-- Loading a template to Quit the quiz -->
+                                <div class="oj-sm-align-self-flex-end oj-flex-item" data-bind="template: 'quitQuiz'"></div>
+                                <div class="oj-flex-bar" data-bind="click: moveToNextQuestion, css: {'disable-actions' : disableNextButton}" 
+                                     style="height: 26px; background-color: #F80000; color: #FFF; border-radius: 27px; cursor: pointer;">
+                                    <div class="oj-sm-align-self-center oj-margin-end oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
+                                        Next
+                                    </div>
+                                    <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                                        <span>
+                                            <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+
+            </script>
+            <script type="text/html" id="useCaseItemsNonEditable">
+                <!-- masonry layout transitions won't work on resize of viewport if we kept under display: flex style property -->
+                <div class="use-cases-body-content">
+                    <div class="oj-lg-12 oj-flex-item" style="max-width: 750px; padding-bottom: 50px; margin-left: auto; margin-right: auto;">
+                        <!-- ko if: isUseCasesForUserLoaded() -->
+                        <div id="masonryUseCases" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+                            <!-- ko foreach: useCasesForUser -->
+                            <div class="use-case-tile oj-masonrylayout-tile-1x1" data-bind="attr: { id: 'useCase' + id }" style="background-color: #FFFFFF;">
+                                <div class="blur-selected-tile oj-sm-hide" data-bind="attr: { id: 'useCaseLayer' + id }"></div>
+                                <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + image }" alt="Image" />
+                                <div class="oj-margin-horizontal oj-flex-bar">
+                                    <div class="oj-sm-align-self-center oj-flex-bar-start">
+                                        <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
+                                            <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold; margin-bottom: 2px" data-bind="attr: {title: title}, text: title.length > 35 ? trimmedTitle : title"></span>
+                                        </div>
+                                    </div>
+                                    <div class="oj-sm-align-self-center oj-flex-bar-end">
+                                        <img class="bread-crumbs-icon" data-bind="click: $parent.getUseCaseDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: finalSubQuestionSelected() === true  -->
+                            <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
+                                <div class="finish-selection text-center oj-sm-align-items-center oj-flex">
+                                    <span class="oj-sm-12 oj-flex-item" style="font-size: 10px; margin-top: 25px; color: #CCCCCC;" data-bind="text: 'You can find more information about the tailored Use Cases in the dashboard.'"></span>
+                                </div>
+                                <div class="finish-btn-container oj-sm-align-items-center oj-sm-justify-content-center oj-flex">
+                                    <div class="finish-btn oj-flex-bar" data-bind="click: finishTailoring">
+                                        <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start" style="padding: 5px 0px 5px 30px;">
+                                            Finish
+                                        </div>
+                                        <div class="oj-flex-bar-end" style="padding-right: 12px;">
+                                            <span>
+                                                <i class="material-icons" style="font-size: 18px; margin-top: 4px;">play_arrow</i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                        
+                        <!-- Loading a template to Quit the quiz -->
+                        <div data-bind="template: 'quitQuiz'"></div>
+                    </div>
+                    </script>
+
+        <script type="text/html" id="quitQuiz">
+            <div class="oj-flex" style="max-width: 750px; margin-left: auto; margin-right: auto;"
+                 data-bind="css: (inQuestion() === 1 || inQuestion() === 3) ? 'oj-sm-justify-content-center' : 'oj-sm-flex-items-initial'">
+                <a class="quit-quiz" data-bind="click: goToDashboard">Quit quiz. I'll come back later.</a>
+            </div>
+        </script>
+    </div>
+</div>   
+<img class="need-help" src="css/img/need-help.png" data-bind="click: onClickFeedback" alt="" />
+<tech-support references="{{references}}" is-panel-visible="{{false}}"></tech-support>
+    

@@ -1,0 +1,359 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 19, 2017, 8:04:39 PM
+    Author     : nyasarap
+*/
+
+.use-cases-demo-page, useCases-page {
+    background-color: #F1F2F2;
+}
+
+.info-popup {
+    font-size: 15px;
+    max-width: 300px;
+}
+
+.dashboard .use-cases-btn {
+    height: 30px;
+    font-size: 18px;
+    padding: 5px 0px 5px 15px;
+    background-color: #F80000;
+    color: #FFF;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+.dashboard .use-cases-btn .play-icon {
+    padding-right: 12px;
+}
+
+.dashboard .dashboard-use-case-btn {
+    margin-left: 40px;
+}
+
+.use-case-items i {
+    font-size: 18px;
+    margin-top: 1px;
+}
+
+.use-cases-head-content .status-completed {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 20px;
+    border-radius: 50%;
+    background-color: #F80000;
+}
+
+.use-cases-head-content .status-not-started-header {
+    width: 14px;
+    height: 14px;
+    margin: 16px;
+    border: 1px solid #F80000;
+    border-radius: 50%;
+}
+
+.use-cases-head-content .status-not-started {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+}
+
+.use-cases-head-content .status-unknown {
+    display: block;
+    margin: 20px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+    width: 10px;
+    height: 10px;
+    opacity: 0.4;
+}
+
+.use-cases-head-content .status-completed-small {
+    display: block;
+    width: 4px;
+    height: 4px;
+    margin: 21px 10px;
+    border-radius: 50%;
+    background-color: #F80000;
+    border: 1px solid #F80000;
+}
+
+.use-cases-head-content .status-not-started-small {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 19px 10px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+    border: 1px solid #F80000;
+    opacity: 0.4;
+}
+
+.use-cases-head-content .status-unknown-small {
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin: 21px 10px;
+    border-radius: 50%;
+    background-color:#CCCCCC;
+    opacity: 0.4;
+}
+
+.use-cases-head-content .status-of-final-step-not-selected-small {
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin: 21px 10px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+    opacity: 0.4;
+}
+
+.use-cases-head-content .status-of-final-step-selected-small {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 19px 10px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
+    border: 1px solid #F80000;
+    opacity: 0.4;
+}
+
+.use-cases-demo-page .inverted-btn, .dashboard-page .inverted-btn, .useCases-page .inverted-btn {
+    min-width: 120px;
+    color: #F80000;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 0px;
+    border: 2px solid #F80000;
+    border-radius: 27px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .inverted-btn,.dashboard-page .use-case-details-wrapper .inverted-btn, .useCases-page .use-case-details-wrapper .inverted-btn {
+    min-width: 100px;
+    font-size: 12px;
+    margin-right: 15px;
+    margin-top: 12px;
+    cursor: default;
+}
+
+.use-cases-demo-page .inverted-btn-hover:hover, .useCases-page .inverted-btn-hover:hover {
+    color: #FFFFFF;
+    background-color: #F80000;
+}
+
+.dashboard-use-cases {
+    max-width: 840px;
+    padding-bottom: 50px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .finish-btn-container {
+    height: 70px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .finish-btn {
+    height: 26px;
+    background-color: #F80000;
+    color: #FFF;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+.dashboard-use-cases .oj-masonrylayout-tile-1x1 .use-case-image {
+    width: 200px;
+    height: 110px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-image, .use-cases-body-content .oj-masonrylayout-tile-1x1 .finish-selection, .use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases {
+    width: 220px;
+    height: 110px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases {
+    background: url("img/usecases/other_unselected.png") no-repeat;
+    background-size: 200px 110px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .add-more-use-cases.selected {
+    background: url("img/usecases/other_selected.png") no-repeat;
+    background-size: 200px 110px;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .title-popup {
+    cursor: pointer;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover {
+    transform: scale(1.3, 1.3);
+}
+
+.dashboard-use-cases .oj-masonrylayout-tile-1x1 {
+    width: 200px;
+    height: 165px;
+}
+
+/* change props of .blur-selected-tile when you have any changes in dimensions */
+.use-cases-body-content .oj-masonrylayout-tile-1x1 {
+    width: 220px;
+    height: 165px;
+    margin: 15px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.use-cases-body-content .oj-masonrylayout-tile-1x1:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.use-cases-body-content .blur-selected-tile {
+    position: absolute;
+    width: 220px;
+    height: 165px;
+    background-color: #000000;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.use-case-selection-cb {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #F80000;
+    border-radius: 3px;
+    background: url("img/usecases/checkbox_unselected.svg") no-repeat;
+}
+
+.use-case-selection-cb:active {
+    border: 1px solid #F80000;
+    background: url("img/usecases/checkbox_unselected_active.svg") no-repeat;
+}
+
+.use-case-selection-cb.selected {
+    border: none;
+    background: url("img/usecases/checkbox_selected.svg") no-repeat;
+}
+
+.use-case-selection-cb.selected:active {
+    border: none;
+    background: url("img/usecases/checkbox_selected_active.svg") no-repeat;
+}
+
+.use-cases-demo-page .use-case-details-wrapper, .dashboard-page .use-case-details-wrapper, .useCases-page .use-case-details-wrapper {
+    min-width: 320px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.use-cases-demo-page .use-case-details-wrapper-content, .dashboard-page .use-case-details-wrapper-content, .useCases-page .use-case-details-wrapper-content {
+    padding: 0px 10px 40px 10px;
+}
+
+.close-icon {
+    margin: 18px;
+    cursor: pointer;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .use-case-image, .dashboard-page .use-case-details-wrapper .use-case-image, .useCases-page .use-case-details-wrapper .use-case-image {
+    width: 100%;
+    height: 200px;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .use-case-title, .dashboard-page .use-case-details-wrapper .use-case-title, .useCases-page .use-case-details-wrapper .use-case-title {
+    font-size: 22px;
+    line-height: 28px;
+    color: #000000;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .use-case-heading, .dashboard-page .use-case-details-wrapper .use-case-heading, .useCases-page .use-case-details-wrapper .use-case-heading {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .use-case-description, .dashboard-page .use-case-details-wrapper .use-case-description, .useCases-page .use-case-details-wrapper .use-case-description {
+    font-size: 12px;
+    color: #777;
+    line-height: 20px;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .benefits-content, .dashboard-page .use-case-details-wrapper .benefits-content, .useCases-page .use-case-details-wrapper .benefits-content {
+    font-size: 12px;
+    color: #A8A8A8;
+    padding: 20px;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .benefits-image-container, .dashboard-page .use-case-details-wrapper .benefits-image-container, .useCases-page .use-case-details-wrapper .benefits-image-container {
+    border: 1px solid #F80000;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.use-cases-demo-page .use-case-details-wrapper .benefits-image, .dashboard-page .use-case-details-wrapper .benefits-image, .useCases-page .use-case-details-wrapper .benefits-image {
+    width: 100%;
+    height: 100%;
+}
+
+.use-cases-demo-page a.quit-quiz {
+    color: #B7B9B9;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.anchor-remove {
+    color: #f80000 !important;
+    padding: 10px;
+    cursor: pointer;
+    height: 15px;
+}
+
+.anchor-read-more {
+    color: #f80000 !important;
+    font-size: 10px;
+    line-height: 15px;
+    cursor: pointer;
+}
+
+.btn-add-another {
+    width: 104px;
+    height: 15px;
+    color: #f80000 !important;
+    border: none;
+    background: none !important;
+    cursor: pointer !important;
+}
+
+button.btn-add-another:hover {
+    text-decoration: underline;
+}
+
+.other-benefit-label {
+    margin-top: 7px;
+}
+
+@media screen and (min-width: 480px) {
+    .use-cases-demo-page .use-case-details-wrapper-content, .dashboard-page .use-case-details-wrapper-content, .useCases-page .use-case-details-wrapper-content {
+        padding: 0px 50px 50px 50px;
+    }
+}

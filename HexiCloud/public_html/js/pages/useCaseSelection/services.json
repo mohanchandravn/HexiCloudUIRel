@@ -1,0 +1,16 @@
+{
+  "services": [
+    {
+      "serviceId": "NETWORK",
+      "label": "Network"
+    },
+    {
+      "serviceId": "COMPUTE",
+      "label": "Compute"
+    },
+    {
+      "serviceId": "STORAGE",
+      "label": "Storage"
+    }
+  ]
+}
