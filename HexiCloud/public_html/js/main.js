@@ -290,7 +290,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 self.toggleContactType = function () {
 //                    self.clearSelectedList();
-                    self.isContactSelected(true);
+//                    self.isContactSelected(true);
                     if ($("#contactType").hasClass("oj-sm-hide")) {
                         $("#contactType").removeClass("oj-sm-hide");
                         $("#contactToggle").text("keyboard_arrow_up");
