@@ -1,0 +1,26 @@
+{
+  "guidedPaths": [
+    {
+      "pathId": 4,
+      "label": "Some complementary guided path",
+      "shortDesc": "Some complementary guided path, Some complementary guided path, Some complementary guided path, Some complementary guided path, Some complementary guided path, Some complementary guided path, Some complementary guided path, Some complementary guided path",
+      "image": "an image file name",
+      "imageLink": "public link to image from DOCCS",
+      "isRecommmended": true,
+      "service": null,
+      "useCaseId" : 1,
+      "progress": 30
+    },
+     {
+      "pathId": 5,
+      "label": "Oracle Storage Compute Service",
+      "shortDesc": "Enterprise-proven public cloud storage and archive service that supports your need for cloud-based data storage, sharing, and protection. Secure, resilient, elastic, and simple to use so your data is available when you need it from any environment connected to the Internet.",
+      "image": "an image file name",
+      "imageLink": "public link to image from DOCCS",
+      "isRecommmended": true,
+      "service": null,
+      "useCaseId" : 1,
+      "progress": 60
+    }
+  ]
+}

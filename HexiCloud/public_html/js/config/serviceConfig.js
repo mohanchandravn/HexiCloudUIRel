@@ -368,9 +368,9 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             $.ajax({
                 type: 'GET',
                 url: serverURL,
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
-                },
+//                beforeSend: function (request) {
+//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+//                },
                 dataType: "json",
                 success: function (data, status) {
                     console.log('Successfully retrieved details at: ' + serverURL);
@@ -459,9 +459,9 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             $.ajax({
                 type: 'GET',
                 url: serverURL,
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
-                },
+//                beforeSend: function (request) {
+//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+//                },
                 dataType: "json",
                 success: function (data, status) {
                     console.log('Successfully retrieved details at: ' + serverURL);
@@ -519,7 +519,53 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 }
             });
             return $.when(defer);
-        };       
+        };
+        
+        self.getCoreGuidedPaths = function() {
+            var defer = $.Deferred();
+            var serverURL = "js/pages/useCaseDiscovery/getCoreGuidedPaths.json";
+//            var serverURL = self.portalRestHost() + "/services/rest/getCoreGuidedPaths";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+//                beforeSend: function (request) {
+//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+//                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getGuidedPathDetails = function() {
+            var defer = $.Deferred();
+            var serverURL = "js/pages/useCaseDiscovery/guidedPathDetail.json";
+//            var serverURL = self.portalRestHost() + "/services/rest/guidedPathDetail";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+//                beforeSend: function (request) {
+//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+//                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
 
         self.forgotPasswordService = function (userId) {
             var defer = $.Deferred();

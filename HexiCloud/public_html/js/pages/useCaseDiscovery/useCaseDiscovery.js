@@ -7,7 +7,8 @@
 /**
  * useCaseDiscovery module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt'
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt',
+    'ojs/ojprogressbar'
 ], function (oj, $, ko, service, errorHandler) {
     
     /**
@@ -18,12 +19,84 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var self = this;
         
         self.selectedUseCase = params.rootData.selectedUseCase;
+        self.selectedTab = ko.observable(0);
+        self.areCoreGuidedPathsLoaded = ko.observable(false);
+        self.coreGuidedPaths = ko.observableArray([]);
+        self.urlForTCACalculator = ko.observable('');
+        
+        self.getCoreGuidedPathsData = function(data, event) {
+            showPreloader();
+            var getCoreGuidedPathsDataSuccessFn = function (data, status) {
+                console.log(status);
+                console.log(data);
+                var guidedPaths = data.guidedPaths;
+                self.coreGuidedPaths(guidedPaths);
+            };
+            
+            service.getCoreGuidedPaths().then(getCoreGuidedPathsDataSuccessFn, FailCallBackFn)
+            console.log(data);
+            console.log(event);
+            self.areCoreGuidedPathsLoaded(true);
+            hidePreloader();
+        };
+        
+        self.getComplementaryKnowledgeData = function(data, event) {
+            showPreloader();
+            self.areCoreGuidedPathsLoaded(false);
+            console.log(data);
+            console.log(event);
+            hidePreloader();
+        };
+        
+        self.getTCACalculatorData = function(data, event) {
+            showPreloader();
+            self.areCoreGuidedPathsLoaded(false);
+            console.log(data);
+            console.log(event);
+            self.urlForTCACalculator("https://oracle.valuestoryapp.com/iaas/");
+            hidePreloader();
+        };
+        
+        self.getSuccessStoriesData = function(data, event) {
+            showPreloader();
+            self.areCoreGuidedPathsLoaded(false);
+            console.log(data);
+            console.log(event);
+            hidePreloader();
+        };
 
+        self.autoCaptureData = ko.computed(function() {
+            if (self.selectedTab() === 0) {
+                self.getCoreGuidedPathsData();
+            } else if (self.selectedTab() === 1) {
+                self.getComplementaryKnowledgeData();
+            } else if (self.selectedTab() === 2) {
+                self.getTCACalculatorData();
+            } else if (self.selectedTab() === 3) {
+                self.getSuccessStoriesData();
+            }
+        });
+        
         self.onClickFeedback = function() {
             if (selectedTemplate() === "") {
                 selectedTemplate('email_content');
             }
             $("#tech_support").slideToggle();
+        };
+        
+        self.tabChangeHandler = function(event, data) {
+            console.log(event);
+            console.log(data);
+            self.selectedTab(data.value);
+        };
+        
+        self.onClickOnCoreTechContent = function(data, event) {
+            console.log(data);
+            console.log(event);
+            var getGuidedPathDetailsSuccessFn = function(data, success) {
+                console.log(data);
+            };
+            service.getGuidedPathDetails().then(getGuidedPathDetailsSuccessFn, FailCallBackFn)
         };
         
         /*

@@ -27,7 +27,7 @@ and open the template in the editor.
         </div>
             
         <div id="tabsContainer" class="tabs-container oj-flex oj-xl-12">
-            <div id="tabs" class="tabs" data-bind="ojComponent:{component: 'ojTabs'}">
+            <div id="tabs" class="tabs" data-bind="ojComponent:{component: 'ojTabs', optionChange: tabChangeHandler}">
                 <!-- tab bar -->
                 <ul>
                     <li><span>Core Technical Knowledge</span></li>
@@ -38,7 +38,32 @@ and open the template in the editor.
 
                 <!-- tab contents -->
                 <div id="tabCoreTechnicalKnowledge">
-                    <p>Core Technical Knowledge Content...</p>
+                    <!-- ko if: areCoreGuidedPathsLoaded() -->
+                    <!-- ko foreach: coreGuidedPaths -->
+                    <div class="core-tech-content oj-sm-align-items-center oj-flex" data-bind="css: {'oj-margin-lg-bottom' : $index() === $parent.coreGuidedPaths().length - 1}">
+                        <img class="core-tech-img" data-bind="attr: { src: 'css/img/usecases/' + $parent.selectedUseCase.image }" alt="" />
+                        <div class="oj-padding-lg-vertical oj-flex-item">
+                            <!-- ko if: isRecommended -->
+                            <span data-bind="text: 'Recommended for you'"></span>
+                            <!-- /ko -->
+                            <span data-bind="text: label"></span>
+                        </div>
+                        <span class="inverted-btn text-center" data-bind="text: service.label"></span>
+                        <div>
+                            <span data-bind="text: 'Progress'"></span>
+                            <div style="width:200px;" data-bind="ojComponent:{
+                                                                component: 'ojProgressbar', 
+                                                                value: progress}">
+                            </div>
+                        </div>
+                        <span data-bind="text: 'Chapter ' + parseInt(progress)/10 + ' of 10'"></span>
+                        <button data-bind="click: $parent.onClickOnCoreTechContent">Continue</button>
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <div class="core-tech-support-content">
+                        <span>Would you like to attend a Technical Workshop?</span>
+                    </div>
                 </div>
                 <div id="tabComplementaryKnowledge">
                     <p>Complementary Knowledge Content...</p>
@@ -46,7 +71,7 @@ and open the template in the editor.
                 <!-- <div id="tabTCACalculator" data-bind="click: onClickTabTCACalculator"> -->
                 <div id="tabTCACalculator">
                     <!-- <p>TCA Calculator Content...</p> -->
-                    <iframe class="tca-calculator-iframe" src="https://oracle.valuestoryapp.com/iaas/"></iframe>
+                    <iframe class="tca-calculator-iframe" data-bind="attr: {src: urlForTCACalculator }"></iframe>
                 </div>
                 <div id="tabSuccessStories">
                     <p>Success Stories Content...</p>

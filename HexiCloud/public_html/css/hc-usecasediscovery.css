@@ -34,7 +34,15 @@ and open the template in the editor.
 #useCaseDiscoveryPage .use-case-detail-container .use-case-image {
     width: 100%;
 }
- 
+
+#useCaseDiscoveryPage .oj-tabs-panel {
+    padding: 0px;
+}
+
+#useCaseDiscoveryPage .oj-conveyorbelt {
+    margin-left: 20px;
+}
+
 #useCaseDiscoveryPage .oj-selected .oj-tabs-title {
     color: #F80000;
     font-size: 15px;
@@ -104,4 +112,18 @@ and open the template in the editor.
 
 #useCaseDiscoveryPage #tabsContainer .tabs {
     width: 100%;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-content {
+    margin-bottom: 1px;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-img {
+    width: 65px;
+    height: 65px;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-support-content {
+    min-height: 65px;
+    border-left: 6px solid #F80000;
 }

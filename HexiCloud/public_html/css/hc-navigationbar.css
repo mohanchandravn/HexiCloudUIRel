@@ -86,7 +86,7 @@ navigationbarleft {
 .nav-list li {
     font-size: 18px;
     color: #FFFFFF;
-    height: 45px;
+    min-height: 45px;
     padding: 0px 40px;
     box-sizing: border-box;
     cursor: pointer;

@@ -1,0 +1,84 @@
+{
+  "guidedPathDetail": {
+    "pathId": 1,
+    "label": "Using Oracle Cloud Compute Service (IaaS)",
+    "shortDesc": "An enterprise grade infrastructure service that provides a rapidly provisioned virtual compute environment to easily migrate workloads and run them at scale with predictable, consistent performance, control and visibility.",
+    "image": "an image file name",
+    "imageLink": "public link to image from DOCCS",
+    "isRecommmended": true,
+    "service": {
+      "serviceId": "COMPUTE",
+      "label": "Compute"
+    },
+    "useCaseId": null,
+    "progress": 30,
+    "currentDocId" : 23,
+    "currentPageNumber" : 4,
+    "sections": [
+      {
+        "sectionID": 1,
+        "sectionTitle": "Some Section Title 1",
+        "description": "Some description about this section",
+        "sectionOrder": 1,
+        "sectionDocs": [
+          {
+            "sectionDocId": 1,
+            "docName": "some document name",
+            "docType": "pdf",
+            "timeToComplete": "15 min",
+            "publicLink": "dsfdsafdsafdsa",
+            "docDescription": "Some description about this document.",
+            "docOrder": 1,
+            "status" : "in progress",
+            "lastUpdatedDate" : "",
+            "page_number" : 3
+          },
+          {
+            "sectionDocId": 2,
+            "docName": "some Video name",
+            "docType": "video",
+            "timeToComplete": "10:15",
+            "publicLink": "dsfdsafdsafdsa",
+            "docDescription": "Some description about this Video.",
+            "docOrder": 2,
+            "status" : "in progress",
+            "lastUpdatedDate" : "",
+            "page_number" : 3
+          }
+        ]
+      },
+      {
+        "sectionID": 2,
+        "sectionTitle": "Some Section Title 2",
+        "description": "Some description about this section",
+        "sectionOrder": 2,
+        "sectionDocs": [
+          {
+            "sectionDocId": 3,
+            "docName": "some document name",
+            "docType": "pdf",
+            "timeToComplete": "15 min",
+            "publicLink": "dsfdsafdsafdsa",
+            "docDescription": "Some description about this document.",
+            "docOrder": 1,
+            "status" : "in progress",
+            "lastUpdatedDate" : "",
+            "page_number" : 3
+          },
+          {
+            "sectionDocId": 4,
+            "docName": "some Video name",
+            "docType": "video",
+            "timeToComplete": "10:15",
+            "publicLink": "dsfdsafdsafdsa",
+            "docDescription": "Some description about this Video.",
+            "docOrder": 2,
+            "status" : "in progress",
+            "lastUpdatedDate" : "",
+            "page_number" : 3
+          }
+        ]
+      }
+    ]
+  }
+}

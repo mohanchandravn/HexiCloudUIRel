@@ -1,0 +1,46 @@
+{
+  "guidedPaths": [
+    {
+      "pathId": 1,
+      "label": "Using Oracle Cloud Compute Service (IaaS)",
+      "shortDesc": "An enterprise grade infrastructure service that provides a rapidly provisioned virtual compute environment to easily migrate workloads and run them at scale with predictable, consistent performance, control and visibility.",
+      "image": "an image file name",
+      "imageLink": "public link to image from DOCCS",
+      "isRecommended": true,
+      "service": {
+        "serviceId": "COMPUTE",
+        "label": "Compute"
+      },
+      "useCaseId" : null,
+      "progress": 30
+    },
+     {
+      "pathId": 2,
+      "label": "Oracle Storage Compute Service",
+      "shortDesc": "Enterprise-proven public cloud storage and archive service that supports your need for cloud-based data storage, sharing, and protection. Secure, resilient, elastic, and simple to use so your data is available when you need it from any environment connected to the Internet.",
+      "image": "an image file name",
+      "imageLink": "public link to image from DOCCS",
+      "isRecommended": true,
+      "service": {
+        "serviceId": "STORAGE",
+        "label": "Storage"
+      },
+      "useCaseId" : null,
+      "progress": 60
+    },
+    {
+      "pathId": 3,
+      "label": "Setting Up VPN Using a Third-Party VPN Device",
+      "shortDesc": "Oracle Network Cloud Service offers Site-to-Site VPN for Dedicated Compute customers and FastConnect for all Oracle Cloud customers. Site-to-Site VPN securely extends your on-premises network to your dedicated Oracle Compute zone. FastConnect provides a high bandwidth connection between your data center and Oracle Cloud services.",
+      "image": "an image file name",
+      "imageLink": "public link to image from DOCCS",
+      "isRecommended": true,
+      "service": {
+        "serviceId": "NETWORK",
+        "label": "Network"
+      },
+      "useCaseId" : null,
+      "progress": 60
+    }
+  ]
+}
