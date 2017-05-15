@@ -17,6 +17,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
     function useCaseDiscoveryViewModel(params) {
         
         var self = this;
+        var router = params.ojRouter.parentRouter;
         
         self.selectedUseCase = params.rootData.selectedUseCase;
         self.selectedTab = ko.observable(0);
@@ -90,13 +91,21 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             self.selectedTab(data.value);
         };
         
+        self.geProgressStatus = function(progressValue) {
+            if (Number(progressValue) < 1 ) {
+                return 'red';
+            } else if (Number(progressValue) < 35 ) {
+                return 'orange';
+            } else {
+                return 'green';
+            }
+        };
+        
         self.onClickOnCoreTechContent = function(data, event) {
             console.log(data);
             console.log(event);
-            var getGuidedPathDetailsSuccessFn = function(data, success) {
-                console.log(data);
-            };
-            service.getGuidedPathDetails().then(getGuidedPathDetailsSuccessFn, FailCallBackFn)
+            params.rootData.selectedGuidedPath = data;
+            router.go('guidedPathDetails');
         };
         
         /*

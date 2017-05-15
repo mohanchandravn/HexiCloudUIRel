@@ -40,29 +40,39 @@ and open the template in the editor.
                 <div id="tabCoreTechnicalKnowledge">
                     <!-- ko if: areCoreGuidedPathsLoaded() -->
                     <!-- ko foreach: coreGuidedPaths -->
-                    <div class="core-tech-content oj-sm-align-items-center oj-flex" data-bind="css: {'oj-margin-lg-bottom' : $index() === $parent.coreGuidedPaths().length - 1}">
-                        <img class="core-tech-img" data-bind="attr: { src: 'css/img/usecases/' + $parent.selectedUseCase.image }" alt="" />
-                        <div class="oj-padding-lg-vertical oj-flex-item">
+                    <div class="core-tech-content oj-sm-align-items-center oj-flex">
+                        <img class="core-tech-img" data-bind="attr: { src: 'css/img/usecases/dockers.jpg' }" alt="" />
+                        <div class="oj-padding-lg-horizontal oj-xl-4 oj-flex-item">
                             <!-- ko if: isRecommended -->
-                            <span data-bind="text: 'Recommended for you'"></span>
+                            <span class="core-tech-recommended-text oj-flex" data-bind="text: 'Recommended for you'"></span>
                             <!-- /ko -->
-                            <span data-bind="text: label"></span>
+                            <span class="core-tech-title oj-flex" data-bind="text: label"></span>
                         </div>
-                        <span class="inverted-btn text-center" data-bind="text: service.label"></span>
-                        <div>
-                            <span data-bind="text: 'Progress'"></span>
-                            <div style="width:200px;" data-bind="ojComponent:{
-                                                                component: 'ojProgressbar', 
-                                                                value: progress}">
+                        <div class="oj-xl-2 oj-flex-item">
+                            <div class="oj-sm-justify-content-center oj-flex">
+                                <span class="inverted-btn text-center" data-bind="text: service.label"></span>
                             </div>
                         </div>
-                        <span data-bind="text: 'Chapter ' + parseInt(progress)/10 + ' of 10'"></span>
-                        <button data-bind="click: $parent.onClickOnCoreTechContent">Continue</button>
+                        <div class="oj-xl-4 oj-flex-item">
+                            <div class="oj-sm-justify-content-flex-start oj-flex">
+                                <span class="core-tech-progress-title oj-xl-12 oj-flex-item" data-bind="text: 'Progress'"></span>
+                                <div class="core-tech-progress-bar" style="width:200px;" data-bind="css: 'core-tech-progress-' + $parent.geProgressStatus(progress),
+                                                                ojComponent:{
+                                                                    component: 'ojProgressbar', 
+                                                                    value: parseInt(progress) === 0 ? '3' : progress}">
+                                </div>
+                                <span class="core-tech-chapter-text" data-bind="text: 'Chapter ' + parseInt(progress)/10 + ' of 10'"></span>
+                            </div>
+                        </div>
+                        <div class="oj-margin-lg-end oj-flex-item">
+                            <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="click: $parent.onClickOnCoreTechContent, text: parseInt(progress) === 0 ? 'Begin' : 'Continue'"></span>
+                        </div>
                     </div>
                     <!-- /ko -->
                     <!-- /ko -->
-                    <div class="core-tech-support-content">
-                        <span>Would you like to attend a Technical Workshop?</span>
+                    <div class="core-tech-support-content oj-margin-lg-top oj-sm-align-items-center oj-flex">
+                        <span class="oj-margin-lg-end">Would you like to attend a Technical Workshop?</span>
+                        <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="text: 'Contact Us'"></span>
                     </div>
                 </div>
                 <div id="tabComplementaryKnowledge">

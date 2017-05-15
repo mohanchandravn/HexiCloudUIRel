@@ -14,7 +14,7 @@ and open the template in the editor.
 }
 
 .use-case-discovery-wrapper-content {
-    padding: 25px;
+    padding: 25px 25px 50px 25px;
 }
 
 #useCaseDiscoveryPage .use-case-detail-container {
@@ -37,6 +37,7 @@ and open the template in the editor.
 
 #useCaseDiscoveryPage .oj-tabs-panel {
     padding: 0px;
+    background: none;
 }
 
 #useCaseDiscoveryPage .oj-conveyorbelt {
@@ -115,7 +116,10 @@ and open the template in the editor.
 }
 
 #useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-content {
-    margin-bottom: 1px;
+    color: #777;
+    font-size: 12px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #DDDDDD;
 }
 
 #useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-img {
@@ -123,7 +127,59 @@ and open the template in the editor.
     height: 65px;
 }
 
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-recommended-text {
+    color: #F80000;
+    font-weight: bold;
+    line-height: 16px;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-title {
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-progress-bar {
+    width: 200px;
+    background: #DDDDDD;
+    height: 10px;
+    margin-top: 2px;
+    border: none;
+    border-radius: 0px;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-progress-red .oj-progressbar-value {
+    background: #F80000;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-progress-orange .oj-progressbar-value {
+    background: orange;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-progress-green .oj-progressbar-value {
+    background: green;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-chapter-text {
+    margin-left: 10px;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .status-btn {
+    height: 30px;
+    width: 140px;
+    font-size: 18px;
+    color: #FFF;
+    background: #F80000 url(img/icon-24.svg) no-repeat right center;
+    padding: 5px 15px 5px 0px;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
 #useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-support-content {
     min-height: 65px;
+    font-size: 20px;
+    padding-left: 40px;
+    background: #FFFFFF;
     border-left: 6px solid #F80000;
 }

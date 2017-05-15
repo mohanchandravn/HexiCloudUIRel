@@ -1,0 +1,68 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div id="guidedPathDetailsPage" class="guidedPathDetails-page oj-flex">
+    <div class="guided-path-details-container oj-sm-12 oj-flex-item">
+        <!-- ko if: areGuidedPathsLoaded -->
+        <div class="oj-margin-bottom oj-flex">
+            <div class="oj-xl-4 oj-flex-item">
+                <img class="guided-path-details-image" data-bind="attr: { src : 'css/img/usecases/dockers.jpg' }" alt="Image" />
+            </div>
+            <div class="use-case-title-and-desc oj-xl-8 oj-flex-item">
+                <span class="use-case-title oj-flex" data-bind="text: selectedGuidedPath().label"></span>
+                <p class="use-case-description oj-flex" data-bind="text: selectedGuidedPath().shortDesc"></p>
+                <div class="oj-sm-justify-content-flex-start oj-flex">
+                    <span class="core-tech-progress-title oj-xl-12 oj-flex-item" data-bind="text: 'Progress'"></span>
+                    <div class="core-tech-progress-bar" style="width:200px;" data-bind="css: 'core-tech-progress-' + geProgressStatus(selectedGuidedPath().progress),
+                                                    ojComponent:{
+                                                        component: 'ojProgressbar', 
+                                                        value: parseInt(selectedGuidedPath().progress) === 0 ? '3' : selectedGuidedPath().progress}">
+                    </div>
+                    <span class="core-tech-chapter-text" data-bind="text: 'Chapter ' + parseInt(selectedGuidedPath().progress)/10 + ' of 10'"></span>
+                </div>
+            </div>
+        </div>
+        <div class="oj-margin-top oj-flex">
+            <!-- ko foreach: selectedGuidedPath().sections -->
+            <div class="oj-sm-12 oj-flex-item" data-bind="">
+                <div class="guided-path-section-content oj-sm-align-items-center oj-flex" data-bind="attr: {id: sectionID}, click: $parent.toggleGPSectionSubContent">
+                    <div class="oj-sm-11 oj-flex-item">
+                        <span class="bold oj-flex" data-bind="text: sectionTitle"></span>
+                        <span class="section-description oj-flex" data-bind="text: description"></span>
+                    </div>
+                    <div class="oj-sm-1 oj-flex-item">
+                        <div class="oj-sm-justify-content-flex-end oj-flex">
+                            <img class="tick-icon" src="css/img/icon-25.svg" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="guided-path-sub-content-container oj-sm-hide oj-flex" data-bind="attr: {id: sectionID + '-sub-content'}">
+                    <!-- ko foreach: sectionDocs -->
+                    <div class="oj-sm-12 oj-flex-item">
+                        <div class="guided-path-section-sub-content oj-sm-align-items-center oj-flex" 
+                             data-bind="attr: {id: sectionDocId }, 
+                                        click: docType !== 'pdf' ? $parent.openGPSectionSubContent : ''">
+                            <span class="oj-sm-10 oj-flex-item" data-bind="text: docDescription"></span>
+                            <div class="oj-sm-1 oj-flex-item">
+                                <span class="content-time-to-complete oj-sm-justify-content-flex-end oj-flex" data-bind="text: docType === 'pdf' ? timeToComplete + ' read' : timeToComplete"></span>
+                            </div>
+                            <div class="oj-sm-1 oj-flex-item">
+                                <div class="oj-sm-justify-content-flex-end oj-flex">
+                                    <img class="tick-icon" src="css/img/icon-24.svg" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+</div>   
+       
+<img class="need-help" src="css/img/need-help.png" data-bind="click: onClickFeedback" alt="" />
+<tech-support references="{{references}}" is-panel-visible="{{false}}"></tech-support>
