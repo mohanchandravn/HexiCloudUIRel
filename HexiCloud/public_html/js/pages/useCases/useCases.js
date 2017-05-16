@@ -42,7 +42,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var getAllAvailableUseCasesSuccessCbFn = function (data, status) {
             if (data.useCases) {
                 var useCases = data.useCases;
-                debugger;
                 for (var idx = 0; idx < useCases.length; idx++) {
                     for (var index = 0; index < self.tailoredUseCases().length; index++) {
                         if (self.tailoredUseCases()[index].id !== useCases[idx].id) {
@@ -55,10 +54,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                         }
                     }
                 }
-                debugger;
                 self.allAvailableUseCases = useCases;
+                self.areAllAvailableUseCasesLoaded(true);
+                $("#availableUseCases").ojMasonryLayout("refresh");
             }
-            self.areAllUseCasesLoaded(true);
             hidePreloader();
         };
 
@@ -78,6 +77,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     }
                 }
                 self.tailoredUseCases(useCases);
+                self.areAllTailoredUseCasesLoaded(true);
                 $("#tailoredUseCases").ojMasonryLayout("refresh");
                 service.getAllUseCases().then(getAllAvailableUseCasesSuccessCbFn, getAllAvailableUseCasesFailCbFn);
             }

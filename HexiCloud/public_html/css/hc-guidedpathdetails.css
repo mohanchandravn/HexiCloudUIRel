@@ -66,10 +66,6 @@ and open the template in the editor.
     background: green;
 }
 
-#guidedPathDetailsPage .guided-path-details-container .core-tech-chapter-text {
-    margin-left: 10px;
-}
-
 #guidedPathDetailsPage .guided-path-details-container .guided-path-section-content {
     min-height: 65px;
     font-size: 12px;

@@ -368,9 +368,9 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             $.ajax({
                 type: 'GET',
                 url: serverURL,
-//                beforeSend: function (request) {
-//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
-//                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
                 dataType: "json",
                 success: function (data, status) {
                     console.log('Successfully retrieved details at: ' + serverURL);

@@ -161,10 +161,6 @@ and open the template in the editor.
     background: green;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-chapter-text {
-    margin-left: 10px;
-}
-
 #useCaseDiscoveryPage #tabCoreTechnicalKnowledge .status-btn {
     height: 30px;
     width: 140px;
