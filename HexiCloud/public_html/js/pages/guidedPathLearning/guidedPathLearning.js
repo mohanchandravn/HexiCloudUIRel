@@ -29,13 +29,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.getSelectedGuidedPathSection = function () {
             var sectionDocs = self.selectedGuidedPathSection().sectionDocs;
             for (var idx = 0; idx < sectionDocs.length; idx++) {
-                console.log(sectionDocs[idx].sectionDocId);
-                console.log(self.selectedGuidedPathSection().selectedSectionDocId);
-                self.selectedGuidedPathSubSection(sectionDocs[idx]);
-                self.areGuidedPathSectionsLoaded(true);
-                if (sectionDocs[idx].sectonDocId === self.selectedGuidedPathSection().selectedSectionDocId) {
-//                    self.selectedGuidedPathSubSection(sectionDocs[idx]);
-//                    self.areGuidedPathSectionsLoaded(true);
+                if (sectionDocs[idx].sectionDocId === self.selectedGuidedPathSection().selectedSectionDocId) {
+                    self.selectedGuidedPathSubSection(sectionDocs[idx]);
+                    self.areGuidedPathSectionsLoaded(true);
                     return;
                 }
             }
