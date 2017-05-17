@@ -8,9 +8,9 @@ and open the template in the editor.
         <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
         <div class="use-cases-content oj-flex">
             <div class="use-case oj-sm-12 oj-flex-item">
+                <!-- ko if: areAllTailoredUseCasesLoaded() -->
                 <span class="heading-type4 bold oj-flex">Selected Use Cases</span>
                 <div class="use-cases-body-content oj-flex">
-                    <!-- ko if: areAllTailoredUseCasesLoaded() -->
                     <div id="tailoredUseCases" class="oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                         <!-- ko foreach: tailoredUseCases -->
                         <!-- ko if: id !== 10 -->
@@ -38,8 +38,8 @@ and open the template in the editor.
                         <!-- /ko -->
                         <!-- /ko -->
                     </div>
-                    <!-- /ko -->
                 </div>
+                <!-- /ko -->
                 <div class="core-tech-support-content oj-margin-lg-top oj-sm-align-items-center oj-flex">
                     <span class="oj-margin-lg-end">Would you like to attend a Technical Workshop?</span>
                     <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="text: 'Contact Us'"></span>

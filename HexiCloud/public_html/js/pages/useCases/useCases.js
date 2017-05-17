@@ -42,22 +42,31 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var getAllAvailableUseCasesSuccessCbFn = function (data, status) {
             if (data.useCases) {
                 var useCases = data.useCases;
-                for (var idx = 0; idx < useCases.length; idx++) {
-                    for (var index = 0; index < self.tailoredUseCases().length; index++) {
-                        if (self.tailoredUseCases()[index].id !== useCases[idx].id) {
-                            if (useCases[idx].title.length > 35) {
-                                var trimTitle = useCases[idx].title.slice(0, 35);
-                                useCases[idx].trimmedTitle = trimTitle + "...";
+                if (self.areAllTailoredUseCasesLoaded()) {
+                    for (var idx = 0; idx < useCases.length; idx++) {
+                        for (var index = 0; index < self.tailoredUseCases().length; index++) {
+                            if (self.tailoredUseCases()[index].id !== useCases[idx].id) {
+                                if (useCases[idx].title.length > 35) {
+                                    var trimTitle = useCases[idx].title.slice(0, 35);
+                                    useCases[idx].trimmedTitle = trimTitle + "...";
+                                }
+                            } else {
+                                useCases.splice(idx, 1);
                             }
-                        } else {
-                            useCases.splice(idx, 1);
+                        }
+                    }
+                } else {
+                    for (var idx = 0; idx < useCases.length; idx++) {
+                        if (useCases[idx].title.length > 35) {
+                            var trimTitle = useCases[idx].title.slice(0, 35);
+                            useCases[idx].trimmedTitle = trimTitle + "...";
                         }
                     }
                 }
-                self.allAvailableUseCases = useCases;
-                self.areAllAvailableUseCasesLoaded(true);
-                $("#availableUseCases").ojMasonryLayout("refresh");
             }
+            self.allAvailableUseCases = useCases;
+            self.areAllAvailableUseCasesLoaded(true);
+            $("#availableUseCases").ojMasonryLayout("refresh");
             hidePreloader();
         };
 
@@ -69,7 +78,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         
         var getTailoredUseCasesSuccessCbFn = function (data, status) {
             var useCases = data.useCases;
-            if (useCases) {
+            if (useCases.length > 0) {
                 for (var idx = 0; idx < useCases.length; idx++) {
                     if (useCases[idx].title.length > 35) {
                         var trimTitle = useCases[idx].title.slice(0, 35);
@@ -79,8 +88,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.tailoredUseCases(useCases);
                 self.areAllTailoredUseCasesLoaded(true);
                 $("#tailoredUseCases").ojMasonryLayout("refresh");
-                service.getAllUseCases().then(getAllAvailableUseCasesSuccessCbFn, getAllAvailableUseCasesFailCbFn);
             }
+            service.getAllUseCases().then(getAllAvailableUseCasesSuccessCbFn, getAllAvailableUseCasesFailCbFn);
         };
 
         var getTailoredUseCasesFailCbFn = function (xhr) {
