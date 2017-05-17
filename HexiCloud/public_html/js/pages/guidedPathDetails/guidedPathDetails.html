@@ -18,9 +18,9 @@ and open the template in the editor.
                     <div class="core-tech-progress-bar" data-bind="css: 'core-tech-progress-' + getProgressStatus(selectedGuidedPath().progress),
                                                     ojComponent:{
                                                         component: 'ojProgressbar', 
-                                                        value: parseInt(selectedGuidedPath().progress) === 0 ? '3' : selectedGuidedPath().progress}">
+                                                        value: selectedGuidedPath().progress === 0 ? '3' : selectedGuidedPath().progress}">
                     </div>
-                    <span class="core-tech-chapter-text" data-bind="text: 'Chapter ' + parseInt(selectedGuidedPath().progress)/10 + ' of 10'"></span>
+                    <span class="core-tech-chapter-text" data-bind="text: 'Chapter ' + selectedGuidedPath().completedChapters + ' of ' + selectedGuidedPath().totalChapters"></span>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@ and open the template in the editor.
                     </div>
                     <div class="oj-sm-1 oj-flex-item">
                         <div class="oj-sm-justify-content-flex-end oj-flex">
-                            <img class="tick-icon" src="css/img/icon-25.svg" alt="" />
+                            <span data-bind="text: isCompleted ? 'C' : 'NC'"></span>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ and open the template in the editor.
                                         click: $parents[1].openGPSectionSubContent.bind($data, $parentContext)">
                             <span class="oj-sm-10 oj-flex-item" data-bind="text: docDescription"></span>
                             <div class="oj-sm-1 oj-flex-item">
-                                <span class="content-time-to-complete oj-sm-justify-content-flex-end oj-flex" data-bind="text: docType === 'pdf' ? timeToComplete + ' read' : timeToComplete"></span>
+                                <span class="content-time-to-complete oj-sm-justify-content-flex-end oj-flex" data-bind="text: $parents[1].getTimeToCompleteByDocType(docType, timeToComplete)"></span>
                             </div>
                             <div class="oj-sm-1 oj-flex-item">
                                 <div class="oj-sm-justify-content-flex-end oj-flex">

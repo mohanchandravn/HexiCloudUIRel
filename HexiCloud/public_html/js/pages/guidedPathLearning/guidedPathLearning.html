@@ -15,25 +15,25 @@ and open the template in the editor.
                     </div>
                     <div class="oj-sm-1 oj-flex-item">
                         <div class="oj-sm-justify-content-flex-end oj-sm-align-items-flex-end oj-flex">
-                            <span class="content-time-to-complete oj-sm-justify-content-flex-end oj-flex" data-bind="text: selectedGuidedPathSubSection().docType === 'pdf' ? selectedGuidedPathSubSection().timeToComplete + ' read' : selectedGuidedPathSubSection().timeToComplete"></span>
+                            <span class="content-time-to-complete oj-sm-justify-content-flex-end oj-flex" data-bind="text: getTimeToCompleteByDocType(selectedGuidedPathSubSection().docType, selectedGuidedPathSubSection().timeToComplete)"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="background-color-white oj-padding-lg oj-margin-lg-top oj-sm-justify-content-center oj-flex">
-            <!-- ko if: selectedGuidedPathSubSection().docType === 'video' -->
+            <!-- ko if: selectedGuidedPathSubSection().docType === 'VIDEO' -->
             <div class="guided-path-section-details oj-sm-12 oj-lg-6 oj-flex-item">
                 <div class="oj-sm-justify-content-center oj-flex">
                     <video class="guided-path-video-tag" preload="auto" controls>
-                        <source data-bind="attr: {src: 'https://documents-usoracleam82569.documents.us2.oraclecloud.com/documents/link/LD4E6CFEEF0521A89099B268DB81338485D611EEEC77/file/D7A4E95C396C10AC4A4AECC9DB81338485D611EEEC77' }">
+                        <source data-bind="attr: {src: selectedGuidedPathSubSection().publicLink }">
                     </video>
                     <span class="sub-section-title oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docName"></span>
                     <span class="sub-section-description oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docDescription"></span>
                 </div>
             </div>
             <!-- /ko -->
-            <!-- ko if: selectedGuidedPathSubSection().docType === 'pdf' -->
+            <!-- ko if: selectedGuidedPathSubSection().docType === 'PDF' -->
             <div class="guided-path-section-details oj-sm-12 oj-lg-6 oj-flex-item">
                 PDF content goes here..
             </div>

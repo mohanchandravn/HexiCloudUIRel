@@ -523,14 +523,13 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.getCoreGuidedPaths = function() {
             var defer = $.Deferred();
-            var serverURL = "js/pages/useCaseDiscovery/getCoreGuidedPaths.json";
-//            var serverURL = self.portalRestHost() + "/services/rest/getCoreGuidedPaths";
+            var serverURL = self.portalRestHost() + "/services/rest/getCoreGuidedPaths";
             $.ajax({
                 type: 'GET',
                 url: serverURL,
-//                beforeSend: function (request) {
-//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
-//                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
                 dataType: "json",
                 success: function (data, status) {
                     console.log('Successfully retrieved details at: ' + serverURL);
@@ -544,16 +543,15 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
         
-        self.getGuidedPathDetails = function() {
+        self.getGuidedPathDetails = function(pathId) {
             var defer = $.Deferred();
-            var serverURL = "js/pages/useCaseDiscovery/guidedPathDetail.json";
-//            var serverURL = self.portalRestHost() + "/services/rest/guidedPathDetail";
+            var serverURL = self.portalRestHost() + "/services/rest/getGuidedPathDetail?pathId=" + pathId;
             $.ajax({
                 type: 'GET',
                 url: serverURL,
-//                beforeSend: function (request) {
-//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
-//                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
                 dataType: "json",
                 success: function (data, status) {
                     console.log('Successfully retrieved details at: ' + serverURL);

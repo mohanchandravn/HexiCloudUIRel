@@ -5,7 +5,7 @@
  */
 
 /**
- * guidedPathDetails module
+ * guidedPathLearning module
  */
 define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojprogressbar'
 ], function (oj, $, ko, service, errorHandler) {
@@ -13,7 +13,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
     /**
      * The view model for the main content view template
      */
-    function guidedPathDetailsViewModel(params) {
+    function guidedPathLearningViewModel(params) {
         
         var self = this;
         var router = params.ojRouter.parentRouter;
@@ -23,7 +23,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.selectedGuidedPathSubSection = ko.observable();
         if (params.rootData.selectedGuidedPathSection) {
             self.selectedGuidedPathSection(params.rootData.selectedGuidedPathSection);
-            console.log(self.selectedGuidedPathSection());
         }
 
         self.getSelectedGuidedPathSection = function () {
@@ -34,6 +33,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     self.areGuidedPathSectionsLoaded(true);
                     return;
                 }
+            }
+        };
+        
+        self.getTimeToCompleteByDocType = function(docType, timeToComplete) {
+            if (docType === "PDF") {
+                return timeToComplete + " read";
+            } else if (docType === "VIDEO") {
+                return timeToComplete;
             }
         };
        
@@ -49,5 +56,5 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
     }
     
-    return guidedPathDetailsViewModel;
+    return guidedPathLearningViewModel;
 });

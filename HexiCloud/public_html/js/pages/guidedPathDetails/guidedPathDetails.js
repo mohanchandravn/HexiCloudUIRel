@@ -18,8 +18,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var self = this;
         var router = params.ojRouter.parentRouter;
         
-//        self.selectedGuidedPath = params.rootData.selectedGuidedPath;
-        self.selectedGuidedPath = ko.observable();
+        self.selectedGuidedPathId = ko.observable(params.rootData.selectedGuidedPathId);
+        self.selectedGuidedPath = ko.observableArray([]);
         self.areGuidedPathsLoaded = ko.observable(false);
         
         var getGuidedPathDetailsSuccessFn = function(data, success) {
@@ -34,6 +34,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 return 'orange';
             } else {
                 return 'green';
+            }
+        };
+        
+        self.getTimeToCompleteByDocType = function(docType, timeToComplete) {
+            if (docType === "PDF") {
+                return timeToComplete + " read";
+            } else if (docType === "VIDEO") {
+                return timeToComplete;
             }
         };
         
@@ -57,7 +65,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.handleAttached = function() {
-            service.getGuidedPathDetails().then(getGuidedPathDetailsSuccessFn, FailCallBackFn);
+            service.getGuidedPathDetails(self.selectedGuidedPathId()).then(getGuidedPathDetailsSuccessFn, FailCallBackFn);
         };
     }
     

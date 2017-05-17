@@ -43,7 +43,7 @@ and open the template in the editor.
                     <div class="core-tech-content oj-sm-align-items-center oj-flex">
                         <img class="core-tech-img" data-bind="attr: { src: 'css/img/usecases/dockers.jpg' }" alt="" />
                         <div class="oj-padding-lg-horizontal oj-xl-4 oj-flex-item">
-                            <!-- ko if: isRecommended -->
+                            <!-- ko if: isRecommmended -->
                             <span class="core-tech-recommended-text oj-flex" data-bind="text: 'Recommended for you'"></span>
                             <!-- /ko -->
                             <span class="core-tech-title oj-flex" data-bind="text: label"></span>
@@ -59,13 +59,13 @@ and open the template in the editor.
                                 <div class="core-tech-progress-bar" data-bind="css: 'core-tech-progress-' + $parent.getProgressStatus(progress),
                                                                 ojComponent:{
                                                                     component: 'ojProgressbar', 
-                                                                    value: parseInt(progress) === 0 ? '3' : progress}">
+                                                                    value: progress === 0 ? '3' : progress}">
                                 </div>
-                                <span class="core-tech-chapter-text" data-bind="text: 'Chapter ' + parseInt(progress)/10 + ' of 10'"></span>
+                                <span class="core-tech-chapter-text" data-bind="text: 'Chapter ' + completedChapters + ' of ' + totalChapters"></span>
                             </div>
                         </div>
                         <div class="oj-margin-lg-end oj-flex-item">
-                            <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="click: $parent.onClickOnCoreTechContent, text: parseInt(progress) === 0 ? 'Begin' : 'Continue'"></span>
+                            <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="click: $parent.onClickOnCoreTechContent, text: progress === 0 ? 'Begin' : 'Continue'"></span>
                         </div>
                     </div>
                     <!-- /ko -->

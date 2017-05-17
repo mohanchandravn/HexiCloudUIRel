@@ -30,10 +30,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             var getCoreGuidedPathsDataSuccessFn = function (data, status) {
                 var guidedPaths = data.guidedPaths;
                 self.coreGuidedPaths(guidedPaths);
+                self.areCoreGuidedPathsLoaded(true);
             };
             
             service.getCoreGuidedPaths().then(getCoreGuidedPathsDataSuccessFn, FailCallBackFn);
-            self.areCoreGuidedPathsLoaded(true);
             hidePreloader();
         };
         
@@ -98,7 +98,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.onClickOnCoreTechContent = function(data, event) {
-            params.rootData.selectedGuidedPath = data;
+            params.rootData.selectedGuidedPathId = data.pathId;
             router.go('guidedPathDetails');
         };
         
