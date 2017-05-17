@@ -23,13 +23,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.areGuidedPathsLoaded = ko.observable(false);
         
         var getGuidedPathDetailsSuccessFn = function(data, success) {
-            console.log(data);
             self.selectedGuidedPath(data.guidedPathDetail);
-            console.log(self.selectedGuidedPath());
             self.areGuidedPathsLoaded(true);
         };
         
-        self.geProgressStatus = function(progressValue) {
+        self.getProgressStatus = function(progressValue) {
             if (Number(progressValue) < 1 ) {
                 return 'red';
             } else if (Number(progressValue) < 35 ) {
@@ -40,17 +38,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.toggleGPSectionSubContent = function(data, event) {
-            console.log(data);
             var id = event.currentTarget.id;
-            console.log(id);
             $(".guided-path-sub-content-container").slideUp();
             $("#" + id + "-sub-content").slideDown();
         };
         
-        self.openGPSectionSubContent = function(data, event) {
-            console.log(data);
-            var id = event.currentTarget.id;
-            console.log(id);
+        self.openGPSectionSubContent = function(parent, data, event) {
+            parent.$data.selectedSectionDocId = data.sectionDocId;
+            params.rootData.selectedGuidedPathSection = parent.$data;
+            router.go('guidedPathLearning');
         };
        
         self.onClickFeedback = function() {

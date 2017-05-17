@@ -28,15 +28,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.getCoreGuidedPathsData = function(data, event) {
             showPreloader();
             var getCoreGuidedPathsDataSuccessFn = function (data, status) {
-                console.log(status);
-                console.log(data);
                 var guidedPaths = data.guidedPaths;
                 self.coreGuidedPaths(guidedPaths);
             };
             
-            service.getCoreGuidedPaths().then(getCoreGuidedPathsDataSuccessFn, FailCallBackFn)
-            console.log(data);
-            console.log(event);
+            service.getCoreGuidedPaths().then(getCoreGuidedPathsDataSuccessFn, FailCallBackFn);
             self.areCoreGuidedPathsLoaded(true);
             hidePreloader();
         };
@@ -91,7 +87,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             self.selectedTab(data.value);
         };
         
-        self.geProgressStatus = function(progressValue) {
+        self.getProgressStatus = function(progressValue) {
             if (Number(progressValue) < 1 ) {
                 return 'red';
             } else if (Number(progressValue) < 35 ) {
@@ -102,8 +98,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.onClickOnCoreTechContent = function(data, event) {
-            console.log(data);
-            console.log(event);
             params.rootData.selectedGuidedPath = data;
             router.go('guidedPathDetails');
         };

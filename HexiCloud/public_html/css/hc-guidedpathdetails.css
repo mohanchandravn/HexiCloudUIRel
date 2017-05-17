@@ -10,6 +10,8 @@ and open the template in the editor.
 
 .guidedPathDetails-page {
     padding: 25px 25px 50px 25px;
+    min-height: 100%;
+    background: #F1F2F2;
 }
 
 #guidedPathDetailsPage .guided-path-details-container .guided-path-details-image {
@@ -64,6 +66,10 @@ and open the template in the editor.
 
 #guidedPathDetailsPage .guided-path-details-container .core-tech-progress-green .oj-progressbar-value {
     background: green;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .core-tech-chapter-text {
+    margin-left: 10px;
 }
 
 #guidedPathDetailsPage .guided-path-details-container .guided-path-section-content {

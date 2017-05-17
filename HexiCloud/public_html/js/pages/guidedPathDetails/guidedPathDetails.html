@@ -7,19 +7,20 @@ and open the template in the editor.
     <div class="guided-path-details-container oj-sm-12 oj-flex-item">
         <!-- ko if: areGuidedPathsLoaded -->
         <div class="oj-margin-bottom oj-flex">
-            <div class="oj-xl-4 oj-flex-item">
+            <div class="oj-lg-4 oj-flex-item">
                 <img class="guided-path-details-image" data-bind="attr: { src : 'css/img/usecases/dockers.jpg' }" alt="Image" />
             </div>
-            <div class="use-case-title-and-desc oj-xl-8 oj-flex-item">
+            <div class="use-case-title-and-desc oj-lg-8 oj-flex-item">
                 <span class="use-case-title oj-flex" data-bind="text: selectedGuidedPath().label"></span>
                 <p class="use-case-description oj-flex" data-bind="text: selectedGuidedPath().shortDesc"></p>
                 <div class="oj-sm-justify-content-flex-start oj-flex">
-                    <span class="core-tech-progress-title oj-xl-12 oj-flex-item" data-bind="text: 'Progress'"></span>
-                    <div class="core-tech-progress-bar" style="width:200px;" data-bind="css: 'core-tech-progress-' + geProgressStatus(selectedGuidedPath().progress),
+                    <span class="core-tech-progress-title oj-lg-12 oj-flex-item" data-bind="text: 'Progress'"></span>
+                    <div class="core-tech-progress-bar" data-bind="css: 'core-tech-progress-' + getProgressStatus(selectedGuidedPath().progress),
                                                     ojComponent:{
                                                         component: 'ojProgressbar', 
                                                         value: parseInt(selectedGuidedPath().progress) === 0 ? '3' : selectedGuidedPath().progress}">
                     </div>
+                    <span class="core-tech-chapter-text" data-bind="text: 'Chapter ' + parseInt(selectedGuidedPath().progress)/10 + ' of 10'"></span>
                 </div>
             </div>
         </div>
@@ -42,7 +43,7 @@ and open the template in the editor.
                     <div class="oj-sm-12 oj-flex-item">
                         <div class="guided-path-section-sub-content oj-sm-align-items-center oj-flex" 
                              data-bind="attr: {id: sectionDocId }, 
-                                        click: docType !== 'pdf' ? $parent.openGPSectionSubContent : ''">
+                                        click: $parents[1].openGPSectionSubContent.bind($data, $parentContext)">
                             <span class="oj-sm-10 oj-flex-item" data-bind="text: docDescription"></span>
                             <div class="oj-sm-1 oj-flex-item">
                                 <span class="content-time-to-complete oj-sm-justify-content-flex-end oj-flex" data-bind="text: docType === 'pdf' ? timeToComplete + ' read' : timeToComplete"></span>

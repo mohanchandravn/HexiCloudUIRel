@@ -8,9 +8,9 @@ and open the template in the editor.
     Author     : nithin narayanan
 */
 
-.use-case-discovery {
-    width: 100%;
-    height: 100%;
+.useCaseDiscovery-page {
+    min-height: 100%;
+    background-color: #F1F2F2;
 }
 
 .use-case-discovery-wrapper-content {
@@ -159,6 +159,10 @@ and open the template in the editor.
 
 #useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-progress-green .oj-progressbar-value {
     background: green;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-chapter-text {
+    margin-left: 10px;
 }
 
 #useCaseDiscoveryPage #tabCoreTechnicalKnowledge .status-btn {

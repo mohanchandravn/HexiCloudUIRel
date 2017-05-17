@@ -263,6 +263,10 @@ textarea.whitePlaceHolder:-ms-input-placeholder {
     font-style: normal !important;
 }
 
+.background-color-white {
+    background-color: white;
+}
+
 .input-color-white {
     color: white;
 }

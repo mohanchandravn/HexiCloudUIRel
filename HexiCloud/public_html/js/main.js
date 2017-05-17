@@ -134,6 +134,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 'useCaseSelection': {label: 'Use Case Selection', value: getPath('useCaseSelection')},
                 'useCaseDiscovery': {label: 'Use Case Discovery', value: getPath('useCaseDiscovery')},
                 'guidedPathDetails': {label: 'Guided Path Details', value: getPath('guidedPathDetails')},
+                'guidedPathLearning': {label: 'Guided Path Learning', value: getPath('guidedPathLearning')},
                 'faqs': {label: 'FAQ\'s', value: getPath('faqs')},
                 'error': {label: 'Error', value: getPath('error')}
             });

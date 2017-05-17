@@ -3,7 +3,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div id="useCaseDiscoveryPage" class="use-case-discovery">
+<div id="useCaseDiscoveryPage" class="useCaseDiscovery-page">
 
     <div class="use-case-discovery-wrapper-content oj-flex">
         
@@ -56,11 +56,12 @@ and open the template in the editor.
                         <div class="oj-xl-4 oj-flex-item">
                             <div class="oj-sm-justify-content-flex-start oj-flex">
                                 <span class="core-tech-progress-title oj-xl-12 oj-flex-item" data-bind="text: 'Progress'"></span>
-                                <div class="core-tech-progress-bar" style="width:200px;" data-bind="css: 'core-tech-progress-' + $parent.geProgressStatus(progress),
+                                <div class="core-tech-progress-bar" data-bind="css: 'core-tech-progress-' + $parent.getProgressStatus(progress),
                                                                 ojComponent:{
                                                                     component: 'ojProgressbar', 
                                                                     value: parseInt(progress) === 0 ? '3' : progress}">
                                 </div>
+                                <span class="core-tech-chapter-text" data-bind="text: 'Chapter ' + parseInt(progress)/10 + ' of 10'"></span>
                             </div>
                         </div>
                         <div class="oj-margin-lg-end oj-flex-item">
