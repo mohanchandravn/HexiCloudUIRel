@@ -34,7 +34,18 @@ and open the template in the editor.
                     </div>
                     <div class="oj-sm-1 oj-flex-item">
                         <div class="oj-sm-justify-content-flex-end oj-flex">
-                            <span data-bind="text: isCompleted ? 'C' : 'NC'"></span>
+                            <!-- ko if: isCompleted -->
+                                <img class="tick-icon" src="css/img/guidedpaths/section-checked.svg" alt="" />
+                            <!-- /ko -->
+                            <!-- ko ifnot: isCompleted -->
+                                <!-- ko if: completedSubSections > 0 -->
+                                <span data-bind="text:completedSubSections"></span>/
+                                <span data-bind="text:totalSubSections"></span>
+                                <!-- /ko -->
+                                <!-- ko if: completedSubSections === 0 -->
+                                    <img class="tick-icon" src="css/img/guidedpaths/check-circle-outline-blank.svg" alt="" />
+                                <!-- /ko -->
+                            <!-- /ko -->
                         </div>
                     </div>
                 </div>
@@ -44,13 +55,18 @@ and open the template in the editor.
                         <div class="guided-path-section-sub-content oj-sm-align-items-center oj-flex" 
                              data-bind="attr: {id: sectionDocId }, 
                                         click: $parents[1].openGPSectionSubContent.bind($data, $parentContext)">
-                            <span class="oj-sm-10 oj-flex-item" data-bind="text: docDescription"></span>
+                            <span class="oj-sm-10 oj-flex-item" data-bind="text: docName"></span>
                             <div class="oj-sm-1 oj-flex-item">
                                 <span class="content-time-to-complete oj-sm-justify-content-flex-end oj-flex" data-bind="text: $parents[1].getTimeToCompleteByDocType(docType, timeToComplete)"></span>
                             </div>
                             <div class="oj-sm-1 oj-flex-item">
                                 <div class="oj-sm-justify-content-flex-end oj-flex">
-                                    <img class="tick-icon" src="css/img/icon-24.svg" alt="" />
+                                    <!-- ko if: status === 'C' -->
+                                    <img class="tick-icon" src="css/img/guidedpaths/section-checked.svg" alt="" />
+                                    <!-- /ko -->
+                                    <!-- ko if: status !== 'C' -->
+                                    <img class="tick-icon" src="css/img/guidedpaths/check-circle-outline-blank.svg" alt="" />
+                                    <!-- /ko -->
                                 </div>
                             </div>
                         </div>
