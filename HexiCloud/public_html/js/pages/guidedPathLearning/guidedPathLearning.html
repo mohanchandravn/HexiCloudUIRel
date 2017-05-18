@@ -11,7 +11,7 @@ and open the template in the editor.
                 <div class="guided-path-section-content oj-sm-align-items-flex-end oj-flex">
                     <div class="oj-sm-11 oj-flex-item">
                         <span class="bold oj-flex" data-bind="text: selectedGuidedPathSection().sectionTitle"></span>
-                        <span class="section-description oj-flex" data-bind="text: selectedGuidedPathSubSection().docDescription"></span>
+                        <span class="section-description oj-flex" data-bind="text: selectedGuidedPathSubSection().docName"></span>
                     </div>
                     <div class="oj-sm-1 oj-flex-item">
                         <div class="oj-sm-justify-content-flex-end oj-sm-align-items-flex-end oj-flex">
@@ -28,7 +28,7 @@ and open the template in the editor.
                     <video class="guided-path-video-tag" preload="auto" controls>
                         <source data-bind="attr: {src: selectedGuidedPathSubSection().publicLink }">
                     </video>
-                    <span class="sub-section-title oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docName"></span>
+                    <!--<span class="sub-section-title oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docName"></span>-->
                     <span class="sub-section-description oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docDescription"></span>
                 </div>
             </div>
