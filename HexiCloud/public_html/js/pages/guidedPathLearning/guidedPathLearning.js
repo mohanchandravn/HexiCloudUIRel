@@ -46,6 +46,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
                     // Load the PDF document
                     if (self.selectedGuidedPathSubSection().docType === "PDF") {
                         getPDFDoc(self.selectedGuidedPathSubSection().publicLink);
+                    } else {
+                        hidePreloader();
                     }
                     return;
                 }
@@ -53,14 +55,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
         };
 
         function getPDFDoc(docURL) {
-            self.canvas(document.getElementById('the-canvas')),
-                    self.ctx(self.canvas().getContext('2d'));
+            self.canvas(document.getElementById('the-canvas')), self.ctx(self.canvas().getContext('2d'));
 
             // document.getElementById('prev').addEventListener('click', self.onPrevPage());
             // document.getElementById('next').addEventListener('click', self.onNextPage());
 
             if (self.pageNum() == 1) {
-                document.getElementById('prev').disabled = true;
+                $('#prev').removeClass('prevEnabled');
+                $('#prev').addClass('prevDisabled');
             }
 
             if (self.scale() <= 1) {
@@ -115,6 +117,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
 
                 // Update page counters
                 document.getElementById('page_num').textContent = self.pageNum();
+                
+                hidePreloader();
             }
         }
 
@@ -139,12 +143,16 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
             }
             self.pageNum(self.pageNum() - 1);
 
-            if (self.pageNum() <= 1) {
-                document.getElementById('prev').disabled = true;
-                document.getElementById('next').disabled = false;
+            if (self.pageNum() <= 1) {                
+                $('#prev').removeClass('prevEnabled');
+                $('#prev').addClass('prevDisabled');
+                $('#next').removeClass('nextDisabled');
+                $('#next').addClass('nextEnabled');
             } else {
-                document.getElementById('prev').disabled = false;
-                document.getElementById('next').disabled = false;
+                $('#prev').removeClass('prevDisabled');
+                $('#prev').addClass('prevEnabled');
+                $('#next').removeClass('nextDisabled');
+                $('#next').addClass('nextEnabled');
             }
 
             queueRenderPage(self.pageNum());
@@ -160,11 +168,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
             self.pageNum(self.pageNum() + 1);
 
             if (self.pageNum() >= self.pdfDoc().numPages) {
-                document.getElementById('next').disabled = true;
-                document.getElementById('prev').disabled = false;
+                $('#next').removeClass('nextEnabled');
+                $('#next').addClass('nextDisabled');
+                $('#prev').removeClass('prevDisabled');
+                $('#prev').addClass('prevEnabled');
             } else {
-                document.getElementById('next').disabled = false;
-                document.getElementById('prev').disabled = false;
+                $('#prev').removeClass('prevDisabled');
+                $('#prev').addClass('prevEnabled');
+                $('#next').removeClass('nextDisabled');
+                $('#next').addClass('nextEnabled');
             }
 
             queueRenderPage(self.pageNum());
@@ -175,14 +187,20 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
             self.pageNum(isNaN(pageNo) ? 1 : pageNo);
 
             if (self.pageNum() < 2) {
-                document.getElementById('prev').disabled = true;
-                document.getElementById('next').disabled = false;
+                $('#prev').removeClass('prevEnabled');
+                $('#prev').addClass('prevDisabled');
+                $('#next').removeClass('nextDisabled');
+                $('#next').addClass('nextEnabled');
             } else if (self.pageNum() >= self.pdfDoc().numPages) {
-                document.getElementById('next').disabled = true;
-                document.getElementById('prev').disabled = false;
+                $('#next').removeClass('prevEnabled');
+                $('#next').addClass('prevDisabled');
+                $('#prev').removeClass('nextDisabled');
+                $('#prev').addClass('nextEnabled');
             } else {
-                document.getElementById('prev').disabled = false;
-                document.getElementById('next').disabled = false;
+                $('#prev').removeClass('prevDisabled');
+                $('#prev').addClass('prevEnabled');
+                $('#next').removeClass('nextDisabled');
+                $('#next').addClass('nextEnabled');
             }
 
             renderPage(self.pageNum());
@@ -232,6 +250,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
         };
 
         self.handleAttached = function () {
+            showPreloader();
             self.getSelectedGuidedPathSection();
         };
     }
