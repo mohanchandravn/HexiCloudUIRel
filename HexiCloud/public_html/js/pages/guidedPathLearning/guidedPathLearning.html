@@ -35,13 +35,31 @@ and open the template in the editor.
             <!-- /ko -->
             <!-- ko if: selectedGuidedPathSubSection().docType === 'PDF' -->
             <div class="guided-path-section-details oj-sm-12 oj-lg-6 oj-flex-item">
-                PDF content goes here..
+                <div id="pdfEditorContainer">
+                    <br></br>&nbsp;
+                    <input id="goToPageNo" type="text" size="4" placeholder="Page No.">&nbsp;
+                    <button id="goToPage" data-bind="click: onGoToPage()">Go</button> 
+                    <br></br>
+                    <div>
+                        &nbsp;
+                        <button id="prev" data-bind="click: onPrevPage()">Prev</button>&nbsp;
+                        <button id="next" data-bind="click: onNextPage()">Next</button>&nbsp;&nbsp;
+                        <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button id="zoomIn" data-bind="click: zoomIn()">Zoom In</button>&nbsp;
+                        <button id="zoomOut" data-bind="click: zoomOut()">Zoom Out</button>
+                    </div>
+                    <div style="width: 650px; height: 650px; overflow: auto; margin-top: 10px;">
+                        <canvas id="the-canvas"></canvas>
+                    </div>
+                </div>
             </div>
             <!-- /ko -->
         </div>
         <!-- /ko -->
     </div>
 </div>   
-       
+
 <img class="need-help" src="css/img/need-help.png" data-bind="click: onClickFeedback" alt="" />
 <tech-support references="{{references}}" is-panel-visible="{{false}}"></tech-support>

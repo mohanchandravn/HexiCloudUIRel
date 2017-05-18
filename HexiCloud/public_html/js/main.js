@@ -21,7 +21,8 @@ requirejs.config({
         'signals': 'libs/js-signals/signals.min',
         'customElements': 'libs/webcomponents/CustomElements.min',
         'proj4': 'libs/proj4js/dist/proj4-src',
-        'css': 'libs/require-css/css.min'
+        'css': 'libs/require-css/css.min',
+        'pdfjs-dist': 'libs/pdfjs/pdfjs-1.7.225'
 
 
 
