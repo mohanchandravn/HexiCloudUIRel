@@ -197,7 +197,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
 
                 self.showHeaderNav = ko.computed(function () {
                     var id = router.currentState().id;
-                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery"];
+                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery", "guidedPathDetails", "guidedPathLearning"];
                     return (pages.indexOf(id) > -1) ? '' : 'visibility-hidden';
                 });
 
@@ -351,6 +351,10 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.routeToUseCaseSelection = function (data, event) {
                     router.go(event.currentTarget.id + '/');
                 };
+                
+                self.routeToUseCases = function (data, event) {
+                    router.go('useCases');
+                };                
 
                 self.routeToResources = function (data, event) {
                     //routeTo(data,event);

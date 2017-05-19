@@ -32,7 +32,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
         self.pageNum = ko.observable(1);
         self.pageRendering = ko.observable(false);
         self.pageNumPending = ko.observable(null);
-        self.scale = ko.observable(1.8);
+        self.scale = ko.observable(1.5);
         self.canvas = ko.observable();
         self.ctx = ko.observable();
 

@@ -51,8 +51,8 @@ and open the template in the editor.
 
 .prevEnabled {
     background: url(img/guidedpaths/previous-enabled.svg) no-repeat center;
-    background-size: 50px;
-    width: 60px;
+    background-size: 60px;
+    width: 75px;
     height: 130px;
     margin: 200px 25px 0px 0px;
     cursor: pointer;
@@ -60,8 +60,8 @@ and open the template in the editor.
 
 .prevDisabled {
     background: url(img/guidedpaths/previous-disabled.svg) no-repeat center;
-    background-size: 50px;
-    width: 60px;
+    background-size: 60px;
+    width: 75px;
     height: 130px;
     margin: 200px 25px 0px 0px;
     pointer-events: none;
@@ -70,8 +70,8 @@ and open the template in the editor.
 
 .nextEnabled {
     background: url(img/guidedpaths/next-enabled.svg) no-repeat center;
-    background-size: 50px;
-    width: 60px;
+    background-size: 60px;
+    width: 75px;
     height: 130px;
     margin: 200px 0px 0px 0px;
     cursor: pointer;
@@ -79,8 +79,8 @@ and open the template in the editor.
 
 .nextDisabled {
     background: url(img/guidedpaths/next-disabled.svg) no-repeat center;
-    background-size: 50px;
-    width: 60px;
+    background-size: 60px;
+    width: 75px;
     height: 130px;
     margin: 200px 0px 0px 0px;
     pointer-events: none;
@@ -89,38 +89,38 @@ and open the template in the editor.
 
 .zoomInEnabled {
     background: url(img/guidedpaths/zoom-in.png) no-repeat center;
-    background-size: 35px;
-    width: 35px;
-    height: 35px;
-    padding: 0px 10px 0px 20px;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: 25px;
     cursor: pointer;
 }
 
 .zoomInDisabled {
     background: url(img/guidedpaths/zoom-in.png) no-repeat center;
-    background-size: 35px;
-    width: 35px;
-    height: 35px;
-    padding: 0px 10px 0px 20px;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: 25px;
     pointer-events: none;
     cursor: not-allowed;
 }
 
 .zoomOutEnabled {
     background: url(img/guidedpaths/zoom-out.png) no-repeat center;
-    background-size: 35px;
-    width: 35px;
-    height: 35px;
-    padding: 0px 10px 0px 10px;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
     cursor: pointer;
 }
 
 .zoomOutDisabled {
     background: url(img/guidedpaths/zoom-out.png) no-repeat center;
-    background-size: 35px;
-    width: 35px;
-    height: 35px;
-    padding: 0px 10px 0px 10px;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
     pointer-events: none;
     cursor: not-allowed;
 }
@@ -128,4 +128,8 @@ and open the template in the editor.
 .pdf-section {
     width: 100%;
     max-width: 100%;
+}
+
+.page-number {
+    margin-top: 7px;
 }
