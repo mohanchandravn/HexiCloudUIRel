@@ -36,19 +36,13 @@ and open the template in the editor.
             <!-- ko if: selectedGuidedPathSubSection().docType === 'PDF' -->
             <div class="guided-path-section-details pdf-section oj-sm-12 oj-lg-6 oj-flex-bar">
                 <div id="prev" class="oj-sm-align-self-flex-start oj-flex-bar-start prevDisabled" data-bind="click: onPrevPage()"></div>
-                <div id="pdfEditorContainer">
-                    <br></br>&nbsp;
-                    <input id="goToPageNo" type="text" size="4" placeholder="Page No.">&nbsp;
-                    <button id="goToPage" data-bind="click: onGoToPage()">Go</button> 
-                    <br></br>
-                    <div>
-                        <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button id="zoomIn" data-bind="click: zoomIn()">Zoom In</button>&nbsp;
-                        <button id="zoomOut" data-bind="click: zoomOut()">Zoom Out</button>
+                <div id="pdfEditorContainer" class="oj-flex">
+                    <div class="oj-flex-bar">
+                        <span class="oj-sm-align-self-flex-start oj-flex-bar-start">Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+                        <div id="zoomIn" class="zoomInEnabled" data-bind="click: zoomIn()"></div>
+                        <div id="zoomOut" class="zoomOutEnabled oj-sm-align-self-flex-top oj-flex-bar-top" data-bind="click: zoomOut()"></div>
                     </div>
-                    <div style="width: 650px; height: 650px; overflow: auto; margin-top: 10px;">
+                    <div class="oj-flex" style="width: 650px; height: 650px; overflow: auto; margin-top: 10px;">
                         <canvas id="the-canvas"></canvas>
                     </div>
                 </div>

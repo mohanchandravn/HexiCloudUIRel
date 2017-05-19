@@ -25,6 +25,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var getGuidedPathDetailsSuccessFn = function(data, success) {
             self.selectedGuidedPath(data.guidedPathDetail);
             self.areGuidedPathsLoaded(true);
+            hidePreloader();
         };
         
         self.getProgressStatus = function(progressValue) {
@@ -65,6 +66,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.handleAttached = function() {
+            showPreloader();
             service.getGuidedPathDetails(self.selectedGuidedPathId()).then(getGuidedPathDetailsSuccessFn, FailCallBackFn);
         };
     }

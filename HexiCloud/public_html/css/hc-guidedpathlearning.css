@@ -52,20 +52,18 @@ and open the template in the editor.
 .prevEnabled {
     background: url(img/guidedpaths/previous-enabled.svg) no-repeat center;
     background-size: 50px;
-    border-radius: 50%;
     width: 60px;
     height: 130px;
-    margin: 190px 25px 0px 0px;
+    margin: 200px 25px 0px 0px;
     cursor: pointer;
 }
 
 .prevDisabled {
     background: url(img/guidedpaths/previous-disabled.svg) no-repeat center;
     background-size: 50px;
-    border-radius: 50%;
     width: 60px;
     height: 130px;
-    margin: 190px 25px 0px 0px;
+    margin: 200px 25px 0px 0px;
     pointer-events: none;
     cursor: not-allowed;
 }
@@ -73,20 +71,56 @@ and open the template in the editor.
 .nextEnabled {
     background: url(img/guidedpaths/next-enabled.svg) no-repeat center;
     background-size: 50px;
-    border-radius: 50%;
     width: 60px;
     height: 130px;
-    margin: 190px 0px 0px 25px;
+    margin: 200px 0px 0px 0px;
     cursor: pointer;
 }
 
 .nextDisabled {
     background: url(img/guidedpaths/next-disabled.svg) no-repeat center;
     background-size: 50px;
-    border-radius: 50%;
     width: 60px;
     height: 130px;
-    margin: 190px 0px 0px 25px;
+    margin: 200px 0px 0px 0px;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.zoomInEnabled {
+    background: url(img/guidedpaths/zoom-in.png) no-repeat center;
+    background-size: 35px;
+    width: 35px;
+    height: 35px;
+    padding: 0px 10px 0px 20px;
+    cursor: pointer;
+}
+
+.zoomInDisabled {
+    background: url(img/guidedpaths/zoom-in.png) no-repeat center;
+    background-size: 35px;
+    width: 35px;
+    height: 35px;
+    padding: 0px 10px 0px 20px;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.zoomOutEnabled {
+    background: url(img/guidedpaths/zoom-out.png) no-repeat center;
+    background-size: 35px;
+    width: 35px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
+    cursor: pointer;
+}
+
+.zoomOutDisabled {
+    background: url(img/guidedpaths/zoom-out.png) no-repeat center;
+    background-size: 35px;
+    width: 35px;
+    height: 35px;
+    padding: 0px 10px 0px 10px;
     pointer-events: none;
     cursor: not-allowed;
 }

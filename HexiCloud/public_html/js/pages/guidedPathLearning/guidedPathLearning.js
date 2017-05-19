@@ -57,9 +57,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
         function getPDFDoc(docURL) {
             self.canvas(document.getElementById('the-canvas')), self.ctx(self.canvas().getContext('2d'));
 
-            // document.getElementById('prev').addEventListener('click', self.onPrevPage());
-            // document.getElementById('next').addEventListener('click', self.onNextPage());
-
             if (self.pageNum() == 1) {
                 $('#prev').removeClass('prevEnabled');
                 $('#prev').addClass('prevDisabled');
