@@ -130,6 +130,10 @@ and open the template in the editor.
     max-width: 100%;
 }
 
-.page-number {
+.page-number-container {
     margin-top: 7px;
+}
+
+.page-num {
+    padding: 0px 3px 0px 3px;
 }

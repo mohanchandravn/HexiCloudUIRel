@@ -7,8 +7,8 @@
 /**
  * guidedPathLearning module
  */
-define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojprogressbar'
-], function (oj, $, ko, pdfjs) {
+define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'pdfjs-dist/build/pdf', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojprogressbar'
+], function (oj, $, ko, service, errorHandler, pdfjs) {
 
     /**
      * The view model for the main content view template
@@ -114,6 +114,29 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'pdfjs-dist/build/pdf', 'config/serv
 
                 // Update page counters
                 document.getElementById('page_num').textContent = self.pageNum();
+                
+                /*
+                var updateLearningHistorySuccessCbFn = function (data, status) {
+                    hidePreloader();
+                };
+
+                var updateLearningHistoryFailCbFn = function (xhr) {
+                    hidePreloader();
+                    console.log(xhr);
+                    errorHandler.showAppError("ERROR_GENERIC", xhr);
+                };
+                
+                var jsonData = {
+                    "learningUpdate" : {
+                       "pathId": 1,
+                       "sectionID": self.selectedGuidedPathSection().sectionID,
+                       "sectionDocId": 3,
+                       "pageNumber" : 6,
+                       "status" : "C" 
+                    }
+                };
+                service.updateLearningHistory(jsonData).then(updateLearningHistorySuccessCbFn, updateLearningHistoryFailCbFn);
+                */
                 
                 hidePreloader();
             }

@@ -198,7 +198,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.showHeaderNav = ko.computed(function () {
                     var id = router.currentState().id;
                     var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery", "guidedPathDetails", "guidedPathLearning"];
-                    return (pages.indexOf(id) > -1) ? '' : 'visibility-hidden';
+                    return (pages.indexOf(id) > -1) ? '' : 'oj-sm-hide';
                 });
 
                 self.showPreloader = function () {
