@@ -119,7 +119,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             $("#tech_support").slideToggle();
         };
         
-        self.onClickOnUseCase = function(data, event) {
+        self.onClickOnLearnMore = function(data, event) {
             if (data.id) {
                 self.selectedUseCaseDetails(data);
             }
