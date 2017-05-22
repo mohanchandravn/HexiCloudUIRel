@@ -128,7 +128,7 @@ and open the template in the editor.
     opacity: 0.4;
 }
 
-.useCasesSelection-page .inverted-btn, .dashboard-page .inverted-btn {
+.useCasesSelection-page .inverted-btn {
     min-width: 120px;
     color: #F80000;
     font-size: 14px;
@@ -202,11 +202,6 @@ and open the template in the editor.
 
 .useCasesSelection-page .use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover, .dashboard-use-cases .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover {
     transform: scale(1.3, 1.3);
-}
-
-.dashboard-use-cases .oj-masonrylayout-tile-1x1 {
-    width: 200px;
-    height: 165px;
 }
 
 /* change props of .blur-selected-tile when you have any changes in dimensions */

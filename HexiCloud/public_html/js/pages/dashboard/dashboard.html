@@ -81,8 +81,7 @@ and open the template in the editor.
         <div class="dashboard oj-flex">
             <!-- Use case selection -->
             <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
-                <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
-                <!-- ko ifnot: isSelectionPhaseCompleted() === true -->
+                <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px; border-bottom: 1px solid #DDDDDD;">
                     <span class="heading-type4">
                         Let's start your adoption journey!
                     </span>
@@ -95,9 +94,10 @@ and open the template in the editor.
                                 <i class="material-icons">play_arrow</i>
                             </span>
                         </div>
-                    </div>
-                <!-- /ko -->
-                <!-- ko if: isSelectionPhaseCompleted() === true -->
+                    </div>               
+                </div>
+                <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
+                    <!-- ko if: isSelectionPhaseCompleted() === true -->
                     <span class="heading-type4">
                         Please select a Use Case to implement!
                     </span>
@@ -121,31 +121,40 @@ and open the template in the editor.
                             </span>
                         </div>
                     </div>
-                <!-- /ko -->
+                    <!-- /ko -->
                 </div>
             </div>
             <!-- ko if: isSelectionPhaseCompleted() === true -->
             <span class="heading-type2 oj-sm-12 oj-flex-item">Tailored Use Cases</span>
-
-            <div id="masonryUseCases" class="dashboard-use-cases oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
-                <!-- ko foreach: tailoredUseCases() -->
-                <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
-                    <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
-                    <div class="oj-margin-horizontal oj-flex-bar">
-                        <div class="oj-sm-align-self-center oj-flex-bar-start">
-                            <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
-                                <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold;" data-bind="attr: {title: title}, text: title.length > 35 ? trimmedTitle : title"></span>
+            <div class="use-cases-body-content oj-flex-item">
+                <div id="masonryUseCases" class="oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+                    <!-- ko foreach: tailoredUseCases() -->
+                        <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
+                            <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
+                            <div class="use-case-content oj-margin-horizontal oj-flex-bar" style="border-bottom: 1px solid #DDDDDD;">
+                                <div class="oj-sm-align-self-center oj-flex-bar-start">
+                                    <div class="oj-flex" style="margin: 5px 0px 0px 0px;">
+                                        <span class="oj-sm-12 oj-flex-item" style="font-size: 14px; height: 40px; font-weight: bold;" data-bind="attr: {title: title}, text: title.length > 35 ? trimmedTitle : title"></span>
+                                    </div>
+                                </div>
+                                <div class="oj-sm-align-self-center oj-flex-bar-end">
+                                    <img class="bread-crumbs-icon" data-bind="click: $parent.getUseCaseDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
+                                </div>
+                            </div>
+                            <div class="use-case-content oj-sm-align-items-center  oj-flex">
+                                <div class="oj-sm-6 oj-flex-item">
+                                    <span class="inverted-btn oj-sm-justify-content-center oj-flex">Implement</span>
+                                </div>
+                                <div class=" oj-sm-6 oj-flex-item">
+                                    <span class="inverted-btn oj-sm-justify-content-center oj-flex" data-bind="click: $parent.onClickOnLearnMore">Learn more</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="oj-sm-align-self-center oj-flex-bar-end">
-                            <img class="bread-crumbs-icon" data-bind="click: $parent.getUseCaseDetails" src="css/img/icon-25.svg" width="20" height="20" alt="Image" />
-                        </div>
-                    </div>
+                    <!-- /ko -->
                 </div>
-                <!-- /ko -->
             </div>
-
             <!-- /ko -->
+            
             <!-- Use case selection -->
 
             <!-- ko if: selectedServiceItem() !== undefined -->

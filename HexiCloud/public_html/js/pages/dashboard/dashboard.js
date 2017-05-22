@@ -205,6 +205,13 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
             $("#tech_support").slideToggle();
         };
         
+        self.onClickOnLearnMore = function(data, event) {
+            if (data.id) {
+                self.selectedUseCaseDetails(data);
+            }
+            params.rootData.selectedUseCase = self.selectedUseCase();
+            router.go('useCaseDiscovery');
+        };
 
         self.handleAttached = function () {
             showPreloader();
