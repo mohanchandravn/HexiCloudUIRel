@@ -8,7 +8,7 @@
  * useCaseDiscovery module
  */
 define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt',
-    'ojs/ojprogressbar'
+    'ojs/ojprogressbar', 'ojs/ojdialog'
 ], function (oj, $, ko, service, errorHandler) {
     
     /**
@@ -24,6 +24,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.areCoreGuidedPathsLoaded = ko.observable(false);
         self.coreGuidedPaths = ko.observableArray([]);
         self.urlForTCACalculator = ko.observable('');
+        
+        self.selectedService = ko.observable(null);
         
         self.getCoreGuidedPathsData = function(data, event) {
             showPreloader();
@@ -107,6 +109,22 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             window.open('https://oracle.valuestoryapp.com/iaas/', '_blank');
         };
         */
+       
+        closeServiceDetailModal = function () {
+            self.serviceDetailModal(null);
+            $("#detailWindow").ojDialog("close");
+        };
+        
+        openServiceDetailModal = function (data, event) {
+            self.selectedService(data);
+            
+            self.handleOKClose = $("#okButton").click(function() {
+                $("#serviceDetailModal").ojDialog("close"); 
+            });
+        
+            $("#serviceDetailModal").ojDialog("open");
+        };
+        
     }
     
     return useCaseDiscoveryViewModel;

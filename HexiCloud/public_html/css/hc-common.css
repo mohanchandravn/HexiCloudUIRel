@@ -538,7 +538,7 @@ login-page video::-webkit-media-controls-start-playback-button {
 }
 
 .c-pointer {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .need-help {

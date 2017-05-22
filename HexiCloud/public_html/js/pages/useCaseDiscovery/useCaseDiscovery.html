@@ -28,6 +28,7 @@ and open the template in the editor.
             
         <div id="tabsContainer" class="tabs-container oj-flex oj-xl-12">
             <div id="tabs" class="tabs" data-bind="ojComponent:{component: 'ojTabs', optionChange: tabChangeHandler}">
+                
                 <!-- tab bar -->
                 <ul>
                     <li><span>Core Technical Knowledge</span></li>
@@ -50,7 +51,7 @@ and open the template in the editor.
                         </div>
                         <div class="oj-xl-2 oj-flex-item">
                             <div class="oj-sm-justify-content-center oj-flex">
-                                <span class="inverted-btn text-center" data-bind="text: service.label"></span>
+                                <span class="inverted-btn text-center c-pointer" data-bind="text: service.label, click: openServiceDetailModal"></span>
                             </div>
                         </div>
                         <div class="oj-xl-4 oj-flex-item">
@@ -75,21 +76,38 @@ and open the template in the editor.
                         <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="text: 'Contact Us'"></span>
                     </div>
                 </div>
+                
                 <div id="tabComplementaryKnowledge">
                     <p>Complementary Knowledge Content...</p>
                 </div>
+                
                 <!-- <div id="tabTCACalculator" data-bind="click: onClickTabTCACalculator"> -->
                 <div id="tabTCACalculator">
                     <!-- <p>TCA Calculator Content...</p> -->
                     <iframe class="tca-calculator-iframe" data-bind="attr: {src: urlForTCACalculator }"></iframe>
                 </div>
+                
                 <div id="tabSuccessStories">
                     <p>Success Stories Content...</p>
                 </div>
+                
             </div>
         </div>
             
-    </div>   
+    </div>  
+    
+    <!-- ko if: selectedService() !== null -->
+    <div id="serviceDetailModal" title="Cancel Behavior Options" 
+         data-bind="ojComponent:{ component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', cancelBehavior: 'icon' }">
+        <div class="oj-dialog-header" data-bind="text: 'Service Detail - ' + selectedService().service.label"></div>
+        <div class="oj-dialog-body">
+            <div data-bind="text: ''"></div>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="okButton" class="c-pointer" data-bind="ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
+        </div>
+    </div>
+    <!-- /ko -->
 
 </div>
             
