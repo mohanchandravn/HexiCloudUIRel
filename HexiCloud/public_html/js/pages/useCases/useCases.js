@@ -42,6 +42,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var getAllAvailableUseCasesSuccessCbFn = function (data, status) {
             if (data.useCases) {
                 var useCases = data.useCases;
+                
+                /*
                 if (self.areAllTailoredUseCasesLoaded()) {
                     for (var idx = 0; idx < useCases.length; idx++) {
                         for (var index = 0; index < self.tailoredUseCases().length; index++) {
@@ -61,6 +63,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                             var trimTitle = useCases[idx].title.slice(0, 35);
                             useCases[idx].trimmedTitle = trimTitle + "...";
                         }
+                    }
+                }
+                */
+               
+                for (var idx = 0; idx < useCases.length; idx++) {
+                    if (useCases[idx].title.length > 35) {
+                        var trimTitle = useCases[idx].title.slice(0, 35);
+                        useCases[idx].trimmedTitle = trimTitle + "...";
                     }
                 }
             }

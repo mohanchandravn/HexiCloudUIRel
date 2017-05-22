@@ -8,13 +8,14 @@ and open the template in the editor.
         <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
         <div class="use-cases-content oj-flex">
             <div class="use-case oj-sm-12 oj-flex-item">
+                
                 <!-- ko if: areAllTailoredUseCasesLoaded() -->
-                <span class="heading-type4 bold oj-flex">Selected Use Cases</span>
+                <!--<span class="heading-type4 bold oj-flex">Selected Use Cases</span>
                 <div class="use-cases-body-content oj-flex">
-                    <div id="tailoredUseCases" class="oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
+                    <div id="tailoredUseCases" class="oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">-->
                         <!-- ko foreach: tailoredUseCases -->
                         <!-- ko if: id !== 10 -->
-                        <div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
+                        <!--<div class="oj-masonrylayout-tile-1x1" style="background-color: #FFFFFF;">
                             <img class="use-case-image" data-bind="attr: { id : 'img' + id, src : 'css/img/usecases/' + image }" alt="Image" />
                             <div class="use-case-content oj-margin-horizontal oj-flex-bar" style="border-bottom: 1px solid #DDDDDD;">
                                 <div class="oj-sm-align-self-center oj-flex-bar-start">
@@ -34,17 +35,14 @@ and open the template in the editor.
                                     <span class="inverted-btn oj-sm-justify-content-center oj-flex" data-bind="click: $parent.onClickOnLearnMore">Learn more</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- /ko -->
                         <!-- /ko -->
-                    </div>
-                </div>
+                    <!--</div>
+                </div>-->
                 <!-- /ko -->
-                <div class="core-tech-support-content oj-margin-lg-top oj-sm-align-items-center oj-flex">
-                    <span class="oj-margin-lg-end">Would you like to attend a Technical Workshop?</span>
-                    <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="text: 'Contact Us'"></span>
-                </div>
-                <span class="heading-type4 bold oj-margin-lg-top oj-flex">Available Use Cases</span>
+                
+                <span class="heading-type4 bold oj-flex">Use Cases</span>
                 <div class="use-cases-body-content oj-flex">
                     <!-- ko if: areAllAvailableUseCasesLoaded() -->
                     <div id="availableUseCases" class="oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
@@ -76,6 +74,12 @@ and open the template in the editor.
                     </div>
                     <!-- /ko -->
                 </div>
+                
+                <div class="core-tech-support-content oj-margin-lg-top oj-sm-align-items-center oj-flex">
+                    <span class="oj-margin-lg-end">Would you like to attend a Technical Workshop?</span>
+                    <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="text: 'Contact Us'"></span>
+                </div>
+                
             </div>
         </div>
     </div>

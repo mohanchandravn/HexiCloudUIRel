@@ -61,11 +61,11 @@ and open the template in the editor.
 }
 
 #guidedPathDetailsPage .guided-path-details-container .core-tech-progress-orange .oj-progressbar-value {
-    background: orange;
+    background: #FC9F15;
 }
 
 #guidedPathDetailsPage .guided-path-details-container .core-tech-progress-green .oj-progressbar-value {
-    background: green;
+    background: #73CC3B;
 }
 
 #guidedPathDetailsPage .guided-path-details-container .core-tech-chapter-text {
