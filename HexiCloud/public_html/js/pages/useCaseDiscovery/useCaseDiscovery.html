@@ -99,7 +99,7 @@ and open the template in the editor.
     <!-- ko if: selectedService() !== '' -->
     <div id="serviceDetailModal" title="Cancel Behavior Options" 
          data-bind="ojComponent: { component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', cancelBehavior: 'icon',
-		  rootAttributes: { style: 'width: 800px; height: 650px;'} }">
+		  rootAttributes: { style: 'width: 800px; height: 600px;'} }">
         <div class="oj-dialog-header" data-bind="text: selectedService() + ' Service'"></div>
         <div class="oj-dialog-body">
             <!-- ko if: selectedService() !== undefined -->
