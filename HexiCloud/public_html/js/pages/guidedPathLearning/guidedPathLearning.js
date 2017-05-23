@@ -17,9 +17,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
         var self = this;
         var router = params.ojRouter.parentRouter;
-
+                
+        self.selectedUseCase = params.rootData.selectedUseCase;
         self.areGuidedPathSectionsLoaded = ko.observable(false);
         self.selectedPathId = ko.observable();
+        self.selectedPathLabel = ko.observable('');
         self.lastSubSectionToRead = ko.observable(false);
         self.nextButtonLabel = ko.observable("Next");
         self.selectedGuidedPathSection = ko.observable();
@@ -30,7 +32,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         if (params.rootData.selectedPathId) {
             self.selectedPathId(params.rootData.selectedPathId);
         }
-
+        if (params.rootData.selectedPathLabel) {
+            self.selectedPathLabel(params.rootData.selectedPathLabel);
+        }
 
         self.lastSubSectionToRead(params.rootData.lastSubSectionToRead);
 
@@ -48,6 +52,13 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.scale = ko.observable(1.5);
         self.canvas = ko.observable();
         self.ctx = ko.observable();
+        
+        self.breadCrumbs = ko.observableArray([]);
+        var breadCrumbs = [];     
+        breadCrumbs.push({id: 'useCaseDiscovery', label: self.selectedUseCase.title});
+        breadCrumbs.push({id: 'guidedPathDetails', label: self.selectedPathLabel()});
+        breadCrumbs.push({id: 'guidedPathLearning', label: self.selectedGuidedPathSection().sectionTitle});
+        self.breadCrumbs(breadCrumbs);
 
         self.getSelectedGuidedPathSection = function () {
             var sectionDocs = self.selectedGuidedPathSection().sectionDocs;
@@ -94,9 +105,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 //                    renderPage(self.pageNum());
 //                }
                 self.onGoToPage(curPageNumber);
-                console.log('Total no of pages: ' + self.pdfDoc().numPages);
-
-
             });
         }
 
@@ -350,7 +358,15 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     router.go('guidedPathDetails');
                 }
             }
-        }
+        };
+        
+        self.onBreadCrumbSelection = function(data, event) {
+            params.rootData.selectedUseCase = self.selectedUseCase;
+            if (data.id === 'guidedPathDetails') {
+                params.rootData.selectedGuidedPathId = self.selectedPathId();
+            }
+            router.go(data.id);
+        };
 
         self.handleAttached = function () {
             showPreloader();

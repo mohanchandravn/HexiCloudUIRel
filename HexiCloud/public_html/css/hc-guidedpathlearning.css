@@ -167,3 +167,25 @@ and open the template in the editor.
 .page-num {
     padding: 0px 3px 0px 3px;
 }
+
+.bread-crumbs-container {
+    margin-bottom: 5px;
+}
+
+.bread-crumbs-font {
+    font-weight: bold;
+    color: #333;
+}
+
+.bread-crumbs-font:visited {
+    color: #333;
+}
+
+.bread-crumbs-font-current {
+    font-weight: bold;
+    color: #F80000;
+}
+
+.bread-crumbs-separator {
+    padding: 0px 3px 0px 3px;
+}

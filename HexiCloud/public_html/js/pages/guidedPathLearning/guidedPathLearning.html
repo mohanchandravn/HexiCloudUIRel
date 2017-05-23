@@ -3,7 +3,25 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
 <div id="guidedPathLearningPage" class="guidedPathLearning-page oj-flex">
+    
+    <!-- ko if: breadCrumbs().length > 0 -->
+    <div id="breadCrumbsContainer" class="bread-crumbs-container oj-flex-item">
+        <!-- ko foreach: breadCrumbs() -->
+            <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
+                <a href="#" class="bread-crumbs-font" data-bind="attr:{id: id}, text: label, click: $parent.onBreadCrumbSelection"></a>
+            <!-- /ko -->
+            <!-- ko if: $index() === $parent.breadCrumbs().length - 1 -->
+                <span class="bread-crumbs-font-current" data-bind="text: label"></span>
+            <!-- /ko -->
+            <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
+                <span class="bread-crumbs-separator">&gt;</span>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    
     <div class="guided-path-learning-container oj-sm-12 oj-flex-item">
         <!-- ko if: areGuidedPathSectionsLoaded -->
         <div class="oj-flex">

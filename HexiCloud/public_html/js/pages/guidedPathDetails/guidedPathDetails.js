@@ -56,8 +56,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             parent.$data.selectedSectionDocId = data.sectionDocId;
             params.rootData.selectedGuidedPathSection = parent.$data;
             params.rootData.selectedPathId = self.selectedGuidedPathId();
+            params.rootData.selectedPathLabel = self.selectedGuidedPath().label;
+            
             if (params.rootData.selectedGuidedPathSection.sectionDocs.length === 1) {
                 params.rootData.lastSubSectionToRead = true;
+                
             } else {
                 var sectionDocs = params.rootData.selectedGuidedPathSection.sectionDocs;
                 for (var idx = 0; idx < sectionDocs.length; idx++) {
@@ -70,6 +73,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 }
                
             }
+            
             router.go('guidedPathLearning');
         };
        
