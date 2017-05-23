@@ -67,6 +67,36 @@ and open the template in the editor.
     pointer-events: none;
     cursor: not-allowed;
 }
+.nextHidden {
+    display: none;
+}
+
+.doc-button {
+   margin: 252px 0px 0px 0px; 
+}
+
+
+#guidedPathLearningPage .pdf-next-btn {
+    height: 30px;
+    width: 140px;
+    font-size: 18px;
+    color: #FFF;
+    background: #F80000 url(img/icon-24.svg) no-repeat right center;
+    padding: 5px 32px 5px 28px;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+#guidedPathLearningPage .video-next-btn {
+    height: 23px;
+    width: 110px;
+    font-size: 18px;
+    color: #FFF;
+    background: #F80000 url(img/icon-24.svg) no-repeat right center;
+    padding: 5px 0px 5px 25px;
+    border-radius: 27px;
+    cursor: pointer;
+}
 
 .nextEnabled {
     background: url(img/guidedpaths/next-enabled.svg) no-repeat center;

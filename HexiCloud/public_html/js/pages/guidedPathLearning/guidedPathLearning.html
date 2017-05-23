@@ -30,6 +30,8 @@ and open the template in the editor.
                     </video>
                     <!--<span class="sub-section-title oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docName"></span>-->
                     <span class="sub-section-description oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docDescription"></span>
+                    
+                    <span class="oj-sm-align-self-flex-top oj-flex-bar-top video-next-btn" data-bind="click: completeSubSection, text: nextButtonLabel()"></span>
                 </div>
             </div>
             <!-- /ko -->
@@ -46,7 +48,13 @@ and open the template in the editor.
                         <canvas id="the-canvas"></canvas>
                     </div>
                 </div>
-                <div id="next" class="oj-sm-align-self-flex-top oj-flex-bar-top nextEnabled" data-bind="click: onNextPage()"></div>
+                <div id="nextArrowCont" class="nextHidden">
+                    <div id="next" class="oj-sm-align-self-flex-top oj-flex-bar-top nextEnabled" data-bind="click: onNextPage()"></div>
+                </div>
+                <div id="nextButtonCont" class="nextHidden doc-button">
+                    <span class="oj-sm-align-self-flex-top oj-flex-bar-top pdf-next-btn" data-bind="click: completeSubSection, text: nextButtonLabel()"></span>
+                </div>
+
             </div>
             <!-- /ko -->
         </div>

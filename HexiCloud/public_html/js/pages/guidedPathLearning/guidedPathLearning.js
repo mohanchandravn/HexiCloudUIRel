@@ -19,10 +19,23 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var router = params.ojRouter.parentRouter;
 
         self.areGuidedPathSectionsLoaded = ko.observable(false);
+        self.selectedPathId = ko.observable();
+        self.lastSubSectionToRead = ko.observable(false);
+        self.nextButtonLabel = ko.observable("Next");
         self.selectedGuidedPathSection = ko.observable();
         self.selectedGuidedPathSubSection = ko.observable();
         if (params.rootData.selectedGuidedPathSection) {
             self.selectedGuidedPathSection(params.rootData.selectedGuidedPathSection);
+        }
+        if (params.rootData.selectedPathId) {
+            self.selectedPathId(params.rootData.selectedPathId);
+        }
+
+
+        self.lastSubSectionToRead(params.rootData.lastSubSectionToRead);
+
+        if (self.lastSubSectionToRead()) {
+            self.nextButtonLabel("Finish");
         }
 
         // The workerSrc property shall be specified.
@@ -45,7 +58,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
                     // Load the PDF document
                     if (self.selectedGuidedPathSubSection().docType === "PDF") {
-                        getPDFDoc(self.selectedGuidedPathSubSection().publicLink);
+                        getPDFDoc(self.selectedGuidedPathSubSection().publicLink, self.selectedGuidedPathSubSection().pageNumber, self.selectedGuidedPathSubSection().status);
                     } else {
                         hidePreloader();
                     }
@@ -54,9 +67,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
         };
 
-        function getPDFDoc(docURL) {
+        function getPDFDoc(docURL, curPageNumber, status) {
             self.canvas(document.getElementById('the-canvas')), self.ctx(self.canvas().getContext('2d'));
-
             if (self.pageNum() == 1) {
                 $('#prev').removeClass('prevEnabled');
                 $('#prev').addClass('prevDisabled');
@@ -73,11 +85,18 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             pdfjs.PDFJS.getDocument(docURL).then(function (pdfDoc_) {
                 self.pdfDoc(pdfDoc_);
                 document.getElementById('page_count').textContent = self.pdfDoc().numPages;
-
+//                if (status !== null && curPageNumber !== 0) {
+//                    if (status === 'I') {
+//                        self.onGoToPage(curPageNumber);
+//                    }
+//                } else {
+//                    // Initial/first page rendering
+//                    renderPage(self.pageNum());
+//                }
+                self.onGoToPage(curPageNumber);
                 console.log('Total no of pages: ' + self.pdfDoc().numPages);
 
-                // Initial/first page rendering
-                renderPage(self.pageNum());
+
             });
         }
 
@@ -114,30 +133,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
                 // Update page counters
                 document.getElementById('page_num').textContent = self.pageNum();
-                
-                /*
-                var updateLearningHistorySuccessCbFn = function (data, status) {
-                    hidePreloader();
-                };
-
-                var updateLearningHistoryFailCbFn = function (xhr) {
-                    hidePreloader();
-                    console.log(xhr);
-                    errorHandler.showAppError("ERROR_GENERIC", xhr);
-                };
-                
-                var jsonData = {
-                    "learningUpdate" : {
-                       "pathId": 1,
-                       "sectionID": self.selectedGuidedPathSection().sectionID,
-                       "sectionDocId": 3,
-                       "pageNumber" : 6,
-                       "status" : "C" 
-                    }
-                };
-                service.updateLearningHistory(jsonData).then(updateLearningHistorySuccessCbFn, updateLearningHistoryFailCbFn);
-                */
-                
                 hidePreloader();
             }
         }
@@ -151,6 +146,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.pageNumPending(num);
             } else {
                 renderPage(num);
+                self.updateLearning(num, 'I');
             }
         }
 
@@ -163,16 +159,20 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
             self.pageNum(self.pageNum() - 1);
 
-            if (self.pageNum() <= 1) {                
+            if (self.pageNum() <= 1) {
                 $('#prev').removeClass('prevEnabled');
                 $('#prev').addClass('prevDisabled');
                 $('#next').removeClass('nextDisabled');
                 $('#next').addClass('nextEnabled');
+                $('#nextArrowCont').removeClass('nextHidden');
+                $('#nextButtonCont').addClass('nextHidden');
             } else {
                 $('#prev').removeClass('prevDisabled');
                 $('#prev').addClass('prevEnabled');
                 $('#next').removeClass('nextDisabled');
                 $('#next').addClass('nextEnabled');
+                $('#nextArrowCont').removeClass('nextHidden');
+                $('#nextButtonCont').addClass('nextHidden');
             }
 
             queueRenderPage(self.pageNum());
@@ -192,35 +192,45 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 $('#next').addClass('nextDisabled');
                 $('#prev').removeClass('prevDisabled');
                 $('#prev').addClass('prevEnabled');
+                $('#nextArrowCont').addClass('nextHidden');
+                $('#nextButtonCont').removeClass('nextHidden');
             } else {
                 $('#prev').removeClass('prevDisabled');
                 $('#prev').addClass('prevEnabled');
                 $('#next').removeClass('nextDisabled');
                 $('#next').addClass('nextEnabled');
+                $('#nextArrowCont').removeClass('nextHidden');
+                $('#nextButtonCont').addClass('nextHidden');
             }
 
             queueRenderPage(self.pageNum());
         };
 
-        self.onGoToPage = function () {
-            var pageNo = parseInt(document.getElementById('goToPageNo').value);
-            self.pageNum(isNaN(pageNo) ? 1 : pageNo);
+        self.onGoToPage = function (num) {
+//            var pageNo = parseInt(document.getElementById('goToPageNo').value);
+            self.pageNum((isNaN(num) || num === 0) ? 1 : num);
 
             if (self.pageNum() < 2) {
                 $('#prev').removeClass('prevEnabled');
                 $('#prev').addClass('prevDisabled');
                 $('#next').removeClass('nextDisabled');
                 $('#next').addClass('nextEnabled');
+                $('#nextArrowCont').removeClass('nextHidden');
+                $('#nextButtonCont').addClass('nextHidden');
             } else if (self.pageNum() >= self.pdfDoc().numPages) {
-                $('#next').removeClass('prevEnabled');
-                $('#next').addClass('prevDisabled');
-                $('#prev').removeClass('nextDisabled');
-                $('#prev').addClass('nextEnabled');
+                $('#prev').removeClass('prevDisabled');
+                $('#prev').addClass('prevEnabled');
+                $('#nextArrowCont').addClass('nextHidden');
+                $('#nextButtonCont').removeClass('nextHidden');
+                $('#next').removeClass('nextEnabled');
+                $('#next').addClass('nextDisabled');
             } else {
                 $('#prev').removeClass('prevDisabled');
                 $('#prev').addClass('prevEnabled');
                 $('#next').removeClass('nextDisabled');
                 $('#next').addClass('nextEnabled');
+                $('#nextArrowCont').removeClass('nextHidden');
+                $('#nextButtonCont').addClass('nextHidden');
             }
 
             renderPage(self.pageNum());
@@ -268,6 +278,79 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
             $("#tech_support").slideToggle();
         };
+        self.updateLearning = function (num, docStatus) {
+            var updateLearningHistorySuccessCbFn = function (data, status) {
+                hidePreloader();
+            };
+
+            var updateLearningHistoryFailCbFn = function (xhr) {
+                hidePreloader();
+                console.log(xhr);
+                errorHandler.showAppError("ERROR_GENERIC", xhr);
+            };
+
+            var jsonData = {
+                "learningUpdate": {
+                    "pathId": self.selectedPathId(),
+                    "sectionID": self.selectedGuidedPathSection().sectionID,
+                    "sectionDocId": self.selectedGuidedPathSubSection().sectionDocId,
+                    "pageNumber": num,
+                    "status": docStatus
+                }
+            };
+            service.updateLearningHistory(jsonData).then(updateLearningHistorySuccessCbFn, updateLearningHistoryFailCbFn);
+        };
+
+        self.completeSubSection = function () {
+            self.updateLearning(self.pageNum(), 'C');
+            if (self.lastSubSectionToRead()) {
+                params.rootData.selectedGuidedPathId = self.selectedPathId();
+                router.go('guidedPathDetails');
+            } else {
+                var sectionDocs = self.selectedGuidedPathSection().sectionDocs;
+                var curDisplayOrder = self.selectedGuidedPathSubSection().docOrder;
+                var nextDocFound = false;
+                for (var idx = 0; idx < sectionDocs.length; idx++) {
+                    if (sectionDocs[idx].docOrder === curDisplayOrder) {
+                        self.selectedGuidedPathSection().sectionDocs[idx].status = 'C';
+                    }
+                    if (sectionDocs[idx].docOrder > curDisplayOrder && sectionDocs[idx].status !== 'C') {
+                        self.selectedGuidedPathSubSection(sectionDocs[idx]);
+                        nextDocFound = true;
+                        break;
+                    }
+                }
+                var curDocId = self.selectedGuidedPathSubSection().sectionDocId;
+                var foundInCompleteDoc = false;
+                for (var idx = 0; idx < sectionDocs.length; idx++) {
+                    if (sectionDocs[idx].sectionDocId !== curDocId && sectionDocs[idx].status !== 'C') {
+                        self.lastSubSectionToRead(false);
+                        self.nextButtonLabel("Next");
+                        foundInCompleteDoc = true;
+                        break;
+                    }
+                }
+
+
+                if (nextDocFound) {
+                    showPreloader();
+                    if (!foundInCompleteDoc) {
+                        self.lastSubSectionToRead(true);
+                        self.nextButtonLabel("Finish");
+                    }
+                    // Load the PDF document
+                    if (self.selectedGuidedPathSubSection().docType === "PDF") {
+                        getPDFDoc(self.selectedGuidedPathSubSection().publicLink, self.selectedGuidedPathSubSection().pageNumber, self.selectedGuidedPathSubSection().status);
+                    } else {
+                        hidePreloader();
+                    }
+
+                } else {
+                    params.rootData.selectedGuidedPathId = self.selectedPathId();
+                    router.go('guidedPathDetails');
+                }
+            }
+        }
 
         self.handleAttached = function () {
             showPreloader();
