@@ -10,7 +10,6 @@ and open the template in the editor.
 
 navigationbarleft {
     background-color: #31353D;
-    /*background-color: #FFFFFF;*/
     border-right: 2px solid #b0c6d1;
 }
 
@@ -45,7 +44,7 @@ navigationbarleft {
     font-size: 18px;
     color: #FFFFFF;
     min-height: 45px;
-    padding: 0px 20px 0px 40px;
+    padding: 0px 20px 0px 20px;
     border-left: 6px solid transparent;
     box-sizing: border-box;
     cursor: pointer;
@@ -84,9 +83,37 @@ navigationbarleft {
 .nav-guided-path-heading {
     font-size: 18px;
     color: #8F9090;
+    padding: 0px 46px;
 }
 
 .nav-guided-path-container .nav-use-case-container {
     background: #272A31;
-    height: 100px;
+    padding: 10px 20px 10px 26px;
+}
+
+.nav-guided-path-container .nav-use-case-sub-content {
+    font-size: 14px;
+    padding: 5px;
+}
+
+.nav-guided-path-container .nav-progress-bar-container {
+    font-size: 14px;
+    padding-left: 46px;
+}
+
+.nav-guided-path-container .nav-progress-bar {
+    width: 150px;
+    background: #949391;
+    height: 10px;
+    margin-top: 2px;
+    border: none;
+    border-radius: 0px;
+}
+
+.nav-guided-path-container .nav-progress-orange .oj-progressbar-value {
+    background: #FC9F15;
+}
+
+.nav-guided-path-container .nav-progress-red .oj-progressbar-value {
+    background: #F80000;
 }

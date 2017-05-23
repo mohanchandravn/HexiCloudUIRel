@@ -7,7 +7,7 @@
 /**
  * navigationbarleft module
  */
-define(['text!./navigationbarleft.html', 'ojs/ojcore', 'knockout'
+define(['text!./navigationbarleft.html', 'ojs/ojcore', 'knockout', 'ojs/ojprogressbar'
 ], function (template) {
     /**
      * The view model for the main content view template
