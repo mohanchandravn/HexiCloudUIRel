@@ -547,3 +547,7 @@ login-page video::-webkit-media-controls-start-playback-button {
     right: 20px;
     cursor: pointer;
 }
+
+.margin-bottom-7px {
+    margin-bottom: 7px;
+}
