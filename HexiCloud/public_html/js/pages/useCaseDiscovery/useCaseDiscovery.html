@@ -28,6 +28,7 @@ and open the template in the editor.
             
         <div id="tabsContainer" class="tabs-container oj-flex oj-xl-12">
             <div id="tabs" class="tabs" data-bind="ojComponent:{component: 'ojTabs', optionChange: tabChangeHandler}">
+                
                 <!-- tab bar -->
                 <ul>
                     <li><span>Core Technical Knowledge</span></li>
@@ -50,7 +51,7 @@ and open the template in the editor.
                         </div>
                         <div class="oj-xl-2 oj-flex-item">
                             <div class="oj-sm-justify-content-center oj-flex">
-                                <span class="inverted-btn text-center" data-bind="text: service.label"></span>
+                                <span class="inverted-btn text-center c-pointer" data-bind="text: service.label, click: openServiceDetailModal"></span>
                             </div>
                         </div>
                         <div class="oj-xl-4 oj-flex-item">
@@ -75,21 +76,78 @@ and open the template in the editor.
                         <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="text: 'Contact Us'"></span>
                     </div>
                 </div>
+                
                 <div id="tabComplementaryKnowledge">
                     <p>Complementary Knowledge Content...</p>
                 </div>
+                
                 <!-- <div id="tabTCACalculator" data-bind="click: onClickTabTCACalculator"> -->
                 <div id="tabTCACalculator">
                     <!-- <p>TCA Calculator Content...</p> -->
                     <iframe class="tca-calculator-iframe" data-bind="attr: {src: urlForTCACalculator }"></iframe>
                 </div>
+                
                 <div id="tabSuccessStories">
                     <p>Success Stories Content...</p>
                 </div>
+                
             </div>
         </div>
             
-    </div>   
+    </div>  
+    
+    <!-- ko if: selectedService() !== '' -->
+    <div id="serviceDetailModal" title="Cancel Behavior Options" 
+         data-bind="ojComponent: { component: 'ojDialog', initialVisibility: 'hide', modality: 'modeless', cancelBehavior: 'icon',
+		  rootAttributes: { style: 'width: 800px; height: 600px;'} }">
+        <div class="oj-dialog-header" data-bind="text: selectedService() + ' Service'"></div>
+        <div class="oj-dialog-body">
+            <!-- ko if: selectedService() !== undefined -->
+            <div id="serviceBenefits" class="oj-sm-12 oj-lg-12 oj-flex-item">
+                <div class="benefits oj-flex" data-bind="css: isScreenLGorXL() ? 'oj-margin-lg-end' : ''">
+                    <span class="heading-type2 oj-sm-12 oj-flex-item" data-bind="text: 'Benefits for ' + selectedService() + ': '"></span>
+                    <!--ko if: hasServiceBenefits() -->
+                    <span class="oj-sm-12 oj-flex-item margin-bottom-7px">
+                        <span class="heading-type4 color-red" data-bind="text: selectedServiceTitle"></span>
+                        <span class="normal-text" data-bind="text: ' - ' + selectedServiceSubTitle()"></span>
+                    </span>
+                    <span class="heading-type4 oj-sm-12 oj-flex-item" data-bind="text: benefitsTitle() + ':'"></span>
+                    <ul class="oj-sm-12 oj-flex-item">
+                        <!-- ko foreach: selectedServiceBenefitsArray -->
+                        <li>
+                            <div data-bind="text: text"></div>
+                        </li>
+                        <!-- /ko -->
+                    </ul>
+                    <!-- /ko -->
+                    <!--ko ifnot: hasServiceBenefits() -->
+                    <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
+                        <span class="heading-type4 color-red" data-bind="text: selectedServiceTitle"></span>
+                    </span>
+                    <!--/ko -->
+                </div>
+            </div>
+            <div class="key-features oj-margin-lg-vertical oj-sm-12 oj-lg-12 oj-flex-item">
+                <span class="heading-type2 oj-flex" data-bind="text: 'Key features for ' + selectedService() + ': '"></span>
+                <!--ko if: hasServiceBenefits() -->
+                <div class="oj-margin-lg-top oj-flex" style="height: 500px;">
+                    <iframe id="pdf" style="width: 100%;" height="500" data-bind="attr : { src: 'https://docs.google.com/gview?url=' + pdfSrc() + '&embedded=true' }" frameborder="0"></iframe>
+                </div>
+                <!--/ko -->
+                <!--ko ifnot: hasServiceBenefits() -->
+                <div class="oj-hybrid-padding"></div>
+                <span class="oj-margin-lg-vertical oj-sm-12 oj-flex-item">
+                    <span class="heading-type4 color-red" data-bind="text: selectedServiceTitle"></span>
+                </span>
+                <!--/ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="okButton" class="c-pointer" data-bind="ojComponent: {component: 'ojButton', label: 'Close'}"> </button>
+        </div>
+    </div>
+    <!-- /ko -->
 
 </div>
             

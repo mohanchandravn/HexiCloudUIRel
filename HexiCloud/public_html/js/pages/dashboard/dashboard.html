@@ -81,9 +81,9 @@ and open the template in the editor.
         <div class="dashboard oj-flex">
             <!-- Use case selection -->
             <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
-                <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px; border-bottom: 1px solid #DDDDDD;">
+                <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
                     <span class="heading-type4">
-                        Let's start your adoption journey!
+                        Please select a Use Case to implement or learn more!
                     </span>
                     <div id="useCaseSelection" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUseCaseSelection">
                         <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
@@ -96,8 +96,8 @@ and open the template in the editor.
                         </div>
                     </div>               
                 </div>
-                <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
-                    <!-- ko if: isSelectionPhaseCompleted() === true -->
+                <!-- ko if: isSelectionPhaseCompleted() === true -->
+                <!-- <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px; border-top: 1px solid #DDDDDD;">
                     <span class="heading-type4">
                         Please select a Use Case to implement!
                     </span>
@@ -121,8 +121,8 @@ and open the template in the editor.
                             </span>
                         </div>
                     </div>
-                    <!-- /ko -->
-                </div>
+                </div> -->
+                <!-- /ko -->
             </div>
             <!-- ko if: isSelectionPhaseCompleted() === true -->
             <span class="heading-type2 oj-sm-12 oj-flex-item">Tailored Use Cases</span>

@@ -8,7 +8,7 @@
  * useCaseDiscovery module
  */
 define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojknockout', 'ojs/ojtabs', 'ojs/ojconveyorbelt',
-    'ojs/ojprogressbar'
+    'ojs/ojprogressbar', 'ojs/ojdialog'
 ], function (oj, $, ko, service, errorHandler) {
     
     /**
@@ -25,6 +25,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.coreGuidedPaths = ko.observableArray([]);
         self.urlForTCACalculator = ko.observable('');
         
+        self.hasServiceBenefits = ko.observable(false);
+        self.selectedService = ko.observable();
+        self.selectedServiceTitle = ko.observable();
+        self.selectedServiceSubTitle = ko.observable();
+        self.benefitsTitle = ko.observable();
+        self.pdfSrc = ko.observable();
+        self.selectedServiceBenefitsArray = ko.observableArray([]);
+
         self.getCoreGuidedPathsData = function(data, event) {
             showPreloader();
             var getCoreGuidedPathsDataSuccessFn = function (data, status) {
@@ -107,6 +115,55 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             window.open('https://oracle.valuestoryapp.com/iaas/', '_blank');
         };
         */
+       
+        closeServiceDetailModal = function () {
+            $("#detailWindow").ojDialog("close");
+        };
+        
+        openServiceDetailModal = function (data, event) {
+            
+            showPreloader();
+            
+            var selectedService = data.service.label;
+            
+            var getServiceDetailsSuccessCbFn = function (data, status) {
+                self.selectedService(selectedService);
+                if (status !== 'nocontent') {                    
+                    self.hasServiceBenefits(true);
+                    self.selectedServiceTitle(data.Service.title);
+                    self.selectedServiceSubTitle(data.Service.subTitle);
+                    self.benefitsTitle(data.Service.Benefits.title);
+                    self.pdfSrc(data.Service.FeaturesLink);
+                    self.selectedServiceBenefitsArray(data.Service.Benefits.benefitsList);
+                    
+                } else {
+                    self.selectedServiceTitle('Coming Soon');
+                    self.selectedServiceSubTitle('');
+                    self.benefitsTitle('');
+                    self.pdfSrc('');
+                    self.hasServiceBenefits(false);
+                    self.selectedServiceBenefitsArray([]);
+                }
+                
+                $("#serviceDetailModal").ojDialog("open");
+
+                hidePreloader();
+            };
+            
+            var getServiceDetailsFailCbFn = function (xhr) {
+                hidePreloader();
+                console.log(xhr);
+                errorHandler.showAppError("ERROR_GENERIC", xhr);
+            };
+            
+            var serviceType = data.service.serviceId.toLowerCase();
+            service.getServiceDetails(serviceType).then(getServiceDetailsSuccessCbFn, getServiceDetailsFailCbFn);
+            
+            self.handleOKClose = $("#okButton").click(function() {
+                $("#serviceDetailModal").ojDialog("close"); 
+            });
+        };
+        
     }
     
     return useCaseDiscoveryViewModel;

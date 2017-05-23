@@ -537,7 +537,7 @@ login-page video::-webkit-media-controls-start-playback-button {
 }
 
 .c-pointer {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .need-help {
@@ -545,4 +545,8 @@ login-page video::-webkit-media-controls-start-playback-button {
     bottom: 0;
     right: 20px;
     cursor: pointer;
+}
+
+.margin-bottom-7px {
+    margin-bottom: 7px;
 }

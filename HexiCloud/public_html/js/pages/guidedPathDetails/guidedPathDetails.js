@@ -55,6 +55,21 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.openGPSectionSubContent = function(parent, data, event) {
             parent.$data.selectedSectionDocId = data.sectionDocId;
             params.rootData.selectedGuidedPathSection = parent.$data;
+            params.rootData.selectedPathId = self.selectedGuidedPathId();
+            if (params.rootData.selectedGuidedPathSection.sectionDocs.length === 1) {
+                params.rootData.lastSubSectionToRead = true;
+            } else {
+                var sectionDocs = params.rootData.selectedGuidedPathSection.sectionDocs;
+                for (var idx = 0; idx < sectionDocs.length; idx++) {
+                    if (sectionDocs[idx].sectionDocId !== data.sectionDocId && sectionDocs[idx].status !== 'C') {
+                       params.rootData.lastSubSectionToRead = false;
+                       break;
+                   } else {
+                       params.rootData.lastSubSectionToRead = true;
+                   }   
+                }
+               
+            }
             router.go('guidedPathLearning');
         };
        

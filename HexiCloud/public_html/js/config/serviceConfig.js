@@ -565,12 +565,13 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
         
-        self.updateLearningHistory = function () {
+        self.updateLearningHistory = function (payload) {
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/updateLearningHistory";
             $.ajax({
                 type: "POST",
                 url: serverURL,
+                data: JSON.stringify(payload),
                 beforeSend: function (request) {
                     request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
                 },
