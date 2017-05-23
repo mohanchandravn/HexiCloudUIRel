@@ -8,15 +8,15 @@ and open the template in the editor.
     <div class="use-case-discovery-wrapper-content oj-flex">
         
         <div class="use-case-detail-container oj-flex-bar">
-            <div class="oj-sm-align-self-flex-start oj-flex-bar-start oj-xl-4">
+            <div class="oj-sm-align-self-flex-start oj-flex-bar-start oj-lg-4">
                 <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCase.image }" alt="Image" />
             </div>
-            <div class="use-case-title-and-desc oj-xl-6">
+            <div class="use-case-title-and-desc oj-lg-6">
                 <span class="use-case-title oj-flex" data-bind="text: selectedUseCase.title"></span>
                 <span class="use-case-heading oj-flex" data-bind="text: 'DESCRIPTION'"></span>
                 <p class="use-case-description oj-flex" data-bind="text: selectedUseCase.longDesc"></p>
             </div>
-            <div class="services oj-sm-align-self-flex-top oj-flex-bar-top oj-xl-2">
+            <div class="services oj-sm-align-self-flex-top oj-flex-bar-top oj-lg-2">
                 <span class="use-case-heading oj-flex" data-bind="text: 'SERVICES NEEDED'"></span>
                 <div class="oj-flex">
                     <!-- ko foreach: selectedUseCase.services -->
@@ -26,7 +26,7 @@ and open the template in the editor.
             </div>
         </div>
             
-        <div id="tabsContainer" class="tabs-container oj-flex oj-xl-12">
+        <div id="tabsContainer" class="tabs-container oj-flex oj-lg-12">
             <div id="tabs" class="tabs" data-bind="ojComponent:{component: 'ojTabs', optionChange: tabChangeHandler}">
                 
                 <!-- tab bar -->
@@ -43,30 +43,34 @@ and open the template in the editor.
                     <!-- ko foreach: coreGuidedPaths -->
                     <div class="core-tech-content oj-sm-align-items-center oj-flex">
                         <img class="core-tech-img" data-bind="attr: { src: 'css/img/usecases/dockers.jpg' }" alt="" />
-                        <div class="oj-padding-lg-horizontal oj-xl-4 oj-flex-item">
+                        <div class="oj-padding-lg-horizontal oj-lg-4 oj-flex-item">
                             <!-- ko if: isRecommmended -->
                             <span class="core-tech-recommended-text oj-flex" data-bind="text: 'Recommended for you'"></span>
                             <!-- /ko -->
                             <span class="core-tech-title oj-flex" data-bind="text: label"></span>
                         </div>
-                        <div class="oj-xl-2 oj-flex-item">
+                        <div class="oj-lg-2 oj-flex-item">
                             <div class="oj-sm-justify-content-center oj-flex">
                                 <span class="inverted-btn text-center c-pointer" data-bind="text: service.label, click: openServiceDetailModal"></span>
                             </div>
                         </div>
-                        <div class="oj-xl-4 oj-flex-item">
+                        <div class="oj-lg-2 oj-xl-3 oj-flex-item">
                             <div class="oj-sm-justify-content-flex-start oj-flex">
-                                <span class="core-tech-progress-title oj-xl-12 oj-flex-item" data-bind="text: 'Progress'"></span>
+                                <span class="core-tech-progress-title oj-lg-12 oj-flex-item" data-bind="text: 'Progress'"></span>
                                 <div class="core-tech-progress-bar" data-bind="css: 'core-tech-progress-' + $parent.getProgressStatus(progress),
                                                                 ojComponent:{
                                                                     component: 'ojProgressbar', 
                                                                     value: progress === 0 ? '3' : progress}">
                                 </div>
-                                <span class="core-tech-chapter-text" data-bind="text: 'Chapter ' + completedChapters + ' of ' + totalChapters"></span>
+                                <span class="core-tech-chapter-text" data-bind="css: viewportSize() === 'XL' ? 'oj-margin-start' : 'oj-margin-top', text: 'Chapter ' + completedChapters + ' of ' + totalChapters"></span>
                             </div>
                         </div>
                         <div class="oj-margin-lg-end oj-flex-item">
-                            <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="click: $parent.onClickOnCoreTechContent, text: progress === 0 ? 'Begin' : 'Continue'"></span>
+                            <div class="oj-flex" style="text-align: -webkit-right;">
+                                <div class="oj-flex-item">
+                                    <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="click: $parent.onClickOnCoreTechContent, text: progress === 0 ? 'Begin' : 'Continue'"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /ko -->
@@ -103,7 +107,7 @@ and open the template in the editor.
         <div class="oj-dialog-header" data-bind="text: selectedService() + ' Service'"></div>
         <div class="oj-dialog-body">
             <!-- ko if: selectedService() !== undefined -->
-            <div id="serviceBenefits" class="oj-sm-12 oj-lg-12 oj-flex-item">
+            <div id="serviceBenefits" class="oj-sm-12 oj-flex-item">
                 <div class="benefits oj-flex" data-bind="css: isScreenLGorXL() ? 'oj-margin-lg-end' : ''">
                     <span class="heading-type2 oj-sm-12 oj-flex-item" data-bind="text: 'Benefits for ' + selectedService() + ': '"></span>
                     <!--ko if: hasServiceBenefits() -->
