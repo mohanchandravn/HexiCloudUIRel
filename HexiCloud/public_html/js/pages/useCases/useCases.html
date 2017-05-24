@@ -75,6 +75,26 @@ and open the template in the editor.
                     <!-- /ko -->
                 </div>
                 
+                <!-- ko if: isSelectionPhaseCompleted() === true -->
+                <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
+                    <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
+                        <span class="heading-type4">
+                            Please select a Use Case to implement!
+                        </span>
+                        <div id="useCaseSelection" class="dashboard-use-case-btn use-cases-btn oj-flex-bar" data-bind="click: routeToUseCaseSelection">
+                            <div class="oj-margin-end oj-sm-align-self-center oj-flex-bar-start">
+                                Go to Use Case selection
+                            </div>
+                            <div class="play-icon oj-flex-bar-end">
+                                <span>
+                                    <i class="material-icons">play_arrow</i>
+                                </span>
+                            </div>
+                        </div>               
+                    </div>
+                </div>
+                <!-- /ko -->
+                    
                 <div class="core-tech-support-content oj-margin-lg-top oj-sm-align-items-center oj-flex">
                     <span class="oj-margin-lg-end">Would you like to attend a Technical Workshop?</span>
                     <span class="status-btn oj-sm-justify-content-center oj-flex" data-bind="text: 'Contact Us'"></span>

@@ -73,7 +73,7 @@ and open the template in the editor.
 }
 
 .useCases-page .use-cases-content .core-tech-support-content {
-    min-height: 65px;
+    height: 100px;
     font-size: 20px;
     padding-left: 40px;
     background: #FFFFFF;
