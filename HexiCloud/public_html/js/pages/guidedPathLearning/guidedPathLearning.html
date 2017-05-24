@@ -5,23 +5,23 @@ and open the template in the editor.
 -->
 
 <div id="guidedPathLearningPage" class="guidedPathLearning-page oj-flex">
-    
+
     <!-- ko if: breadCrumbs().length > 0 -->
     <div id="breadCrumbsContainer" class="bread-crumbs-container oj-flex-item">
         <!-- ko foreach: breadCrumbs() -->
-            <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
-                <a href="#" class="bread-crumbs-font" data-bind="attr:{id: id}, text: label, click: $parent.onBreadCrumbSelection"></a>
-            <!-- /ko -->
-            <!-- ko if: $index() === $parent.breadCrumbs().length - 1 -->
-                <span class="bread-crumbs-font-current" data-bind="text: label"></span>
-            <!-- /ko -->
-            <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
-                <span class="bread-crumbs-separator">&gt;</span>
-            <!-- /ko -->
+        <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
+        <a href="#" class="bread-crumbs-font" data-bind="attr:{id: id}, text: label, click: $parent.onBreadCrumbSelection"></a>
+        <!-- /ko -->
+        <!-- ko if: $index() === $parent.breadCrumbs().length - 1 -->
+        <span class="bread-crumbs-font-current" data-bind="text: label"></span>
+        <!-- /ko -->
+        <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
+        <span class="bread-crumbs-separator">&gt;</span>
+        <!-- /ko -->
         <!-- /ko -->
     </div>
     <!-- /ko -->
-    
+
     <div class="guided-path-learning-container oj-sm-12 oj-flex-item">
         <!-- ko if: areGuidedPathSectionsLoaded -->
         <div class="oj-flex">
@@ -48,31 +48,43 @@ and open the template in the editor.
                     </video>
                     <!--<span class="sub-section-title oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docName"></span>-->
                     <span class="sub-section-description oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docDescription"></span>
-                    
+
                     <span class="oj-sm-align-self-flex-top oj-flex-bar-top video-next-btn" data-bind="click: completeSubSection, text: nextButtonLabel()"></span>
                 </div>
             </div>
             <!-- /ko -->
             <!-- ko if: selectedGuidedPathSubSection().docType === 'PDF' -->
             <div class="guided-path-section-details pdf-section oj-sm-12 oj-lg-6 oj-flex-bar">
-                <div id="prev" class="oj-sm-align-self-flex-start oj-flex-bar-start prevDisabled" data-bind="click: onPrevPage()"></div>
+                <div id="prev" class="oj-sm-align-self-flex-start oj-flex-bar-start prevDisabled hide-on-doc-load display-none" data-bind="click: onPrevPage()"></div>
                 <div id="pdfEditorContainer" class="oj-flex">
-                    <div class="oj-flex-bar">
+                    <div class="oj-flex-bar hide-on-doc-load display-none">
                         <span class="oj-sm-align-self-flex-start oj-flex-bar-start page-number-container"> Page <span id="page_num" class="page-num"></span> of <span id="page_count" class="page-num"></span></span>
                         <div id="zoomIn" class="zoomInEnabled" data-bind="click: zoomIn()"></div>
                         <div id="zoomOut" class="zoomOutEnabled oj-sm-align-self-flex-top oj-flex-bar-top" data-bind="click: zoomOut()"></div>
                     </div>
-                    <div class="oj-flex" style="width: 800px; height: 750px; overflow: auto; margin-top: 10px;">
+                    <div class="oj-flex" style="overflow: auto; margin-top: 10px;">
                         <canvas id="the-canvas"></canvas>
                     </div>
                 </div>
-                <div id="nextArrowCont" class="nextHidden">
+                <div id="nextArrowCont" class="nextHidden hide-on-doc-load display-none">
                     <div id="next" class="oj-sm-align-self-flex-top oj-flex-bar-top nextEnabled" data-bind="click: onNextPage()"></div>
                 </div>
-                <div id="nextButtonCont" class="nextHidden doc-button">
+                <div id="nextButtonCont" class="nextHidden doc-button hide-on-doc-load display-none">
                     <span class="oj-sm-align-self-flex-top oj-flex-bar-top pdf-next-btn" data-bind="click: completeSubSection, text: nextButtonLabel()"></span>
                 </div>
 
+            </div>
+            <div class="oj-sm-12 oj-lg-6 oj-flex-item padding-top-40 hide-on-doc-load display-none">
+                <a data-bind="attr:{href:selectedGuidedPathSubSection().publicLink}" class="download-link">
+                    <div class="oj-sm-align-items-center oj-flex" >
+                        <div class="oj-flex-item download-icon">
+                            <i class="material-icons left">file_download</i>
+                        </div>
+                        <div class="oj-flex-item">
+                            <span class="margin-left-10px">Download document</span>
+                        </div>
+                    </div>
+                </a>
             </div>
             <!-- /ko -->
         </div>

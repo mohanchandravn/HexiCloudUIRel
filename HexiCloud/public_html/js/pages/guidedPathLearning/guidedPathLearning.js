@@ -49,7 +49,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.pageNum = ko.observable(1);
         self.pageRendering = ko.observable(false);
         self.pageNumPending = ko.observable(null);
-        self.scale = ko.observable(1.5);
+        self.scale = ko.observable(1);
         self.canvas = ko.observable();
         self.ctx = ko.observable();
         
@@ -79,6 +79,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
 
         function getPDFDoc(docURL, curPageNumber, status) {
+            
             self.canvas(document.getElementById('the-canvas')), self.ctx(self.canvas().getContext('2d'));
             if (self.pageNum() == 1) {
                 $('#prev').removeClass('prevEnabled');
@@ -106,6 +107,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 //                }
                 self.onGoToPage(curPageNumber);
             });
+            
         }
 
         /**
@@ -141,6 +143,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
                 // Update page counters
                 document.getElementById('page_num').textContent = self.pageNum();
+                $('.hide-on-doc-load').removeClass('display-none');
                 hidePreloader();
             }
         }
@@ -341,6 +344,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
 
                 if (nextDocFound) {
+                    $('.hide-on-doc-load').addClass('display-none');
                     showPreloader();
                     if (!foundInCompleteDoc) {
                         self.lastSubSectionToRead(true);

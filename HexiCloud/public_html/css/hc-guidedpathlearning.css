@@ -189,3 +189,27 @@ and open the template in the editor.
 .bread-crumbs-separator {
     padding: 0px 3px 0px 3px;
 }
+
+.download-link {
+    color: grey;
+    text-decoration: none;
+}
+
+.download-link:hover {
+    text-decoration: none;
+}
+.download-link:active, .download-link:visited {
+    color:grey;
+}
+
+.padding-top-40 {
+    padding-top: 40px;
+}
+
+.download-icon {
+    text-align: end;
+}
+
+.display-none {
+    display: none;
+}
