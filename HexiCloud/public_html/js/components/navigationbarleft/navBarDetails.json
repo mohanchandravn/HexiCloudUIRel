@@ -1,0 +1,60 @@
+{
+    "navBarDetails" : {
+	"tailoredUseCases" : [
+            {
+                "useCaseId" : 1,
+                "title" : "Lift & Shift Oracle applications Mixed Workloads",
+                "progress" : 8.75,
+                "pathPrgDetails" : [
+                    {
+                        "code" : "core",
+                        "label" : "Core Technical Knowledge",
+                        "progress" : 15
+                    },
+                    {
+                        "code" : "complementary",
+                        "label" : "Complementary Knowledge",
+                        "progress" : 20
+                    },
+                    {
+                        "code" : "tco",
+                        "label" : "TCO Calculator",
+                        "progress" : 0
+                    },
+                    {
+                        "code" : "success",
+                        "label" : "Success Stories",
+                        "progress" : 0
+                    }
+                ]
+            },
+            {
+                "useCaseId" : 2,
+                "title" : "Lift & Shift  Non-Oracle Workloads",
+                "progress" : 50,
+                "pathPrgDetails" : [
+                    {
+                        "code" : "core",
+                        "label" : "Core Technical Knowledge",
+                        "progress" : 100
+                    },
+                    {
+                        "code" : "complementary",
+                        "label" : "Complementary Knowledge",
+                        "progress" : 100
+                    },
+                    {
+                        "code" : "tco",
+                        "label" : "TCO Calculator",
+                        "progress" : 0
+                    },
+                    {
+                        "code" : "success",
+                        "label" : "Success Stories",
+                        "progress" : 0
+                    }
+                ]
+            }
+	]
+    }
+}
