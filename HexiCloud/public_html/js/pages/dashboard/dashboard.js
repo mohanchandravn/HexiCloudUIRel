@@ -46,7 +46,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
         self.areUseCaseDetailsFetched = ko.observable(false);
         self.selectedUseCaseDetails = ko.observableArray([]);
         self.tailoredUseCases = ko.observableArray([]);
-        self.isSelectionPhaseCompleted = ko.observable(false);
                 
         self.getClass = function (serverType) {
 //            if (serverType === 'COMPUTE') {
@@ -114,7 +113,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
             }
                 
             if (data.selectionPhaseCompleted) {
-                self.isSelectionPhaseCompleted(true);
+                isSelectionPhaseCompleted(true);
                 var useCases = data.useCases;
                 if (useCases) {
                     for (var idx = 0; idx < useCases.length; idx++) {

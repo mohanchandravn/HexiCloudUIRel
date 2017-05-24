@@ -9,21 +9,21 @@ and open the template in the editor.
     <!-- ko if: breadCrumbs().length > 0 -->
     <div id="breadCrumbsContainer" class="bread-crumbs-container oj-flex-item">
         <!-- ko foreach: breadCrumbs() -->
-        <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
-        <a href="#" class="bread-crumbs-font" data-bind="attr:{id: id}, text: label, click: $parent.onBreadCrumbSelection"></a>
-        <!-- /ko -->
-        <!-- ko if: $index() === $parent.breadCrumbs().length - 1 -->
-        <span class="bread-crumbs-font-current" data-bind="text: label"></span>
-        <!-- /ko -->
-        <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
-        <span class="bread-crumbs-separator">&gt;</span>
-        <!-- /ko -->
+            <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
+            <a class="bread-crumbs-font" data-bind="attr:{id: id}, text: label, click: $parent.onBreadCrumbSelection"></a>
+            <!-- /ko -->
+            <!-- ko if: $index() === $parent.breadCrumbs().length - 1 -->
+            <span class="bread-crumbs-font-current" data-bind="text: label"></span>
+            <!-- /ko -->
+            <!-- ko if: $index() !== $parent.breadCrumbs().length - 1 -->
+            <span class="bread-crumbs-separator">&gt;</span>
+            <!-- /ko -->
         <!-- /ko -->
     </div>
     <!-- /ko -->
 
+    <!-- ko if: areGuidedPathSectionsLoaded -->
     <div class="guided-path-learning-container oj-sm-12 oj-flex-item">
-        <!-- ko if: areGuidedPathSectionsLoaded -->
         <div class="oj-flex">
             <div class="oj-sm-12 oj-flex-item" data-bind="">
                 <div class="guided-path-section-content oj-sm-align-items-flex-end oj-flex">
@@ -88,8 +88,9 @@ and open the template in the editor.
             </div>
             <!-- /ko -->
         </div>
-        <!-- /ko -->
     </div>
+    <!-- /ko -->
+
 </div>   
 
 <img class="need-help" src="css/img/need-help.png" data-bind="click: onClickFeedback" alt="" />

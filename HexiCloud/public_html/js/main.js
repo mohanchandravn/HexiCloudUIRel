@@ -194,6 +194,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.slideOutEffect = ko.observable('slideOut');
                 
                 self.isCapturePhaseCompleted = ko.observable(false);
+                self.isSelectionPhaseCompleted = ko.observable(false);
 
                 self.showHeaderNav = ko.computed(function () {
                     var id = router.currentState().id;

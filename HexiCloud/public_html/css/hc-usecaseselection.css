@@ -17,7 +17,7 @@ and open the template in the editor.
     max-width: 300px;
 }
 
-.dashboard .use-cases-btn {
+.useCases-page .use-cases-btn {
     height: 30px;
     font-size: 18px;
     padding: 5px 0px 5px 15px;
@@ -27,11 +27,11 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.dashboard .use-cases-btn .play-icon {
+.useCases-page .use-cases-btn .play-icon {
     padding-right: 12px;
 }
 
-.dashboard .dashboard-use-case-btn {
+.useCases-page .dashboard-use-case-btn {
     margin-left: 40px;
 }
 

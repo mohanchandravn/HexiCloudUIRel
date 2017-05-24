@@ -26,6 +26,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.nextButtonLabel = ko.observable("Next");
         self.selectedGuidedPathSection = ko.observable();
         self.selectedGuidedPathSubSection = ko.observable();
+        
         if (params.rootData.selectedGuidedPathSection) {
             self.selectedGuidedPathSection(params.rootData.selectedGuidedPathSection);
         }
@@ -41,6 +42,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         if (self.lastSubSectionToRead()) {
             self.nextButtonLabel("Finish");
         }
+        
+        self.breadCrumbs = ko.observableArray([{id: 'useCaseDiscovery', label: self.selectedUseCase.title}, 
+                                               {id: 'guidedPathDetails', label: self.selectedPathLabel()},
+                                               {id: 'guidedPathLearning', label: self.selectedGuidedPathSection().description}]);
 
         // The workerSrc property shall be specified.
         pdfjs.PDFJS.workerSrc = 'pdfjs-1.7.225/build/pdf.worker.js';
@@ -52,13 +57,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.scale = ko.observable(1);
         self.canvas = ko.observable();
         self.ctx = ko.observable();
-        
-        self.breadCrumbs = ko.observableArray([]);
-        var breadCrumbs = [];     
-        breadCrumbs.push({id: 'useCaseDiscovery', label: self.selectedUseCase.title});
-        breadCrumbs.push({id: 'guidedPathDetails', label: self.selectedPathLabel()});
-        breadCrumbs.push({id: 'guidedPathLearning', label: self.selectedGuidedPathSection().sectionTitle});
-        self.breadCrumbs(breadCrumbs);
 
         self.getSelectedGuidedPathSection = function () {
             var sectionDocs = self.selectedGuidedPathSection().sectionDocs;
@@ -289,6 +287,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             }
             $("#tech_support").slideToggle();
         };
+        
         self.updateLearning = function (num, docStatus) {
             var updateLearningHistorySuccessCbFn = function (data, status) {
                 hidePreloader();
@@ -341,7 +340,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                         break;
                     }
                 }
-
 
                 if (nextDocFound) {
                     $('.hide-on-doc-load').addClass('display-none');
