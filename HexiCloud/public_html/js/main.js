@@ -81,10 +81,10 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 "edge": "start",
                 "displayMode": "push",
                 "autoDismiss": "focusLoss",
-                "modality": "modeless"//,
-                        //        "query": oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.XL_UP)
+                "modality": "modeless"
+//                "query": oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP)
             };
-
+            
             //oj.Assert.forceDebug();
             //oj.Logger.option('level', oj.Logger.LEVEL_INFO);
             oj.ModuleBinding.defaults.modelPath = './';
@@ -190,12 +190,33 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.isCapturePhaseCompleted = ko.observable(false);
                 self.isSelectionPhaseCompleted = ko.observable(false);
 
+                self.screenRange = oj.ResponsiveKnockoutUtils.createScreenRangeObservable();
+                self.viewportSize = ko.computed(function () {
+                    var range = self.screenRange();
+                    console.log(range.toUpperCase());
+                    return range.toUpperCase();
+                });
+                
+                self.isScreenSMorMD = ko.computed(function () {
+                    return (self.viewportSize() === "SM" || self.viewportSize() === "MD");
+                });
+
+                self.isScreenLGorXL = ko.computed(function () {
+                    return (self.viewportSize() === "LG" || self.viewportSize() === "XL");
+                });
+                
                 self.showHeaderNav = ko.computed(function () {
                     var id = router.currentState().id;
                     var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery", "guidedPathDetails", "guidedPathLearning"];
                     return (pages.indexOf(id) > -1) ? '' : 'oj-sm-hide';
                 });
-
+                
+                self.showUserDetails = ko.computed(function () {
+                    var id = router.currentState().id;
+                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery", "guidedPathDetails", "guidedPathLearning"];
+                    return (pages.indexOf(id) > -1) ? '' : 'oj-sm-hide';
+                });
+                
                 self.showPreloader = function () {
                     $("#preloader").removeClass("oj-sm-hide");
                     $("#routingContainer").css("pointer-events", "none");
@@ -222,21 +243,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.goToPage = function(id) {
                     router.go(id);
                 };
-
-                self.screenRange = oj.ResponsiveKnockoutUtils.createScreenRangeObservable();
-                self.viewportSize = ko.computed(function () {
-                    var range = self.screenRange();
-                    console.log(range.toUpperCase());
-                    return range.toUpperCase();
-                });
-
-                self.isScreenSMorMD = ko.computed(function () {
-                    return (self.viewportSize() === "SM" || self.viewportSize() === "MD");
-                });
-
-                self.isScreenLGorXL = ko.computed(function () {
-                    return (self.viewportSize() === "LG" || self.viewportSize() === "XL");
-                });
 
                 self.slideInAnimate = function (duration, delay) {
                     if (self.slideInEffect() && oj.AnimationUtils[self.slideInEffect()]) {
