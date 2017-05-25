@@ -13,31 +13,35 @@ define(['text!./navigationbarleft.html', 'knockout', 'jquery', 'config/serviceCo
      * The view model for the main content view template
      */
     function navigationbarleftContentViewModel() {
+        
         var self = this;
         
         self.navTailoredUseCases = ko.observableArray([]);
+        
         self.updateNavGuidedPathContent = ko.computed(function () {
-           if (isSelectionPhaseCompleted()) {
-                self.getNavBarDetails();
-           } else {
-               self.navTailoredUseCases([]);
-           }
-           return;
+            if (isSelectionPhaseCompleted()) {
+                self.getGuidedPathsProgressForAllUseCases();
+            } else {
+                self.navTailoredUseCases([]);
+            }
+            return;
         });
         
-        self.getNavBarDetails = function () {
-            var getNavBarDetailsSuccessCbFn = function(data, status) {
+        self.getGuidedPathsProgressForAllUseCases = function () {
+            showPreloader();
+            
+            var getGuidedPathsProgressSuccessCbFn = function(data, status) {
                 self.navTailoredUseCases(data.useCases);
                 hidePreloader();
             };
             
-            var getNavBarDetailsFailCbFn = function(xhr) {
+            var getGuidedPathsProgressFailCbFn = function(xhr) {
                 console.log(xhr);
                 hidePreloader();
                 errorHandler.showAppError("ERROR_GENERIC", xhr);
             };
-            showPreloader();
-            service.getNavBarDetails().then(getNavBarDetailsSuccessCbFn, getNavBarDetailsFailCbFn);
+            
+            service.getGuidedPathsProgressForAllUseCases().then(getGuidedPathsProgressSuccessCbFn, getGuidedPathsProgressFailCbFn);
         };
         
         self.getProgressStatus = function(progressValue) {

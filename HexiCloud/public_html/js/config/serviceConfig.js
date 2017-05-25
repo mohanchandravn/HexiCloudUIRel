@@ -713,9 +713,9 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             });
         };
         
-        self.getNavBarDetails = function () {
+        self.getGuidedPathsProgressForAllUseCases = function () {
             var defer = $.Deferred();
-            var serverURL = self.portalRestHost() + "/services/rest/getUseCasesGuidedPathProgress";
+            var serverURL = self.portalRestHost() + "/services/rest/getGuidedPathsProgressForAllUseCases";
             $.ajax({
                 type: "GET",
                 url: serverURL,
