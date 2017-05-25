@@ -714,8 +714,9 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         };
         
         self.getNavBarDetails = function () {
+            var defer = $.Deferred();
 //            var serverURL = self.portalRestHost() + "/services/rest/getNavBarDetails";
-            var serverURL = "components/navigationbarleft/navBarDetails.json";
+            var serverURL = "js/components/navigationbarleft/navBarDetails.json";
             $.ajax({
                 type: "GET",
                 url: serverURL,
@@ -723,12 +724,15 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 //                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
 //                },
                 success: function (data, textStatus, xhr) {
-                    console.log('Successfully posted data at: ' + serverURL);
+                    console.log('Successfully retrieved data at: ' + serverURL);
+                    defer.resolve(data, status);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log("Error posting data to the service : " + serverURL);
+                    defer.reject(xhr);
                 }
             });
+            return $.when(defer);
         };
     };
 

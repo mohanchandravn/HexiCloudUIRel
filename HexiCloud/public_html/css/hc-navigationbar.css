@@ -87,21 +87,19 @@ navigationbarleft {
 }
 
 .nav-guided-path-container .nav-use-case-container {
-    background: #272A31;
     padding: 10px 20px 10px 46px;
 }
 
-.nav-guided-path-container .nav-use-case-sub-content {
-    font-size: 14px;
-    padding: 5px;
+.nav-guided-path-container .nav-use-case-container.selected {
+    background: #272A31;
 }
 
-.nav-guided-path-container .nav-progress-bar-container {
+.nav-guided-path-container .nav-use-case-container .nav-use-case-sub-content {
     font-size: 14px;
-    padding-left: 46px;
+    padding: 5px 15px;
 }
 
-.nav-guided-path-container .nav-progress-bar {
+.nav-guided-path-container .nav-use-case-container .nav-progress-bar {
     width: 150px;
     background: #949391;
     height: 7px;
@@ -110,10 +108,34 @@ navigationbarleft {
     border-radius: 0px;
 }
 
-.nav-guided-path-container .nav-progress-orange .oj-progressbar-value {
+.nav-guided-path-container .nav-use-case-container .nav-progress-red .oj-progressbar-value {
+    background: #F80000;
+}
+
+.nav-guided-path-container .nav-use-case-container .nav-progress-orange .oj-progressbar-value {
     background: #FC9F15;
 }
 
-.nav-guided-path-container .nav-progress-red .oj-progressbar-value {
+.nav-guided-path-container .nav-use-case-container .nav-progress-green .oj-progressbar-value {
+    background: #77CA47;
+}
+
+.nav-guided-path-container .nav-use-case-container .nav-content-status-container {
+    max-height: 10px;
+    max-width: 10px;
+    margin: 3px 5px 0px 0px;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.nav-guided-path-container .nav-use-case-container .nav-content-red {
     background: #F80000;
+}
+
+.nav-guided-path-container .nav-use-case-container .nav-content-orange {
+    background: #FC9F15;
+}
+
+.nav-guided-path-container .nav-use-case-container .nav-content-green {
+    background: #77CA47;
 }

@@ -80,30 +80,32 @@ and open the template in the editor.
             </li>
         </ul>
     </div>
+    
+    <!-- ko if: isSelectionPhaseCompleted() -->
     <div class="nav-guided-path-container oj-sm-12 oj-flex-item">
         <span class="nav-guided-path-heading oj-flex">GUIDED PATHS</span>
-        <div class="nav-use-case-container oj-margin-vertical oj-flex">
-            <span class="nav-use-case-heading bold oj-sm-12 oj-flex-item">Lift & Shift</span>
-            <span class="nav-use-case-sub-content oj-sm-12 oj-flex-item">Core Technical Knowledge</span>
-            <span class="nav-use-case-sub-content oj-sm-12 oj-flex-item">Complementary Knowledge</span>
-            <span class="nav-use-case-sub-content oj-sm-12 oj-flex-item">TCA Calculator</span>
-            <span class="nav-use-case-sub-content oj-sm-12 oj-flex-item">Success Stories</span>
-        </div>
-        <div class="nav-progress-bar-container oj-flex">
-            <span class="nav-progress-title oj-sm-12 oj-flex-item" data-bind="text: 'Backup'"></span>
-            <div class="nav-progress-bar" data-bind="css: 'nav-progress-orange',
-                                            ojComponent:{
-                                                component: 'ojProgressbar', 
-                                                value: '56'}">
+        <div class="oj-margin-vertical oj-flex">
+            <!-- ko foreach: navTailoredUseCases() -->
+            <div class="nav-use-case-container oj-sm-12 oj-flex-item" data-bind="attr: {id: useCaseId + 'Container'}">
+                <div class="oj-flex">
+                    <span class="nav-use-case-heading c-pointer oj-sm-12 oj-flex-item" data-bind="attr: {id: useCaseId + 'Heading'}, text: title, click: $parent.toggleNavUseCaseContent.bind($data, useCaseId)"></span>
+                    <div class="nav-progress-bar" data-bind="attr: {id: useCaseId + 'ProgressBar'}, css: 'nav-progress-' + $parent.getProgressStatus(progress),
+                                                    ojComponent:{
+                                                        component: 'ojProgressbar', 
+                                                        value: progress}">
+                    </div>
+                    <!-- ko foreach: pathPrgDetails -->
+                    <div class="nav-use-case-sub-content oj-sm-hide oj-sm-12 oj-flex-item" data-bind="css: $parent.useCaseId + 'Content', click: $parents[1].toggleNavUseCaseContent.bind($data, $parent.useCaseId, 'content')">
+                        <div class="oj-flex">
+                            <span class="nav-content-status-container oj-flex-item" data-bind="css: 'nav-content-' + $parents[1].getProgressStatus(progress)"></span>
+                            <span class="oj-flex-item" data-bind="text: label"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
             </div>
-        </div>
-        <div class="nav-progress-bar-container oj-margin-lg-top oj-flex">
-            <span class="nav-progress-title oj-sm-12 oj-flex-item" data-bind="text: 'Disaster Recovery'"></span>
-            <div class="nav-progress-bar" data-bind="css: 'nav-progress-red',
-                                            ojComponent:{
-                                                component: 'ojProgressbar', 
-                                                value: '40'}">
-            </div>
+            <!-- /ko -->
         </div>
     </div>
+    <!-- /ko -->
 </div>
