@@ -49,17 +49,23 @@ and open the template in the editor.
 }
 
 .useCases-page .inverted-btn {
-    color: #F80000;
-    font-size: 14px;
+        color: #F80000;
+    font-size: 11px;
     font-weight: bold;
     padding: 5px 0px;
-    margin: 0px 5px;
-    border: 2px solid #F80000;
+    margin: 0px 10px;
+    border: 1.2px solid #F80000;
     border-radius: 27px;
     background-color: #FFFFFF;
     box-sizing: border-box;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
+
+.useCases-page .inverted-btn:hover {
+    transform: scale(1.2, 1.2);
+}
+
 
 .useCases-page .use-cases-content .status-btn {
     height: 30px;
@@ -70,7 +76,13 @@ and open the template in the editor.
     padding: 5px 15px 5px 0px;
     border-radius: 27px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
+
+.useCases-page .use-cases-content .status-btn:hover {
+    transform: scale(1.2, 1.2);
+}
+
 
 .useCases-page .use-cases-content .core-tech-support-content {
     height: 100px;

@@ -93,18 +93,23 @@ and open the template in the editor.
 }
 
 #useCaseDiscoveryPage .inverted-btn {
-    min-width: 100px;
+    min-width: 77px;
     background-color: #FFFFFF;
     color: #F80000;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
     margin-right: 15px;
     margin-top: 10px;
     padding: 5px 0px;
-    border: 2px solid #F80000;
+    border: 1.2px solid #F80000;
     border-radius: 27px;
     box-sizing: border-box;
     cursor: default;
+   transition: all 0.3s ease-in-out;
+}
+
+#useCaseDiscoveryPage .btn-transform:hover {
+    transform: scale(1.2, 1.2);
 }
 
 #useCaseDiscoveryPage .tabs-container {
@@ -170,6 +175,11 @@ and open the template in the editor.
     padding: 5px 15px 5px 0px;
     border-radius: 27px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .status-btn:hover {
+    transform: scale(1.2, 1.2);
 }
 
 #useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-support-content {

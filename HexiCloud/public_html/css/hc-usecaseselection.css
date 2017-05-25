@@ -33,7 +33,13 @@ and open the template in the editor.
 
 .useCases-page .dashboard-use-case-btn {
     margin-left: 40px;
+    transition: all 0.3s ease-in-out;
 }
+
+.useCases-page .dashboard-use-case-btn:hover {
+    transform: scale(1.2, 1.2);
+}
+
 
 .use-case-items i {
     font-size: 18px;
