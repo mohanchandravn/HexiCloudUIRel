@@ -244,3 +244,9 @@ and open the template in the editor.
 .display-none {
     display: none;
 }
+
+#docContainer {
+    overflow: auto; 
+    margin-top: 10px;
+    position: relative
+}

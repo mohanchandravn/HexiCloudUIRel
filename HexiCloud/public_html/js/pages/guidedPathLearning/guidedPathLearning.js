@@ -57,6 +57,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.scale = ko.observable(1);
         self.canvas = ko.observable();
         self.ctx = ko.observable();
+        
 
         self.getSelectedGuidedPathSection = function () {
             var sectionDocs = self.selectedGuidedPathSection().sectionDocs;
@@ -117,6 +118,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 self.pageRendering(true);
                 // Using promise to fetch the page
                 self.pdfDoc().getPage(num).then(function (page) {
+                    // This is for setting the max-height and max-height to the container
+                    // based on the actual dimensions of the container. Adding +20 to not
+                    // show the scrolls initially with out zooming
+                    var initialViewPort = page.getViewport(1);
+                    $('#docContainer').css('max-width', initialViewPort.width + 20);
+                    $('#docContainer').css('max-height', initialViewPort.height +20);
                     var viewport = page.getViewport(self.scale());
                     self.canvas().height = viewport.height;
                     self.canvas().width = viewport.width;
@@ -247,7 +254,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
         self.zoomIn = function () {
             if (self.scale() < 3) {
-                self.scale(self.scale() + 0.5);
+                self.scale(self.scale() + 0.2);
                 renderPage(self.pageNum());
                 if (self.scale() < 3) {
                     document.getElementById('zoomIn').disabled = false;
@@ -261,7 +268,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
         self.zoomOut = function () {
             if (self.scale() > 1) {
-                self.scale(self.scale() - 0.5);
+                self.scale(self.scale() - 0.2);
                 renderPage(self.pageNum());
                 if (self.scale() > 1) {
                     document.getElementById('zoomOut').disabled = false;
