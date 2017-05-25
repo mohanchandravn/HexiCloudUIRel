@@ -56,6 +56,11 @@ and open the template in the editor.
     height: 130px;
     margin: 200px 25px 0px 0px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.prevEnabled:hover {
+    transform: scale(1.2, 1.2);
 }
 
 .prevDisabled {
@@ -85,6 +90,11 @@ and open the template in the editor.
     padding: 5px 32px 5px 28px;
     border-radius: 27px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#guidedPathLearningPage .pdf-next-btn:hover {
+    transform: scale(1.2, 1.2);
 }
 
 #guidedPathLearningPage .video-next-btn {
@@ -96,6 +106,11 @@ and open the template in the editor.
     padding: 5px 0px 5px 25px;
     border-radius: 27px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#guidedPathLearningPage .video-next-btn:hover {
+    transform: scale(1.2, 1.2);
 }
 
 .nextEnabled {
@@ -105,6 +120,11 @@ and open the template in the editor.
     height: 130px;
     margin: 200px 0px 0px 0px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.nextEnabled:hover {
+    transform: scale(1.2, 1.2);
 }
 
 .nextDisabled {
@@ -124,6 +144,11 @@ and open the template in the editor.
     height: 30px;
     margin-left: 25px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.zoomInEnabled:hover {
+    transform: scale(1.2, 1.2);
 }
 
 .zoomInDisabled {
@@ -143,6 +168,11 @@ and open the template in the editor.
     height: 30px;
     margin-left: 10px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.zoomOutEnabled:hover {
+    transform: scale(1.2, 1.2);
 }
 
 .zoomOutDisabled {
