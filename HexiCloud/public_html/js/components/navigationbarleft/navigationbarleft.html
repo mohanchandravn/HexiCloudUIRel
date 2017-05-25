@@ -86,16 +86,16 @@ and open the template in the editor.
         <span class="nav-guided-path-heading oj-flex">GUIDED PATHS</span>
         <div class="oj-margin-vertical oj-flex">
             <!-- ko foreach: navTailoredUseCases() -->
-            <div class="nav-use-case-container oj-sm-12 oj-flex-item" data-bind="attr: {id: useCaseId + 'Container'}">
+            <div class="nav-use-case-container oj-sm-12 oj-flex-item" data-bind="attr: {id: id + 'Container'}">
                 <div class="oj-flex">
-                    <span class="nav-use-case-heading c-pointer oj-sm-12 oj-flex-item" data-bind="attr: {id: useCaseId + 'Heading'}, text: title, click: $parent.toggleNavUseCaseContent.bind($data, useCaseId)"></span>
-                    <div class="nav-progress-bar" data-bind="attr: {id: useCaseId + 'ProgressBar'}, css: 'nav-progress-' + $parent.getProgressStatus(progress),
+                    <span class="nav-use-case-heading c-pointer oj-sm-12 oj-flex-item" data-bind="attr: {id: id + 'Heading'}, text: title, click: $parent.toggleNavUseCaseContent.bind($data, id)"></span>
+                    <div class="nav-progress-bar" data-bind="attr: {id: id + 'ProgressBar'}, css: 'nav-progress-' + $parent.getProgressStatus(progress),
                                                     ojComponent:{
                                                         component: 'ojProgressbar', 
                                                         value: progress}">
                     </div>
-                    <!-- ko foreach: pathPrgDetails -->
-                    <div class="nav-use-case-sub-content oj-sm-hide oj-sm-12 oj-flex-item" data-bind="css: $parent.useCaseId + 'Content', click: $parents[1].toggleNavUseCaseContent.bind($data, $parent.useCaseId, 'content')">
+                    <!-- ko foreach: pathProgressDetails -->
+                    <div class="nav-use-case-sub-content oj-sm-hide oj-sm-12 oj-flex-item" data-bind="css: $parent.id + 'Content', click: $parents[1].toggleNavUseCaseContent.bind($data, $parent.id, 'content')">
                         <div class="oj-flex">
                             <span class="nav-content-status-container oj-flex-item" data-bind="css: 'nav-content-' + $parents[1].getProgressStatus(progress)"></span>
                             <span class="oj-flex-item" data-bind="text: label"></span>

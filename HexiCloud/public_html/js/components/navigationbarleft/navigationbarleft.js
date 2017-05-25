@@ -27,14 +27,16 @@ define(['text!./navigationbarleft.html', 'knockout', 'jquery', 'config/serviceCo
         
         self.getNavBarDetails = function () {
             var getNavBarDetailsSuccessCbFn = function(data, status) {
-                self.navTailoredUseCases(data.navBarDetails.tailoredUseCases);
+                self.navTailoredUseCases(data.useCases);
+                hidePreloader();
             };
             
             var getNavBarDetailsFailCbFn = function(xhr) {
                 console.log(xhr);
+                hidePreloader();
                 errorHandler.showAppError("ERROR_GENERIC", xhr);
             };
-            
+            showPreloader();
             service.getNavBarDetails().then(getNavBarDetailsSuccessCbFn, getNavBarDetailsFailCbFn);
         };
         
@@ -49,7 +51,6 @@ define(['text!./navigationbarleft.html', 'knockout', 'jquery', 'config/serviceCo
         };
         
         self.toggleNavUseCaseContent = function(useCaseId, component, data, event) {
-            console.log(useCaseId);
             if ($("#" + useCaseId + "ProgressBar").hasClass("oj-sm-hide")) {
                 $(".nav-use-case-container").removeClass("selected");
                 $(".nav-use-case-heading").removeClass("bold");

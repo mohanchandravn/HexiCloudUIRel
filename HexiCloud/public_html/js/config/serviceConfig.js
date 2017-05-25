@@ -715,15 +715,14 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
         
         self.getNavBarDetails = function () {
             var defer = $.Deferred();
-//            var serverURL = self.portalRestHost() + "/services/rest/getNavBarDetails";
-            var serverURL = "js/components/navigationbarleft/navBarDetails.json";
+            var serverURL = self.portalRestHost() + "/services/rest/getUseCasesGuidedPathProgress";
             $.ajax({
                 type: "GET",
                 url: serverURL,
-//                beforeSend: function (request) {
-//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
-//                },
-                success: function (data, textStatus, xhr) {
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                success: function (data, status, xhr) {
                     console.log('Successfully retrieved data at: ' + serverURL);
                     defer.resolve(data, status);
                 },
