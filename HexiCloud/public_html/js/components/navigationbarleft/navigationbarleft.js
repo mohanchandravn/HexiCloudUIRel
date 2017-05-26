@@ -7,15 +7,14 @@
 /**
  * navigationbarleft module
  */
-define(['text!./navigationbarleft.html', 'knockout', 'jquery', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojcore', 'ojs/ojprogressbar'
-], function (template, ko, $, service, errorHandler) {
+define(['text!./navigationbarleft.html', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorhandler', 'ojs/ojcore', 'ojs/ojprogressbar'
+], function (template, $) {
     /**
      * The view model for the main content view template
      */
-    function navigationbarleftContentViewModel(params) {
+    function navigationbarleftContentViewModel() {
         
         var self = this;
-//        var router = params.ojRouter.parentRouter;
                       
         self.getProgressStatus = function(progressValue) {
             if (Number(progressValue) < 1 ) {
@@ -43,11 +42,6 @@ define(['text!./navigationbarleft.html', 'knockout', 'jquery', 'config/serviceCo
                 $(".nav-use-case-sub-content").addClass("oj-sm-hide");
                 $("." + useCaseId + "Content").removeClass("oj-sm-hide");
             }
-        };
-        
-        self.getSelectedUseCaseDetails = function (parent) {
-//            params.rootData.selectedUseCase = parent;
-//            router.go('useCaseDiscovery');
         };
     };
     

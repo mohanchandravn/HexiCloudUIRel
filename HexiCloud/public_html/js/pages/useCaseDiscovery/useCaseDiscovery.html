@@ -9,17 +9,17 @@ and open the template in the editor.
         
         <div class="use-case-detail-container oj-flex-bar">
             <div class="oj-sm-align-self-flex-start oj-flex-bar-start oj-lg-4">
-                <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCase.image }" alt="Image" />
+                <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCase().image }" alt="Image" />
             </div>
             <div class="use-case-title-and-desc oj-lg-6">
-                <span class="use-case-title oj-flex" data-bind="text: selectedUseCase.title"></span>
+                <span class="use-case-title oj-flex" data-bind="text: selectedUseCase().title"></span>
                 <span class="use-case-heading oj-flex" data-bind="text: 'DESCRIPTION'"></span>
-                <p class="use-case-description oj-flex" data-bind="text: selectedUseCase.longDesc"></p>
+                <p class="use-case-description oj-flex" data-bind="text: selectedUseCase().longDesc"></p>
             </div>
             <div class="services oj-sm-align-self-flex-top oj-flex-bar-top oj-lg-2">
                 <span class="use-case-heading oj-flex" data-bind="text: 'SERVICES NEEDED'"></span>
                 <div class="oj-flex">
-                    <!-- ko foreach: selectedUseCase.services -->
+                    <!-- ko foreach: selectedUseCase().services -->
                         <span class="inverted-btn text-center" data-bind="text: label"></span>
                     <!-- /ko -->
                 </div>

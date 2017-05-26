@@ -123,7 +123,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     // show the scrolls initially with out zooming
                     var initialViewPort = page.getViewport(1);
                     $('#docContainer').css('max-width', initialViewPort.width + 20);
-                    $('#docContainer').css('max-height', initialViewPort.height +20);
+                    $('#docContainer').css('max-height', initialViewPort.height + 20);
                     var viewport = page.getViewport(self.scale());
                     self.canvas().height = viewport.height;
                     self.canvas().width = viewport.width;
@@ -226,7 +226,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 //            var pageNo = parseInt(document.getElementById('goToPageNo').value);
             self.pageNum((isNaN(num) || num === 0) ? 1 : num);
 
-            if (self.pageNum() < 2) {
+            if (self.pdfDoc().numPages == 1) {
+                $('#prev').removeClass('prevEnabled');
+                $('#prev').addClass('prevDisabled');
+                $('#next').removeClass('nextEnabled');
+                $('#next').addClass('nextDisabled');
+                $('#nextArrowCont').addClass('nextHidden');
+                $('#nextButtonCont').removeClass('nextHidden');
+            } else if (self.pageNum() < 2) {
                 $('#prev').removeClass('prevEnabled');
                 $('#prev').addClass('prevDisabled');
                 $('#next').removeClass('nextDisabled');

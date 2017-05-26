@@ -191,6 +191,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.isSelectionPhaseCompleted = ko.observable(false);
                 self.isGPContentFetching = ko.observable(false);
                 self.navTailoredUseCases = ko.observableArray([]);
+                self.selectedUseCase = ko.observable();
 
                 self.screenRange = oj.ResponsiveKnockoutUtils.createScreenRangeObservable();
                 self.viewportSize = ko.computed(function () {
@@ -329,7 +330,9 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         oj.OffcanvasUtils.close(navigationDrawerLeft);
                         return true;
                     }
-                    self.getGuidedPathsProgressForAllUseCases();
+                    if (self.isSelectionPhaseCompleted()) {
+                        self.getGuidedPathsProgressForAllUseCases();
+                    }
                     window.scrollTo(0, 0);
                     return (oj.OffcanvasUtils.open(navigationDrawerLeft));
                 };
@@ -398,7 +401,13 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     $("#tech_support").show();
                 };
 
-                // Fetxhing Guided Path content in Naviation bar code goes here..
+                self.getSelectedUseCaseDetails = function (parent) {
+                    self.selectedUseCase(parent);
+                    self.toggleLeft();
+                    router.go('useCaseDiscovery');
+                };
+
+                // Fetching Guided Path content in Navigation bar code goes here..
                 self.getGuidedPathsProgressForAllUseCases = function () {
                     self.showNavPreloader();
                     self.navTailoredUseCases([]);
@@ -406,7 +415,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     var getGuidedPathsProgressSuccessCbFn = function(data, status) {
                         self.navTailoredUseCases(data.useCases);
                         self.hideNavPreloader();
-                        console.log(data);
                     };
 
                     var getGuidedPathsProgressFailCbFn = function(xhr) {
