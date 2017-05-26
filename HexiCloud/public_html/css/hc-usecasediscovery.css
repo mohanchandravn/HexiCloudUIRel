@@ -120,32 +120,32 @@ and open the template in the editor.
     width: 100%;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-content {
+#useCaseDiscoveryPage .core-tech-content {
     color: #777;
     font-size: 12px;
     background: #FFFFFF;
     border-bottom: 1px solid #DDDDDD;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-img {
+#useCaseDiscoveryPage .core-tech-img {
     width: 65px;
     height: 65px;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-recommended-text {
+#useCaseDiscoveryPage .core-tech-recommended-text {
     color: #F80000;
     font-weight: bold;
     line-height: 16px;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-title {
+#useCaseDiscoveryPage .core-tech-title {
     color: #000000;
     font-size: 20px;
     font-weight: bold;
     line-height: 24px;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-progress-bar {
+#useCaseDiscoveryPage .core-tech-progress-bar {
     width: 200px;
     background: #DDDDDD;
     height: 10px;
@@ -154,19 +154,19 @@ and open the template in the editor.
     border-radius: 0px;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-progress-red .oj-progressbar-value {
+#useCaseDiscoveryPage .core-tech-progress-red .oj-progressbar-value {
     background: #F80000;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-progress-orange .oj-progressbar-value {
+#useCaseDiscoveryPage .core-tech-progress-orange .oj-progressbar-value {
     background: #FC9F15;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-progress-green .oj-progressbar-value {
+#useCaseDiscoveryPage .core-tech-progress-green .oj-progressbar-value {
     background: #77CA47;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .status-btn {
+#useCaseDiscoveryPage .status-btn {
     height: 30px;
     width: 140px;
     font-size: 18px;
@@ -178,11 +178,11 @@ and open the template in the editor.
     transition: all 0.3s ease-in-out;
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .status-btn:hover {
+#useCaseDiscoveryPage .status-btn:hover {
     transform: scale(1.2, 1.2);
 }
 
-#useCaseDiscoveryPage #tabCoreTechnicalKnowledge .core-tech-support-content {
+#useCaseDiscoveryPage .core-tech-support-content {
     min-height: 65px;
     font-size: 20px;
     padding-left: 40px;

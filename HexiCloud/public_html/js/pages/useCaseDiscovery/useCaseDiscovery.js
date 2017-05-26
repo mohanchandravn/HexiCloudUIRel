@@ -23,6 +23,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.selectedTab = ko.observable(0);
         self.areCoreGuidedPathsLoaded = ko.observable(false);
         self.coreGuidedPaths = ko.observableArray([]);
+        self.areComplementaryGuidedPathsLoaded = ko.observable(false);
+        self.complementaryGuidedPaths = ko.observableArray([]);
         self.urlForTCACalculator = ko.observable('');
         
         self.hasServiceBenefits = ko.observable(false);
@@ -33,31 +35,47 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.pdfSrc = ko.observable();
         self.selectedServiceBenefitsArray = ko.observableArray([]);
 
-        self.getCoreGuidedPathsData = function(data, event) {
+        self.getCoreGuidedPaths = function(data, event) {
             showPreloader();
+            
             var getCoreGuidedPathsDataSuccessFn = function (data, status) {
-                var guidedPaths = data.guidedPaths;
-                self.coreGuidedPaths(guidedPaths);
+                self.coreGuidedPaths(data.guidedPaths);
                 self.areCoreGuidedPathsLoaded(true);
+                hidePreloader();
             };
             
-            service.getCoreGuidedPaths().then(getCoreGuidedPathsDataSuccessFn, FailCallBackFn);
-            hidePreloader();
+            var getCoreGuidedPathsDataFailCbFn = function (xhr) {
+                hidePreloader();
+                console.log(xhr);
+                errorHandler.showAppError("ERROR_GENERIC", xhr);
+            };
+            
+            service.getCoreGuidedPaths().then(getCoreGuidedPathsDataSuccessFn, getCoreGuidedPathsDataFailCbFn);
         };
         
-        self.getComplementaryKnowledgeData = function(data, event) {
+        self.getComplementaryKnowledgeGuidedPaths = function(data, event) {
             showPreloader();
-            self.areCoreGuidedPathsLoaded(false);
-            console.log(data);
-            console.log(event);
-            hidePreloader();
+            
+            var getComplementaryGuidedPathsSuccessFn = function (data, status) {
+                if (data){
+                    self.complementaryGuidedPaths(data.guidedPaths);
+                    self.areComplementaryGuidedPathsLoaded(true);
+                }                
+                hidePreloader();
+            };
+            
+            var getComplementaryGuidedPathsFailCbFn = function (xhr) {
+                hidePreloader();
+                console.log(xhr);
+                errorHandler.showAppError("ERROR_GENERIC", xhr);
+            };
+            
+            service.getComplementaryGuidedPaths(self.selectedUseCase.id).then(getComplementaryGuidedPathsSuccessFn, getComplementaryGuidedPathsFailCbFn);
         };
         
         self.getTCACalculatorData = function(data, event) {
             showPreloader();
             self.areCoreGuidedPathsLoaded(false);
-            console.log(data);
-            console.log(event);
             self.urlForTCACalculator("https://oracle.valuestoryapp.com/iaas/");
             hidePreloader();
         };
@@ -65,16 +83,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.getSuccessStoriesData = function(data, event) {
             showPreloader();
             self.areCoreGuidedPathsLoaded(false);
-            console.log(data);
-            console.log(event);
             hidePreloader();
         };
 
         self.autoCaptureData = ko.computed(function() {
             if (self.selectedTab() === 0) {
-                self.getCoreGuidedPathsData();
+                self.getCoreGuidedPaths();
             } else if (self.selectedTab() === 1) {
-                self.getComplementaryKnowledgeData();
+                self.getComplementaryKnowledgeGuidedPaths();
             } else if (self.selectedTab() === 2) {
                 self.getTCACalculatorData();
             } else if (self.selectedTab() === 3) {
@@ -90,8 +106,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.tabChangeHandler = function(event, data) {
-            console.log(event);
-            console.log(data);
             self.selectedTab(data.value);
         };
         
