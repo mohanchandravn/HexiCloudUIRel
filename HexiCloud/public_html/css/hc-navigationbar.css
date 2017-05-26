@@ -13,6 +13,70 @@ navigationbarleft {
     border-right: 2px solid #b0c6d1;
 }
 
+.nav-preloader-container .help-text {
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.nav-preloader-container .dots {
+   vertical-align: middle;
+   border-radius: 100%;
+   background: #FFFFFF;
+   display: inline-block;
+   width: 10px;
+   height: 10px;
+   margin: 3px 2px;
+   -webkit-animation: nav-preloader-container 0.8s linear infinite alternate;
+   animation: nav-preloader-container 0.8s linear infinite alternate;
+}
+
+.nav-preloader-container .dots:nth-child(1) {
+   -webkit-animation-delay: -0.8;
+   animation-delay: -0.8s;
+}
+
+.nav-preloader-container .dots:nth-child(2) {
+   -webkit-animation-delay: -0.53333s;
+   animation-delay: -0.53333s;
+}
+
+.nav-preloader-container .dots:nth-child(3) {
+   -webkit-animation-delay: -0.26666s;
+   animation-delay: -0.26666s;
+}
+
+@keyframes nav-preloader-container {
+   from {transform: scale(0, 0);}
+   to {transform: scale(1, 1);}
+}
+@-webkit-keyframes nav-preloader-container {
+   from {-webkit-transform: scale(0, 0);}
+   to {-webkit-transform: scale(1, 1);}
+}
+
+/*
+navigationbarleft .nav-preloader-container {
+    position: fixed;
+    left: calc(50% - 36px);
+    height: 100%;
+    width: 100%;
+}
+
+navigationbarleft .nav-preloader {
+    border: 6px solid #f3f3f3;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 0.6s linear infinite;
+    border-top: 6px solid #555;
+    border-radius: 112%;
+    width: 60px;
+    height: 60px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}*/
+
 .nav-list {
     margin: 50px 0px;
     padding-left: 0;

@@ -189,6 +189,8 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 
                 self.isCapturePhaseCompleted = ko.observable(false);
                 self.isSelectionPhaseCompleted = ko.observable(false);
+                self.isGPContentFetching = ko.observable(false);
+                self.navTailoredUseCases = ko.observableArray([]);
 
                 self.screenRange = oj.ResponsiveKnockoutUtils.createScreenRangeObservable();
                 self.viewportSize = ko.computed(function () {
@@ -228,7 +230,17 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     $("#routingContainer").css("pointer-events", "");
                     $("#routingContainer").css("opacity", "");
                 };
-                
+
+                self.showNavPreloader = function () {
+                    $("#navPreloader").removeClass("oj-sm-hide");
+                    self.isGPContentFetching(true);
+                };
+
+                self.hideNavPreloader = function () {
+                    $("#navPreloader").addClass("oj-sm-hide");
+                    isGPContentFetching(false);
+                };
+
                 self.isPhoneNumberAdded = function () {
                     if (sessionInfo.getFromSession('phoneNumber') !== 'null') {
                         phoneNumber(sessionInfo.getFromSession('phoneNumber'));
@@ -317,6 +329,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         oj.OffcanvasUtils.close(navigationDrawerLeft);
                         return true;
                     }
+                    self.getGuidedPathsProgressForAllUseCases();
                     window.scrollTo(0, 0);
                     return (oj.OffcanvasUtils.open(navigationDrawerLeft));
                 };
@@ -385,6 +398,27 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     $("#tech_support").show();
                 };
 
+                // Fetxhing Guided Path content in Naviation bar code goes here..
+                self.getGuidedPathsProgressForAllUseCases = function () {
+                    self.showNavPreloader();
+                    self.navTailoredUseCases([]);
+
+                    var getGuidedPathsProgressSuccessCbFn = function(data, status) {
+                        self.navTailoredUseCases(data.useCases);
+                        self.hideNavPreloader();
+                        console.log(data);
+                    };
+
+                    var getGuidedPathsProgressFailCbFn = function(xhr) {
+                        console.log(xhr);
+                        debugger;
+                        self.hideNavPreloader();
+                        errorHandler.showAppError("ERROR_GENERIC", xhr);
+                    };
+
+                    service.getGuidedPathsProgressForAllUseCases().then(getGuidedPathsProgressSuccessCbFn, getGuidedPathsProgressFailCbFn);
+                };
+                
                 self.logout = function (data, event) {
 
                     var logoutSuccessCallback = function () {

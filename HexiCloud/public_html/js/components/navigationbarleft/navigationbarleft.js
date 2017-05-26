@@ -12,38 +12,11 @@ define(['text!./navigationbarleft.html', 'knockout', 'jquery', 'config/serviceCo
     /**
      * The view model for the main content view template
      */
-    function navigationbarleftContentViewModel() {
+    function navigationbarleftContentViewModel(params) {
         
         var self = this;
-        
-        self.navTailoredUseCases = ko.observableArray([]);
-        
-        self.updateNavGuidedPathContent = ko.computed(function () {
-            if (isSelectionPhaseCompleted()) {
-                self.getGuidedPathsProgressForAllUseCases();
-            } else {
-                self.navTailoredUseCases([]);
-            }
-            return;
-        });
-        
-        self.getGuidedPathsProgressForAllUseCases = function () {
-            showPreloader();
-            
-            var getGuidedPathsProgressSuccessCbFn = function(data, status) {
-                self.navTailoredUseCases(data.useCases);
-                hidePreloader();
-            };
-            
-            var getGuidedPathsProgressFailCbFn = function(xhr) {
-                console.log(xhr);
-                hidePreloader();
-                errorHandler.showAppError("ERROR_GENERIC", xhr);
-            };
-            
-            service.getGuidedPathsProgressForAllUseCases().then(getGuidedPathsProgressSuccessCbFn, getGuidedPathsProgressFailCbFn);
-        };
-        
+//        var router = params.ojRouter.parentRouter;
+                      
         self.getProgressStatus = function(progressValue) {
             if (Number(progressValue) < 1 ) {
                 return 'red';
@@ -54,7 +27,7 @@ define(['text!./navigationbarleft.html', 'knockout', 'jquery', 'config/serviceCo
             }
         };
         
-        self.toggleNavUseCaseContent = function(useCaseId, component, data, event) {
+        self.toggleNavUseCaseContent = function (useCaseId, data, event) {
             if ($("#" + useCaseId + "ProgressBar").hasClass("oj-sm-hide")) {
                 $(".nav-use-case-container").removeClass("selected");
                 $(".nav-use-case-heading").removeClass("bold");
@@ -69,7 +42,12 @@ define(['text!./navigationbarleft.html', 'knockout', 'jquery', 'config/serviceCo
                 $("#" + useCaseId + "ProgressBar").addClass("oj-sm-hide");
                 $(".nav-use-case-sub-content").addClass("oj-sm-hide");
                 $("." + useCaseId + "Content").removeClass("oj-sm-hide");
-            }            
+            }
+        };
+        
+        self.getSelectedUseCaseDetails = function (parent) {
+//            params.rootData.selectedUseCase = parent;
+//            router.go('useCaseDiscovery');
         };
     };
     
