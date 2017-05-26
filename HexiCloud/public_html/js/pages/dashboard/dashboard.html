@@ -80,7 +80,14 @@ and open the template in the editor.
 
         <div class="dashboard oj-flex">
             <!-- Use case selection -->
-            <!-- <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;"> -->
+            <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
+                <!-- ko if: isSelectionPhaseCompleted() === true -->
+                <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
+                    <span class="heading-type4">
+                        Please select a use case below to Implement or Learn more!
+                    </span>           
+                </div>
+                <!-- /ko -->
                 <!-- ko if: isSelectionPhaseCompleted() === true -->
                 <!-- <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px; border-top: 1px solid #DDDDDD;">
                     <span class="heading-type4">
@@ -108,7 +115,7 @@ and open the template in the editor.
                     </div>
                 </div> -->
                 <!-- /ko -->
-             <!-- </div>-->
+             </div>
             <!-- ko if: isSelectionPhaseCompleted() === true -->
             <span class="heading-type2 oj-sm-12 oj-flex-item">Tailored Use Cases</span>
             <div class="use-cases-body-content oj-flex-item">
