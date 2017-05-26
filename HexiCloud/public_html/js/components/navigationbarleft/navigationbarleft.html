@@ -103,7 +103,7 @@ and open the template in the editor.
                     <div class="nav-progress-bar" data-bind="attr: {id: id + 'ProgressBar'}, css: 'nav-progress-' + $parent.getProgressStatus(progress),
                                                     ojComponent:{
                                                         component: 'ojProgressbar', 
-                                                        value: progress}">
+                                                        value: progress === 0 ? '3' : progress}">
                     </div>
                     <!-- ko foreach: pathProgressDetails -->
                     <div class="nav-use-case-sub-content oj-sm-hide oj-sm-12 oj-flex-item" data-bind="css: $parent.id + 'Content', click: $parents[1].toggleNavUseCaseContent.bind($data, $parent.id)">
