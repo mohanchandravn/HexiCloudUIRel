@@ -543,6 +543,28 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             return $.when(defer);
         };
         
+        self.getComplementaryGuidedPaths = function(useCaseId) {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/getCompleGuidedPaths?useCaseId=" + useCaseId;
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
         self.getGuidedPathDetails = function(pathId) {
             var defer = $.Deferred();
             var serverURL = self.portalRestHost() + "/services/rest/getGuidedPathDetail?pathId=" + pathId;
