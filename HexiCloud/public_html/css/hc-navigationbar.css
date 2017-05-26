@@ -54,29 +54,6 @@ navigationbarleft {
    to {-webkit-transform: scale(1, 1);}
 }
 
-/*
-navigationbarleft .nav-preloader-container {
-    position: fixed;
-    left: calc(50% - 36px);
-    height: 100%;
-    width: 100%;
-}
-
-navigationbarleft .nav-preloader {
-    border: 6px solid #f3f3f3;
-    -webkit-animation: spin 1s linear infinite;
-    animation: spin 0.6s linear infinite;
-    border-top: 6px solid #555;
-    border-radius: 112%;
-    width: 60px;
-    height: 60px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}*/
-
 .nav-list {
     margin: 50px 0px;
     padding-left: 0;

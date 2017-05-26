@@ -81,6 +81,7 @@ and open the template in the editor.
         </ul>
     </div>
     
+    <!-- ko if: isSelectionPhaseCompleted() -->
     <div id="navPreloader" class="oj-sm-hide oj-sm-12 oj-flex-item">
         <div class="nav-preloader-container oj-sm-justify-content-center oj-flex">
             <span class="help-text text-center oj-sm-12 oj-flex-item" data-bind="text: 'Guided path content is loading'"></span>
@@ -89,8 +90,8 @@ and open the template in the editor.
             <span class="dots"></span>
         </div>
     </div>
-<!--        <div class="nav-preloader oj-sm-align-self-center"></div>-->
-    </div>
+    <!-- /ko -->
+    
     <!-- ko if: isSelectionPhaseCompleted() -->
     <div id="gpContainer" class="nav-guided-path-container oj-sm-12 oj-flex-item">
         <!-- ko ifnot: isGPContentFetching() -->
@@ -107,7 +108,7 @@ and open the template in the editor.
                     </div>
                     <!-- ko foreach: pathProgressDetails -->
                     <div class="nav-use-case-sub-content oj-sm-hide oj-sm-12 oj-flex-item" data-bind="css: $parent.id + 'Content', click: $parents[1].toggleNavUseCaseContent.bind($data, $parent.id)">
-                        <div class="oj-flex" data-bind="click: $parents[1].getSelectedUseCaseDetails.bind($data, $parent)">
+                        <div class="c-pointer oj-flex" data-bind="click: getSelectedUseCaseDetails.bind($data, $parent)">
                             <span class="nav-content-status-container oj-flex-item" data-bind="css: 'nav-content-' + $parents[1].getProgressStatus(progress)"></span>
                             <span class="oj-flex-item" data-bind="text: label"></span>
                         </div>

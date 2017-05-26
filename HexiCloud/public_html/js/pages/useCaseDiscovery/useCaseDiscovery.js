@@ -19,7 +19,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var self = this;
         var router = params.ojRouter.parentRouter;
         
-        self.selectedUseCase = params.rootData.selectedUseCase;
+        self.selectedUseCase = ko.computed( function() {
+            return selectedUseCase();
+        });
         self.selectedTab = ko.observable(0);
         self.areCoreGuidedPathsLoaded = ko.observable(false);
         self.coreGuidedPaths = ko.observableArray([]);
@@ -70,7 +72,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 errorHandler.showAppError("ERROR_GENERIC", xhr);
             };
             
-            service.getComplementaryGuidedPaths(self.selectedUseCase.id).then(getComplementaryGuidedPathsSuccessFn, getComplementaryGuidedPathsFailCbFn);
+            service.getComplementaryGuidedPaths(self.selectedUseCase().id).then(getComplementaryGuidedPathsSuccessFn, getComplementaryGuidedPathsFailCbFn);
         };
         
         self.getTCACalculatorData = function(data, event) {
@@ -120,7 +122,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         self.onClickOnCoreTechContent = function(data, event) {
-            params.rootData.selectedUseCase = self.selectedUseCase;
+            params.rootData.selectedUseCase = self.selectedUseCase();
             params.rootData.selectedGuidedPathId = data.pathId;
             router.go('guidedPathDetails');
         };
