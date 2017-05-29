@@ -102,6 +102,7 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
             ko.components.register('navigationbarright', {require: 'components/navigationbarright/navigationbarright'});
             ko.components.register('usecasedetails', {require: 'components/usecasedetails/usecasedetails'});
             ko.components.register('servicedetails', {require: 'components/servicedetails/servicedetails'});
+            ko.components.register('breadcrumb', {require: 'components/breadcrumb/breadcrumb'});
 
             function getPath(path) {
                 if (path === 'learningFlow')

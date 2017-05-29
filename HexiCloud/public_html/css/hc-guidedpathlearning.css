@@ -198,26 +198,26 @@ and open the template in the editor.
     padding: 0px 3px 0px 3px;
 }
 
-.bread-crumbs-container {
+.breadcrumb-container {
     margin-bottom: 5px;
 }
 
-.bread-crumbs-font {
+.breadcrumb-font {
     font-weight: bold;
     color: #333;
     cursor: pointer;
 }
 
-.bread-crumbs-font:visited {
+.breadcrumb-font:visited {
     color: #333;
 }
 
-.bread-crumbs-font-current {
+.breadcrumb-font-current {
     font-weight: bold;
     color: #F80000;
 }
 
-.bread-crumbs-separator {
+.breadcrumb-separator {
     padding: 0px 3px 0px 3px;
 }
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!-- ko if: breadcrumbs().length > 0 -->
+    <div id="breadcrumbContainer" class="breadcrumb-container oj-flex-item">
+        <!-- ko foreach: breadcrumbs() -->
+            <!-- ko if: $index() !== $parent.breadcrumbs().length - 1 || $parent.breadcrumbs().length === 1 -->
+            <a class="breadcrumb-font" data-bind="attr:{id: id}, text: label, click: $parent.onBreadcrumbSelection"></a>
+            <!-- /ko -->
+            <!-- ko if: $index() === $parent.breadcrumbs().length - 1 && $parent.breadcrumbs().length > 1 -->
+            <span class="breadcrumb-font-current" data-bind="text: label"></span>
+            <!-- /ko -->
+            <!-- ko if: $index() !== $parent.breadcrumbs().length - 1 -->
+            <span class="breadcrumb-separator">&gt;</span>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+<!-- /ko -->

@@ -123,7 +123,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         
         self.onClickOnCoreTechContent = function(data, event) {
             params.rootData.selectedUseCase = self.selectedUseCase();
-            params.rootData.selectedGuidedPathId = data.pathId;
+            params.rootData.selectedPathId = data.pathId;
             router.go('guidedPathDetails');
         };
         

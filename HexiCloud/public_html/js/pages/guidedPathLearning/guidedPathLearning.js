@@ -16,8 +16,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
     function guidedPathLearningViewModel(params) {
 
         var self = this;
+
         var router = params.ojRouter.parentRouter;
-                
+        
+        self.params = params;
         self.selectedUseCase = params.rootData.selectedUseCase;
         self.areGuidedPathSectionsLoaded = ko.observable(false);
         self.selectedPathId = ko.observable();
@@ -43,7 +45,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             self.nextButtonLabel("Finish");
         }
         
-        self.breadCrumbs = ko.observableArray([{id: 'useCaseDiscovery', label: self.selectedUseCase.title}, 
+        self.breadcrumbs = ko.observableArray([{id: 'useCaseDiscovery', label: self.selectedUseCase.title}, 
                                                {id: 'guidedPathDetails', label: self.selectedPathLabel()},
                                                {id: 'guidedPathLearning', label: self.selectedGuidedPathSection().description}]);
 
@@ -328,7 +330,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.completeSubSection = function () {
             self.updateLearning(self.pageNum(), 'C');
             if (self.lastSubSectionToRead()) {
-                params.rootData.selectedGuidedPathId = self.selectedPathId();
+                params.rootData.selectedPathId = self.selectedPathId();
                 router.go('guidedPathDetails');
             } else {
                 var sectionDocs = self.selectedGuidedPathSection().sectionDocs;
@@ -370,18 +372,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     }
 
                 } else {
-                    params.rootData.selectedGuidedPathId = self.selectedPathId();
+                    params.rootData.selectedPathId = self.selectedPathId();
                     router.go('guidedPathDetails');
                 }
             }
-        };
-        
-        self.onBreadCrumbSelection = function(data, event) {
-            params.rootData.selectedUseCase = self.selectedUseCase;
-            if (data.id === 'guidedPathDetails') {
-                params.rootData.selectedGuidedPathId = self.selectedPathId();
-            }
-            router.go(data.id);
         };
 
         self.handleAttached = function () {
