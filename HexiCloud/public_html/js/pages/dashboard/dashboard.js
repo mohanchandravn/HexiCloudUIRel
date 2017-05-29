@@ -8,7 +8,7 @@
  * dashboard module
  */
 define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sessionInfo', 'util/errorhandler', 'ojs/ojknockout',
-    'components/techsupport/loader', 'ojs/ojmasonrylayout', 'ojs/ojoffcanvas'
+    'components/techsupport/loader', 'ojs/ojmasonrylayout', 'ojs/ojoffcanvas', 'ojs/ojdialog'
 ], function (oj, $, ko, service, sessionInfo, errorHandler) {
     /**
      * The view model for the main content view template
@@ -30,13 +30,13 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
         self.serviceItems = ko.observableArray([]);
         self.minimalServiceItems = ko.observableArray([]);
         self.allServiceItems = ko.observableArray([]);
-        self.selectedServiceItem = ko.observable();
-        self.selectedItemTitle = ko.observable();
-        self.selectedItemSubTitle = ko.observable();
+        self.selectedService = ko.observable();
+        self.selectedServiceTitle = ko.observable();
+        self.selectedServiceSubTitle = ko.observable();
         self.benefitsTitle = ko.observable();
         self.pdfSrc = ko.observable();
         self.detailsContentMaxHeight = ko.observable(0);
-        self.selectedItemBenefitsArray = ko.observableArray([]);
+        self.selectedServiceBenefitsArray = ko.observableArray([]);
         self.noServices = ko.observable(false);
         self.hasServiceBenefits = ko.observable(false);
         self.showControlsButton = ko.observable(false);
@@ -147,40 +147,46 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
             self.showViewLessButton(true);
         };
 
-        self.openServiceDetail = function (data, event) {
+        self.openServiceDetailModal = function (data, event) {
             showPreloader();
             var serviceClicked = data.service;
             var serverType = data.service.toLowerCase();
 
             var successCbFn = function (data, status) {
-                self.selectedServiceItem(serviceClicked);
+                self.selectedService(serviceClicked);
                 if (status !== 'nocontent') {
                     self.hasServiceBenefits(true);
-                    self.selectedItemTitle(data.Service.title);
-                    self.selectedItemSubTitle(data.Service.subTitle);
+                    self.selectedServiceTitle(data.Service.title);
+                    self.selectedServiceSubTitle(data.Service.subTitle);
                     self.benefitsTitle(data.Service.Benefits.title);
                     self.pdfSrc(data.Service.FeaturesLink);
-                    self.selectedItemBenefitsArray(data.Service.Benefits.benefitsList);
+                    self.selectedServiceBenefitsArray(data.Service.Benefits.benefitsList);
                     
                 } else {
-                    self.selectedItemTitle('Coming Soon');
-                    self.selectedItemSubTitle('');
+                    self.selectedServiceTitle('Coming Soon');
+                    self.selectedServiceSubTitle('');
                     self.benefitsTitle('');
                     self.pdfSrc('');
                     self.hasServiceBenefits(false);
-                    self.selectedItemBenefitsArray([]);
+                    self.selectedServiceBenefitsArray([]);
                 }
+                
+                $("#serviceDetailModal").ojDialog("open");
 
                 hidePreloader();
                 
-                // scroll the benefits conteiner to top including header
+                /* scroll the benefits conteiner to top including header
                 $('html, body').animate({
                     scrollTop: $('#serviceBenefits').offset().top - 80
-                }, 500);
+                }, 500); */
             };
 
             service.getServiceDetails(serverType).then(successCbFn, FailCallBackFn);
             service.updateAudit({"stepCode" : getStateId(), "action" : "View More : " + serviceClicked});
+
+            self.handleOKClose = $("#okButton").click(function() {
+                $("#serviceDetailModal").ojDialog("close"); 
+            });
         };
 
         self.getUseCaseDetails = function (data, event) {
