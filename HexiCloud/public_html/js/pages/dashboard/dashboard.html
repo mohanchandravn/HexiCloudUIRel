@@ -7,8 +7,13 @@ and open the template in the editor.
     <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
         <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
         <div class="provisioned-services dashboard oj-flex">
-            <span class="heading-type2 oj-sm-12 oj-flex-item">Welcome to the Dashboard</span>
-            <span class="heading-type4 oj-sm-12 oj-flex-item">The dashboard page provides you with a snapshot of your provisioned services, relevant use cases and your progress within the How-to guides. Further information click within each section to directed to the relevant page.</span>
+            <div class="welcome-container oj-margin-lg-bottom oj-sm-12 oj-flex-item">
+                <span class="heading-type2 oj-sm-12 oj-flex-item">Welcome to your dashboard!</span>
+                <div class="welcome-message"> 
+                    <span class="heading-type4 oj-sm-12 oj-flex-item">The dashboard page provides you with a snapshot of your provisioned services, relevant use cases and your progress within the How-to guides. Further information click within each section to directed to the relevant page.</span>
+                </div>
+            </div>
+            
             <!-- ko if: noServices() -->
             <div class="oj-sm-12 oj-flex-item">
                 <div class="oj-flex">
@@ -21,15 +26,15 @@ and open the template in the editor.
                 </div>
             </div>
             <!-- /ko -->
+            
             <!-- ko ifnot: noServices() -->
-
             <div class="oj-sm-12 oj-flex-item">
                 <div class="oj-flex">
                     <div class="oj-sm-12 oj-flex-item">
                         <div class="content stage oj-flex">
-                            <span class="heading-type2 oj-sm-12 oj-flex-item">Your services</span>
-                            <span class="heading-type4 oj-sm-12 oj-flex-item">Please see below an overview of your provisioned services. To display all your provisioned services click ‘View all’</span>
-                            <hr>
+                            <span class="heading-type2 oj-sm-12 oj-flex-item">My Services</span>
+                            <!-- <span class="heading-type4 oj-sm-12 oj-flex-item">Please see below an overview of your provisioned services. To display all your provisioned services click ‘View all’</span>
+                            <hr> -->
                         </div>
                     </div>
                 </div>
