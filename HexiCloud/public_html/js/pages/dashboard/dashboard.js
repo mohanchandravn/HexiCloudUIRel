@@ -35,7 +35,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
         self.selectedServiceSubTitle = ko.observable();
         self.benefitsTitle = ko.observable();
         self.pdfSrc = ko.observable();
-        self.detailsContentMaxHeight = ko.observable(0);
         self.selectedServiceBenefitsArray = ko.observableArray([]);
         self.noServices = ko.observable(false);
         self.hasServiceBenefits = ko.observable(false);
@@ -46,21 +45,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
         self.areUseCaseDetailsFetched = ko.observable(false);
         self.selectedUseCaseDetails = ko.observableArray([]);
         self.tailoredUseCases = ko.observableArray([]);
-                
-        self.getClass = function (serverType) {
-//            if (serverType === 'COMPUTE') {
-//                return 'blue';
-//            } else if (serverType === 'JCS') {
-//                return 'green';
-//            } else {
-//                return 'purple';
-//            }
-            return 'purple';
-        };
-        
-//        self.selectedUseCase = ko.computed(function() {
-//            return self.selectedUseCaseDetails();
-//        }, self);
         
         self.getIcon = function (serverType) {
             if (serverType.toLowerCase().indexOf("compute") >= 0) {
@@ -86,9 +70,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
             self.allServiceItems(data);
             if (self.allServiceItems()) {
                 $.each(data, function (idx, serviceItem) {
-                    if (length < serviceItem.details.length) {
-                        length = serviceItem.details.length;
-                    }
                     if (idx <= 3) {
                         array.push(serviceItem);
                     }
@@ -97,7 +78,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
                         self.showViewAllButton(true);
                     }
                 });
-                self.detailsContentMaxHeight(length);
                 self.minimalServiceItems(array);
                 self.serviceItems(array);
             } else {
@@ -175,7 +155,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
 
                 hidePreloader();
                 
-                /* scroll the benefits conteiner to top including header
+                /* scroll the benefits container to top including header
                 $('html, body').animate({
                     scrollTop: $('#serviceBenefits').offset().top - 80
                 }, 500); */

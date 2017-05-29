@@ -108,6 +108,10 @@ header-content {
     visibility: hidden;
 }
 
+.color-black {
+    color: #000000;
+}
+
 .color-red {
     color: #F80000;
 }
