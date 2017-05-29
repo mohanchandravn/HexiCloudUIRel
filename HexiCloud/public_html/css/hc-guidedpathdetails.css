@@ -120,3 +120,15 @@ and open the template in the editor.
     width : 100%;
     height : 20%;
 }
+
+.section-selected {
+    background: #DDDDDD !important;
+}
+
+.guided-path-section-content:hover {
+    background-color: #DDDDDD !important;
+}
+
+.guided-path-section-sub-content:hover {
+    background-color: #DDDDDD !important;
+}

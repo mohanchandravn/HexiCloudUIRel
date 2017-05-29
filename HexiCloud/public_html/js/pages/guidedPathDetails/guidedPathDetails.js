@@ -22,6 +22,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.selectedGuidedPath = ko.observableArray([]);
         self.areGuidedPathsLoaded = ko.observable(false);
         
+        self.prevSectionIdSelected = ko.observable('');
+        
         var getGuidedPathDetailsSuccessFn = function(data, success) {
             self.selectedGuidedPath(data.guidedPathDetail);
             self.areGuidedPathsLoaded(true);
@@ -48,8 +50,13 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         
         self.toggleGPSectionSubContent = function(data, event) {
             var id = event.currentTarget.id;
+            if (self.prevSectionIdSelected() !== '') {
+                $('#' + self.prevSectionIdSelected()).toggleClass('section-selected');
+            }
+            $('#' + id).toggleClass('section-selected');
             $(".guided-path-sub-content-container").slideUp();
             $("#" + id + "-sub-content").slideDown();
+            self.prevSectionIdSelected(id);
         };
         
         self.openGPSectionSubContent = function(parent, data, event) {

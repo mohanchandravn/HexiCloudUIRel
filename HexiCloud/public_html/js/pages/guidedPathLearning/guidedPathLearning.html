@@ -43,7 +43,7 @@ and open the template in the editor.
             <!-- ko if: selectedGuidedPathSubSection().docType === 'VIDEO' -->
             <div class="guided-path-section-details oj-sm-12 oj-lg-6 oj-flex-item">
                 <div class="oj-sm-justify-content-center oj-flex">
-                    <video class="guided-path-video-tag" preload="auto" controls>
+                    <video class="guided-path-video-tag" preload="auto" controls poster="css/img/video_overlay.png">
                         <source data-bind="attr: {src: selectedGuidedPathSubSection().publicLink }">
                     </video>
                     <!--<span class="sub-section-title oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docName"></span>-->
