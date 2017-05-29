@@ -10,14 +10,14 @@ and open the template in the editor.
         <img class="close-icon" src="css/img/close.png" alt="Close it" data-bind="click: closeUseCaseDetailOffCanvas" />
     </div>
     <div class="use-case-details-wrapper-content oj-sm-justify-content-center oj-flex">
-        <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + $parent.selectedUseCase().image }" alt="Image" />
-        <span class="use-case-title bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: $parent.selectedUseCase().title"></span>
+        <img class="use-case-image" data-bind="attr: { src : 'css/img/usecases/' + selectedUseCase().image }" alt="Image" />
+        <span class="use-case-title bold text-center oj-margin-lg-vertical oj-sm-12 oj-flex-item" data-bind="text: selectedUseCase().title"></span>
         <span class="use-case-heading oj-sm-12 oj-flex-item" data-bind="text: 'DESCRIPTION'"></span>
-        <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: $parent.selectedUseCase().longDesc"></p>
+        <p class="use-case-description oj-sm-12 oj-flex-item" data-bind="text: selectedUseCase().longDesc"></p>
         <span class="use-case-heading oj-margin-lg-top oj-sm-12 oj-flex-item" data-bind="text: 'SERVICES NEEDED'"></span>
         <div class="oj-sm-12 oj-flex-item">
             <div class="oj-flex">
-                <!-- ko foreach: $parent.selectedUseCase().services -->
+                <!-- ko foreach: selectedUseCase().services -->
                 <span class="inverted-btn text-center" data-bind="text: label"></span>
                 <!-- /ko -->
             </div>

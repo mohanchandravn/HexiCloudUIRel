@@ -58,9 +58,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
             return 'purple';
         };
         
-        self.selectedUseCase = ko.computed(function() {
-            return self.selectedUseCaseDetails();
-        }, self);
+//        self.selectedUseCase = ko.computed(function() {
+//            return self.selectedUseCaseDetails();
+//        }, self);
         
         self.getIcon = function (serverType) {
             if (serverType.toLowerCase().indexOf("compute") >= 0) {
@@ -185,7 +185,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
 
         self.getUseCaseDetails = function (data, event) {
             if (data.id) {
-                self.selectedUseCaseDetails(data);
+                selectedUseCase(data);
                 self.areUseCaseDetailsFetched(true);
                 oj.OffcanvasUtils.open(useCaseDrawerRight);
                 $(window).scrollTop(0);
@@ -206,10 +206,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
         
         self.onClickOnLearnMore = function(data, event) {
             if (data.id) {
-                self.selectedUseCaseDetails(data);
+                selectedUseCase(data);
+                params.rootData.selectedUseCase = selectedUseCase();
+                router.go('useCaseDiscovery');
             }
-            params.rootData.selectedUseCase = self.selectedUseCase();
-            router.go('useCaseDiscovery');
         };
 
         self.handleAttached = function () {
