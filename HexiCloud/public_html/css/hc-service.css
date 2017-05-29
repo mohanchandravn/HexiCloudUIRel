@@ -146,25 +146,18 @@ and open the template in the editor.
 
 .provisioned-services .service {
     position: relative;
+    width: 310px;
+    max-width: 310px;
     /*overflow: auto;*/
     background-color: #fff;
-    margin: 50px 0;
-}
-.provisioned-services .service.blue .head {
-    background-color: #008bbc;
+    margin: 20px 20px 0px 0px;
 }
 
-.provisioned-services .service.green .head {
-    background-color: #3f9f8a;
-}
-
-.provisioned-services .service.purple .head {
-    background-color: #56638a;
-}
 .provisioned-services .service .head {
     padding: 10px 15px;
+    background-color: #56638a;
 }
-
+/*
 .provisioned-services .service .head .laas {
     float: right;
     padding: 8px 10px 5px 5px;
@@ -172,19 +165,11 @@ and open the template in the editor.
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     color: #fff;
-}
+}*/
 
-.provisioned-services .service.blue .laas {
-    background-color: #45aace;
-}
-
-.provisioned-services .service.green .laas {
-    background-color: #73b9aa;
-}
-
-.provisioned-services .service.purple .laas {
+/*.provisioned-services .service .head .laas {
     background-color: #848daa;
-}
+}*/
 
 .provisioned-services .service .head .laas img {
     margin: 0 10px;
@@ -198,12 +183,12 @@ and open the template in the editor.
 
 .provisioned-services .service .head .metered {
     font-size: 12px;
-    margin: 30px 0 -5px 0;
+    margin: 15px 0 -5px 0;
     padding: 0;
 }
 
 .provisioned-services .service .head .serviceName {
-    font-size: 21px;
+    font-size: 26px;
     font-weight: lighter;
 }
 
@@ -254,7 +239,7 @@ and open the template in the editor.
 }
 
 .provisioned-services .service .body p {
-    color: #8aadbf;
+    /*color: #8aadbf;*/
 }
 .provisioned-services .service .body .instances {
     font-size: 100px;
@@ -264,17 +249,10 @@ and open the template in the editor.
     text-align: center;
 }
 
-.provisioned-services .service.blue span {
-    color: #008bbc;
+.provisioned-services .service .body span {
+    /*color: #56638a;*/
 }
 
-.provisioned-services .service.green span {
-    color: #3f9f8a;
-}
-
-.provisioned-services .service.purple span {
-    color: #56638a;
-}
 .provisioned-services .service .body .col-40 {
     display: inline-block;
     width: 35%;
@@ -368,13 +346,9 @@ and open the template in the editor.
     }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1280px) {
+@media screen and (min-width: 1024px) {
     .servicesMini-page {
         padding: 0px 120px 10px 10px;
-    }
-    .provisioned-services .service .head .img-dimen {
-       width : 30px !important;
-       height: 30px !important;
     }
     .provisioned-services .service .head .metered {
         font-size: 12px;
@@ -409,8 +383,8 @@ and open the template in the editor.
 }
 
 .provisioned-services .service .head .img-dimen {
-   width : 30px;
-   height: 30px;
+   width : 60px;
+   height: 60px;
 }
 
 .provisioned-services .service .body .col-80 {
@@ -425,8 +399,9 @@ and open the template in the editor.
 }
 
 .provisioned-services .service .body .uom-measurement {
-    font-size: 18px;
-    height: 19px;
+    font-size: 12px;
+    color: #CCCCCC;
+    /*height: 19px;*/
 }
 
 .provisioned-services .service .body .short-desc {

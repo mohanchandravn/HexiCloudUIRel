@@ -83,6 +83,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
         function populateUI(data, status) {
             var array = [];
             var length = 0;
+            console.log(JSON.stringify(data));
             self.allServiceItems(data);
             if (self.allServiceItems()) {
                 $.each(data, function (idx, serviceItem) {

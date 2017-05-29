@@ -16,49 +16,48 @@ and open the template in the editor.
             
             <!-- ko if: noServices() -->
             <div class="oj-sm-12 oj-flex-item">
-                <div class="oj-flex">
-                    <div class="oj-sm-12 oj-flex-item">
-                        <div class="content stage oj-flex">
-                            <span class="heading-type4 oj-sm-12 oj-flex-item">We cannot find any services associated with your account, please contact CSC to resolve the issue.</span>
-                            <hr>
-                        </div>
-                    </div>
+                <div class="content stage oj-flex">
+                    <span class="heading-type4 oj-sm-12 oj-flex-item">We cannot find any services associated with your account, please contact CSC to resolve the issue.</span>
+                    <hr>
                 </div>
             </div>
             <!-- /ko -->
             
             <!-- ko ifnot: noServices() -->
             <div class="oj-sm-12 oj-flex-item">
-                <div class="oj-flex">
-                    <div class="oj-sm-12 oj-flex-item">
-                        <div class="content stage oj-flex">
-                            <span class="heading-type2 oj-sm-12 oj-flex-item">My Services</span>
-                            <!-- <span class="heading-type4 oj-sm-12 oj-flex-item">Please see below an overview of your provisioned services. To display all your provisioned services click ‘View all’</span>
-                            <hr> -->
-                        </div>
-                    </div>
+                <div class="content stage oj-flex">
+                    <span class="heading-type2 oj-sm-12 oj-flex-item">My Services</span>
+                    <!-- <span class="heading-type4 oj-sm-12 oj-flex-item">Please see below an overview of your provisioned services. To display all your provisioned services click ‘View all’</span>
+                    <hr> -->
                 </div>
             </div>
             <div class="oj-sm-12 oj-flex-item">
-                <div class="oj-flex oj-flex-items-pad">
+                <div class="oj-flex">
                     <!-- ko foreach: serviceItems -->
-                    <div class="oj-flex-item oj-md-10 oj-lg-3">
-                        <div class="service" data-bind="css: $parent.getClass(service)">
-                            <div class="head">
-                                <div class="laas"><img src="css/img/laas-icon.png"><span style="color: white; font-weight:lighter" data-bind="text: platform"></span></div>
-                                <img data-bind="attr:{src:$parent.getIcon(service)}" class="img-dimen" alt="Image">
-                                <p class="metered" data-bind="text: serviceType === '' ? '&nbsp;' : serviceType"></p>
-                                <h4 class="serviceName" data-bind="text: service"></h4>
+                    <div class="oj-flex-item">
+                        <div class="service oj-flex" data-bind="css: $parent.getClass(service)">
+                            <div class="head oj-sm-12 oj-flex-item">
+                                <!--<div class="laas"><img src="css/img/laas-icon.png"><span style="color: white; font-weight:lighter" data-bind="text: platform"></span></div>-->
+                                <div class="oj-sm-align-items-flex-end oj-flex">
+                                    <img data-bind="attr:{src:$parent.getIcon(service)}" class="img-dimen" alt="Image">
+                                    <div class="oj-margin-start">
+                                        <div class="oj-flex">
+                                            <p class="metered oj-sm-12 oj-flex-item" data-bind="text: serviceType === '' ? '&nbsp;' : serviceType"></p>
+                                            <h4 class="serviceName oj-sm-12 oj-flex-item" data-bind="text: service"></h4>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="body oj-flex" data-bind="css: 'row-count-' + $parent.detailsContentMaxHeight()">
-                                <div class="oj-sm-12 oj-flex-item">
+                            <div class="body oj-sm-12 oj-flex-item" data-bind="css: 'row-count-' + $parent.detailsContentMaxHeight()">
+                                <div class="oj-sm-justify-content-center oj-flex">
                                     <!-- ko foreach: details -->
-                                    <p class="serviceDetails oj-sm-justify-content-center oj-sm-align-items-flex-end oj-flex">
-                                        <span class="uom-quantity" data-bind="text: quantity"></span>&nbsp;<span class="uom-measurement" data-bind="text: uom"></span>
-                                        <!-- ko if: tier9ShortDesc !== null && tier9ShortDesc !== "" -->
-                                        &nbsp;<span class="short-desc" data-bind="text: '(' + tier9ShortDesc + ')', attr: { title: tier9LongDesc }"></span>
-                                        <!-- /ko -->
-                                    </p>
+                                    <div class="oj-sm-4 oj-flex-item">
+                                        <p class="serviceDetails text-center oj-sm-justify-content-center oj-sm-align-items-flex-end oj-flex">
+                                            <span class="uom-quantity bold oj-sm-12 oj-flex-item" data-bind="text: quantity"></span>
+                                            <span class="uom-measurement oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: uom"></span>
+
+                                        </p>
+                                    </div>
                                     <!-- /ko -->
                                 </div>
                                 <div class="oj-sm-align-self-flex-end oj-sm-12 oj-flex-item">
