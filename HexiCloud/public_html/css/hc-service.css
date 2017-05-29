@@ -282,7 +282,7 @@ and open the template in the editor.
 
 .provisioned-services h4 {
     color: #00758f;
-    z-index: 99999;
+    z-index: 1;
 }
 
 .provisioned-services .deep-red-button {
@@ -400,8 +400,7 @@ and open the template in the editor.
 
 .provisioned-services .service .body .uom-measurement {
     font-size: 12px;
-    color: #CCCCCC;
-    /*height: 19px;*/
+    color: #A8A7AD;
 }
 
 .provisioned-services .service .body .short-desc {

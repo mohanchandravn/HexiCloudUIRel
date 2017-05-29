@@ -16,6 +16,14 @@
       {
         "quantity": 450,
         "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
       }
     ]
   },
@@ -60,6 +68,50 @@
       {
         "quantity": 12,
         "uom": "TB"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      }
+    ]
+  },
+  {
+    "displayOrder": 5,
+    "platform": "IaaS",
+    "service": "Storage",
+    "serviceType": "NON METERED",
+    "details": [
+      {
+        "quantity": 12,
+        "uom": "TB"
+      }
+    ]
+  },
+  {
+    "displayOrder": 6,
+    "platform": "IaaS",
+    "service": "Storage",
+    "serviceType": "NON METERED",
+    "details": [
+      {
+        "quantity": 12,
+        "uom": "TB"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
       },
       {
         "quantity": 450,

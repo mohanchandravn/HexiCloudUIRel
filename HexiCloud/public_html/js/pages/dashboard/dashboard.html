@@ -8,7 +8,7 @@ and open the template in the editor.
         <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
         <div class="provisioned-services dashboard oj-flex">
             <div class="welcome-container oj-margin-lg-bottom oj-sm-12 oj-flex-item">
-                <span class="heading-type2 oj-sm-12 oj-flex-item">Welcome to your dashboard!</span>
+                <span class="heading-type2 color-black oj-sm-12 oj-flex-item">Welcome to your dashboard!</span>
                 <div class="welcome-message"> 
                     <span class="heading-type4 oj-sm-12 oj-flex-item">The dashboard page provides you with a snapshot of your provisioned services, relevant use cases and your progress within the How-to guides. Further information click within each section to directed to the relevant page.</span>
                 </div>
@@ -25,8 +25,11 @@ and open the template in the editor.
             
             <!-- ko ifnot: noServices() -->
             <div class="oj-sm-12 oj-flex-item">
-                <div class="content stage oj-flex">
-                    <span class="heading-type2 oj-sm-12 oj-flex-item">My Services</span>
+                <div class="oj-flex">
+                    <div class="oj-sm-12 oj-flex-item">
+                        <span class="heading-type2 color-black">My Services</span>
+                        <span data-bind="text: showViewAllButton() ? ' (4 of ' + serviceItems().length + ')' : ''"></span>
+                    </div>
                     <!-- <span class="heading-type4 oj-sm-12 oj-flex-item">Please see below an overview of your provisioned services. To display all your provisioned services click ‘View all’</span>
                     <hr> -->
                 </div>
@@ -35,7 +38,7 @@ and open the template in the editor.
                 <div class="oj-flex">
                     <!-- ko foreach: serviceItems -->
                     <div>
-                        <div class="service oj-flex" data-bind="css: $parent.getClass(service)">
+                        <div class="service oj-flex">
                             <div class="head oj-sm-12 oj-flex-item">
                                 <!--<div class="laas"><img src="css/img/laas-icon.png"><span style="color: white; font-weight:lighter" data-bind="text: platform"></span></div>-->
                                 <div class="oj-sm-align-items-flex-end oj-flex">
@@ -48,7 +51,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                             </div>
-                            <div class="body oj-sm-12 oj-flex-item" data-bind="css: 'row-count-' + $parent.detailsContentMaxHeight()">
+                            <div class="body oj-sm-12 oj-flex-item">
                                 <div class="oj-sm-justify-content-center oj-flex">
                                     <!-- ko foreach: details -->
                                     <div class="oj-sm-4 oj-flex-item">
@@ -60,9 +63,9 @@ and open the template in the editor.
                                     </div>
                                     <!-- /ko -->
                                 </div>
-                                <div class="oj-sm-align-self-flex-end oj-sm-12 oj-flex-item">
-                                    <div class="oj-sm-justify-content-center oj-flex">
-                                        <a class="view-more-button oj-sm-6 oj-flex-item" data-bind="click: $parent.openServiceDetailModal">View More</a>
+                                <div class="view-more-btn-container oj-sm-align-items-flex-end oj-sm-justify-content-center oj-flex">
+                                    <div class="oj-sm-6 oj-flex-item">
+                                        <span class="inverted-btn oj-sm-justify-content-center oj-flex" data-bind="click: $parent.openServiceDetailModal">View more</span>
                                     </div>
                                 </div>
                             </div>

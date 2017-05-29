@@ -61,52 +61,15 @@ and open the template in the editor.
     }
 }
 
-.view-more-button {
-    background-color: #F80000;
-    /* padding: 10px 30px; */
-    display: inline-block;
-    text-align: center;
-    height: 36px;
-    border-radius: 27px;
-    margin-top: 10px !important;
-    background-image: none !important;
-    color: #fff;
-    font-size: 18px;
-    line-height: 2.5rem;
-    cursor: pointer;
-    opacity: 0.6;
-    width: 100%;
-    /* padding: 0px 20px 0px 20px; */
-    /* z-index: 999; */
-
-}
-.view-more-button:hover {
-    text-decoration: none;
-    background-color: #C80000;
-    color: #fff;
-    opacity: 1;
-}
-
-.view-more-button:hover, 
-.view-more-button:focus,
-.view-more-button:active{
-    text-decoration: none;
-}
-
-.view-more-button:active {
-    color: #fff;
-    border-radius: 27px;
-}
-
 .dashboard-page {
     padding: 10px;
     background-color: #F1F2F2; 
 }
 
 .dashboard-page .use-cases-body-content .oj-masonrylayout-tile-1x1 {
-    width: 220px;
+    width: 280px;
     height: 240px;
-    margin: 15px;
+    margin: 20px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.15);
     transition: all 0.3s ease-in-out;
 }
@@ -116,7 +79,7 @@ and open the template in the editor.
 }
 
 .dashboard-page .oj-masonrylayout-tile-1x1 .use-case-image {
-    width: 220px;
+    width: 280px;
     height: 140px;
 }
 
@@ -127,6 +90,7 @@ and open the template in the editor.
 
 .dashboard-page .use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-content {
     height: 50px;
+    padding: 5px;
 }
 
 .dashboard-page .use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover {
@@ -138,6 +102,10 @@ and open the template in the editor.
     margin-bottom: 10px;
 }
 
+.dashboard-page .view-more-btn-container {
+    height: 40px;
+}    
+    
 .dashboard-page .inverted-btn {
     color: #F80000;
     font-size: 11px;
