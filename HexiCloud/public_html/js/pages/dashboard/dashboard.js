@@ -127,7 +127,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
             self.showViewLessButton(true);
         };
 
-        self.openServiceDetailModal = function (data, event) {
+        self.openServiceDetailDialog = function (data, event) {
             showPreloader();
             var serviceClicked = data.service;
             var serverType = data.service.toLowerCase();
@@ -150,8 +150,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
                     self.hasServiceBenefits(false);
                     self.selectedServiceBenefitsArray([]);
                 }
-                
-                $("#serviceDetailModal").ojDialog("open");
+                $("#serviceDetailDialog").ojDialog("open");
+                $("#serviceDetailDialog").ojDialog("option", "title", self.selectedService() + ' Service');
 
                 hidePreloader();
                 
@@ -163,10 +163,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
 
             service.getServiceDetails(serverType).then(successCbFn, FailCallBackFn);
             service.updateAudit({"stepCode" : getStateId(), "action" : "View More : " + serviceClicked});
-
-            self.handleOKClose = $("#okButton").click(function() {
-                $("#serviceDetailModal").ojDialog("close"); 
-            });
         };
 
         self.getUseCaseDetails = function (data, event) {
