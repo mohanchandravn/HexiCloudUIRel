@@ -250,16 +250,3 @@ and open the template in the editor.
     margin-top: 10px;
     position: relative
 }
-
-#guidedPathLearningPage .printer-icon {
-    height: 23px;
-    width: 110px;
-    background: url(img/printer-icon.png) no-repeat right center;
-    background-size: 18px;
-    padding: 5px 0px 5px 25px;
-    cursor: pointer;
-}
-
-#guidedPathLearningPage .print-label {
-    padding: 12px;
-}
