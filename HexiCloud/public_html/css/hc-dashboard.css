@@ -33,6 +33,7 @@ and open the template in the editor.
     border-left: 5px solid #F80000;
     background-color: #FFF;
     text-align: center;
+    padding: 20px;
 }
 
 .dashboard .welcome-message-container {
