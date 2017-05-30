@@ -188,8 +188,7 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
 
         self.getUserClmData = function (userId) {
             var defer = $.Deferred();
-            var serverURL = "js/pages/servicesMini/servicesMini.json";
-//            var serverURL = self.portalRestHost() + "/services/rest/getClmData/" + userId + "/";
+            var serverURL = self.portalRestHost() + "/services/rest/getClmData/" + userId + "/";
             $.ajax({
                 type: "GET",
                 url: serverURL,
