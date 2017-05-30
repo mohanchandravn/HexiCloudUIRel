@@ -8,9 +8,9 @@ and open the template in the editor.
         <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
         <div class="provisioned-services dashboard oj-flex">
             <div class="welcome-container oj-margin-lg-bottom oj-sm-12 oj-flex-item">
-                <span class="heading-type2 color-black oj-sm-12 oj-flex-item">Welcome to your dashboard!</span>
-                <div class="welcome-message"> 
-                    <span class="heading-type4 oj-sm-12 oj-flex-item">The dashboard page provides you with a snapshot of your provisioned services, relevant use cases and your progress within the How-to guides. Further information click within each section to directed to the relevant page.</span>
+                <span class="heading-type2 oj-sm-12 oj-flex-item dashboard-header">Welcome to your dashboard!</span>
+                <div class="welcome-message-container"> 
+                    <span class="heading-type4 oj-sm-12 oj-flex-item welcome-message">The dashboard page provides you with a snapshot of your provisioned services, relevant use cases and your progress within the How-to guides. Further information click within each section to directed to the relevant page.</span>
                 </div>
             </div>
             
@@ -27,7 +27,7 @@ and open the template in the editor.
             <div class="oj-sm-12 oj-flex-item">
                 <div class="oj-flex">
                     <div class="oj-sm-12 oj-flex-item">
-                        <span class="heading-type2 color-black">My Services</span>
+                        <span class="heading-type2 dashboard-header">My Services</span>
                         <span data-bind="text: showViewAllButton() ? ' (4 of ' + serviceItems().length + ')' : ''"></span>
                     </div>
                     <!-- <span class="heading-type4 oj-sm-12 oj-flex-item">Please see below an overview of your provisioned services. To display all your provisioned services click ‘View all’</span>
@@ -124,7 +124,7 @@ and open the template in the editor.
                 <!-- /ko -->
              </div>
             <!-- ko if: isSelectionPhaseCompleted() === true -->
-            <span class="heading-type2 color-black oj-sm-12 oj-flex-item">Tailored Use Cases</span>
+            <span class="heading-type2 oj-sm-12 oj-flex-item dashboard-header">Tailored Use Cases</span>
             <div class="use-cases-body-content oj-flex-item">
                 <div id="masonryUseCases" class="oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                     <!-- ko foreach: tailoredUseCases() -->

@@ -37,10 +37,15 @@ and open the template in the editor.
     text-align: center;
 }
 
-.dashboard .welcome-message {
-    width: 70%; 
+.dashboard .welcome-message-container {
+    width: 60%; 
     margin: auto; 
     margin-top: 20px;
+}
+
+.dashboard .welcome-message {
+    color: #948E85 !important;
+    font-size: 18px;
 }
 
 @media screen and (max-width: 1023px) {
@@ -147,4 +152,9 @@ and open the template in the editor.
     .dashboard-page .use-cases-content {
         padding: 20px;
     }
+}
+
+.dashboard-page .dashboard-header {
+    color: #303942 !important;
+    font-size: 36px;
 }
