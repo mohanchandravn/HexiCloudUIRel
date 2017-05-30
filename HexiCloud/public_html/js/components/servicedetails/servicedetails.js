@@ -7,8 +7,8 @@
 /**
  * servicedetails module
  */
-define(['text!./servicedetails.html', 'ojs/ojcore'
-], function (template) {
+define(['jquery', 'text!./servicedetails.html'
+], function ($, template) {
     
     /**
      * The view model for the main content view template
@@ -24,6 +24,11 @@ define(['text!./servicedetails.html', 'ojs/ojcore'
         self.benefitsTitle = params.benefitsTitle;
         self.pdfSrc = params.pdfSrc;
         self.selectedServiceBenefitsArray = params.selectedServiceBenefitsArray;
+               
+        self.handleOKClose = $("#okButton").click(function() {
+            $("#serviceDetailDialog").ojDialog("close");
+        });
+
     }
 
     return {viewModel: serviceDetailsContentViewModel, template: template};

@@ -123,7 +123,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         
         self.onClickOnCoreTechContent = function(data, event) {
             params.rootData.selectedUseCase = self.selectedUseCase();
-            params.rootData.selectedGuidedPathId = data.pathId;
+            params.rootData.selectedPathId = data.pathId;
             router.go('guidedPathDetails');
         };
         
@@ -132,13 +132,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             window.open('https://oracle.valuestoryapp.com/iaas/', '_blank');
         };
         */
-       
-        closeServiceDetailModal = function () {
-            $("#detailWindow").ojDialog("close");
-        };
-        
-        openServiceDetailModal = function (data, event) {
-            
+               
+        openServiceDetailDialog = function (data, event) {
             showPreloader();
             
             var selectedService = data.service.label;
@@ -162,7 +157,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     self.selectedServiceBenefitsArray([]);
                 }
                 
-                $("#serviceDetailModal").ojDialog("open");
+                $("#serviceDetailDialog").ojDialog("open");
+                $("#serviceDetailDialog").ojDialog("option", "title", self.selectedService() + ' Service');
 
                 hidePreloader();
             };
@@ -175,10 +171,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             
             var serviceType = data.service.serviceId.toLowerCase();
             service.getServiceDetails(serviceType).then(getServiceDetailsSuccessCbFn, getServiceDetailsFailCbFn);
-            
-            self.handleOKClose = $("#okButton").click(function() {
-                $("#serviceDetailModal").ojDialog("close"); 
-            });
         };
         
     }

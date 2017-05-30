@@ -4,9 +4,13 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div id="guidedPathDetailsPage" class="guidedPathDetails-page oj-flex">
+
     <div class="guided-path-details-container oj-sm-12 oj-flex-item">
+        
+        <breadcrumb params="breadcrumbs: breadcrumbs(), parentParams: params"></breadcrumb>  
+
         <!-- ko if: areGuidedPathsLoaded -->
-        <div class="oj-margin-bottom oj-flex">
+        <div class="oj-flex oj-margin-bottom oj-margin-top">
             <div class="oj-lg-4 oj-flex-item">
                 <img class="guided-path-details-image" data-bind="attr: { src : 'css/img/usecases/dockers.jpg' }" alt="Image" />
             </div>

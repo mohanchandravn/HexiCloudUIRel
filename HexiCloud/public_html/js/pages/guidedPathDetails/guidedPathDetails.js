@@ -18,14 +18,23 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var self = this;
         var router = params.ojRouter.parentRouter;
         
-        self.selectedGuidedPathId = ko.observable(params.rootData.selectedGuidedPathId);
+        self.params = params;
+
+        self.selectedPathId = ko.observable(params.rootData.selectedPathId);
         self.selectedGuidedPath = ko.observableArray([]);
         self.areGuidedPathsLoaded = ko.observable(false);
         
         self.prevSectionIdSelected = ko.observable('');
         
+        self.breadcrumbs = ko.observableArray([{id: 'useCaseDiscovery', label: params.rootData.selectedUseCase.title}]);
+                                           
         var getGuidedPathDetailsSuccessFn = function(data, success) {
             self.selectedGuidedPath(data.guidedPathDetail);
+            
+            var breadcrumbs = self.breadcrumbs();
+            breadcrumbs.push({id: 'guidedPathDetails', label: data.guidedPathDetail.label});
+            self.breadcrumbs(breadcrumbs);
+            
             self.areGuidedPathsLoaded(true);
             hidePreloader();
         };
@@ -62,7 +71,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.openGPSectionSubContent = function(parent, data, event) {
             parent.$data.selectedSectionDocId = data.sectionDocId;
             params.rootData.selectedGuidedPathSection = parent.$data;
-            params.rootData.selectedPathId = self.selectedGuidedPathId();
+            params.rootData.selectedPathId = self.selectedPathId();
             params.rootData.selectedPathLabel = self.selectedGuidedPath().label;
             
             if (params.rootData.selectedGuidedPathSection.sectionDocs.length === 1) {
@@ -78,7 +87,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                        params.rootData.lastSubSectionToRead = true;
                    }   
                 }
-               
             }
             
             router.go('guidedPathLearning');
@@ -93,7 +101,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         
         self.handleAttached = function() {
             showPreloader();
-            service.getGuidedPathDetails(self.selectedGuidedPathId()).then(getGuidedPathDetailsSuccessFn, FailCallBackFn);
+            service.getGuidedPathDetails(self.selectedPathId()).then(getGuidedPathDetailsSuccessFn, FailCallBackFn);
         };
     }
     
