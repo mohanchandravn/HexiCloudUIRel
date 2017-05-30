@@ -27,7 +27,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.coreGuidedPaths = ko.observableArray([]);
         self.areComplementaryGuidedPathsLoaded = ko.observable(false);
         self.complementaryGuidedPaths = ko.observableArray([]);
-        self.urlForTCACalculator = ko.observable('');
+        self.urlForTCOCalculator = ko.observable('');
         
         self.hasServiceBenefits = ko.observable(false);
         self.selectedService = ko.observable();
@@ -75,10 +75,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             service.getComplementaryGuidedPaths(self.selectedUseCase().id).then(getComplementaryGuidedPathsSuccessFn, getComplementaryGuidedPathsFailCbFn);
         };
         
-        self.getTCACalculatorData = function(data, event) {
+        self.getTCOCalculatorData = function(data, event) {
             showPreloader();
             self.areCoreGuidedPathsLoaded(false);
-            self.urlForTCACalculator("https://oracle.valuestoryapp.com/iaas/");
+            self.urlForTCOCalculator("https://oracle.valuestoryapp.com/iaas/");
             hidePreloader();
         };
         
@@ -94,7 +94,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             } else if (self.selectedTab() === 1) {
                 self.getComplementaryKnowledgeGuidedPaths();
             } else if (self.selectedTab() === 2) {
-                self.getTCACalculatorData();
+                self.getTCOCalculatorData();
             } else if (self.selectedTab() === 3) {
                 self.getSuccessStoriesData();
             }
@@ -128,7 +128,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
         
         /*
-        self.onClickTabTCACalculator = function() {
+        self.onClickTabTCOCalculator = function() {
             window.open('https://oracle.valuestoryapp.com/iaas/', '_blank');
         };
         */
