@@ -26,9 +26,9 @@ and open the template in the editor.
             <!-- ko ifnot: noServices() -->
             <div class="oj-sm-12 oj-flex-item">
                 <div class="oj-flex">
-                    <div class="oj-sm-12 oj-flex-item">
+                    <div class="oj-sm-12 oj-flex-item oj-margin-lg-top">
                         <span class="heading-type2 dashboard-header">My Services</span>
-                        <span data-bind="css: isScreenLGorXL() ? 'oj-padding-lg-horizontal' : 'oj-padding-horizontal', text: ' (' + serviceItems().length + ' of ' + allServiceItems().length + ')'"></span>
+                        <span class="services-count" data-bind="css: isScreenLGorXL() ? 'oj-padding-lg-horizontal' : 'oj-padding-horizontal', text: ' (' + serviceItems().length + ' of ' + allServiceItems().length + ')'"></span>
                         <span class="inverted-btn no-margin" data-bind="visible: showViewAllButton, click: openAllServices">View all</span>
                         <span class="inverted-btn no-margin" data-bind="visible: showViewLessButton, click: openMinimalServices">Show less</span>
                     </div>
@@ -36,7 +36,7 @@ and open the template in the editor.
                     <hr> -->
                 </div>
             </div>
-            <div class="oj-sm-12 oj-flex-item">
+            <div class="oj-sm-12 oj-flex-item oj-margin-lg-bottom">
                 <div class="oj-flex">
                     <!-- ko foreach: serviceItems -->
                     <div>
@@ -80,7 +80,7 @@ and open the template in the editor.
 
         <div class="dashboard oj-flex">
             <!-- Use case selection -->
-            <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item" style="border-left: 5px solid #F80000; background-color: #FFF;">
+            <div class="use-case-items oj-margin-lg-bottom oj-sm-12 oj-flex-item margin-top-10px" style="border-left: 5px solid #F80000; background-color: #FFF;">
                 <!-- ko if: isSelectionPhaseCompleted() === true -->
                 <div class="oj-sm-align-items-center oj-flex" style="height: 100px; margin-left: 40px;">
                     <span class="heading-type4">
@@ -117,7 +117,7 @@ and open the template in the editor.
                 <!-- /ko -->
              </div>
             <!-- ko if: isSelectionPhaseCompleted() === true -->
-            <span class="heading-type2 oj-sm-12 oj-flex-item dashboard-header">Tailored Use Cases</span>
+            <span class="heading-type2 oj-sm-12 oj-flex-item dashboard-header no-margin">Tailored Use Cases</span>
             <div class="use-cases-body-content oj-flex-item">
                 <div id="masonryUseCases" class="oj-sm-12 oj-flex-item" data-bind="ojComponent: {component: 'ojMasonryLayout'}">
                     <!-- ko foreach: tailoredUseCases() -->
