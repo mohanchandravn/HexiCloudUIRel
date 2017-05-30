@@ -78,7 +78,7 @@ header-content {
 }
 
 .color-blue {
-    color: #00758f;
+    color: #00758f !important;
 }
 
 .normal-text {
@@ -89,15 +89,15 @@ header-content {
 }
 
 .text-center{
-    text-align: center;
+    text-align: center !important;
 }
 
 .bold {
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .no-margin {
-    margin: 0px;
+    margin: 0px !important;
 }
 
 .display-none {
@@ -105,7 +105,7 @@ header-content {
 }
 
 .visibility-hidden {
-    visibility: hidden;
+    visibility: hidden !important;
 }
 
 .color-black {
@@ -113,7 +113,7 @@ header-content {
 }
 
 .color-red {
-    color: #F80000;
+    color: #F80000 !important;
 }
 
 navigationbarleft {
@@ -140,7 +140,7 @@ usecasedetails {
 }
 
 .opacity-half {
-    opacity: 0.5;
+    opacity: 0.5 !important;
 }
 
 .pointer-events-none {

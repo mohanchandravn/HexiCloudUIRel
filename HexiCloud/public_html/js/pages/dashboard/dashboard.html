@@ -7,7 +7,7 @@ and open the template in the editor.
     <div class="oj-offcanvas-inner-wrapper" style="min-height: calc(100vh - 80px);">
         <usecasedetails id="useCaseDrawerRight" params="areUseCaseDetailsFetched: areUseCaseDetailsFetched, useCaseId: selectedUseCaseDetails().id"></usecasedetails>
         <div class="provisioned-services dashboard oj-flex">
-            <div class="welcome-container oj-margin-lg-bottom oj-sm-12 oj-flex-item">
+            <div class="welcome-container oj-margin-lg-bottom oj-padding-lg-vertical oj-sm-12 oj-flex-item">
                 <span class="heading-type2 color-black oj-sm-12 oj-flex-item">Welcome to your dashboard!</span>
                 <div class="welcome-message"> 
                     <span class="heading-type4 oj-sm-12 oj-flex-item">The dashboard page provides you with a snapshot of your provisioned services, relevant use cases and your progress within the How-to guides. Further information click within each section to directed to the relevant page.</span>
@@ -28,7 +28,9 @@ and open the template in the editor.
                 <div class="oj-flex">
                     <div class="oj-sm-12 oj-flex-item">
                         <span class="heading-type2 color-black">My Services</span>
-                        <span data-bind="text: showViewAllButton() ? ' (4 of ' + serviceItems().length + ')' : ''"></span>
+                        <span data-bind="css: isScreenLGorXL() ? 'oj-padding-lg-horizontal' : 'oj-padding-horizontal', text: ' (' + serviceItems().length + ' of ' + allServiceItems().length + ')'"></span>
+                        <span class="inverted-btn no-margin" data-bind="visible: showViewAllButton, click: openAllServices">View all</span>
+                        <span class="inverted-btn no-margin" data-bind="visible: showViewLessButton, click: openMinimalServices">Show less</span>
                     </div>
                     <!-- <span class="heading-type4 oj-sm-12 oj-flex-item">Please see below an overview of your provisioned services. To display all your provisioned services click ‘View all’</span>
                     <hr> -->
@@ -58,7 +60,6 @@ and open the template in the editor.
                                         <p class="serviceDetails text-center oj-sm-justify-content-center oj-sm-align-items-flex-end oj-flex">
                                             <span class="uom-quantity bold oj-sm-12 oj-flex-item" data-bind="text: quantity"></span>
                                             <span class="uom-measurement oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: uom"></span>
-
                                         </p>
                                     </div>
                                     <!-- /ko -->
@@ -73,16 +74,8 @@ and open the template in the editor.
                     </div>
                     <!-- /ko -->
                 </div>    
-            </div>
-            <div class="oj-flex-item" data-bind="visible: showControlsButton">
-                <div class="oj-flex oj-sm-justify-content-flex-end" data-bind="visible: showViewAllButton">
-                    <a class="deep-red-button open-all-services-btn" data-bind="click: openAllServices">View All »</a>    
-                </div>
-                <div class="oj-flex oj-sm-justify-content-flex-end" data-bind="visible: showViewLessButton">
-                    <a class="deep-red-button open-all-services-btn" data-bind="click: openMinimalServices">Show less »</a>    
-                </div>
-            </div>
-            <!-- /ko -->
+            </div> 
+           <!-- /ko -->
         </div>
 
         <div class="dashboard oj-flex">

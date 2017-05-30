@@ -38,7 +38,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
         self.selectedServiceBenefitsArray = ko.observableArray([]);
         self.noServices = ko.observable(false);
         self.hasServiceBenefits = ko.observable(false);
-        self.showControlsButton = ko.observable(false);
         self.showViewAllButton = ko.observable(false);
         self.showViewLessButton = ko.observable(false);
         
@@ -74,7 +73,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'config/sess
                         array.push(serviceItem);
                     }
                     if (idx > 3) {
-                        self.showControlsButton(true);
                         self.showViewAllButton(true);
                     }
                 });

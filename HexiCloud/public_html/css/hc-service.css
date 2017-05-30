@@ -146,8 +146,8 @@ and open the template in the editor.
 
 .provisioned-services .service {
     position: relative;
-    width: 310px;
-    max-width: 310px;
+    width: 300px;
+    max-width: 300px;
     /*overflow: auto;*/
     background-color: #fff;
     margin: 20px 20px 0px 0px;
@@ -282,7 +282,6 @@ and open the template in the editor.
 
 .provisioned-services h4 {
     color: #00758f;
-    z-index: 1;
 }
 
 .provisioned-services .deep-red-button {
