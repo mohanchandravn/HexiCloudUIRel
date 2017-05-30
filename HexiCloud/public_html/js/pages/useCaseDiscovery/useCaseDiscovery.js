@@ -19,10 +19,16 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         var self = this;
         var router = params.ojRouter.parentRouter;
         
+        self.selectedTab = ko.observable();
         self.selectedUseCase = ko.computed( function() {
+            if (selectedUseCase().tabId) {
+                self.selectedTab(selectedUseCase().tabId);
+                delete selectedUseCase().tabId;
+            } else {
+                self.selectedTab('core');
+            }
             return selectedUseCase();
         });
-        self.selectedTab = ko.observable(0);
         self.coreGuidedPaths = ko.observableArray([]);
         self.complementaryGuidedPaths = ko.observableArray([]);
         self.urlForTCOCalculator = ko.observable('');
@@ -87,14 +93,17 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         };
 
         self.autoCaptureData = ko.computed(function() {
-            if (self.selectedTab() === 0) {
-                self.getCoreGuidedPaths();
-            } else if (self.selectedTab() === 1) {
-                self.getComplementaryKnowledgeGuidedPaths();
-            } else if (self.selectedTab() === 2) {
-                self.getTCOCalculatorData();
-            } else if (self.selectedTab() === 3) {
-                self.getSuccessStoriesData();
+            if (self.selectedUseCase() !== null) {
+                if (self.selectedTab() === "core") {
+                    self.getCoreGuidedPaths();
+                } else if (self.selectedTab() === "complementary") {
+                    self.getComplementaryKnowledgeGuidedPaths();
+                } else if (self.selectedTab() === "tco") {
+                    self.getTCOCalculatorData();
+                } else if (self.selectedTab() === "success") {
+                    self.getSuccessStoriesData();
+                }
+                $( "#tabs" ).ojTabs( "option", "selected", self.selectedTab() );
             }
         });
         
@@ -169,6 +178,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             
             var serviceType = data.service.serviceId.toLowerCase();
             service.getServiceDetails(serviceType).then(getServiceDetailsSuccessCbFn, getServiceDetailsFailCbFn);
+        };
+        
+        self.handleBindingsApplied = function() {
+            $( "#tabs" ).ojTabs( "option", "selected", self.selectedTab() );
         };
         
     }

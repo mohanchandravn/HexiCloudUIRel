@@ -403,7 +403,8 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     $("#tech_support").show();
                 };
 
-                self.getSelectedUseCaseDetails = function (parent) {
+                self.getSelectedUseCaseDetails = function (parent, data, event) {
+                    parent.tabId = data.code;
                     self.selectedUseCase(parent);
                     self.toggleLeft();
                     router.go('useCaseDiscovery');
