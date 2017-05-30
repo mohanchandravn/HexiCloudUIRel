@@ -39,7 +39,7 @@ and open the template in the editor.
 
                 <!-- tab contents -->
                 <div id="tabCoreTechnicalKnowledge">
-                    <!-- ko if: areCoreGuidedPathsLoaded() -->
+                    <!-- ko if: coreGuidedPaths().length > 0 -->
                     <!-- ko foreach: coreGuidedPaths -->
                     <div class="core-tech-content oj-sm-align-items-center oj-flex">
                         <img class="core-tech-img" data-bind="attr: { src: 'css/img/usecases/dockers.jpg' }" alt="" />
@@ -82,7 +82,7 @@ and open the template in the editor.
                 </div>
                 
                 <div id="tabComplementaryKnowledge">
-                    <!-- ko if: areComplementaryGuidedPathsLoaded() -->
+                    <!-- ko if: complementaryGuidedPaths().length > 0 -->
                     <!-- ko foreach: complementaryGuidedPaths -->
                     <div class="core-tech-content oj-sm-align-items-center oj-flex">
                         <img class="core-tech-img" data-bind="attr: { src: 'css/img/usecases/dockers.jpg' }" alt="" />
