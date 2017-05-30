@@ -23,9 +23,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             return selectedUseCase();
         });
         self.selectedTab = ko.observable(0);
-        self.areCoreGuidedPathsLoaded = ko.observable(false);
         self.coreGuidedPaths = ko.observableArray([]);
-        self.areComplementaryGuidedPathsLoaded = ko.observable(false);
         self.complementaryGuidedPaths = ko.observableArray([]);
         self.urlForTCOCalculator = ko.observable('');
         
@@ -41,8 +39,10 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             showPreloader();
             
             var getCoreGuidedPathsDataSuccessFn = function (data, status) {
-                self.coreGuidedPaths(data.guidedPaths);
-                self.areCoreGuidedPathsLoaded(true);
+                self.coreGuidedPaths([]);
+                if (data) {
+                    self.coreGuidedPaths(data.guidedPaths);
+                }
                 hidePreloader();
             };
             
@@ -59,9 +59,9 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             showPreloader();
             
             var getComplementaryGuidedPathsSuccessFn = function (data, status) {
+                self.complementaryGuidedPaths([]);
                 if (data){
                     self.complementaryGuidedPaths(data.guidedPaths);
-                    self.areComplementaryGuidedPathsLoaded(true);
                 }                
                 hidePreloader();
             };
@@ -77,14 +77,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         
         self.getTCOCalculatorData = function(data, event) {
             showPreloader();
-            self.areCoreGuidedPathsLoaded(false);
             self.urlForTCOCalculator("https://oracle.valuestoryapp.com/iaas/");
             hidePreloader();
         };
         
         self.getSuccessStoriesData = function(data, event) {
             showPreloader();
-            self.areCoreGuidedPathsLoaded(false);
             hidePreloader();
         };
 
