@@ -49,7 +49,7 @@ and open the template in the editor.
                         <div id="zoomOut" class="zoomOutEnabled oj-sm-align-self-flex-top oj-flex-bar-top" data-bind="click: zoomOut()"></div>
                     </div>
                     <div id="docContainer">
-                        <canvas id="the-canvas"></canvas>
+                        <canvas id="pdfCanvas"></canvas>
                     </div>
                 </div>
                 <div id="nextArrowCont" class="nextHidden hide-on-doc-load display-none">
@@ -67,10 +67,16 @@ and open the template in the editor.
                             <i class="material-icons left">file_download</i>
                         </div>
                         <div class="oj-flex-item">
-                            <span class="margin-left-10px">Download document</span>
+                            <span class="margin-left-6px">Download document</span>
                         </div>
                     </div>
                 </a>
+                <!--
+                <div class="oj-flex c-pointer download-link" data-bind="click: printCanvas"> 
+                    <div class="printer-icon"></div>
+                    <span class="print-label" data-bind="text: 'Print'"></span>
+                </div>
+                -->
             </div>
             <!-- /ko -->
         </div>

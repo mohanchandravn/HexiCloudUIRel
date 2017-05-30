@@ -81,7 +81,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
         function getPDFDoc(docURL, curPageNumber, status) {
             
-            self.canvas(document.getElementById('the-canvas')), self.ctx(self.canvas().getContext('2d'));
+            self.canvas(document.getElementById('pdfCanvas')), self.ctx(self.canvas().getContext('2d'));
             if (self.pageNum() == 1) {
                 $('#prev').removeClass('prevEnabled');
                 $('#prev').addClass('prevDisabled');
@@ -377,6 +377,24 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 }
             }
         };
+        
+        self.printCanvas = function() {  
+            var dataUrl = document.getElementById('pdfCanvas').toDataURL(); //attempt to save base64 string to server using this var  
+            var windowContent = '<!DOCTYPE html>';
+            windowContent += '<html>'
+            windowContent += '<head><title>Print canvas</title></head>';
+            windowContent += '<body>'
+            windowContent += '<img src="' + dataUrl + '">';
+            windowContent += '</body>';
+            windowContent += '</html>';
+            var printWin = window.open('','','width=750,height=600');
+            printWin.document.open();
+            printWin.document.write(windowContent);
+            printWin.document.close();
+            printWin.focus();
+            printWin.print();
+            printWin.close();
+        }
 
         self.handleAttached = function () {
             showPreloader();
