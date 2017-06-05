@@ -220,11 +220,11 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
 
         self.addOtherUseCase = function () {
             self.otherUserCaseCount(self.otherUserCaseCount() + 1);
-//            self.otherUseCaseSummary = ko.observable('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.');
+//            self.otherUseCaseSummary = ko.observable('');
 //        self.otherUseCaseServicesUsed = ko.observableArray([]);
 //        self.otherUseCaseBenefits = ko.observableArray(["   "]);
             self.otherUseCases.push({
-                useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
+                useCaseSummary: '',
                 useCaseServicesUsed: [],
                 useCaseBenefits: '',
                 otherUserCaseCount: self.otherUserCaseCount()
@@ -321,7 +321,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     self.otherUserCaseCount(self.otherUserCaseCount() + 1);
                     self.otherUseCases([]);
                     self.otherUseCases([{
-                            useCaseSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet eros a velit laoreet tristique accumsan sed libero.',
+                            useCaseSummary: '',
                             useCaseServicesUsed: [],
                             useCaseBenefits: '',
                             otherUserCaseCount: self.otherUserCaseCount()

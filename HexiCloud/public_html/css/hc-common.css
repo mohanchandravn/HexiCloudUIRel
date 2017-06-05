@@ -78,7 +78,7 @@ header-content {
 }
 
 .color-blue {
-    color: #00758f;
+    color: #00758f !important;
 }
 
 .normal-text {
@@ -89,15 +89,15 @@ header-content {
 }
 
 .text-center{
-    text-align: center;
+    text-align: center !important;
 }
 
 .bold {
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .no-margin {
-    margin: 0px;
+    margin: 0px !important;
 }
 
 .display-none {
@@ -105,16 +105,15 @@ header-content {
 }
 
 .visibility-hidden {
-    visibility: hidden;
+    visibility: hidden !important;
 }
 
 .color-red {
-    color: #F80000;
+    color: #F80000 !important;
 }
 
 navigationbarleft {
     width: 320px;
-    max-width: 320px;
     top: 0;
 }
 
@@ -137,7 +136,7 @@ usecasedetails {
 }
 
 .opacity-half {
-    opacity: 0.5;
+    opacity: 0.5 !important;
 }
 
 .pointer-events-none {
@@ -261,6 +260,10 @@ textarea.whitePlaceHolder::-moz-placeholder {  /* Firefox 19+ */
 textarea.whitePlaceHolder:-ms-input-placeholder {  
     color: white !important;
     font-style: normal !important;
+}
+
+.background-color-white {
+    background-color: white;
 }
 
 .input-color-white {
@@ -534,7 +537,7 @@ login-page video::-webkit-media-controls-start-playback-button {
 }
 
 .c-pointer {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .need-help {
@@ -542,4 +545,16 @@ login-page video::-webkit-media-controls-start-playback-button {
     bottom: 0;
     right: 20px;
     cursor: pointer;
+}
+
+.margin-bottom-7px {
+    margin-bottom: 7px;
+}
+
+.margin-left-6px {
+    margin-left: 6px
+}
+
+.margin-top-10px {
+    margin-top: 10px;
 }

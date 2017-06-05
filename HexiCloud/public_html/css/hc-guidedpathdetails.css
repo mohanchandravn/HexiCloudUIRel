@@ -1,0 +1,134 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 15, 2017, 6:24:33 PM
+    Author     : nyasarap
+*/
+
+.guidedPathDetails-page {
+    padding: 25px 25px 50px 25px;
+    min-height: 100%;
+    background: #F1F2F2;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .guided-path-details-image {
+    width: 100%;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .use-case-title-and-desc {
+    background: #FFFFFF;
+    padding: 30px 15px 30px 30px;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .use-case-title {
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 28px;
+    color: #000000;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #F80000;
+    padding-bottom: 7px;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .use-case-description {
+    font-size: 12px;
+    color: #777;
+    line-height: 20px;
+    margin-top: 5px;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .core-tech-title {
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .core-tech-progress-bar {
+    width: 200px;
+    background: #DDDDDD;
+    height: 10px;
+    margin-top: 2px;
+    border: none;
+    border-radius: 0px;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .core-tech-progress-red .oj-progressbar-value {
+    background: #F80000;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .core-tech-progress-orange .oj-progressbar-value {
+    background: #FC9F15;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .core-tech-progress-green .oj-progressbar-value {
+    background: #77CA47;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .core-tech-chapter-text {
+    margin-left: 10px;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .guided-path-section-content {
+    min-height: 65px;
+    font-size: 12px;
+    padding: 10px 20px 10px 10px;
+    margin-top: 8px;
+    background: #FFFFFF;
+    border-left: 6px solid #F80000;
+    cursor: pointer;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .guided-path-section-content .section-description {
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .tick-icon {
+    width: 25px;
+    height: 25px;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .guided-path-section-sub-content {
+    min-height: 65px;
+    font-size: 20px;
+    padding: 10px 20px 10px 40px;
+    margin-bottom: 1px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+#guidedPathDetailsPage .guided-path-details-container .guided-path-section-sub-content .content-time-to-complete {
+    font-size: 12px;
+    color: #777;
+}
+
+.full-width-height {
+    width: 100%;
+    height: 100%;
+}
+
+.full-width-height-90 {
+    width : 100%;
+    height : 90%;
+}
+
+.full-width-height-10 {
+    width : 100%;
+    height : 20%;
+}
+
+.section-selected {
+    background: #DDDDDD !important;
+}
+
+.guided-path-section-content:hover {
+    background-color: #DDDDDD !important;
+}
+
+.guided-path-section-sub-content:hover {
+    background-color: #DDDDDD !important;
+}

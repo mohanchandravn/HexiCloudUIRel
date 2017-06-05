@@ -12,6 +12,18 @@
       {
         "quantity": 500,
         "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
       }
     ]
   },
@@ -28,6 +40,10 @@
       {
         "quantity": 10,
         "uom": "OCPU"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
       }
     ]
   },
@@ -38,13 +54,37 @@
     "serviceType": "METERED",
     "details": [
       {
-        "quantity": 750,
-        "uom": "GB/Month"
+        "quantity": 2,
+        "uom": "OCPU"
       }
     ]
   },
   {
     "displayOrder": 4,
+    "platform": "IaaS",
+    "service": "Storage",
+    "serviceType": "NON METERED",
+    "details": [
+      {
+        "quantity": 12,
+        "uom": "TB"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      }
+    ]
+  },
+  {
+    "displayOrder": 5,
     "platform": "IaaS",
     "service": "Storage",
     "serviceType": "NON METERED",
@@ -58,24 +98,24 @@
   {
     "displayOrder": 6,
     "platform": "IaaS",
-    "service": "Network",
+    "service": "Storage",
     "serviceType": "NON METERED",
     "details": [
       {
-        "quantity": 1,
-        "uom": "VPN"
-      }
-    ]
-  },
-  {
-    "displayOrder": 8,
-    "platform": "IaaS",
-    "service": "Container",
-    "serviceType": "NON METERED",
-    "details": [
+        "quantity": 12,
+        "uom": "TB"
+      },
       {
-        "quantity": 10,
-        "uom": "OCPU"
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
+      },
+      {
+        "quantity": 450,
+        "uom": "GB/Month"
       }
     ]
   }

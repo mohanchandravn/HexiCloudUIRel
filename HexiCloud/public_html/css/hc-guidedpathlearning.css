@@ -1,0 +1,252 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 17, 2017, 10:23:03 AM
+    Author     : nyasarap
+*/
+
+.guidedPathLearning-page {
+    min-height: 100%;
+    padding: 10px;
+    background-color: #F1F2F2;
+}
+
+.guidedPathLearning-page .guided-path-learning-container .guided-path-section-content {
+    min-height: 65px;
+    font-size: 12px;
+    padding: 10px 20px 10px 10px;
+    margin-top: 8px;
+    background: #FFFFFF;
+    border-left: 6px solid #F80000;
+}
+
+.guidedPathLearning-page .guided-path-learning-container .guided-path-section-content .section-description {
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.guidedPathLearning-page .guided-path-learning-container .guided-path-section-details .sub-section-title {
+    font-size: 20px;
+}
+
+.guidedPathLearning-page .guided-path-learning-container .guided-path-section-details .sub-section-description {
+    font-size: 12px;
+    color: #777;
+    line-height: 20px;
+}
+
+.guidedPathLearning-page .guided-path-learning-container .guided-path-section-details .guided-path-video-tag {
+    width: 100%;
+    height: 350px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .guidedPathLearning-page {
+        padding: 30px;
+    }
+}
+
+.prevEnabled {
+    background: url(img/guidedpaths/previous-enabled.svg) no-repeat center;
+    background-size: 60px;
+    width: 75px;
+    height: 130px;
+    margin: 200px 25px 0px 0px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.prevEnabled:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.prevDisabled {
+    background: url(img/guidedpaths/previous-disabled.svg) no-repeat center;
+    background-size: 60px;
+    width: 75px;
+    height: 130px;
+    margin: 200px 25px 0px 0px;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+.nextHidden {
+    display: none;
+}
+
+.doc-button {
+   margin: 252px 0px 0px 0px; 
+}
+
+
+#guidedPathLearningPage .pdf-next-btn {
+    height: 30px;
+    width: 140px;
+    font-size: 18px;
+    color: #FFF;
+    background: #F80000 url(img/icon-24.svg) no-repeat right center;
+    padding: 5px 32px 5px 28px;
+    border-radius: 27px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#guidedPathLearningPage .pdf-next-btn:hover {
+    transform: scale(1.2, 1.2);
+}
+
+#guidedPathLearningPage .video-next-btn {
+    height: 23px;
+    width: 110px;
+    font-size: 18px;
+    color: #FFF;
+    background: #F80000 url(img/icon-24.svg) no-repeat right center;
+    padding: 5px 0px 5px 25px;
+    border-radius: 27px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#guidedPathLearningPage .video-next-btn:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.nextEnabled {
+    background: url(img/guidedpaths/next-enabled.svg) no-repeat center;
+    background-size: 60px;
+    width: 75px;
+    height: 130px;
+    margin: 200px 0px 0px 0px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.nextEnabled:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.nextDisabled {
+    background: url(img/guidedpaths/next-disabled.svg) no-repeat center;
+    background-size: 60px;
+    width: 75px;
+    height: 130px;
+    margin: 200px 0px 0px 0px;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.zoomInEnabled {
+    background: url(img/guidedpaths/zoom-in.png) no-repeat center;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.zoomInEnabled:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.zoomInDisabled {
+    background: url(img/guidedpaths/zoom-in.png) no-repeat center;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: 25px;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.zoomOutEnabled {
+    background: url(img/guidedpaths/zoom-out.png) no-repeat center;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.zoomOutEnabled:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.zoomOutDisabled {
+    background: url(img/guidedpaths/zoom-out.png) no-repeat center;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.pdf-section {
+    width: 100%;
+    max-width: 100%;
+}
+
+.page-number-container {
+    margin-top: 7px;
+}
+
+.page-num {
+    padding: 0px 3px 0px 3px;
+}
+
+.breadcrumb-container {
+    margin-bottom: 5px;
+}
+
+.breadcrumb-font {
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.breadcrumb-font:visited {
+    color: #333;
+}
+
+.breadcrumb-font-current {
+    font-weight: bold;
+    color: #F80000;
+}
+
+.breadcrumb-separator {
+    padding: 0px 3px 0px 3px;
+}
+
+.download-link {
+    color: grey;
+    text-decoration: none;
+}
+
+.download-link:hover {
+    text-decoration: none;
+}
+.download-link:active, .download-link:visited {
+    color:grey;
+}
+
+.padding-top-40 {
+    padding-top: 40px;
+}
+
+.download-icon {
+    text-align: end;
+}
+
+.display-none {
+    display: none;
+}
+
+#docContainer {
+    overflow: auto; 
+    margin-top: 10px;
+    position: relative
+}

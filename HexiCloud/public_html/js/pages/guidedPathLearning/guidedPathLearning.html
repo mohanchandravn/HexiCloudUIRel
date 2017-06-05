@@ -1,0 +1,83 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div id="guidedPathLearningPage" class="guidedPathLearning-page oj-flex">
+
+    <breadcrumb params="breadcrumbs: breadcrumbs, parentParams: params"></breadcrumb>  
+
+    <!-- ko if: areGuidedPathSectionsLoaded -->
+    <div class="guided-path-learning-container oj-sm-12 oj-flex-item">
+        <div class="oj-flex">
+            <div class="oj-sm-12 oj-flex-item" data-bind="">
+                <div class="guided-path-section-content oj-sm-align-items-flex-end oj-flex">
+                    <div class="oj-sm-11 oj-flex-item">
+                        <span class="bold oj-flex" data-bind="text: selectedGuidedPathSection().sectionTitle"></span>
+                        <span class="section-description oj-flex" data-bind="text: selectedGuidedPathSubSection().docName"></span>
+                    </div>
+                    <div class="oj-sm-1 oj-flex-item">
+                        <div class="oj-sm-justify-content-flex-end oj-sm-align-items-flex-end oj-flex">
+                            <span class="content-time-to-complete oj-sm-justify-content-flex-end oj-flex" data-bind="text: getTimeToCompleteByDocType(selectedGuidedPathSubSection().docType, selectedGuidedPathSubSection().timeToComplete)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="background-color-white oj-padding-lg oj-margin-lg-top oj-sm-justify-content-center oj-flex">
+            <!-- ko if: selectedGuidedPathSubSection().docType === 'VIDEO' -->
+            <div class="guided-path-section-details oj-sm-12 oj-lg-6 oj-flex-item">
+                <div class="oj-sm-justify-content-center oj-flex">
+                    <video class="guided-path-video-tag" preload="auto" controls poster="css/img/video_overlay.png">
+                        <source data-bind="attr: {src: selectedGuidedPathSubSection().publicLink }">
+                    </video>
+                    <!--<span class="sub-section-title oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docName"></span>-->
+                    <span class="sub-section-description oj-margin-top oj-sm-12 oj-flex-item" data-bind="text: selectedGuidedPathSubSection().docDescription"></span>
+
+                    <span class="oj-sm-align-self-flex-top oj-flex-bar-top video-next-btn" data-bind="click: completeSubSection, text: nextButtonLabel()"></span>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: selectedGuidedPathSubSection().docType === 'PDF' -->
+            <div class="guided-path-section-details pdf-section oj-sm-12 oj-lg-6 oj-flex-bar">
+                <div id="prev" class="oj-sm-align-self-flex-start oj-flex-bar-start prevDisabled hide-on-doc-load display-none" data-bind="click: onPrevPage()"></div>
+                <div id="pdfEditorContainer" class="oj-flex">
+                    <div class="oj-flex-bar hide-on-doc-load display-none">
+                        <span class="oj-sm-align-self-flex-start oj-flex-bar-start page-number-container"> Page <span id="page_num" class="page-num"></span> of <span id="page_count" class="page-num"></span></span>
+                        <div id="zoomIn" class="zoomInEnabled" data-bind="click: zoomIn()"></div>
+                        <div id="zoomOut" class="zoomOutEnabled oj-sm-align-self-flex-top oj-flex-bar-top" data-bind="click: zoomOut()"></div>
+                    </div>
+                    <div id="docContainer">
+                        <canvas id="pdfCanvas"></canvas>
+                    </div>
+                </div>
+                <div id="nextArrowCont" class="nextHidden hide-on-doc-load display-none">
+                    <div id="next" class="oj-sm-align-self-flex-top oj-flex-bar-top nextEnabled" data-bind="click: onNextPage()"></div>
+                </div>
+                <div id="nextButtonCont" class="nextHidden doc-button hide-on-doc-load display-none">
+                    <span class="oj-sm-align-self-flex-top oj-flex-bar-top pdf-next-btn" data-bind="click: completeSubSection, text: nextButtonLabel()"></span>
+                </div>
+
+            </div>
+            <div class="oj-sm-12 oj-lg-6 oj-flex-item padding-top-40 hide-on-doc-load display-none">
+                <a data-bind="attr:{href:selectedGuidedPathSubSection().publicLink}" class="download-link">
+                    <div class="oj-sm-align-items-center oj-flex" >
+                        <div class="oj-flex-item download-icon">
+                            <i class="material-icons left">file_download</i>
+                        </div>
+                        <div class="oj-flex-item">
+                            <span class="margin-left-6px">Download document</span>
+                        </div>
+                    </div>
+                </a>            
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+
+</div>   
+
+<img class="need-help" src="css/img/need-help.png" data-bind="click: onClickFeedback" alt="" />
+<tech-support references="{{references}}" is-panel-visible="{{false}}"></tech-support>

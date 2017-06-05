@@ -21,7 +21,8 @@ requirejs.config({
         'signals': 'libs/js-signals/signals.min',
         'customElements': 'libs/webcomponents/CustomElements.min',
         'proj4': 'libs/proj4js/dist/proj4-src',
-        'css': 'libs/require-css/css.min'
+        'css': 'libs/require-css/css.min',
+        'pdfjs-dist': 'libs/pdfjs/pdfjs-1.7.225'
 
 
 
@@ -80,10 +81,10 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 "edge": "start",
                 "displayMode": "push",
                 "autoDismiss": "focusLoss",
-                "modality": "modeless"//,
-                        //        "query": oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.XL_UP)
+                "modality": "modeless"
+//                "query": oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.LG_UP)
             };
-
+            
             //oj.Assert.forceDebug();
             //oj.Logger.option('level', oj.Logger.LEVEL_INFO);
             oj.ModuleBinding.defaults.modelPath = './';
@@ -100,6 +101,8 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
             ko.components.register('navigationbarleft', {require: 'components/navigationbarleft/navigationbarleft'});
             ko.components.register('navigationbarright', {require: 'components/navigationbarright/navigationbarright'});
             ko.components.register('usecasedetails', {require: 'components/usecasedetails/usecasedetails'});
+            ko.components.register('servicedetails', {require: 'components/servicedetails/servicedetails'});
+            ko.components.register('breadcrumb', {require: 'components/breadcrumb/breadcrumb'});
 
             function getPath(path) {
                 if (path === 'learningFlow')
@@ -133,6 +136,8 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 'useCases': {label: 'Use Cases', value: getPath('useCases')},
                 'useCaseSelection': {label: 'Use Case Selection', value: getPath('useCaseSelection')},
                 'useCaseDiscovery': {label: 'Use Case Discovery', value: getPath('useCaseDiscovery')},
+                'guidedPathDetails': {label: 'Guided Path Details', value: getPath('guidedPathDetails')},
+                'guidedPathLearning': {label: 'Guided Path Learning', value: getPath('guidedPathLearning')},
                 'faqs': {label: 'FAQ\'s', value: getPath('faqs')},
                 'error': {label: 'Error', value: getPath('error')}
             });
@@ -180,24 +185,43 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.changingNumber = ko.observable(false);
                 self.userFirstLastName = ko.observable(sessionInfo.getFromSession(sessionInfo.userFirstLastName));
                 self.userClmRegistryId = ko.observable(sessionInfo.getFromSession(sessionInfo.userClmRegistryId));
-//                self.isChatInitialized = ko.observable(false);
-//                self.isDashboardSelected = ko.observable(true);
-//                self.isUseCaseSelected = ko.observable(false);
-//                self.isResourceSelected = ko.observable(false);
-//                self.isContactSelected = ko.observable(false);
-//                self.currentSelectedCss = "selectedList";
 
                 self.slideInEffect = ko.observable('slideIn');
                 self.slideOutEffect = ko.observable('slideOut');
                 
                 self.isCapturePhaseCompleted = ko.observable(false);
+                self.isSelectionPhaseCompleted = ko.observable(false);
+                self.isGPContentFetching = ko.observable(false);
+                self.navTailoredUseCases = ko.observableArray([]);
+                self.selectedUseCase = ko.observable();
 
-                self.showHeaderNav = ko.computed(function () {
-                    var id = router.currentState().id;
-                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery"];
-                    return (pages.indexOf(id) > -1) ? '' : 'visibility-hidden';
+                self.screenRange = oj.ResponsiveKnockoutUtils.createScreenRangeObservable();
+                self.viewportSize = ko.computed(function () {
+                    var range = self.screenRange();
+                    console.log(range.toUpperCase());
+                    return range.toUpperCase();
+                });
+                
+                self.isScreenSMorMD = ko.computed(function () {
+                    return (self.viewportSize() === "SM" || self.viewportSize() === "MD");
                 });
 
+                self.isScreenLGorXL = ko.computed(function () {
+                    return (self.viewportSize() === "LG" || self.viewportSize() === "XL");
+                });
+                
+                self.showHeaderNav = ko.computed(function () {
+                    var id = router.currentState().id;
+                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery", "guidedPathDetails", "guidedPathLearning"];
+                    return (pages.indexOf(id) > -1) ? '' : 'oj-sm-hide';
+                });
+                
+                self.showUserDetails = ko.computed(function () {
+                    var id = router.currentState().id;
+                    var pages = ["dashboard", "useCases", "useCaseSelection", "faqs", "useCaseDiscovery", "guidedPathDetails", "guidedPathLearning"];
+                    return (pages.indexOf(id) > -1) ? '' : 'oj-sm-hide';
+                });
+                
                 self.showPreloader = function () {
                     $("#preloader").removeClass("oj-sm-hide");
                     $("#routingContainer").css("pointer-events", "none");
@@ -209,7 +233,17 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     $("#routingContainer").css("pointer-events", "");
                     $("#routingContainer").css("opacity", "");
                 };
-                
+
+                self.showNavPreloader = function () {
+                    $("#navPreloader").removeClass("oj-sm-hide");
+                    self.isGPContentFetching(true);
+                };
+
+                self.hideNavPreloader = function () {
+                    $("#navPreloader").addClass("oj-sm-hide");
+                    isGPContentFetching(false);
+                };
+
                 self.isPhoneNumberAdded = function () {
                     if (sessionInfo.getFromSession('phoneNumber') !== 'null') {
                         phoneNumber(sessionInfo.getFromSession('phoneNumber'));
@@ -224,21 +258,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.goToPage = function(id) {
                     router.go(id);
                 };
-
-                self.screenRange = oj.ResponsiveKnockoutUtils.createScreenRangeObservable();
-                self.viewportSize = ko.computed(function () {
-                    var range = self.screenRange();
-                    console.log(range.toUpperCase());
-                    return range.toUpperCase();
-                });
-
-                self.isScreenSMorMD = ko.computed(function () {
-                    return (self.viewportSize() === "SM" || self.viewportSize() === "MD");
-                });
-
-                self.isScreenLGorXL = ko.computed(function () {
-                    return (self.viewportSize() === "LG" || self.viewportSize() === "XL");
-                });
 
                 self.slideInAnimate = function (duration, delay) {
                     if (self.slideInEffect() && oj.AnimationUtils[self.slideInEffect()]) {
@@ -289,8 +308,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.dashboardServices = ko.observableArray([]);
 
                 self.toggleContactType = function () {
-//                    self.clearSelectedList();
-                    self.isContactSelected(true);
                     if ($("#contactType").hasClass("oj-sm-hide")) {
                         $("#contactType").removeClass("oj-sm-hide");
                         $("#contactToggle").text("keyboard_arrow_up");
@@ -313,10 +330,11 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                 self.toggleLeft = function () {
                     if ($("#navigationDrawerLeft").hasClass('oj-offcanvas-open')) {
                         oj.OffcanvasUtils.close(navigationDrawerLeft);
-//                        $("#navigationIconLeft").removeClass('oj-sm-hide');
                         return true;
                     }
-//                    $("#navigationIconLeft").addClass('oj-sm-hide');
+                    if (self.isSelectionPhaseCompleted()) {
+                        self.getGuidedPathsProgressForAllUseCases();
+                    }
                     window.scrollTo(0, 0);
                     return (oj.OffcanvasUtils.open(navigationDrawerLeft));
                 };
@@ -330,7 +348,6 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         "userAction": "Clicked Dashboard"
                     }, true);
                     routeTo(data, event);
-//                    self.isDashboardSelected(true);
                 };
 
                 self.routeToUsecase = function (data, event) {
@@ -342,22 +359,21 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         "userAction": "Clicked Use Cases"
                     }, true);
                     routeTo(data, event);
-//                    self.isUseCaseSelected(true);
                 };
                 
                 self.routeToUseCaseSelection = function (data, event) {
                     router.go(event.currentTarget.id + '/');
                 };
+                
+                self.routeToUseCases = function (data, event) {
+                    router.go('useCases');
+                };                
 
                 self.routeToResources = function (data, event) {
-                    //routeTo(data,event);
-//                    self.clearSelectedList();
-//                    self.isResourceSelected(true);
                     self.toggleResourcesType();
                 };
 
                 self.routeToFAQs = function (data, event) {
-                    //routeTo(data,event);
                     service.updateCurrentStep({
                         "userId": loggedInUser(),
                         "userRole": loggedInUserRole(),
@@ -365,24 +381,14 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                         "preStepCode": getStateId(),
                         "userAction": "Clicked FAQ's"
                     }, true);
-//                    self.clearSelectedList();
                     routeTo(data, event);
                 };
 
                 var routeTo = function (data, event) {
                     console.log(event.currentTarget.id);
-//                    self.clearSelectedList();
                     router.go(event.currentTarget.id + '/');
                     self.toggleLeft();
                 };
-
-//                self.clearSelectedList = function () {
-//                    self.isDashboardSelected(false);
-//                    self.isUseCaseSelected(false);
-//                    self.isResourceSelected(false);
-//                    self.isContactSelected(false);
-//                };
-
 
                 self.capturedEvent = function (data, event) {
                     // Clear session attributes on user logout
@@ -397,6 +403,33 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                     $("#tech_support").show();
                 };
 
+                self.getSelectedUseCaseDetails = function (parent, data, event) {
+                    parent.tabId = data.code;
+                    self.selectedUseCase(parent);
+                    self.toggleLeft();
+                    router.go('useCaseDiscovery');
+                };
+
+                // Fetching Guided Path content in Navigation bar code goes here..
+                self.getGuidedPathsProgressForAllUseCases = function () {
+                    self.showNavPreloader();
+                    self.navTailoredUseCases([]);
+
+                    var getGuidedPathsProgressSuccessCbFn = function(data, status) {
+                        self.navTailoredUseCases(data.useCases);
+                        self.hideNavPreloader();
+                    };
+
+                    var getGuidedPathsProgressFailCbFn = function(xhr) {
+                        console.log(xhr);
+                        debugger;
+                        self.hideNavPreloader();
+                        errorHandler.showAppError("ERROR_GENERIC", xhr);
+                    };
+
+                    service.getGuidedPathsProgressForAllUseCases().then(getGuidedPathsProgressSuccessCbFn, getGuidedPathsProgressFailCbFn);
+                };
+                
                 self.logout = function (data, event) {
 
                     var logoutSuccessCallback = function () {
@@ -405,11 +438,9 @@ require(['ojs/ojcore', 'knockout', 'jquery', 'config/sessionInfo', 'util/errorha
                             self.toggleLeft();
                         }
                         $("#tech_support").hide();
-//                        self.isDashboardSelected(true);
-//                        self.isUseCaseSelected(false);
-//                        self.isResourceSelected(false);
-//                        self.isContactSelected(false);
                         router.go('home/');
+                        self.isCapturePhaseCompleted(false);
+                        self.isSelectionPhaseCompleted(false);
                         self.isPhoneNumberAdded();
                     };
                     service.logout().then(logoutSuccessCallback);

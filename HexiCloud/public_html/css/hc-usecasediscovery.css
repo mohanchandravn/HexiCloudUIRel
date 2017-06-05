@@ -8,13 +8,13 @@ and open the template in the editor.
     Author     : nithin narayanan
 */
 
-.use-case-discovery {
-    width: 100%;
-    height: 100%;
+.useCaseDiscovery-page {
+    min-height: 100%;
+    background-color: #F1F2F2;
 }
 
 .use-case-discovery-wrapper-content {
-    padding: 25px;
+    padding: 25px 25px 50px 25px;
 }
 
 #useCaseDiscoveryPage .use-case-detail-container {
@@ -34,7 +34,16 @@ and open the template in the editor.
 #useCaseDiscoveryPage .use-case-detail-container .use-case-image {
     width: 100%;
 }
- 
+
+#useCaseDiscoveryPage .oj-tabs-panel {
+    padding: 0px;
+    background: none;
+}
+
+#useCaseDiscoveryPage .oj-conveyorbelt {
+    margin-left: 20px;
+}
+
 #useCaseDiscoveryPage .oj-selected .oj-tabs-title {
     color: #F80000;
     font-size: 15px;
@@ -55,7 +64,7 @@ and open the template in the editor.
     text-decoration: none;
 }
 
-.tca-calculator-iframe {
+.tco-calculator-iframe {
     width: 100%;
     height: 651px;
 }
@@ -84,18 +93,23 @@ and open the template in the editor.
 }
 
 #useCaseDiscoveryPage .inverted-btn {
-    min-width: 100px;
+    min-width: 77px;
     background-color: #FFFFFF;
     color: #F80000;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
     margin-right: 15px;
     margin-top: 10px;
     padding: 5px 0px;
-    border: 2px solid #F80000;
+    border: 1.2px solid #F80000;
     border-radius: 27px;
     box-sizing: border-box;
     cursor: default;
+   transition: all 0.3s ease-in-out;
+}
+
+#useCaseDiscoveryPage .btn-transform:hover {
+    transform: scale(1.2, 1.2);
 }
 
 #useCaseDiscoveryPage .tabs-container {
@@ -104,4 +118,74 @@ and open the template in the editor.
 
 #useCaseDiscoveryPage #tabsContainer .tabs {
     width: 100%;
+}
+
+#useCaseDiscoveryPage .core-tech-content {
+    color: #777;
+    font-size: 12px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+#useCaseDiscoveryPage .core-tech-img {
+    width: 65px;
+    height: 65px;
+}
+
+#useCaseDiscoveryPage .core-tech-recommended-text {
+    color: #F80000;
+    font-weight: bold;
+    line-height: 16px;
+}
+
+#useCaseDiscoveryPage .core-tech-title {
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+#useCaseDiscoveryPage .core-tech-progress-bar {
+    width: 200px;
+    background: #DDDDDD;
+    height: 10px;
+    margin-top: 2px;
+    border: none;
+    border-radius: 0px;
+}
+
+#useCaseDiscoveryPage .core-tech-progress-red .oj-progressbar-value {
+    background: #F80000;
+}
+
+#useCaseDiscoveryPage .core-tech-progress-orange .oj-progressbar-value {
+    background: #FC9F15;
+}
+
+#useCaseDiscoveryPage .core-tech-progress-green .oj-progressbar-value {
+    background: #77CA47;
+}
+
+#useCaseDiscoveryPage .status-btn {
+    height: 30px;
+    width: 140px;
+    font-size: 18px;
+    color: #FFF;
+    background: #F80000 url(img/icon-24.svg) no-repeat right center;
+    padding: 5px 15px 5px 0px;
+    border-radius: 27px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#useCaseDiscoveryPage .status-btn:hover {
+    transform: scale(1.2, 1.2);
+}
+
+#useCaseDiscoveryPage .core-tech-support-content {
+    min-height: 65px;
+    font-size: 20px;
+    padding-left: 40px;
+    background: #FFFFFF;
+    border-left: 6px solid #F80000;
 }

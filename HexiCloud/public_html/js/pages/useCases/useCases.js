@@ -28,31 +28,81 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         
         console.log('useCases page');
 
-        self.areAllUseCasesLoaded = ko.observable(false);
+        self.areAllTailoredUseCasesLoaded = ko.observable(false);
+        self.areAllAvailableUseCasesLoaded = ko.observable(false);
         self.areUseCaseDetailsFetched = ko.observable(false);
         self.selectedUseCaseDetails = ko.observableArray([]);
-        self.allUseCases = [];
+        self.tailoredUseCases = ko.observableArray([]);
+        self.allAvailableUseCases = [];
         
-        self.selectedUseCase = ko.computed(function() {
-            return self.selectedUseCaseDetails();
-        }, self);
+//        self.selectedUseCase = ko.computed(function() {
+//            return self.selectedUseCaseDetails();
+//        }, self);
         
-        var getAllUseCasesSuccessCbFn = function (data, status) {
+        var getAllAvailableUseCasesSuccessCbFn = function (data, status) {
             if (data.useCases) {
                 var useCases = data.useCases;
+                
+                /*
+                if (self.areAllTailoredUseCasesLoaded()) {
+                    for (var idx = 0; idx < useCases.length; idx++) {
+                        for (var index = 0; index < self.tailoredUseCases().length; index++) {
+                            if (self.tailoredUseCases()[index].id !== useCases[idx].id) {
+                                if (useCases[idx].title.length > 35) {
+                                    var trimTitle = useCases[idx].title.slice(0, 35);
+                                    useCases[idx].trimmedTitle = trimTitle + "...";
+                                }
+                            } else {
+                                useCases.splice(idx, 1);
+                            }
+                        }
+                    }
+                } else {
+                    for (var idx = 0; idx < useCases.length; idx++) {
+                        if (useCases[idx].title.length > 35) {
+                            var trimTitle = useCases[idx].title.slice(0, 35);
+                            useCases[idx].trimmedTitle = trimTitle + "...";
+                        }
+                    }
+                }
+                */
+               
                 for (var idx = 0; idx < useCases.length; idx++) {
                     if (useCases[idx].title.length > 35) {
                         var trimTitle = useCases[idx].title.slice(0, 35);
                         useCases[idx].trimmedTitle = trimTitle + "...";
                     }
                 }
-                self.allUseCases = useCases;
             }
-            self.areAllUseCasesLoaded(true);
+            self.allAvailableUseCases = useCases;
+            self.areAllAvailableUseCasesLoaded(true);
+            $("#availableUseCases").ojMasonryLayout("refresh");
             hidePreloader();
         };
 
-        var getAllUseCasesFailCbFn = function (xhr) {
+        var getAllAvailableUseCasesFailCbFn = function (xhr) {
+            hidePreloader();
+            console.log(xhr);
+            errorHandler.showAppError("ERROR_GENERIC", xhr);
+        };
+        
+        var getTailoredUseCasesSuccessCbFn = function (data, status) {
+            var useCases = data.useCases;
+            if (useCases.length > 0) {
+                for (var idx = 0; idx < useCases.length; idx++) {
+                    if (useCases[idx].title.length > 35) {
+                        var trimTitle = useCases[idx].title.slice(0, 35);
+                        useCases[idx].trimmedTitle = trimTitle + "...";
+                    }
+                }
+                self.tailoredUseCases(useCases);
+                self.areAllTailoredUseCasesLoaded(true);
+                $("#tailoredUseCases").ojMasonryLayout("refresh");
+            }
+            service.getAllUseCases().then(getAllAvailableUseCasesSuccessCbFn, getAllAvailableUseCasesFailCbFn);
+        };
+
+        var getTailoredUseCasesFailCbFn = function (xhr) {
             hidePreloader();
             console.log(xhr);
             errorHandler.showAppError("ERROR_GENERIC", xhr);
@@ -60,7 +110,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         
         self.getUseCaseDetails = function (data, event) {
             if (data.id) {
-                self.selectedUseCaseDetails(data);
+                selectedUseCase(data);
                 self.areUseCaseDetailsFetched(true);
                 oj.OffcanvasUtils.open(useCaseDrawerRight);
                 $(window).scrollTop(0);
@@ -79,12 +129,12 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             $("#tech_support").slideToggle();
         };
         
-        self.onClickOnUseCase = function(data, event) {
+        self.onClickOnLearnMore = function(data, event) {
             if (data.id) {
-                self.selectedUseCaseDetails(data);
+                selectedUseCase(data);
+                params.rootData.selectedUseCase = selectedUseCase();
+                router.go('useCaseDiscovery');
             }
-            params.rootData.selectedUseCase = self.selectedUseCase();
-            router.go('useCaseDiscovery');
         };
         
         self.handleTransitionCompleted = function () {
@@ -96,7 +146,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             showPreloader();
 
             oj.OffcanvasUtils.setupResponsive(useCaseDrawerRight);
-            service.getAllUseCases().then(getAllUseCasesSuccessCbFn, getAllUseCasesFailCbFn);
+            service.getTailoredUseCases().then(getTailoredUseCasesSuccessCbFn, getTailoredUseCasesFailCbFn);
         };
   }
     

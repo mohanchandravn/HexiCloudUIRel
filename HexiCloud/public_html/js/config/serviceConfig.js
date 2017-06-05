@@ -456,9 +456,9 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
             $.ajax({
                 type: 'GET',
                 url: serverURL,
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
-                },
+//                beforeSend: function (request) {
+//                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+//                },
                 dataType: "json",
                 success: function (data, status) {
                     console.log('Successfully retrieved details at: ' + serverURL);
@@ -516,7 +516,96 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 }
             });
             return $.when(defer);
-        };       
+        };
+        
+        self.getCoreGuidedPaths = function() {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/getCoreGuidedPaths";
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getComplementaryGuidedPaths = function(useCaseId) {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/getCompleGuidedPaths?useCaseId=" + useCaseId;
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.getGuidedPathDetails = function(pathId) {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/getGuidedPathDetail?pathId=" + pathId;
+            $.ajax({
+                type: 'GET',
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    console.log('Successfully retrieved details at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error retrieving service details.");
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+        
+        self.updateLearningHistory = function (payload) {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/updateLearningHistory";
+            $.ajax({
+                type: "POST",
+                url: serverURL,
+                data: JSON.stringify(payload),
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                contentType: "application/json",
+                success: function (data) {
+                    console.log('Successfully posted data at: ' + serverURL);
+                    defer.resolve(data, {status: 200});
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error posting data to the service" + serverURL);
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
 
         self.forgotPasswordService = function (userId) {
             var defer = $.Deferred();
@@ -642,8 +731,28 @@ define(['knockout', 'jquery', 'config/sessionInfo', 'ojs/ojrouter'
                 }
             });
         };
-    }
-    ;
+        
+        self.getGuidedPathsProgressForAllUseCases = function () {
+            var defer = $.Deferred();
+            var serverURL = self.portalRestHost() + "/services/rest/getGuidedPathsProgressForAllUseCases";
+            $.ajax({
+                type: "GET",
+                url: serverURL,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + sessionInfo.getFromSession(sessionInfo.accessToken));
+                },
+                success: function (data, status, xhr) {
+                    console.log('Successfully retrieved data at: ' + serverURL);
+                    defer.resolve(data, status);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error posting data to the service : " + serverURL);
+                    defer.reject(xhr);
+                }
+            });
+            return $.when(defer);
+        };
+    };
 
     return new serviceConfig();
 });

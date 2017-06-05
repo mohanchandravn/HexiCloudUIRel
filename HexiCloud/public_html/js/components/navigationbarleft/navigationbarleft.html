@@ -6,7 +6,7 @@ and open the template in the editor.
 
 <div class="navigation-left oj-flex">
     <div class="oj-sm-12 oj-flex-item">
-        <ul class="pages-nav-list nav-list">
+        <ul class="nav-list">
             <li id="dashboard" class="oj-sm-align-items-center oj-flex" data-bind="click: routeToDashboard, css: getStateId() ===  'dashboard' ? 'selected' : ''">
                 <img class="nav-icons" src="css/img/dashboard-icon.png" alt="Dashboard" />
                 <span>Dashboard</span>
@@ -16,17 +16,20 @@ and open the template in the editor.
                 <span>My Services</span>
             </li>
             <li id="useCases" class="oj-sm-align-items-center oj-flex" data-bind="click: routeToUsecase, css: getStateId() ===  'useCases' ? 'selected' : ''">
-                <img class="nav-icons" src="css/img/use-cases-icon.png" alt="Dashboard" />
+                <img class="nav-icons" src="css/img/use-cases-icon.png" alt="Use Cases" />
                 <span>Use Cases</span>
             </li>
-            <li id="resources" data-bind="click: routeToResources">
-                <div class="list-header oj-flex-bar">
-                    <div class="oj-flex-bar-start"><span>Resources</span></div>
-                    <div class="oj-flex-bar-end"><i id="resourcesToggle" class="material-icons">keyboard_arrow_down</i></div>
+            <li id="resources" class="nav-resources oj-flex" data-bind="click: routeToResources">
+                <div class="oj-sm-12 oj-flex-item">
+                    <div class="list-header oj-flex-bar">
+                        <img class="nav-icons" src="css/img/resources-icon.png" alt="Resources" />
+                        <div class="oj-flex-bar-start"><span>Resources</span></div>
+                        <div class="oj-flex-bar-end"><i id="resourcesToggle" class="material-icons">keyboard_arrow_down</i></div>
+                    </div>
                 </div>
-                <div class="list-detail oj-sm-12 oj-flex-item">
-                    <ul id="resourcesType" class="nav-list oj-sm-hide">
-                        <li id="faqs" class="sub-nav" data-bind="click: routeToFAQs">
+                <div class="oj-sm-12 oj-flex-item">
+                    <ul id="resourcesType" class="sub-nav-list oj-sm-hide">
+                        <li id="faqs" data-bind="click: routeToFAQs">
                             <div class="sub-nav-content oj-flex oj-sm-flex-items-initial" >
                                 <div class="oj-flex-item"><span class="sub-nav-title">Cloud Get Started - FAQ's</span></div>
                             </div>
@@ -34,31 +37,40 @@ and open the template in the editor.
                     </ul>
                 </div>
             </li>
-            <li>
-                <div class="list-header oj-flex-bar" data-bind="click: toggleContactType">
-                    <div class="oj-flex-bar-start"><span>Contact</span></div>
-                    <div class="oj-flex-bar-end"><i id="contactToggle" class="material-icons">keyboard_arrow_down</i></div>
+            <li class="nav-contact">
+                <div class="oj-sm-12 oj-flex-item">
+                    <div class="list-header oj-flex-bar" data-bind="click: toggleContactType">
+                        <img class="nav-icons" src="css/img/contact-icon.png" alt="Contacts" />
+                        <div class="oj-flex-bar-start">
+                            <span>Contact</span>
+                        </div>
+                        <div class="oj-flex-bar-end">
+                            <i id="contactToggle" class="material-icons">keyboard_arrow_down</i>
+                        </div>
+                    </div>
                 </div>
-                <div class="list-detail oj-sm-12 oj-flex-item">
-                    <ul id="contactType" class="nav-list oj-sm-hide">
-                        <li id="email" class="sub-nav" data-bind="click: capturedEvent">
-                            <div class="sub-nav-content oj-flex oj-sm-flex-items-initial" >
-                                <div class="oj-flex-item"><i class="material-icons left">email</i></div>
-                                <div class="oj-flex-item"><span class="sub-nav-title margin-left-10px">Email</span></div>
+                <div class="oj-sm-12 oj-flex-item">
+                    <ul id="contactType" class="sub-nav-list oj-sm-hide">
+                        <li id="email" data-bind="click: capturedEvent">
+                            <div class="sub-nav-content oj-sm-align-items-center oj-flex" >
+                                <div class="icon-container oj-flex-item">
+                                    <i class="material-icons left">email</i>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <span class="sub-nav-title margin-left-10px">Email</span>
+                                </div>
                             </div>
                         </li>
                         <li id="phone" class="sub-nav" data-bind="click: capturedEvent">
-                            <div class="sub-nav-content oj-flex oj-sm-flex-items-initial" >
-                                <div class="oj-flex-item"><i class="material-icons left">phone</i></div>
-                                <div class="oj-flex-item"><span class="sub-nav-title margin-left-10px">Call</span></div>
+                            <div class="sub-nav-content oj-sm-align-items-center oj-flex" >
+                                <div class="icon-container oj-flex-item">
+                                    <i class="material-icons left">phone</i>
+                                </div>
+                                <div class="oj-flex-item">
+                                    <span class="sub-nav-title margin-left-10px">Call</span>
+                                </div>
                             </div>
                         </li>
-<!--                        <li id="chat" class="sub-nav" data-bind="click: capturedEvent">
-                            <div class="sub-nav-content oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center" >
-                                <div class="oj-flex-item"><i class="material-icons left">chat</i></div>
-                                <div class="oj-flex-item"><span>Chat</span></div>
-                            </div>
-                        </li>-->
                     </ul>
                 </div>
             </li>
@@ -68,4 +80,45 @@ and open the template in the editor.
             </li>
         </ul>
     </div>
+    
+    <!-- ko if: isSelectionPhaseCompleted() -->
+    <div id="navPreloader" class="oj-sm-hide oj-sm-12 oj-flex-item">
+        <div class="nav-preloader-container oj-sm-justify-content-center oj-flex">
+            <span class="help-text text-center oj-sm-12 oj-flex-item" data-bind="text: 'Guided path content is loading'"></span>
+            <span class="dots"></span>
+            <span class="dots"></span>
+            <span class="dots"></span>
+        </div>
+    </div>
+    <!-- /ko -->
+    
+    <!-- ko if: isSelectionPhaseCompleted() -->
+    <div id="gpContainer" class="nav-guided-path-container oj-sm-12 oj-flex-item">
+        <!-- ko ifnot: isGPContentFetching() -->
+        <span class="nav-guided-path-heading oj-flex">GUIDED PATHS</span>
+        <div class="oj-margin-vertical oj-flex">
+            <!-- ko foreach: navTailoredUseCases() -->
+            <div class="nav-use-case-container oj-sm-12 oj-flex-item" data-bind="attr: {id: id + 'Container'}">
+                <div class="oj-flex">
+                    <span class="nav-use-case-heading c-pointer oj-sm-12 oj-flex-item" data-bind="attr: {id: id + 'Heading'}, text: title, click: $parent.toggleNavUseCaseContent.bind($data, id)"></span>
+                    <div class="nav-progress-bar" data-bind="attr: {id: id + 'ProgressBar'}, css: 'nav-progress-' + $parent.getProgressStatus(progress),
+                                                    ojComponent:{
+                                                        component: 'ojProgressbar', 
+                                                        value: progress === 0 ? '3' : progress}">
+                    </div>
+                    <!-- ko foreach: pathProgressDetails -->
+                    <div class="nav-use-case-sub-content oj-sm-hide oj-sm-12 oj-flex-item" data-bind="css: $parent.id + 'Content', click: $parents[1].toggleNavUseCaseContent.bind($data, $parent.id)">
+                        <div class="c-pointer oj-flex" data-bind="click: getSelectedUseCaseDetails.bind($data, $parent)">
+                            <span class="nav-content-status-container oj-flex-item" data-bind="css: 'nav-content-' + $parents[1].getProgressStatus(progress)"></span>
+                            <span class="oj-flex-item" data-bind="text: label"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
 </div>

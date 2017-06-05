@@ -29,6 +29,25 @@ and open the template in the editor.
     margin-bottom: 20px;
 }
 
+.dashboard .welcome-container {
+    border-left: 5px solid #F80000;
+    background-color: #FFF;
+    text-align: center;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.dashboard .welcome-message-container {
+    width: 60%; 
+    margin: auto; 
+    margin-top: 20px;
+}
+
+.dashboard .welcome-message {
+    color: #948E85 !important;
+    font-size: 18px;
+}
+
 @media screen and (max-width: 1023px) {
     .dashboard {
         padding: 0px 10px 10px 10px;
@@ -47,39 +66,98 @@ and open the template in the editor.
     }
 }
 
-.view-more-button {
-    background-color: #F80000;
-    /* padding: 10px 30px; */
-    display: inline-block;
-    text-align: center;
-    height: 36px;
-    border-radius: 27px;
-    margin-top: 10px !important;
-    background-image: none !important;
-    color: #fff;
-    font-size: 18px;
-    line-height: 2.5rem;
+.dashboard-page {
+    background-color: #F1F2F2; 
+}
+
+.dashboard-page .use-cases-body-content .oj-masonrylayout-tile-1x1 {
+    width: 280px;
+    height: 240px;
+    margin: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+.dashboard-page .use-cases-body-content .oj-masonrylayout-tile-1x1:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.dashboard-page .oj-masonrylayout-tile-1x1 .use-case-image {
+    width: 280px;
+    height: 140px;
+}
+
+.dashboard-page .use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon {
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
-    opacity: 0.6;
-    width: 100%;
-    /* padding: 0px 20px 0px 20px; */
-    /* z-index: 999; */
-
-}
-.view-more-button:hover {
-    text-decoration: none;
-    background-color: #C80000;
-    color: #fff;
-    opacity: 1;
 }
 
-.view-more-button:hover, 
-.view-more-button:focus,
-.view-more-button:active{
-    text-decoration: none;
+.dashboard-page .use-cases-body-content .oj-masonrylayout-tile-1x1 .use-case-content {
+    height: 50px;
+    padding: 5px;
 }
 
-.view-more-button:active {
-    color: #fff;
+.dashboard-page .use-cases-body-content .oj-masonrylayout-tile-1x1 .bread-crumbs-icon:hover {
+    transform: scale(1.3, 1.3);
+}
+
+.dashboard-page .use-case-details-wrapper-content .inverted-btn {
+    min-width: 120px;
+    margin-bottom: 10px;
+}
+
+.dashboard-page .view-more-btn-container {
+    height: 40px;
+}    
+    
+.dashboard-page .inverted-btn {
+    color: #F80000;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 15px;
+    margin: 0px 10px;
+    border: 1.2px solid #F80000;
     border-radius: 27px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.dashboard-page .inverted-btn:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.dashboard-page .use-cases-content .status-btn {
+    height: 30px;
+    width: 140px;
+    font-size: 18px;
+    color: #FFF;
+    background: #F80000 url(img/icon-24.svg) no-repeat right center;
+    padding: 5px 15px 5px 0px;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+.dashboard-page .use-cases-content .core-tech-support-content {
+    min-height: 65px;
+    font-size: 20px;
+    padding-left: 40px;
+    background: #FFFFFF;
+    border-left: 6px solid #F80000;
+}
+
+@media screen and (min-width: 1024px) {
+    .dashboard-page .use-cases-content {
+        padding: 20px;
+    }
+}
+
+.dashboard-page .dashboard-header {
+    color: #303942 !important;
+    font-size: 36px;
+}
+
+.dashboard-page .services-count {
+    font-size: 15px;
 }
