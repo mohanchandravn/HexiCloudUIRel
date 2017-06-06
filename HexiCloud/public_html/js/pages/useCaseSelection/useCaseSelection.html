@@ -194,17 +194,16 @@ and open the template in the editor.
                                                                         invalidComponentTracker: $parent.tracker,
                                                                         optionChange: $parent.benefitsOptionChange,
                                                                         rootAttributes: {style:'max-width:20em; margin-top:5px;'},
-                                                                        translations: {'required': {
-                                                                                    messageDetail: 'Please select atleast one benefit'}}}">
+                                                                        translations: {'required': {messageDetail: 'Please select atleast one benefit'}}}">
                                             </select>
                                             <!-- ko if: $parent.isOtherBenefitSelected() -->
-                                            <label id="otherBenefitLabel" for="otherBenefit" class="other-benefit-label" data-bind="text: $parent.otherBenefitLabel"></label>
-                                            <input id="otherBenefit" type="text" maxlength="50" data-bind="ojComponent: {component: 'ojInputText', 
+                                            <label for="otherBenefit" class="oj-flex other-benefit-label" data-bind="text: otherBenefitLabel"></label>
+                                            <input type="text" maxlength="50" data-bind="ojComponent: {component: 'ojInputText', 
                                                                                                                     placeholder: 'Enter other benefit', 
-                                                                                                                    value: $parent.otherBenefit,
+                                                                                                                    value: otherBenefit,
                                                                                                                     invalidComponentTracker: $parent.tracker,
                                                                                                                     required: true,
-                                                                                                                    rootAttributes: {style:'max-width: 63%; margin-top: 5px;'}} "/>
+                                                                                                                    rootAttributes: {style:'max-width: 63%; margin-top: 5px;'}}"/>
                                             <!-- /ko -->
                                         </div>
                                     </div>
