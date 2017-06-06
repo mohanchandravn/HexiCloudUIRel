@@ -36,9 +36,6 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         self.isServiceSelected = ko.observable(false);
         self.isBenefitSelected = ko.observable(false);
         self.isOtherBenefitSelected = ko.observable(false);
-        self.otherBenefit = ko.observable('');
-        
-        self.otherBenefitLabel = ko.observable('Others: ');
 
         self.selectedUseCaseItems = ko.observableArray([]);
         self.hasSelectedOtherUseCase = ko.observable(false);
@@ -116,7 +113,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                     }
                 }
                 self.useCasesForUser = useCases;
-                self.tailoredUseCases(useCases)
+                self.tailoredUseCases(useCases);
              }
             self.isUseCasesForUserLoaded(true);
             
@@ -227,6 +224,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 useCaseSummary: '',
                 useCaseServicesUsed: [],
                 useCaseBenefits: '',
+                otherBenefit: '',
+                otherBenefitLabel: 'Others: ',
                 otherUserCaseCount: self.otherUserCaseCount()
             });
             $( "#otherUseCasesAccordion" ).ojAccordion( "refresh" );
@@ -324,6 +323,8 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                             useCaseSummary: '',
                             useCaseServicesUsed: [],
                             useCaseBenefits: '',
+                            otherBenefit: '',
+                            otherBenefitLabel: 'Others: ',
                             otherUserCaseCount: self.otherUserCaseCount()
                         }]);
                     $("#img10").addClass("selected");
@@ -343,8 +344,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         });
         
         self.disableAddAnotherButton = ko.pureComputed(function () {
-            return !self.isServiceSelected() || !self.isBenefitSelected() 
-                || (self.isOtherBenefitSelected() && commonHelper.isNullOrEmpty(self.otherBenefit())) || self.hasInvalidComponents();
+            return !self.isServiceSelected() || !self.isBenefitSelected() || self.hasInvalidComponents();
         });
          
         self.moveToNextQuestion = function () {
@@ -388,7 +388,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                         var eachBenefit = useCase.useCaseBenefits[idx];
                         if (eachBenefit === 8) { // Other benefit
                             // Appending user entered text
-                            eachBenefit = eachBenefit + '#' + self.otherBenefit(); 
+                            eachBenefit = eachBenefit + '#' + useCase.otherBenefit; 
                         }
                         benefitsArr.push(eachBenefit);
                     }
@@ -517,7 +517,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
                 
                 // To refresh the items in the JET component
                 $("#masonryUseCases").ojMasonryLayout("refresh");
-            }
+            };
             
             if (array[foundAt]) {
                 array[foundAt].status = "completed";
@@ -649,20 +649,14 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
             // Other benefit
             for (var idx in value) {
                 if (value[idx] === 8) {
-                    self.otherBenefitLabel('Others: ');
                     self.isOtherBenefitSelected(true);
                     break;
                 } else {
-                    self.otherBenefitLabel('');
                     self.isOtherBenefitSelected(false);
                 }
             }
-            
-            if (!self.isOtherBenefitSelected()) {
-                self.otherBenefit('');
-            }
         };
-
+                       
         self.onClickFeedback = function() {
             if (selectedTemplate() === "") {
                 selectedTemplate('email_content');
