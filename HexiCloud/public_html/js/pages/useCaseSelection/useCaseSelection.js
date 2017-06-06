@@ -344,8 +344,7 @@ define(['ojs/ojcore', 'jquery', 'knockout', 'config/serviceConfig', 'util/errorh
         });
         
         self.disableAddAnotherButton = ko.pureComputed(function () {
-            return !self.isServiceSelected() || !self.isBenefitSelected() 
-                || (self.isOtherBenefitSelected() && commonHelper.isNullOrEmpty(self.otherBenefit())) || self.hasInvalidComponents();
+            return !self.isServiceSelected() || !self.isBenefitSelected() || self.hasInvalidComponents();
         });
          
         self.moveToNextQuestion = function () {
